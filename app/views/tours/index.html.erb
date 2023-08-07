@@ -1,10 +1,11 @@
 <h3>All Tours</h3>
 <ul>
   <% @tours.each do |tour| %>
-    <li><%= tour.title %> - <%= tour.artist %> - created by <%= tour.tourman_id %></li>
+    <li><%= tour.title %> - <%= tour.artist %> - created by <%= tour.tourman_id %> - <%= link_to "Link", tour_path(tour) %></li>
 
   <% end %>
 </ul>
 
 
 <%= link_to "New Tour", new_tour_path %>
+  <%= link_to "Home", root_path %>
