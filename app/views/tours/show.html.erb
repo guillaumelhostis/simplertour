@@ -3,7 +3,11 @@
 <p><%= @tour.genre %></p>
 
 
-<%= link_to "Delete",
-  tour_path(@tour),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+
+
+
+<% if policy(@tour).edit? %>
+  <%= link_to "Edit this tour", edit_tour_path(@tour) %> |
+<% end %>
+<!-- [...] -->
+<%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>
