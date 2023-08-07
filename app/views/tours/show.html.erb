@@ -1,0 +1,9 @@
+<h2><%= @tour.title %></h2>
+<p><%= @tour.artist%></p>
+<p><%= @tour.genre %></p>
+
+
+<%= link_to "Delete",
+  tour_path(@tour),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>

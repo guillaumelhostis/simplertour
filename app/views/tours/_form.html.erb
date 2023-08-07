@@ -1,0 +1,12 @@
+<%= simple_form_for(@tour) do |f| %>
+
+
+    <%= f.input :title, :label => "Tour Name"%>
+    <%= f.input :artist, :label => "Artist Name"%>
+    <%= f.input :genre, :label => "Genre" %>
+    <%= f.input :starting, :label => "Starting" %>
+    <%= f.input :ending, :label => "Ending" %>
+
+    <%= f.submit "Create tour"%>
+
+<% end %>
