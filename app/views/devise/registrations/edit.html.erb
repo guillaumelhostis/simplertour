@@ -14,6 +14,38 @@
                 hint: "leave it blank if you don't want to change it",
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
+    <%= f.input :first_name,
+                :label => "First Name",
+                required: true,
+                autofocus: true %>
+    <%= f.input :last_name,
+                :label => "Last Name",
+                required: true,
+                autofocus: true %>
+    <%= f.input :birth_day,
+                :label => "Birth Day",
+                required: true,
+                autofocus: true %>
+    <%= f.input :address,
+                :label => "Address",
+                required: true,
+                autofocus: true %>
+    <%= f.input :post_code,
+                :label => "Post Code",
+                required: true,
+                autofocus: true %>
+    <%= f.input :city,
+                :label => "City",
+                required: true,
+                autofocus: true %>
+    <%= f.input :country,
+                :label => "Country",
+                required: true,
+                autofocus: true %>
+    <%= f.input :phone_number,
+                :label => "Phone Number",
+                required: true,
+                autofocus: true %>
     <%= f.input :password_confirmation,
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
