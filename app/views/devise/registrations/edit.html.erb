@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit user<%= resource_name.to_s.humanize %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -10,42 +10,34 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true %>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true %>
+    <%= f.input :birth_day, as: :date, start_year: Date.today.year - 90,
+                              end_year: Date.today.year - 12 %>
+    <%= f.input :address,
+                required: true,
+                autofocus: true %>
+    <%= f.input :post_code,
+                required: true,
+                autofocus: true %>
+    <%= f.input :city,
+                required: true,
+                autofocus: true %>
+    <%= f.input :country,
+                required: true,
+                autofocus: true %>
+    <%= f.input :phone_number,
+                required: true,
+                autofocus: true %>
+
     <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :first_name,
-                :label => "First Name",
-                required: true,
-                autofocus: true %>
-    <%= f.input :last_name,
-                :label => "Last Name",
-                required: true,
-                autofocus: true %>
-    <%= f.input :birth_day,
-                :label => "Birth Day",
-                required: true,
-                autofocus: true %>
-    <%= f.input :address,
-                :label => "Address",
-                required: true,
-                autofocus: true %>
-    <%= f.input :post_code,
-                :label => "Post Code",
-                required: true,
-                autofocus: true %>
-    <%= f.input :city,
-                :label => "City",
-                required: true,
-                autofocus: true %>
-    <%= f.input :country,
-                :label => "Country",
-                required: true,
-                autofocus: true %>
-    <%= f.input :phone_number,
-                :label => "Phone Number",
-                required: true,
-                autofocus: true %>
     <%= f.input :password_confirmation,
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
