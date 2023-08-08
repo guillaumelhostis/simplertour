@@ -10,19 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_130205) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_162640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "crew_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "crew_id", null: false
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crew_id"], name: "index_crew_users_on_crew_id"
+    t.index ["user_id"], name: "index_crew_users_on_user_id"
+  end
 
   create_table "crews", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "crews_users", id: false, force: :cascade do |t|
-    t.bigint "crew_id", null: false
-    t.bigint "user_id", null: false
   end
 
   create_table "tourmen", force: :cascade do |t|
@@ -82,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_130205) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "crew_users", "crews"
+  add_foreign_key "crew_users", "users"
   add_foreign_key "tours", "crews"
   add_foreign_key "tours", "tourmen"
 end
