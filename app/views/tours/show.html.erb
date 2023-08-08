@@ -3,11 +3,18 @@
 <p><%= @tour.genre %></p>
 
 
+<h2>Crew <%= link_to "Edit Crew", crew_path(@crew) %></h2>
+<ul>
+  <% @crew_users.each do |member| %>
+    <li><%= member.first_name %></li>
+  <% end %>
+</ul>
+
+
 
 
 
 <% if policy(@tour).edit? %>
-  <%= link_to "Edit this tour", edit_tour_path(@tour) %> |
+  <%= link_to "Edit this tour", edit_tour_path(@tour) %>
 <% end %>
-<!-- [...] -->
 <%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>

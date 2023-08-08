@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :crews do
     member do
       post 'assign_users'
+      delete 'unassign_user/:user_id', action: :unassign_user, as: :unassign_user
     end
   end
 

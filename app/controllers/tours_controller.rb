@@ -7,6 +7,8 @@ class ToursController < ApplicationController
 
   def show
     authorize @tour
+    @crew = Crew.find(@tour.crew_id)
+    @crew_users = @crew.users
   end
 
   def new
