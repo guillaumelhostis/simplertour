@@ -10,6 +10,8 @@ class CrewsController < ApplicationController
     authorize @crew
     @users = User.all
     @crew_users = @crew.users
+    @tour = Tour.find_by(crew_id: @crew.id)
+
   end
 
 

@@ -19,8 +19,12 @@ class ToursController < ApplicationController
     @tour.tourman_id = current_tourman.id
     authorize @tour
     @tour.save
+    @newcrew = Crew.new(name: "Team #{@tour.title}")
+    @newcrew.save
+    @tour.crew_id = @newcrew.id
+    @tour.save
 
-    redirect_to tour_path(@tour)
+    redirect_to crew_path(@newcrew)
   end
 
   def edit
