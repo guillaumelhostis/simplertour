@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :tourman, controllers: {
+  devise_for :tourmen, controllers: {
     sessions: 'tourman/sessions',
     registrations: 'tourman/registrations'
   }
 
-  devise_for :user, controllers: {
+  devise_for :users, controllers: {
     sessions: 'user/sessions'
   }
 
