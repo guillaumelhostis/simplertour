@@ -1,0 +1,16 @@
+<h1>This is <%= @crew.name %> Team</h1>
+
+
+<%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
+  <label for="user_ids">Select Users:</label>
+  <%= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
+  <%= submit_tag "Assign Users" %>
+<% end %>
+
+
+<h2>Crew Members:</h2>
+<ul>
+  <% @crew_users.each do |crew_user| %>
+    <li><%= crew_user.first_name %></li>
+  <% end %>
+</ul>

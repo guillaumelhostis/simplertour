@@ -5,8 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: [:tech, :artist, :guest]
   after_initialize :set_default_role, :if => :new_record?
+  has_and_belongs_to_many :crews
+
 
   def set_default_role
     self.role ||= :tech
   end
+
+  private
+
+
+
 end
