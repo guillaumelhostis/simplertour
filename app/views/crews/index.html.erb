@@ -1,0 +1,7 @@
+<h1>All Crews</h1>
+
+<ul>
+<% @crews.each do |crew| %>
+  <li><%= link_to crew.name, crew_path(crew) %></li>
+<% end %>
+</ul>

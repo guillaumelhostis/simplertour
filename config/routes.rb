@@ -15,4 +15,10 @@ Rails.application.routes.draw do
 
   resources :tours
 
+  resources :crews do
+    member do
+      post 'assign_users'
+    end
+  end
+
 end
