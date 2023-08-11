@@ -9,6 +9,8 @@ class ToursController < ApplicationController
     authorize @tour
     @crew = Crew.find(@tour.crew_id)
     @crew_users = @crew.users
+    @concerts = @tour.concerts
+    @concert = Concert.new
   end
 
   def new
@@ -42,7 +44,9 @@ class ToursController < ApplicationController
 
   def destroy
     authorize @tour
+
     @tour.destroy
+
     # No need for app/views/restaurants/destroy.html.erb
     redirect_to tours_path, status: :see_other
   end

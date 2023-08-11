@@ -1,5 +1,6 @@
 class Tour < ApplicationRecord
   belongs_to :tourman
-  has_one :crew
+  belongs_to :crew, dependent: :destroy
+  has_many :concerts, dependent: :destroy
 
 end

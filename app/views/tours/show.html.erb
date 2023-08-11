@@ -12,6 +12,31 @@
 
 
 
+<h2>Concerts:</h2>
+<ul>
+  <% @concerts.each do |concert| %>
+    <li><%= concert.date %> - <%= concert.location %></li>
+  <% end %>
+</ul>
+
+<h2>Create New Concert:</h2>
+<%= form_for [@tour, Concert.new] do |f| %>
+  <%= f.label :date %>
+  <%= f.date_field :date %>
+
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create Concert" %>
+<% end %>
+
+
+
+
+
 
 
 <% if policy(@tour).edit? %>

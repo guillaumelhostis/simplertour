@@ -1,0 +1,9 @@
+<%= form_for [@tour, @concert] do |f| %>
+  <%= f.label :date %>
+  <%= f.date_field :date %>
+
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+
+  <%= f.submit "Update Concert" %>
+<% end %>
