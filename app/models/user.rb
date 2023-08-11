@@ -13,11 +13,9 @@ class User < ApplicationRecord
     self.role ||= :tech
   end
 
-  def user_role_in_team(team)
-    crew_user_entry = CrewUser.find_by(crew_id: team.id)
-    raise
-
-    crew_user_entry ? team_user_entry.role : nil
+  def user_role_in_team(team, user)
+    crew_user_entry = CrewUser.find_by({ crew_id: team.id, user_id: user.id })
+    crew_user_entry ? crew_user_entry.role : nil
   end
 
   private

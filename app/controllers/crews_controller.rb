@@ -17,15 +17,14 @@ class CrewsController < ApplicationController
   def assign_users
     @crew = Crew.find(params[:id])
     @users = User.where(id: params[:user_ids])
-    role = params[:role]
 
+    role = params[:role]
 
     if @crew.users.exists?(id: @users.ids[0])
       redirect_to @crew, notice: "User is already in the team #{@crew.name}"
       authorize @crew
     else
       @users.each do |user|
-        @crew.users << user
         CrewUser.create(user: user, crew: @crew, role: role)
       end
       authorize @crew
@@ -50,6 +49,8 @@ class CrewsController < ApplicationController
   def crew_params
     params.require(:crew).permit(:name)
   end
+
+
 
   def set_crew
     @crew = Crew.find(params[:id])

@@ -6,7 +6,7 @@
 <h2>Crew <%= link_to "Edit Crew", crew_path(@crew) %></h2>
 <ul>
   <% @crew_users.each do |member| %>
-    <li><%= member.first_name %></li>
+    <li><%= member.first_name %> - <%= member.user_role_in_team(@crew, member)%> </li>
   <% end %>
 </ul>
 
