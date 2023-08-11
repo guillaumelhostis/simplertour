@@ -1,5 +1,5 @@
 class Crew < ApplicationRecord
   has_many :crew_users
-  has_many :users, through: :crew_users
-  belongs_to :tour, optional: true
+  has_many :users, through: :crew_users, dependent: :destroy
+  has_one :tour, dependent: :destroy
 end
