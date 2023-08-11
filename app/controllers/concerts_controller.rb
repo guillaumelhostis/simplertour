@@ -3,7 +3,12 @@ class ConcertsController < ApplicationController
   def new
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.build
+  end
 
+  def show
+    @concert = Concert.find(params[:tour_id])
+    @tour = Tour.find(params[:id])
+    authorize @concert
   end
 
   def create
@@ -11,10 +16,12 @@ class ConcertsController < ApplicationController
     @concert = @tour.concerts.build(concert_params)
     authorize @concert
 
+    # @venue = Venue.find(params[:concert][:venue_id])
+    @concert.venue = nil
     if @concert.save
       redirect_to tour_path(@tour), notice: 'Concert was successfully created.'
     else
-      render 'tours/show'
+      redirect_to tour_path(@tour), notice: 'Could not add a new show something went wrong'
     end
   end
 
@@ -30,9 +37,9 @@ class ConcertsController < ApplicationController
     authorize @concert
 
     if @concert.update(concert_params)
-      redirect_to tour_path(@tour), notice: 'Concert was successfully updated.'
+      redirect_to tour_concert_path(@concert), notice: 'Concert was successfully updated.'
     else
-      render :edit
+      render :show
     end
   end
 
@@ -48,7 +55,7 @@ class ConcertsController < ApplicationController
   private
 
   def concert_params
-    params.require(:concert).permit(:date, :location, :name)
+    params.require(:concert).permit(:date, :location, :name, :venue_id)
   end
 
 end

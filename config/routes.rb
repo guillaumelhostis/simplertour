@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get  'pages/user'
   get 'pages/tourman'
 
+  resources :venues
+
 
   resources :tours do
     resources :concerts, except: [:index]

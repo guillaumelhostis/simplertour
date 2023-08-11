@@ -15,7 +15,7 @@
 <h2>Concerts:</h2>
 <ul>
   <% @concerts.each do |concert| %>
-    <li><%= concert.date %> - <%= concert.location %></li>
+    <li><%= concert.date %> - <%= concert.location %> - <%= link_to "Link", tour_concert_path(concert) %></li>
   <% end %>
 </ul>
 
