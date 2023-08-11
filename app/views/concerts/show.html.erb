@@ -1,0 +1,19 @@
+<h1><%= @concert.name %> - <%= @concert.date %></h1>
+<h2><strong><%= @concert.tour.artist %></strong></h2>
+
+<h2>Venue:</h2>
+<% if @concert.venue %>
+  <p><strong><%= @concert.venue.name %></strong></p>
+<% else %>
+  <p>No venue assigned</p>
+  <%# FAIRE UN LIEN POUR CREER UNE VENU %>
+<% end %>
+
+<% if @concert.venue.nil? %>
+  <h2>Assign Venue:</h2>
+  <%= form_with(model: [@tour, @concert]) do |form| %>
+    <%= form.label :venue_id %>
+    <%= form.collection_select(:venue_id, Venue.all, :id, :name, { prompt: 'Select Venue' }) %>
+    <%= form.submit 'Assign Venue' %>
+  <% end %>
+<% end %>
