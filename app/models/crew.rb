@@ -1,4 +1,5 @@
 class Crew < ApplicationRecord
-  has_and_belongs_to_many :users
+  has_many :crew_users
+  has_many :users, through: :crew_users
   belongs_to :tour, optional: true
 end

@@ -4,6 +4,8 @@
 <%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
   <label for="user_ids">Select Users:</label>
   <%= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
+  <label for="role">Select Role:</label>
+  <%= text_field_tag "role" %>
   <%= submit_tag "Assign Users" %>
 <% end %>
 
@@ -11,8 +13,7 @@
 <h2>Crew Members:</h2>
 <ul>
   <% @crew_users.each do |crew_user| %>
-    <li><%= crew_user.first_name %>
-
+    <li><%= crew_user.first_name %> - <%= crew_user.user_role_in_team(@crew, crew_user) %>
     <%= button_to 'Unassign', unassign_user_crew_path(@crew, crew_user), method: :delete %>
     </li>
   <% end %>
