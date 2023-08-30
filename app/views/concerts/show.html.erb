@@ -2,12 +2,15 @@
 <h2><strong><%= @concert.tour.artist %></strong></h2>
 
 <h2>Venue:</h2>
-<% if @concert.venue %>
-  <p><strong><%= @concert.venue.name %></strong></p>
-<% else %>
-  <p>No venue assigned</p>
-  <%# FAIRE UN LIEN POUR CREER UNE VENU %>
-<% end %>
+<div id="venue-space">
+  <% if @concert.venue %>
+    <p><strong><%= @concert.venue.name %></strong></p>
+    <%= button_to 'Remove Venue', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'btn btn-danger' %>
+  <% else %>
+    <p>No venue assigned</p>
+    <%= link_to 'Create Venue', new_venue_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
 
 <% if @concert.venue.nil? %>
   <h2>Assign Venue:</h2>
@@ -17,3 +20,6 @@
     <%= form.submit 'Assign Venue' %>
   <% end %>
 <% end %>
+
+
+<%= link_to "This Tour", tour_path(@tour.id), class: 'btn btn-primary'  %>

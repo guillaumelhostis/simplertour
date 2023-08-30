@@ -3,4 +3,5 @@ class Tour < ApplicationRecord
   belongs_to :crew, dependent: :destroy
   has_many :concerts, dependent: :destroy
 
+
 end

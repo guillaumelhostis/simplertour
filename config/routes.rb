@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
 
   resources :tours do
-    resources :concerts, except: [:index]
+    resources :concerts, except: [:index] do
+      patch :remove_venue, on: :member
+    end
   end
 
   resources :crews do

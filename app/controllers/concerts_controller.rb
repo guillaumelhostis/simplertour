@@ -52,10 +52,23 @@ class ConcertsController < ApplicationController
     redirect_to tour_path(@tour), notice: 'Concert was successfully deleted.'
   end
 
+  def remove_venue
+
+    @concert = Concert.find(params[:tour_id])
+
+
+    @concert.update(venue_id: nil)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def concert_params
     params.require(:concert).permit(:date, :location, :name, :venue_id)
   end
+
 
 end
