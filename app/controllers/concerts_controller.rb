@@ -18,6 +18,7 @@ class ConcertsController < ApplicationController
 
     # @venue = Venue.find(params[:concert][:venue_id])
     @concert.venue = nil
+    # @concert.hotel = nil
     if @concert.save
       redirect_to tour_path(@tour), notice: 'Concert was successfully created.'
     else
@@ -34,9 +35,12 @@ class ConcertsController < ApplicationController
   def update
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:id])
+
+
     authorize @concert
 
     if @concert.update(concert_params)
+
       redirect_to tour_concert_path(@concert), notice: 'Concert was successfully updated.'
     else
       render :show
@@ -48,15 +52,12 @@ class ConcertsController < ApplicationController
     @concert = @tour.concerts.find(params[:id])
     authorize @concert
     @concert.destroy
-
     redirect_to tour_path(@tour), notice: 'Concert was successfully deleted.'
   end
 
   def remove_venue
 
     @concert = Concert.find(params[:tour_id])
-
-
     @concert.update(venue_id: nil)
 
     respond_to do |format|
@@ -64,10 +65,20 @@ class ConcertsController < ApplicationController
     end
   end
 
+  # def remove_hotel
+
+  #   @concert = Concert.find(params[:tour_id])
+  #   @concert.update(hotel_id: nil)
+  #   respond_to do |format|
+  #     format.js
+  #   end
+
+  # end
+
   private
 
   def concert_params
-    params.require(:concert).permit(:date, :location, :name, :venue_id)
+    params.require(:concert).permit(:date, :location, :name, :venue_id, hotel_ids: [])
   end
 
 

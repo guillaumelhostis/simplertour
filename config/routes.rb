@@ -13,11 +13,14 @@ Rails.application.routes.draw do
   get 'pages/tourman'
 
   resources :venues
+  resources :hotels
 
 
   resources :tours do
     resources :concerts, except: [:index] do
       patch :remove_venue, on: :member
+      patch :remove_hotel, on: :member
+      resources :concert_hotels, only: [:create]
     end
   end
 

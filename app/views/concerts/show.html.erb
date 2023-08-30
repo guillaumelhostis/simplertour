@@ -2,24 +2,50 @@
 <h2><strong><%= @concert.tour.artist %></strong></h2>
 
 <h2>Venue:</h2>
-<div id="venue-space">
-  <% if @concert.venue %>
-    <p><strong><%= @concert.venue.name %></strong></p>
-    <%= button_to 'Remove Venue', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'btn btn-danger' %>
-  <% else %>
-    <p>No venue assigned</p>
-    <%= link_to 'Create Venue', new_venue_path, class: 'btn btn-primary' %>
-  <% end %>
-</div>
+  <div id="venue-space">
+    <% if @concert.venue %>
+      <p><strong><%= @concert.venue.name %></strong> - <%= button_to 'Remove Venue', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'btn btn-danger' %> </p>
+    <% else %>
+      <p>No venue assigned</p>
+      <%= link_to 'Create Venue', new_venue_path, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 
-<% if @concert.venue.nil? %>
-  <h2>Assign Venue:</h2>
-  <%= form_with(model: [@tour, @concert]) do |form| %>
-    <%= form.label :venue_id %>
-    <%= form.collection_select(:venue_id, Venue.all, :id, :name, { prompt: 'Select Venue' }) %>
-    <%= form.submit 'Assign Venue' %>
+  <% if @concert.venue.nil? %>
+    <h2>Assign Venue:</h2>
+    <%= form_with(model: [@tour, @concert]) do |form| %>
+      <%= form.label :venue_id %>
+      <%= form.collection_select(:venue_id, Venue.where(tourman_id: current_tourman.id), :id, :name, { prompt: 'Select Venue' }) %>
+      <%= form.submit 'Assign Venue' %>
+    <% end %>
   <% end %>
-<% end %>
+
+
+<h2>Hotel:</h2>
+
+  <div id="hotel-space">
+    <% if @concert.hotels %>
+      <ul>
+        <% @concert.hotels.each do |hotel| %>
+          <li><strong><%= hotel.name %></strong> </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No venue assigned</p>
+      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+    <% end %>
+    <h2>Assign hotel:</h2>
+      <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
+        <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }) %>
+        <%= submit_tag "Add Hotel" %>
+      <% end %>
+    <h2>Or add Hotel from scratch</h2>
+      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+  </div>
+
+
+
+
 
 
 <%= link_to "This Tour", tour_path(@tour.id), class: 'btn btn-primary'  %>
