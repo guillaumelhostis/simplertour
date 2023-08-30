@@ -1,0 +1,6 @@
+<h1><%= @hotel.name %> - <%= @hotel.address %></h1>
+<h2><strong><%= @hotel.standing %> stars</strong></h2>
+
+
+
+<%= button_to "Destroy this hotel", @hotel, method: :delete if policy(@hotel).destroy?%>

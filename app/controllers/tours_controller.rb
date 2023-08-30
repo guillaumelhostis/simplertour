@@ -54,7 +54,7 @@ class ToursController < ApplicationController
   private
 
   def tour_params
-    params.require(:tour).permit(:title, :artist, :genre, :starting, :ending)
+    params.require(:tour).permit(:title, :artist, :genre, :starting, :ending, concerts_attributes: [:date, :location, :name, :venue_id, hotel_ids: []])
   end
 
   def set_tour

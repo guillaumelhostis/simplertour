@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_110809) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_135424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "concert_hotels", force: :cascade do |t|
+    t.bigint "concert_id", null: false
+    t.bigint "hotel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["concert_id"], name: "index_concert_hotels_on_concert_id"
+    t.index ["hotel_id"], name: "index_concert_hotels_on_hotel_id"
+  end
 
   create_table "concerts", force: :cascade do |t|
     t.date "date"
@@ -38,6 +47,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_110809) do
 
   create_table "crews", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.integer "postcode"
+    t.string "city"
+    t.string "country"
+    t.integer "standing"
+    t.integer "tourman_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -111,6 +132,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_110809) do
     t.integer "tourman_id"
   end
 
+  add_foreign_key "concert_hotels", "concerts"
+  add_foreign_key "concert_hotels", "hotels"
   add_foreign_key "concerts", "tours"
   add_foreign_key "concerts", "venues"
   add_foreign_key "crew_users", "crews"
