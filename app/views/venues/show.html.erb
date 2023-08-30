@@ -1,0 +1,6 @@
+<h1><%= @venue.name %> - <%= @venue.address %></h1>
+<h2><strong><%= @venue.capacity %> seats</strong></h2>
+
+
+
+<%= button_to "Destroy this venue", @venue, method: :delete if policy(@venue).destroy?%>
