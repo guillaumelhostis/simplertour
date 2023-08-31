@@ -9,7 +9,8 @@ class ConcertsController < ApplicationController
     @concert = Concert.find(params[:tour_id])
     @tour = Tour.find(params[:id])
     @crew = @tour.crew
-
+    @timeentry = TimetableEntry.new
+    @timetable_entries = TimetableEntry.where(concert_id: @concert)
     authorize @concert
   end
 

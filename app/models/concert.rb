@@ -4,4 +4,5 @@ class Concert < ApplicationRecord
   belongs_to :hotel, optional: true
   has_many :concert_hotels, dependent: :destroy
   has_many :hotels, through: :concert_hotels
+  has_many :timetable_entries, dependent: :destroy
 end
