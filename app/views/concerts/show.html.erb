@@ -54,7 +54,20 @@
   </div>
 
 
+<h2>TimeTable:</h2>
+  <div id="timetable-entries">
+    <%= render partial: 'timetable_entry', collection: @concert.timetable_entries %>
+  </div>
+  <h3>Add a new timetable</h3>
+    <%= form_for [@tour, @concert, @timeentry] do |f| %>
+    <%= f.label :hour %>
+    <%= f.time_field :hourminute %>
 
+    <%= f.label :information %>
+    <%= f.text_field :information %>
+
+    <%= f.submit "Create timeentry" %>
+    <% end %>
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_081819) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_140458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_081819) do
     t.integer "tourman_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "timetable_entries", force: :cascade do |t|
+    t.bigint "concert_id", null: false
+    t.text "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.time "hourminute"
+    t.index ["concert_id"], name: "index_timetable_entries_on_concert_id"
   end
 
   create_table "tourmen", force: :cascade do |t|
@@ -160,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_081819) do
   add_foreign_key "concerts", "venues"
   add_foreign_key "crew_users", "crews"
   add_foreign_key "crew_users", "users"
+  add_foreign_key "timetable_entries", "concerts"
   add_foreign_key "tours", "crews"
   add_foreign_key "tours", "tourmen"
 end

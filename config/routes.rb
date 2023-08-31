@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :tours do
     resources :concerts, except: [:index] do
+      resources :timetable_entries, only: [:create, :destroy, :update]
       patch :remove_venue, on: :member
       patch :remove_hotel, on: :member
       resources :concert_hotels, only: [:create, :destroy] do
