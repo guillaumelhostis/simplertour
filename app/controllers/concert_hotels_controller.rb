@@ -41,4 +41,17 @@ class ConcertHotelsController < ApplicationController
     end
   end
 
+  def destroy
+    @concert_hotel = ConcertHotel.find(params[:id])
+    authorize @concert_hotel
+    @concert_hotel.destroy
+    @tour = Tour.find(params[:tour_id])
+    @concert = @tour.concerts.find(params[:concert_id])
+
+    respond_to do |format|
+      format.html { redirect_to tour_concert_path(@tour, @concert), notice: 'Concert hotel was successfully removed.' }
+      format.json { head :no_content }
+    end
+  end
+
 end
