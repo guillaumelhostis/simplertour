@@ -8,6 +8,8 @@ class ConcertsController < ApplicationController
   def show
     @concert = Concert.find(params[:tour_id])
     @tour = Tour.find(params[:id])
+    @crew = @tour.crew
+
     authorize @concert
   end
 

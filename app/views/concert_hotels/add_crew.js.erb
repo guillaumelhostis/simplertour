@@ -1,0 +1,13 @@
+// app/views/concert_hotels/add_crew.js.erb
+
+// Assuming you have a div with the ID 'flash-messages' to display notices
+var flashMessages = document.getElementById('flash-messages');
+
+// Assuming you have a CSS class 'add-crew-btn' for the submit button
+var addButton = document.querySelector('.add-crew-btn[data-concert_hotel_id="<%= @concert_hotel.id %>"]');
+
+// Handle success message
+flashMessages.innerHTML = '<div class="alert alert-success">Crew member added successfully.</div>';
+
+// Disable the submit button after successful submission
+addButton.disabled = true;
