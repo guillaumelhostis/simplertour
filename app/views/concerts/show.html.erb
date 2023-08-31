@@ -27,7 +27,7 @@
     <% if @concert.hotels %>
       <ul>
         <% @concert.concert_hotels.each do |concert_hotel| %>
-          <p><strong>Hotel:</strong> <%= concert_hotel.hotel.name %></p>
+          <p><strong>Hotel:</strong> <%= concert_hotel.hotel.name %> - <%= button_to "Destroy this concerthotel", tour_concert_concert_hotel_path(@concert.tour, @concert, concert_hotel), method: :delete if policy(concert_hotel).destroy?%></p>
           <div class="d-flex">
             <strong>Associated Users:</strong>
             <%= concert_hotel.users.map { |user| "
