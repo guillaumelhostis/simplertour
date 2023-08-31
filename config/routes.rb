@@ -20,7 +20,12 @@ Rails.application.routes.draw do
     resources :concerts, except: [:index] do
       patch :remove_venue, on: :member
       patch :remove_hotel, on: :member
-      resources :concert_hotels, only: [:create]
+      resources :concert_hotels, only: [:create, :destroy] do
+        member do
+          delete 'remove_user/:user_id', action: :remove_user, as: 'remove_user'
+          post 'add_crew', action: :add_crew, as: 'add_crew'
+        end
+      end
     end
   end
 
