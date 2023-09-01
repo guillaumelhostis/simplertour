@@ -3,7 +3,7 @@
   width: 80%;
   height: 60px;
   position: fixed;
-  z-index: 999;
+  z-index: 888;
   top: 0;
   left: 0;
   right: 0;
@@ -18,7 +18,6 @@
   -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
 }
 
-
 .simpler-tour-home {
   padding: 0px 30px;
   border-right: solid rgba(255, 255, 255, 0.8);
@@ -28,19 +27,35 @@
   width: 112px;
 }
 
+.simpler-tour-home-link a {
+  color: white;
+}
+
+.simpler-tour-home-link a:hover {
+  color: white;
+}
+
+.simpler-tour-home-link a:visited {
+  color: white;
+}
 
 .simpler-tour-menu-links {
   padding: 0px 30px;
   width: 375px;
   display: flex;
   justify-content: space-between;
-  opacity: 0.9;
+  opacity: 1;
 }
 
-.simpler-tour-menu-links span:hover {
-  font-weight: bold;
+.simpler-tour-dropdown-menu {
+  display: none;
+}
+
+.simpler-tour-menu-links a:hover {
+
   transition: 0.4s;
   color: white;
+  opacity: 0.7;
 }
 
 .navbar-navigation-container {
@@ -51,4 +66,87 @@
 
 .simpler-tour-navbar-end{
   padding: 0px 30px;
+}
+
+/* Dropdown styles for smaller screens */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.1);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 998;
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
+  margin-top: 0px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  opacity: 0.7;
+}
+
+/* Show the dropdown menu when the button is hovered over */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.simpler-tour-dropdown-menu {
+  display: none;
+}
+
+.modal-navbar-content {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15% auto;
+  padding: 15px;
+  color: white;
+  // border: 1px solid #888;
+  width: 420px;
+  height: 90px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: 0.8s;
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+
+
+
+@media screen and (max-width: 850px) {
+  /* Hide the original menu links for smaller screens */
+  .simpler-tour-menu-links {
+    display: none;
+  }
+
+  .simpler-tour-dropdown-menu {
+    display: block;
+    padding-left: 30px ;
+  }
 }
