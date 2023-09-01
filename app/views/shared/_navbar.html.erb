@@ -1,12 +1,12 @@
 <div class="navbar navbar-expand-sm  navbar-lewagon ">
   <div class="d-flex w-100">
     <div class="simpler-tour-home">
-    <div class="simpler-tour-home-link"><strong>SIMPLER TOUR</strong></div>
+      <div class="simpler-tour-home-link"><strong><%= link_to 'SIMPLER TOUR', root_path %></strong></div>
     </div>
     <div class="navbar-navigation-container">
       <!-- Dropdown menu button for smaller screens -->
       <div class="dropdown simpler-tour-dropdown-menu">
-        <button class="dropbtn" onclick="toggleDropdown()"><i class="fas fa-bars white-icon"></i></button>
+        <button class="dropbtn"><i class="fas fa-bars white-icon"></i></button>
         <div class="dropdown-content" id="myDropdown">
           <a href="#">MY TOURS</a>
           <a href="#">ABOUT US</a>
@@ -21,8 +21,10 @@
       </div>
 
       <div class="simpler-tour-navbar-end">
-        <a href="#" class="button-green">LOGIN</a>
+        <a href="#" class="button-green" data-action="click->navbar#openModal">LOGIN</a>
       </div>
+
+
     </div>
   </div>
 

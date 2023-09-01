@@ -7,8 +7,32 @@
       </div>
       <p>A web tool designed to help you <strong>create</strong> and <strong>manage</strong> your tour,  a meeting point to communicate with your crew. </p>
     </div>
-    <div>
-      <span class="button-green">CREATE ACCOUNT</span>
+    <div data-controller="home">
+      <div id="myModal" class="modal" data-home-target="modal">
+        <div class="modal-content">
+          <!-- Modal content goes here -->
+          <span class="close" data-action="click->home#closeModal"><i class="fas fa-times black-icon"></i></span>
+          <div class="text-center mb-3">
+            <h2>SELECT YOUR ROLE</h2>
+          </div>
+
+          <div class="d-flex justify-content-around mb-3">
+            <div>
+              <%= link_to "Register as a Tour Manager", new_tourman_registration_path, class: "button-green" %>
+            </div>
+            <div>
+              <%= link_to "Register as a Crew Member", new_user_registration_path, class: "button-green" %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <a href="#" class="button-green" data-action="click->home#openModal">CREATE ACCOUNT</a>
+      </div>
     </div>
   </div>
+
+
 </div>

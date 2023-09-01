@@ -3,7 +3,7 @@
   width: 80%;
   height: 60px;
   position: fixed;
-  z-index: 999;
+  z-index: 888;
   top: 0;
   left: 0;
   right: 0;
@@ -25,6 +25,18 @@
 
 .simpler-tour-home-link {
   width: 112px;
+}
+
+.simpler-tour-home-link a {
+  color: white;
+}
+
+.simpler-tour-home-link a:hover {
+  color: white;
+}
+
+.simpler-tour-home-link a:visited {
+  color: white;
 }
 
 .simpler-tour-menu-links {
@@ -103,6 +115,28 @@
 .simpler-tour-dropdown-menu {
   display: none;
 }
+
+.modal-navbar-content {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15% auto;
+  padding: 15px;
+  color: white;
+  // border: 1px solid #888;
+  width: 420px;
+  height: 90px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: 0.8s;
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+
 
 
 @media screen and (max-width: 850px) {

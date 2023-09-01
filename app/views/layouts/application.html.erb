@@ -15,7 +15,21 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
+    <div data-controller="navbar">
+      <%= render "shared/navbar" %>
+      <!-- Modal container (outside of the navbar) -->
+        <div id="myModal" class="modal" data-navbar-target="modal">
+          <div class="modal-navbar-content">
+            <span class="close" data-action="click->navbar#closeModal"><i class="fas fa-times black-icon"></i></span>
+
+
+                <%= link_to "Login as a Tour Manager", new_tourman_session_path, class: "button-green" %>
+                <%= link_to "Login as a Crew Member", new_user_session_path, class: "button-green" %>
+
+
+          </div>
+        </div>
+    </div>
     <%= yield %>
     <%= render "shared/flashes" %>
   </body>
