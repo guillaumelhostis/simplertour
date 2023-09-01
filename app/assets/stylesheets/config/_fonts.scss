@@ -14,3 +14,27 @@ $headers-font: "Nunito", "Helvetica", "sans-serif";
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+body h1{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
+  font-size: 50px;
+  margin-bottom: -1px;
+}
+
+body h2{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+
+body p{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300;
+  font-size: 16px;
+}

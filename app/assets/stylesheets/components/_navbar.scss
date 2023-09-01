@@ -1,12 +1,54 @@
 .navbar-lewagon {
+  background: rgba(255, 255, 255, 0.1);
+  width: 80%;
+  height: 60px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* Center horizontally */
+  border-radius: 15px;
+  margin-top: 40px;
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  color: white;
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
+}
+
+
+.simpler-tour-home {
+  padding: 0px 30px;
+  border-right: solid rgba(255, 255, 255, 0.8);
+}
+
+.simpler-tour-home-link {
+  width: 112px;
+}
+
+
+.simpler-tour-menu-links {
+  padding: 0px 30px;
+  width: 375px;
+  display: flex;
   justify-content: space-between;
-  background: white;
+  opacity: 0.9;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.simpler-tour-menu-links span:hover {
+  font-weight: bold;
+  transition: 0.4s;
+  color: white;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-navigation-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.simpler-tour-navbar-end{
+  padding: 0px 30px;
 }
