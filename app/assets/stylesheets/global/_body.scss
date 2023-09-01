@@ -1,0 +1,21 @@
+body::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: -130px;
+  width: 40%;
+  height: 70%;
+  background-color: #4ECCA3;
+  border-radius: 86%;
+  z-index: -1;
+  filter: blur(95px);
+}
+
+.body-container{
+  width: 80%;
+  margin: 150px auto;
+  color: white;
+  position: relative;
+  z-index: 1; /* Ensure content is below the navbar */
+
+}
