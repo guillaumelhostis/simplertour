@@ -18,19 +18,20 @@
 
           <div class="d-flex justify-content-around mb-3">
             <div>
-              <%= link_to "Register as a Tour Manager", new_tourman_registration_path, class: "button-green" %>
+              <%= link_to "SIGN IN AS A TOUR MANAGER", new_tourman_registration_path, class: "button-green" %>
             </div>
             <div>
-              <%= link_to "Register as a Crew Member", new_user_registration_path, class: "button-green" %>
+              <%= link_to "SIGN IN AS A CREW MEMBER", new_user_registration_path, class: "button-green" %>
             </div>
           </div>
 
         </div>
       </div>
-
-      <div>
-        <a href="#" class="button-green" data-action="click->home#openModal">CREATE ACCOUNT</a>
-      </div>
+      <% if !tourman_signed_in?  && !user_signed_in?%>
+        <div>
+          <a href="#" class="button-green" data-action="click->home#openModal">CREATE ACCOUNT</a>
+        </div>
+      <% end %>
     </div>
   </div>
 

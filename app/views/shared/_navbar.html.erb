@@ -21,7 +21,15 @@
       </div>
 
       <div class="simpler-tour-navbar-end">
-        <a href="#" class="button-green" data-action="click->navbar#openModal">LOGIN</a>
+        <% if !tourman_signed_in? %>
+          <% if !user_signed_in? %>
+            <a href="#" class="button-green" data-action="click->navbar#openModal">LOGIN</a>
+          <% else user_signed_in? %>
+            <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete, class: "button-green" %>
+          <% end %>
+        <% elsif tourman_signed_in? %>
+            <%= link_to "Sign out", destroy_tourman_session_path, 'data-turbo-method': :delete, class: "button-green" %>
+        <% end %>
       </div>
 
 
