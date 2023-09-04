@@ -1,11 +1,32 @@
-<h3>All Tours</h3>
-<ul>
-  <% @tours.each do |tour| %>
-    <li><%= tour.title %> - <%= tour.artist %> - created by <%= tour.tourman_id %> - <%= link_to "Link", tour_path(tour) %></li>
+<div class="body-container">
 
-  <% end %>
-</ul>
+  <div class="mb-3"><h1>MY TOURS</h1></div>
+
+  <ul class=" list-unstyled">
+    <% @tours.each do |tour| %>
+      <div class="row">
+        <li>
+          <%= link_to tour_path(tour) do %>
+            <div class="tour-card col-5">
+              <div class="tour-card-img">
+                <%= image_tag(tour.picture) if tour.picture.attached? %>
+                <% unless tour.picture.attached? %>
+                  <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+                <% end %>
+              </div>
+              <div class="tour-card-content">
+                <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
+                <p><strong>from</strong> <%= tour.starting %> <strong>to</strong> <%= tour.ending %></p>
+              </div>
+
+            </div>
+          <% end %>
+        </li>
+      </div>
+    <% end %>
+  </ul>
 
 
-<%= link_to "New Tour", new_tour_path %>
-<%= link_to "Home", root_path %>
+  <%= link_to "New Tour", new_tour_path, class:"button-green" %>
+
+</div>
