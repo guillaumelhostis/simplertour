@@ -11,6 +11,10 @@ application.register("home", HomeController)
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
 
+import CrewController from "./crew_controller"
+application.register("crew", CrewController)
+
+
 // Eager load all controllers defined in the import map under controllers/**/*_controller
 // import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 // eagerLoadControllersFrom("controllers", application)

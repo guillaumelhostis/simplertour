@@ -9,7 +9,9 @@ class CrewsController < ApplicationController
   def show
     authorize @crew
     @users = User.all
-    @crew_users = @crew.users
+    @crew_users = CrewUser.where(crew_id: @crew).order(created_at: :asc)
+
+
     @tour = Tour.find_by(crew_id: @crew.id)
   end
 
@@ -31,6 +33,22 @@ class CrewsController < ApplicationController
       @crew.save
       redirect_to @crew, notice: 'Users were successfully assigned.'
     end
+  end
+
+  def assign_users_role
+    raise
+    @crew = Crew.find(params[:id])
+
+    @crewuser = CrewUser.where(user_id: params[:format], crew_id: params[:id] )
+
+    role = params[:role]
+    @crewuser.update(role: role)
+    authorize @crew
+
+    redirect_to @crew, notice: 'Users were successfully assigned.'
+
+
+
   end
 
   def unassign_user
