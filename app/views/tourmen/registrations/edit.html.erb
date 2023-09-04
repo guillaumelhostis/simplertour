@@ -1,58 +1,130 @@
-<h2>Edit  Tourman<%= resource_name.to_s.humanize %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="body-container">
+  <div class="mb-3">
+    <h1>EDIT MY ACCOUNT</h1>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+        <div class="form-inputs">
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true %>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true %>
-    <%= f.input :birth_day, as: :date, start_year: Date.today.year - 90,
-                              end_year: Date.today.year - 12 %>
-    <%= f.input :address,
-                required: true,
-                autofocus: true %>
-    <%= f.input :post_code,
-                required: true,
-                autofocus: true %>
-    <%= f.input :city,
-                required: true,
-                autofocus: true %>
-    <%= f.input :country,
-                required: true,
-                autofocus: true %>
-    <%= f.input :phone_number,
-                required: true,
-                autofocus: true %>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+            <div class="d-flex">
+              <div class="col-6">
+                <%= f.input :first_name,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "First Name",
+                            input_html: { class: 'form-input' } %>
+              </div>
+              <div class="col-6">
+                <%= f.input :last_name,
+                          required: true,
+                          autofocus: true,
+                          label: false,
+                          placeholder: "Last Name",
+                          input_html: { class: 'form-input' }%>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="col-4">
+                <%= f.input :birth_day,
+                            as: :string,
+                            label: false,
+                            placeholder: "Age",
+                            input_html: { class: 'form-input', type: :date } %>
+              </div>
+              <div class="col-8">
+                <%= f.input :phone_number,
+                          required: true,
+                          autofocus: true,
+                          label: false,
+                          placeholder: "Phone Number",
+                          input_html: { class: 'form-input' }  %>
+              </div>
+            </div>
+            <%= f.input :email, required: true, autofocus: true,
+                          input_html: { autocomplete: "email" },
+                          label: false,
+                          placeholder: "Email",
+                          input_html: { class: 'form-input' } %>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+
+
+            <%= f.input :address,
+                        required: true,
+                        autofocus: true, label: false,
+                        placeholder: "Address",
+                        input_html: { class: 'form-input-address' } %>
+            <div class="d-flex">
+              <div class="col-4">
+                <%= f.input :post_code,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "Post-Code",
+                            input_html: { class: 'form-input' }  %>
+              </div>
+              <div class="col-4">
+                <%= f.input :city,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "City",
+                            input_html: { class: 'form-input' }  %>
+              </div>
+              <div class="col-4 ">
+
+                <%= f.input :country,
+                  required: true,
+                  autofocus: true,
+                  label: false,
+                  prompt: "Select a country",
+                  input_html: { class: 'form-input' }  %>
+              </div>
+            </div>
+
+            <%= f.input :password,
+                        hint: "leave it blank if you don't want to change it",
+                        required: false,
+                        label: false,
+                            placeholder: "New Password",
+                        input_html: { autocomplete: "new-password", class: 'form-input'   } %>
+            <%= f.input :password_confirmation,
+                        required: false,
+                        label: false,
+                            placeholder: "Confirm New Password",
+                        input_html: { autocomplete: "new-password", class: 'form-input'   } %>
+            <%= f.input :current_password,
+                        hint: "we need your current password to confirm your changes",
+                        required: true,
+                        label: false,
+                            placeholder: "Current Password",
+                        input_html: { autocomplete: "current-password", class: 'form-input'   } %>
+            <%= f.input :picture, as: :file,
+                        label: false,
+
+                        prompt: "Profile Picture",
+                        input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
+
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Update", class: "button-green" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
 
-<h3>Cancel my account</h3>
+    <%# cancel account %>
+    <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+  <%#= link_to "Back", :back %>
+</div>
