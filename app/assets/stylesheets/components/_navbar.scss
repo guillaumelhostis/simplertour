@@ -21,6 +21,8 @@
 .simpler-tour-home {
   padding: 0px 30px;
   border-right: solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
 }
 
 .simpler-tour-home-link {
@@ -45,6 +47,7 @@
   display: flex;
   justify-content: space-between;
   opacity: 1;
+  align-items: center;
 }
 
 .simpler-tour-dropdown-menu {
@@ -136,7 +139,35 @@
 
 }
 
+.welcome-navbar p {
+  font-size: 14px;
 
+}
+
+.dropdown-content-picture {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 68px;
+  right: 14px;
+}
+
+.dropdown-content-picture a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: white;
+}
+
+/* Change the link color on hover */
+.dropdown-content-picture a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown content when the show class is present */
+.dropdown-content-picture.show {
+  display: block;
+}
 
 
 @media screen and (max-width: 850px) {
