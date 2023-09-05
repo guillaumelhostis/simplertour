@@ -52,6 +52,22 @@ class CrewsController < ApplicationController
     end
   end
 
+  def update_role_in_crew_member
+
+
+    @crew = Crew.find(params[:id])
+    @crewuser = CrewUser.find_by(user_id: params[:user_id], crew_id: params[:id] )
+    @crewuser.role = nil
+    authorize @crew
+
+    if @crewuser.save
+      render json: { success: true, message: 'Role updated successfully', role: @crewuser.role }
+    else
+      render json: { success: false, errors: @crewuser.errors.full_messages }
+    end
+
+  end
+
   def unassign_user
     @crew = Crew.find(params[:id])
     @user = User.find(params[:user_id])

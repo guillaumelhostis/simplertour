@@ -31,6 +31,10 @@ class CrewPolicy < ApplicationPolicy
     true
   end
 
+  def update_role_in_crew_member?
+    true
+  end
+
 
   def unassign_user?
     true

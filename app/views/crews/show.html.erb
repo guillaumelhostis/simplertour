@@ -31,46 +31,35 @@
 
               <li>
                 <div class="list-crew-members d-flex justify-content-between align-items-center">
-                  <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p> </div>
+                  <div class="d-flex align-items-center">
+
+                      <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                      <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p></div>
+
+
+                  </div>
 
                   <div class="crew-role-delete d-flex align-items-center">
-                    <p>
-                      <strong data-crew-target="crewuserrole<%= index %>">
 
+                      <div class="d-flex align-items-center me-3">
+                        <strong data-crew-target="crewuserrole<%= index %>"><p><%= crew_user.role %></p></strong>
+                      </div>
+                      <div class="margin-bot-seven d-flex align-items-center" data-crew-target="divplusorminus<%= index %>">
+                        <% if crew_user.role.nil? %>
+                          <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus open-plus-icon"></i></a>
+                        <% else %>
+                          <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), "#", data: {action: "click->crew#updateRole", url: url_for(update_role_in_crew_member_crew_path(@crew, crew_user.user_id)), index: index,  confirmMessage: "Are you sure?" } %>
+                        <% end %>
+                      </div>
+                      <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>" >
+                        <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
+                          <div class="d-flex align-items-center">
+                            <%= text_field_tag "role", nil, placeholder: "Role in team", class: "form-input-black-short me-3" %>
+                            <%= submit_tag "NEW ROLE", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
+                          </div>
+                        <% end %>
+                      </div>
 
-
-
-
-                        <%= crew_user.role %>
-
-
-
-
-
-                      </strong>
-                      <%= link_to raw('<i class="fas fa-times-circle text-danger"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-
-                          <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus ms-2"></i></a>
-
-                            <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>">
-                              <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
-                                <label for="role">Select Role:</label>
-                                <%= text_field_tag "role" %>
-                                <%= submit_tag "Assign Users", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
-                              <% end %>
-                            </div>
-
-                    </p>
-
-
-                    <%# <div data-crew-target="role" class="crew-modal"> %>
-                      <%# <div class="crew-modal-content"> %>
-                        <%# <span class="crew-close" data-action="click->crew#closeModal" >&times;</span> %>
-                        <!-- Form goes here -->
-
-
-                      <%# </div> %>
-                    <%# </div> %>
                   </div>
                 </div>
                </li>
@@ -79,8 +68,11 @@
           </ul>
 
         </div>
-        <%= link_to "THIS TOUR", tour_path(@tour.id), class:"button-green" %>
       </div>
+      <div class="col-12 text-start mt-5"><%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class:"button-green" %></div>
     </div>
   </div>
 </div>
+
+
+<%#  %>
