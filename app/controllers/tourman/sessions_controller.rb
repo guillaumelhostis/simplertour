@@ -2,6 +2,7 @@
 
 class Tourman::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  skip_before_action :verify_authenticity_token
 
   # GET /resource/sign_in
   # def new
