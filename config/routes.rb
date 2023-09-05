@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     member do
       post 'assign_users'
       put 'assign_users_role'
+      put 'update_role_in_crew_member/:user_id', to: 'crews#update_role_in_crew_member', as: :update_role_in_crew_member
       delete 'unassign_user/:user_id', action: :unassign_user, as: :unassign_user
     end
   end
