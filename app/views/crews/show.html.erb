@@ -25,47 +25,49 @@
       </div>
       <div class="col-7 container-transparent">
         <div class="container-white">
-          <h2>CREW MEMBERS</h2>
-          <ul class="list-unstyled">
-            <% @crew_users.each_with_index do |crew_user, index|%>
+          <div class="box-shadow-bottom"><h2>CREW MEMBERS</h2></div>
+          <div class="listtoggle">
+            <ul class="list-unstyled">
+              <% @crew_users.each_with_index do |crew_user, index|%>
 
-              <li>
-                <div class="list-crew-members d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
+                  <li>
+                    <div class="list-crew-members d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
 
-                      <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-                      <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p></div>
+                          <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                          <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p></div>
 
 
-                  </div>
-
-                  <div class="crew-role-delete d-flex align-items-center">
-
-                      <div class="d-flex align-items-center me-3">
-                        <strong data-crew-target="crewuserrole<%= index %>"><p><%= crew_user.role %></p></strong>
                       </div>
-                      <div class="margin-bot-seven d-flex align-items-center" data-crew-target="divplusorminus<%= index %>">
-                        <% if crew_user.role.nil? %>
-                          <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus open-plus-icon"></i></a>
-                        <% else %>
-                          <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), "#", data: {action: "click->crew#updateRole", url: url_for(update_role_in_crew_member_crew_path(@crew, crew_user.user_id)), index: index,  confirmMessage: "Are you sure?" } %>
-                        <% end %>
-                      </div>
-                      <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>" >
-                        <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
-                          <div class="d-flex align-items-center">
-                            <%= text_field_tag "role", nil, placeholder: "Role in team", class: "form-input-black-short me-3" %>
-                            <%= submit_tag "NEW ROLE", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
+
+                      <div class="crew-role-delete d-flex align-items-center">
+
+                          <div class="d-flex align-items-center me-3">
+                            <strong data-crew-target="crewuserrole<%= index %>"><p><%= crew_user.role %></p></strong>
                           </div>
-                        <% end %>
+                          <div class="margin-bot-seven d-flex align-items-center" data-crew-target="divplusorminus<%= index %>">
+                            <% if crew_user.role.nil? %>
+                              <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus open-plus-icon"></i></a>
+                            <% else %>
+                              <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), "#", data: {action: "click->crew#updateRole", url: url_for(update_role_in_crew_member_crew_path(@crew, crew_user.user_id)), index: index,  confirmMessage: "Are you sure?" } %>
+                            <% end %>
+                          </div>
+                          <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>" >
+                            <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
+                              <div class="d-flex align-items-center">
+                                <%= text_field_tag "role", nil, placeholder: "Role in team", class: "form-input-black-short me-3" %>
+                                <%= submit_tag "NEW ROLE", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
+                              </div>
+                            <% end %>
+                          </div>
+
                       </div>
+                    </div>
+                  </li>
 
-                  </div>
-                </div>
-               </li>
-
-            <% end %>
-          </ul>
+              <% end %>
+            </ul>
+          </div>
 
         </div>
       </div>
