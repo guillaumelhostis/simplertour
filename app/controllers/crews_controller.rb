@@ -36,19 +36,20 @@ class CrewsController < ApplicationController
   end
 
   def assign_users_role
-    raise
+
     @crew = Crew.find(params[:id])
 
-    @crewuser = CrewUser.where(user_id: params[:format], crew_id: params[:id] )
+    @crewuser = CrewUser.find_by(user_id: params[:format], crew_id: params[:id] )
+
 
     role = params[:role]
-    @crewuser.update(role: role)
+
     authorize @crew
-
-    redirect_to @crew, notice: 'Users were successfully assigned.'
-
-
-
+    if @crewuser.update(role: role)
+      render json: { success: true, message: 'Role updated successfully', role: @crewuser.role }
+    else
+      render json: { success: false, errors: @crewuser.errors.full_messages }
+    end
   end
 
   def unassign_user

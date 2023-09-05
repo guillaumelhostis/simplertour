@@ -5,7 +5,7 @@ export default class extends Controller {
   connect() {
     console.log('CrewController')
   }
-  static targets = ["searchInput", "results", "selectUsers", "role"];
+  static targets = ["searchInput", "results", "selectUsers", "role*", "form*", "submit*", "crewuserrole*"];
 
   search(event) {
     console.log('Search method called');
@@ -47,14 +47,60 @@ export default class extends Controller {
 
   }
 
-  openModal() {
-    this.roleTarget.classList.add('d-inline-block');
-    this.roleTarget.classList.remove('d-none');
-    event.preventDefault();
+  openModal(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    console.log("Index:", index);// Get the index from the data attribute
+    const roleTarget = this.targets.find(`role${index}`);
+    console.log("Role Target:", roleTarget);
 
+
+
+      roleTarget.classList.add('d-inline-block');
+      roleTarget.classList.remove('d-none');
+
+    event.preventDefault();
   }
 
-  closeModal() {
-    this.roleTarget.style.display = "none";
+  closeModal(event) {
+    event.preventDefault();
+
+    const index = event.currentTarget.getAttribute("data-index");
+    const roleTarget = this.targets.find(`role${index}`);
+    const crewuserrole = this.targets.find(`crewuserrole${index}`)
+    roleTarget.classList.add('d-none');
+    roleTarget.classList.remove('d-inline-block');
+
+    const putTarget = this.targets.find(`form${index}`);
+    const formData = new FormData(putTarget);
+
+    console.log(putTarget);
+    for (var [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+
+    fetch(putTarget.action, {
+      method: 'PUT',
+      body: formData,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Handle success here
+        console.log(data.message);
+
+        // Update the role in the DOM
+        crewuserrole.innerHTML = data.role;
+      } else {
+        // Handle errors here
+        console.error('Error:', data.errors || data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 }

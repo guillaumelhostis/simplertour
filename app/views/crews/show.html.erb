@@ -27,7 +27,7 @@
         <div class="container-white">
           <h2>CREW MEMBERS</h2>
           <ul class="list-unstyled">
-            <% @crew_users.each do |crew_user| %>
+            <% @crew_users.each_with_index do |crew_user, index|%>
 
               <li>
                 <div class="list-crew-members d-flex justify-content-between align-items-center">
@@ -35,13 +35,28 @@
 
                   <div class="crew-role-delete d-flex align-items-center">
                     <p>
-                      <strong><%= crew_user.user.user_role_in_team(@crew, crew_user) %></strong>  <%= link_to raw('<i class="fas fa-times-circle text-danger"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-                          <a href="#" data-action="click->crew#openModal"><i class="fas fa-plus ms-2"></i></a>
-                            <div data-crew-target="role "class="d-none">
-                              <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put) do %>
-                              <label for="role">Select Role:</label>
-                              <%= text_field_tag "role" %>
-                              <%= submit_tag "Assign Users", class: "button-green" %>
+                      <strong data-crew-target="crewuserrole<%= index %>">
+
+
+
+
+
+                        <%= crew_user.role %>
+
+
+
+
+
+                      </strong>
+                      <%= link_to raw('<i class="fas fa-times-circle text-danger"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+
+                          <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus ms-2"></i></a>
+
+                            <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>">
+                              <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
+                                <label for="role">Select Role:</label>
+                                <%= text_field_tag "role" %>
+                                <%= submit_tag "Assign Users", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
                               <% end %>
                             </div>
 
