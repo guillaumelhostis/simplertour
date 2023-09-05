@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     sessions: 'user/sessions'
   }
 
+  get '/pages/search', to: 'pages#search'
+
   root to: 'pages#home'
   get  'pages/user'
   get 'pages/tourman'
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
   resources :crews do
     member do
       post 'assign_users'
+      put 'assign_users_role'
       delete 'unassign_user/:user_id', action: :unassign_user, as: :unassign_user
     end
   end

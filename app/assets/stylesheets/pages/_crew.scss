@@ -1,0 +1,98 @@
+.container-white{
+  background-color: #EEEEEE;
+  border-radius: 15px;
+  color: black;
+  box-shadow: 0 0 12px rgba(245, 245, 245, 0.1);
+  padding: 24px;
+}
+
+.container-transparent {
+  background-color: rgba(245, 245, 245, 0);
+  border-radius: 15px;
+  color: black;
+  padding: 0px;
+}
+
+
+
+.result-crew-search{
+  border-radius: 10px;
+  border: solid 1px #232931;
+  color: black;
+  width: 100%;
+
+  margin-top: 7Px;
+  padding: 5px;
+
+}
+
+.result-crew-search:focus{
+
+  border: solid 1px rgba(78,204,163, 0.5);
+
+
+}
+
+.result-crew-search option{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+
+}
+
+
+.result-crew-search option:hover{
+
+  background-color: rgba(78,204,163, 0.5) !important;
+
+}
+
+.crew-role-delete p {
+
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+
+.list-crew-members {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+
+  padding-bottom: 8px;
+  padding-top: 12px;
+}
+
+
+.list-crew-members p {
+  margin-bottom: 0px;
+}
+
+
+/* Style the modal container */
+.crew-modal {
+  display: none;
+  position: absolute;
+  top: 142px;
+  right: -19px;
+  z-index: 1;
+}
+
+/* Style the modal content */
+.crew-modal-content {
+  position: relative;
+  margin: 10% auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Style the close button */
+.crew-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}

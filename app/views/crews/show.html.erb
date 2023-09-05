@@ -1,26 +1,86 @@
 <div class="body-container">
-
-  <h1><%= @crew.name.upcase %></h1>
-
-
-  <%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
-    <label for="user_ids">Select Users:</label>
-    <%= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
-    <label for="role">Select Role:</label>
-    <%= text_field_tag "role" %>
-    <%= submit_tag "Assign Users" %>
-  <% end %>
+  <div data-controller="crew">
+    <h1 class="mb-3"><%= @crew.name.upcase %></h1>
 
 
-  <h2>Crew Members:</h2>
-  <ul>
-    <% @crew_users.each do |crew_user| %>
-      <li><%= crew_user.first_name %> - <%= crew_user.user_role_in_team(@crew, crew_user) %>
-      <%= button_to 'Unassign', unassign_user_crew_path(@crew, crew_user), method: :delete %>
-      </li>
-    <% end %>
-  </ul>
+    <div class="row">
+      <div class="col-4  me-3">
+        <div class="container-white">
+          <h2>SEARCH</h2>
+          <%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
+            <div>
+              <input data-crew-target="searchInput" type="text" id="crew-search" placeholder="Search crew" data-action="input->crew#search" class="form-input-black">
+              <div data-crew-target="results"></div>
+              <%= select_tag "user_ids[]", options_for_select(@users.map { |user| ["#{user.first_name} #{user.last_name}", user.id] }, params[:user_ids]), multiple: true, data: { crew_target: "selectUsers" }, class: "d-none result-crew-search" %>
+
+            </div>
+
+            <%# <label for="role">Select Role:</label> %>
+            <%#= text_field_tag "role" %>
+            <%= submit_tag "ADD TO CREW",  class: "button-green mt-3"%>
+          <% end %>
+        </div>
+          <%# <label for="user_ids">Select Users:</label> %>
+            <%#= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
+      </div>
+      <div class="col-7 container-transparent">
+        <div class="container-white">
+          <h2>CREW MEMBERS</h2>
+          <ul class="list-unstyled">
+            <% @crew_users.each_with_index do |crew_user, index|%>
+
+              <li>
+                <div class="list-crew-members d-flex justify-content-between align-items-center">
+                  <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p> </div>
+
+                  <div class="crew-role-delete d-flex align-items-center">
+                    <p>
+                      <strong data-crew-target="crewuserrole<%= index %>">
 
 
-  <%= link_to "This Tour", tour_path(@tour.id) %>
+
+
+
+                        <%= crew_user.role %>
+
+
+
+
+
+                      </strong>
+                      <%= link_to raw('<i class="fas fa-times-circle text-danger"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+
+                          <a href="#" data-action="click->crew#openModal"  data-index="<%= index %>"><i class="fas fa-plus ms-2"></i></a>
+
+                            <div data-crew-target="role<%= index %>" class="d-none" data-index="<%= index %>">
+                              <%= form_tag(assign_users_role_crew_path(@crew, crew_user.user_id), method: :put, data: { crew_target: "form#{index}" }) do %>
+                                <label for="role">Select Role:</label>
+                                <%= text_field_tag "role" %>
+                                <%= submit_tag "Assign Users", class: "button-green", data: { action: "click->crew#closeModal", index: index, crew_target: "submit#{index}"  } %>
+                              <% end %>
+                            </div>
+
+                    </p>
+
+
+                    <%# <div data-crew-target="role" class="crew-modal"> %>
+                      <%# <div class="crew-modal-content"> %>
+                        <%# <span class="crew-close" data-action="click->crew#closeModal" >&times;</span> %>
+                        <!-- Form goes here -->
+
+
+                      <%# </div> %>
+                    <%# </div> %>
+                  </div>
+                </div>
+               </li>
+
+            <% end %>
+          </ul>
+
+        </div>
+        <%= link_to "THIS TOUR", tour_path(@tour.id), class:"button-green" %>
+      </div>
+    </div>
+  </div>
 </div>

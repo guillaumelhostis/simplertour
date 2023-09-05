@@ -27,6 +27,11 @@ class CrewPolicy < ApplicationPolicy
     true
   end
 
+  def assign_users_role?
+    true
+  end
+
+
   def unassign_user?
     true
   end
