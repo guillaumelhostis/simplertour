@@ -1,0 +1,73 @@
+import { Controller } from "@hotwired/stimulus"
+import flatpickr from "flatpickr";
+
+// Connects to data-controller="dashboard"
+export default class extends Controller {
+  static targets = ["calendar"]
+
+  connect() {
+    console.log("dashboard connected", this.element)
+    flatpickr(".date", {
+
+    })
+    function formatDateForComparison(dateString) {
+      // Parse the date string to a Date object
+      const date = new Date(dateString);
+
+      // Format the date as needed for comparison, e.g., YYYY-MM-DD
+      const formattedDate = date.toISOString().split('T')[0];
+
+      return formattedDate;
+    }
+
+    console.log(this.calendarTarget)
+    // Retrieve dynamic concert dates from the data attribute
+    const concertDates = this.calendarTarget.getAttribute("data-concert-dates");
+    console.log(concertDates);
+    const parsedConcertDates = JSON.parse(concertDates);
+    console.log(parsedConcertDates)
+
+
+    // Calculate the date 6 months before the current date
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+
+    flatpickr('#calendar', {
+      mode: 'multiple',
+      dateFormat: 'Y-m-d',
+      minDate: sixMonthsAgo,
+      inline: true,
+      static: true,
+      showMonths: 12, // Show a total of 12 months
+      numberOfMonths: [6, 6], // Display 6 months in each row
+      showYearDropdown: true, // Enable the year dropdown
+      yearDropdown: true,     // Show the year dropdown
+
+      onReady: function (selectedDates, dateStr, instance) {
+        console.log("on ready worked")
+        // Select all day elements within the calendar container
+        const dayElements = instance.calendarContainer.querySelectorAll(".flatpickr-day");
+
+
+        dayElements.forEach((day) => {
+          const ariaLabel = day.getAttribute("aria-label");
+
+          console.log(ariaLabel);
+          if (concertDates.includes(ariaLabel)) {
+            // Add a background-red class to the matching day
+            day.classList.add("background-color-red");
+          }
+
+
+        });
+
+
+      },
+      onChange: this.handleDateChange.bind(this),
+    });
+
+  }
+
+
+}

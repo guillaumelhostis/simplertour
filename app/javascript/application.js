@@ -3,3 +3,8 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "@popperjs/core"
 import "bootstrap"
+
+// commonjs
+
+
+// es modules are recommended, if available, especially for typescript

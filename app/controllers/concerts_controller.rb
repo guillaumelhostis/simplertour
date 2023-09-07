@@ -19,6 +19,7 @@ class ConcertsController < ApplicationController
     @concert = @tour.concerts.build(concert_params)
     authorize @concert
 
+
     # @venue = Venue.find(params[:concert][:venue_id])
     @concert.venue = nil
     # @concert.hotel = nil

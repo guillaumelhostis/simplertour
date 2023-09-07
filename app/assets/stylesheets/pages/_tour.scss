@@ -1,0 +1,132 @@
+.tour-card-img-square {
+
+  height:132px;
+  width: 132px;
+
+
+}
+
+.tour-card-img-square img{
+  width: 132px; /* Ensure the image never exceeds the width of its container */
+  height: 100%; /* Ensure the image never exceeds the height of its container */
+
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+
+.tour-titles h2{
+  font-size: 32px;;
+}
+
+
+#calendar-container {
+  // width: 100%; /* Set the desired width */
+  // max-width: 600px; /* Adjust the maximum width as needed */
+  // margin: 0 auto; /* Center the container horizontally */
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+/* Calendar input styles */
+#calendar {
+  width: 100%;
+  max-width: 100%; /* Ensure the calendar fits within the container */
+  height: auto; /* Allow the calendar's height to adjust based on content */
+}
+
+.flatpickr-wrapper{
+  width: 100%;
+
+}
+
+/* Style to display calendar in a single row with 6 months */
+.flatpickr-calendar {
+  max-width: 100%; /* Set the desired width for 6 months */
+  margin: 0 auto; /* Center the calendar horizontally */
+  display: flex;
+  overflow: hidden;
+  padding: 10px;
+  // flex-wrap: nowrap; /* Ensure all months are in a single row */
+}
+
+.flatpickr-month {
+  min-width: 125px;
+  max-width: 88px;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  display: none; /* Hide the previous and next month arrows */
+}
+
+.flatpickr-calendar .flatpickr-innerContainer {
+  height: auto;
+}
+
+/* Hide other navigation elements */
+.flatpickr-calendar .flatpickr-weekdays,
+.flatpickr-calendar .flatpickr-monthDropdown-months {
+  display: none;
+}
+
+/* Display the "Next Month" and "Next Year" buttons */
+.flatpickr-calendar .flatpickr-next-month,
+.flatpickr-calendar .flatpickr-prev-month,
+.flatpickr-calendar .flatpickr-next-year {
+  display: inline; /* Make both buttons visible */
+}
+
+/* Display the current year */
+.flatpickr-calendar .flatpickr-current-year {
+  display: inline; /* Make the current year visible */
+}
+
+.flatpickr-calendar .flatpickr-day {
+  font-size: 10px;
+  max-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.flatpickr-calendar .flatpickr-day.selected {
+  background-color: rgba(78, 204, 163, 0.5);
+}
+
+.flatpickr-calendar .flatpickr-day.selected:focus {
+  background-color: rgba(78, 204, 163, 0.5);
+  border: 1px solid rgba(78, 204, 163, 0);
+}
+
+.flatpickr-calendar .flatpickr-days {
+  margin-top: 6px;
+}
+
+/* Ensure days are clickable */
+.flatpickr-calendar .flatpickr-day.flatpickr-disabled {
+  pointer-events: auto !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.flatpickr-calendar .dayContainer {
+  min-width: 125px;
+  max-width: 88px;
+}
+
+.flatpickr-calendar .cur-month,
+.flatpickr-current-month input.cur-year {
+  font-size: 10px !important;
+}
+
+.flatpickr-calendar .flatpickr-current-month {
+  position: relative;
+  width: 100%;
+}
+
+
+.background-color-red {
+  background-color: red !important;
+}
