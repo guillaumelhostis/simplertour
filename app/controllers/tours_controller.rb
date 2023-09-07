@@ -10,6 +10,23 @@ class ToursController < ApplicationController
     @crew = Crew.find(@tour.crew_id)
     @crew_users = @crew.users
     @concerts = @tour.concerts
+    @concert_dates = []
+    @concert_index = []
+
+    @concerts.each do |concert|
+
+      # @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
+      @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
+
+    end
+
+    @concerts.each do |concert|
+
+      # @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
+      @concert_index << concert.id
+
+    end
+
     @concert = Concert.new
   end
 

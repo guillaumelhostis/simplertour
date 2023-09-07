@@ -1,31 +1,49 @@
 <div class="body-container">
 
+  <%# TITLES %>
 
-      <h2><%= @tour.title %></h2>
-      <p><%= @tour.artist%></p>
-      <p><%= @tour.genre %></p>
+  <div class="d-flex mb-4 tour-titles">
+    <div class="me-5">
+      <h1><%= @tour.title.upcase %></h1>
+      <h2><%= @tour.artist.upcase%></h2>
+    </div>
+    <div class="tour-card-img-square ms-2">
+      <%= image_tag(@tour.picture) if @tour.picture.attached? %>
+      <% unless @tour.picture.attached? %>
+      <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+      <% end %>
+    </div>
+  </div>
 
+  <%# DASHBOARD %>
 
-      <h2>Crew <%= link_to "Edit Crew", crew_path(@crew) %></h2>
-      <ul>
-        <% @crew_users.each do |member| %>
-          <li><%= member.first_name %> - <%= member.user_role_in_team(@crew, member)%> </li>
-        <% end %>
-      </ul>
+  <div class="container-transparent" data-controller="dashboard" >
+    <div id="calendar-container" data-dashboard-target="calendar" data-concert-dates="<%= @concert_dates.to_json %>" data-concert-index="<%= @concert_index.to_json%>" data-tour-index="<%= @tour.id.to_json%>">
+      <div id="calendar" ></div>
+    </div>
 
-
-
+    <div class="container">
       <h2>Concerts:</h2>
       <ul>
-        <% @concerts.each do |concert| %>
-          <li><%= concert.date %> - <%= concert.location %> - <%= link_to "Link", tour_concert_path(concert) %></li>
+        <% @concerts.each_with_index do |concert| %>
+          <li><%= concert.date.strftime("%B %e, %Y") %> - <%= concert.location %> - <%= link_to "Link", tour_concert_path(concert) %></li>
         <% end %>
+
       </ul>
+
+
+
+    </div>
+
+
+
+  </div>
 
       <h2>Create New Concert:</h2>
       <%= form_for [@tour, Concert.new] do |f| %>
         <%= f.label :date %>
-        <%= f.date_field :date %>
+        <%= f.date_field :date
+        %>
 
         <%= f.label :location %>
         <%= f.text_field :location %>
@@ -36,16 +54,19 @@
         <%= f.submit "Create Concert" %>
       <% end %>
 
-
-
-
-
-
-
-      <% if policy(@tour).edit? %>
-        <%= link_to "Edit this tour", edit_tour_path(@tour) %>
-      <% end %>
-      <%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>
+  <% if policy(@tour).edit? %>
+    <%= link_to "Edit this tour", edit_tour_path(@tour) %>
+  <% end %>
+  <%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>
 
 
 </div>
+
+
+
+<h2>CREW</h2>
+  <%= link_to "Edit Crew", crew_path(@crew) %>
+
+        <% @crew_users.each do |member| %>
+          <%= member.first_name %> - <%= member.user_role_in_team(@crew, member)%>
+         <% end %>
