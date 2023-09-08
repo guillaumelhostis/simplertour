@@ -1,74 +1,107 @@
-<h1><%= @concert.name %> - <%= @concert.date %></h1>
-<h2><strong><%= @concert.tour.artist %></strong></h2>
+<div class="body-container">
 
-<h2>Venue:</h2>
-  <div id="venue-space">
-    <% if @concert.venue %>
-      <p><strong><%= @concert.venue.name %></strong> - <%= button_to 'Remove Venue', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'btn btn-danger' %> </p>
-    <% else %>
-      <p>No venue assigned</p>
-      <%= link_to 'Create Venue', new_venue_path, class: 'btn btn-primary' %>
-    <% end %>
+  <div class="mb-4 tour-titles">
+    <h1><%= @concert.name.upcase %></h1>
+    <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
   </div>
 
-  <% if @concert.venue.nil? %>
-    <h2>Assign Venue:</h2>
-    <%= form_with(model: [@tour, @concert]) do |form| %>
-      <%= form.label :venue_id %>
-      <%= form.collection_select(:venue_id, Venue.where(tourman_id: current_tourman.id), :id, :name, { prompt: 'Select Venue' }) %>
-      <%= form.submit 'Assign Venue' %>
-    <% end %>
-  <% end %>
+  <div class="row">
+    <div class="col-4 container-white">
 
+      <h2>VENUE</h2>
+        <div id="venue-space">
+          <% if @concert.venue %>
+            <ul class="list-unstyled">
+              <li><strong>Address:</strong> <%= @concert.venue.address %></li>
+              <li><strong>City:</strong> <%= @concert.venue.city %> (<%= @concert.venue.country %>) </li>
+              <li><strong>Capacity:</strong> <%= @concert.venue.capacity %> </li>
+            </ul>
+            <div class="d-flex">
+              <%= button_to 'CHANGE VENUE', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'button-green me-3' %>
+              <%= link_to 'UPDATE VENUE INFOS', edit_venue_path(@concert.venue.id),  remote: true, class: 'button-green' %>
+            </div>
+          <% else %>
 
-<h2>Hotel:</h2>
+            <p><%= link_to 'NEW VENUE', new_venue_path, class: 'button-green'%></p>
+            <div class="d-flex align-items-center">
+            <p class="mb-0 me-3">Or:</p>
+                  <%= form_with(model: [@tour, @concert]) do |form| %>
+                  <div class="d-flex">
+                    <%= form.collection_select(:venue_id, Venue.where(tourman_id: current_tourman.id), :id, :name, { prompt: 'Search in DB' }, class:"form-input-black me-2") %>
+                    <%= form.submit 'Assign Venue', class:"button-green" %>
+                  </div>
+                <% end %>
+            </div>
 
-  <div id="hotel-space">
-    <% if @concert.hotels %>
-      <ul>
-        <% @concert.concert_hotels.each do |concert_hotel| %>
-          <p><strong>Hotel:</strong> <%= concert_hotel.hotel.name %> - <%= button_to "Destroy this concerthotel", tour_concert_concert_hotel_path(@concert.tour, @concert, concert_hotel), method: :delete if policy(concert_hotel).destroy?%></p>
-          <div class="d-flex">
-            <strong>Associated Users:</strong>
-            <%= concert_hotel.users.map { |user| "
-            #{user.first_name} -
-            #{remove_user_link(@tour, @concert, concert_hotel, user)}" }.join(', ').html_safe %>
-          </div>
-          <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
-            <%= form.collection_select(:user_id, @crew.users, :id, :first_name) %>
-            <%= form.button 'Add Crew Member', type: :submit, class: 'add-crew-btn', data: { concert_hotel_id: concert_hotel.id } %>
           <% end %>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No venue assigned</p>
-      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
-    <% end %>
-    <h2>Assign hotel:</h2>
-      <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
-        <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }) %>
-        <%= submit_tag "Add Hotel" %>
-      <% end %>
-    <h2>Or add Hotel from scratch</h2>
-      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+        </div>
+
+
+
+
+
+    </div>
   </div>
 
 
-<h2>TimeTable:</h2>
-  <div id="timetable-entries">
-    <%= render partial: 'timetable_entry', collection: @concert.timetable_entries %>
-  </div>
-  <h3>Add a new timetable</h3>
-    <%= form_for [@tour, @concert, @timeentry] do |f| %>
-    <%= f.label :hour %>
-    <%= f.time_field :hourminute %>
-
-    <%= f.label :information %>
-    <%= f.text_field :information %>
-
-    <%= f.submit "Create timeentry" %>
-    <% end %>
 
 
 
-<%= link_to "This Tour", tour_path(@tour.id), class: 'btn btn-primary'  %>
+
+
+
+
+            <h2>Hotel:</h2>
+
+              <div id="hotel-space">
+                <% if @concert.hotels %>
+                  <ul>
+                    <% @concert.concert_hotels.each do |concert_hotel| %>
+                      <p><strong>Hotel:</strong> <%= concert_hotel.hotel.name %> - <%= button_to "Destroy this concerthotel", tour_concert_concert_hotel_path(@concert.tour, @concert, concert_hotel), method: :delete if policy(concert_hotel).destroy?%></p>
+                      <div class="d-flex">
+                        <strong>Associated Users:</strong>
+                        <%= concert_hotel.users.map { |user| "
+                        #{user.first_name} -
+                        #{remove_user_link(@tour, @concert, concert_hotel, user)}" }.join(', ').html_safe %>
+                      </div>
+                      <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
+                        <%= form.collection_select(:user_id, @crew.users, :id, :first_name) %>
+                        <%= form.button 'Add Crew Member', type: :submit, class: 'add-crew-btn', data: { concert_hotel_id: concert_hotel.id } %>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <p>No venue assigned</p>
+                  <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+                <% end %>
+                <h2>Assign hotel:</h2>
+                  <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
+                    <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }) %>
+                    <%= submit_tag "Add Hotel" %>
+                  <% end %>
+                <h2>Or add Hotel from scratch</h2>
+                  <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+              </div>
+
+
+            <h2>TimeTable:</h2>
+              <div id="timetable-entries">
+                <%= render partial: 'timetable_entry', collection: @concert.timetable_entries %>
+              </div>
+              <h3>Add a new timetable</h3>
+                <%= form_for [@tour, @concert, @timeentry] do |f| %>
+                <%= f.label :hour %>
+                <%= f.time_field :hourminute %>
+
+                <%= f.label :information %>
+                <%= f.text_field :information %>
+
+                <%= f.submit "Create timeentry" %>
+                <% end %>
+
+
+
+            <%= link_to "This Tour", tour_path(@tour.id), class: 'btn btn-primary'  %>
+
+
+</div>

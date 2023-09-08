@@ -1,5 +1,6 @@
 
 <div class="body-container">
+  <h2 class="mb-4">EDIT <%= @venue.name.upcase %> INFOS</h2>
 
   <%= simple_form_for(@venue) do |f| %>
 
@@ -44,6 +45,6 @@
         placeholder: "Capacity",
         input_html: { class: 'form-input' }  %>
 
-    <%= f.submit "Create venue", class:"button-green" %>
+    <%= f.submit "UPDATE VENUE", class:"button-green" %>
   <% end %>
 </div>

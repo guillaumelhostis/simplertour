@@ -17,6 +17,10 @@ application.register("crew", CrewController)
 import DashboardController from "./dashboard_controller"
 application.register("dashboard", DashboardController)
 
+import FlatpickrController from "./flatpickr_controller"
+application.register("flatpickr", FlatpickrController)
+
+
 
 
 // Eager load all controllers defined in the import map under controllers/**/*_controller

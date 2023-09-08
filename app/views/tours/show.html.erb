@@ -1,6 +1,6 @@
 <div class="body-container">
 
-  <%# TITLES %>
+
 
   <div class="d-flex mb-4 tour-titles">
     <div class="me-5">
@@ -15,58 +15,34 @@
     </div>
   </div>
 
-  <%# DASHBOARD %>
+
 
   <div class="container-transparent" data-controller="dashboard" >
     <div id="calendar-container" data-dashboard-target="calendar" data-concert-dates="<%= @concert_dates.to_json %>" data-concert-index="<%= @concert_index.to_json%>" data-tour-index="<%= @tour.id.to_json%>">
       <div id="calendar" ></div>
     </div>
-
-    <div class="container">
-      <h2>Concerts:</h2>
-      <ul>
-        <% @concerts.each_with_index do |concert| %>
-          <li><%= concert.date.strftime("%B %e, %Y") %> - <%= concert.location %> - <%= link_to "Link", tour_concert_path(concert) %></li>
-        <% end %>
-
-      </ul>
-
-
-
-    </div>
-
-
-
   </div>
+  <div class="container-transparent  mt-4" data-controller="flatpickr" >
 
-      <h2>Create New Concert:</h2>
+    <div class="col-8 m-auto">
+
       <%= form_for [@tour, Concert.new] do |f| %>
-        <%= f.label :date %>
-        <%= f.date_field :date
-        %>
+          <div class="d-flex ">
 
-        <%= f.label :location %>
-        <%= f.text_field :location %>
+            <%= f.date_field :date, label: false, placeholder: "Date", class: 'date_pickr form-input me-4'  %>
 
-        <%= f.label :name %>
-        <%= f.text_field :name %>
 
-        <%= f.submit "Create Concert" %>
-      <% end %>
+            <%= f.text_field :location, label: false, placeholder: "Ville", class: "form-input"%>
 
-  <% if policy(@tour).edit? %>
-    <%= link_to "Edit this tour", edit_tour_path(@tour) %>
-  <% end %>
-  <%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>
+
+            <%= f.text_field :name, label: false, placeholder: "Salle", class: "form-input ms-4" %>
+
+            <%= f.submit "CREATE SHOW", class: "button-green ms-4" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
 
 </div>
-
-
-
-<h2>CREW</h2>
-  <%= link_to "Edit Crew", crew_path(@crew) %>
-
-        <% @crew_users.each do |member| %>
-          <%= member.first_name %> - <%= member.user_role_in_team(@crew, member)%>
-         <% end %>
