@@ -128,5 +128,9 @@
 
 
 .background-color-red {
-  background-color: red !important;
+  background-color: rgb(204, 78, 78) !important;
+}
+
+.background-color-red a:hover {
+  color:white !important;
 }

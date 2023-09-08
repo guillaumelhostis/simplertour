@@ -11,6 +11,7 @@ class VenuesController < ApplicationController
     authorize @venue
   end
 
+
   def create
     @venue = Venue.new(venue_params)
     authorize @venue
@@ -23,6 +24,22 @@ class VenuesController < ApplicationController
       redirect_to new_venue_path, notice: 'Could not add a new show something went wrong'
     end
   end
+
+  def edit
+    @venue = Venue.find(params[:id])
+
+    authorize @venue
+  end
+
+  def update
+    @venue = Venue.update(venue_params)
+
+    authorize @venue
+
+    redirect_to venue_path(@venue)
+  end
+
+
 
   def destroy
     @venue = Venue.find(params[:id])
