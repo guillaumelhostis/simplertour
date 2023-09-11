@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal"];
+  static targets = ["modal", "modaltwo*", "modalthree"];
 
   openModal() {
     if (this.modalTarget) {
@@ -24,11 +24,47 @@ export default class extends Controller {
   }
 
   closeModal(event) {
-
-
-
     if (this.modalTarget) {
       this.modalTarget.style.display = "none";
+    }
+  }
+
+  openModalTwo(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    console.log(index)
+    const roleTarget = this.targets.find(`modaltwo${index}`);
+    console.log(roleTarget)
+
+    roleTarget.classList.remove('d-none');
+    roleTarget.classList.add('d-block');
+    event.preventDefault();
+
+  }
+
+  closeModalTwo(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+
+    const roleTarget = this.targets.find(`modaltwo${index}`);
+
+
+
+
+    roleTarget.classList.add('d-none');
+    roleTarget.classList.remove('d-block');
+
+  }
+
+
+  openModalThree() {
+    if (this.modalthreeTarget) {
+      this.modalthreeTarget.style.display = "block";
+      event.preventDefault();
+    }
+  }
+
+  closeModalThree(event) {
+    if (this.modalthreeTarget) {
+      this.modalthreeTarget.style.display = "none";
     }
   }
 }
