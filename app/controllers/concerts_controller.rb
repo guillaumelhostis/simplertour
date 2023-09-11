@@ -10,7 +10,9 @@ class ConcertsController < ApplicationController
     @tour = Tour.find(params[:id])
     @crew = @tour.crew
     @timeentry = TimetableEntry.new
-    @timetable_entries = TimetableEntry.where(concert_id: @concert)
+    @timetable_entries = TimetableEntry.where(concert_id: @concert).order(hourminute: :asc)
+
+    @crew_users = @crew.users
     authorize @concert
   end
 

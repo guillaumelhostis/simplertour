@@ -20,6 +20,9 @@ application.register("dashboard", DashboardController)
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
+import ConcertController from "./concert_controller"
+application.register("concert", ConcertController)
+
 
 
 
