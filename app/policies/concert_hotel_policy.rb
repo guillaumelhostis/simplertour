@@ -22,4 +22,12 @@ class ConcertHotelPolicy < ApplicationPolicy
   def destroy?
     true
   end
+
+  def add_crew?
+    true
+  end
+
+  def remove_user?
+    true
+  end
 end

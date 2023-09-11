@@ -14,31 +14,44 @@ class ConcertHotelsController < ApplicationController
   end
 
   def add_crew
+
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @concert_hotel = @concert.concert_hotels.find(params[:id])
     @user = User.find(params[:user_id])
     @concert_hotel_user = ConcertHotelUser.new(concert_hotel: @concert_hotel, user: @user)
     @concert_hotel_user.save
+    authorize @concert_hotel
+
+    redirect_to tour_concert_path(@concert, @tour)
 
 
-    respond_to do |format|
-      format.js   # Render JavaScript response
-    end
+    # respond_to do |format|
+    #   format.js   # Render JavaScript response
+    # end
   end
 
   def remove_user
+
     @tour = Tour.find(params[:tour_id])
+
     @concert = @tour.concerts.find(params[:concert_id])
+
     @concert_hotel = @concert.concert_hotels.find(params[:id])
     @user = User.find(params[:user_id])
 
+
     @concert_hotel_user = @concert_hotel.concert_hotel_users.find_by(user: @user)
+
+
+    authorize @concert_hotel
     @concert_hotel_user.destroy
 
-    respond_to do |format|
-      format.js   # Render JavaScript response
-    end
+    redirect_to tour_concert_path(@concert, @tour)
+
+    # respond_to do |format|
+    #   format.js   # Render JavaScript response
+    # end
   end
 
   def destroy

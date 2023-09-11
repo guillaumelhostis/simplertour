@@ -100,6 +100,11 @@
               </div>
             </div>
           </div>
+          <%= f.input :image, as: :file,
+                        label: false,
+
+                        prompt: "Profile Picture",
+                        input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
 
           <div class="form-actions">
             <%= f.button :submit, "SIGN UP", class: "button-green" %>
