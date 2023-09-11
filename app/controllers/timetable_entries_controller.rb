@@ -7,17 +7,9 @@ class TimetableEntriesController < ApplicationController
 
     @timeentry.concert_id = @concert.id
     authorize @timeentry
-    respond_to do |format|
-      if @timeentry.save
-        # format.html { redirect_to @concert, notice: 'Timetable entry was successfully created.' }
-        format.js   # This line will look for create.js.erb in the views/timetable_entries folder
-      else
-        format.html { render 'concerts/show' }
-        format.js { render 'error' } # You can create an error.js.erb file for error handling
-      end
-    end
 
-
+    @timeentry.save
+    redirect_to tour_concert_path(@concert, @tour)
   end
 
   def destroy
@@ -27,6 +19,6 @@ class TimetableEntriesController < ApplicationController
   private
 
   def timetable_entries_params
-    params.require(:timetable_entry).permit(:hourminute, :information, :concert_id)
+    params.require(:timetable_entry).permit(:hourminute, :hourminuteend, :information, :concert_id)
   end
 end

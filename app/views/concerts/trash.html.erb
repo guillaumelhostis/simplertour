@@ -1,0 +1,33 @@
+
+
+    <% if @concert.hotels %>
+      <ul>
+        <% @concert.concert_hotels.each do |concert_hotel| %>
+          <p><strong>Hotel:</strong> <%= concert_hotel.hotel.name %> - <%= button_to "Destroy this concerthotel", tour_concert_concert_hotel_path(@concert.tour, @concert, concert_hotel), method: :delete if policy(concert_hotel).destroy?%></p>
+          <div class="d-flex">
+            <strong>Associated Users:</strong>
+            <%= concert_hotel.users.map { |user| "
+            #{user.first_name} -
+            #{remove_user_link(@tour, @concert, concert_hotel, user)}" }.join(', ').html_safe %>
+          </div>
+          <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
+            <%= form.collection_select(:user_id, @crew.users, :id, :first_name) %>
+            <%= form.button 'Add Crew Member', type: :submit, class: 'add-crew-btn', data: { concert_hotel_id: concert_hotel.id } %>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No venue assigned</p>
+      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+    <% end %>
+
+
+
+    <h2>Assign hotel:</h2>
+      <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
+        <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }) %>
+        <%= submit_tag "Add Hotel" %>
+      <% end %>
+    <h2>Or add Hotel from scratch</h2>
+      <%= link_to 'Create hotel', new_hotel_path, class: 'btn btn-primary' %>
+  </div>
