@@ -28,4 +28,4 @@
   <%# if policy(@tour).edit? %>
     <%#= link_to "Edit this tour", edit_tour_path(@tour) %>
   <%# end %>
-  <%#= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>
+  <%= button_to "Destroy this tour", @tour, method: :delete if policy(@tour).destroy?%>

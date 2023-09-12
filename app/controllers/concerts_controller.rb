@@ -1,12 +1,21 @@
 class ConcertsController < ApplicationController
 
+
+
+
   def new
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.build
   end
 
   def show
+    @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
+    @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
+
+
+    @contact = Contact.new
     @concert = Concert.find(params[:tour_id])
+    @contacts = @concert.contacts
     @tour = Tour.find(params[:id])
     @crew = @tour.crew
     @timeentry = TimetableEntry.new
@@ -71,15 +80,33 @@ class ConcertsController < ApplicationController
     end
   end
 
-  # def remove_hotel
+  def removetimetable
 
-  #   @concert = Concert.find(params[:tour_id])
-  #   @concert.update(hotel_id: nil)
-  #   respond_to do |format|
-  #     format.js
-  #   end
 
-  # end
+    # @concert = Concert.find(params[:tour_id].to_i)
+
+
+    @timetable_entry = TimetableEntry.find(params[:timetable_entry_id].to_i)
+    @concert = Concert.find(params[:concert_id].to_i)
+    @tour = Tour.find(params[:tour_id].to_i)
+    authorize @concert
+
+    @timetable_entry.destroy
+    redirect_to tour_concert_path(@tour, @concert), notice: 'Timetable updated'
+  end
+
+  def remove_contact
+
+
+    @contact = Contact.find(params[:contact_id].to_i)
+    @concert = Concert.find(params[:concert_id].to_i)
+    @tour = Tour.find(params[:tour_id].to_i)
+    authorize @concert
+
+    @contact.destroy
+    redirect_to tour_concert_path(@tour, @concert), notice: 'Contact Delete'
+
+  end
 
   private
 

@@ -16,6 +16,7 @@ class Concert < ApplicationRecord
   has_many :concert_hotels, dependent: :destroy
   has_many :hotels, through: :concert_hotels
   has_many :timetable_entries, dependent: :destroy
+  has_many :contacts, dependent: :destroy
   validates :status, presence: true, inclusion: { in: STATUS_CHOICES }
 
   def status_name

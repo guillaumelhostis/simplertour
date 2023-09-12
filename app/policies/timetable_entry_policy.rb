@@ -22,4 +22,8 @@ class TimetableEntryPolicy < ApplicationPolicy
   def destroy?
     true
   end
+
+  def removetimetable?
+    true
+  end
 end

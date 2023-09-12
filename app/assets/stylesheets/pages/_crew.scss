@@ -1,9 +1,10 @@
 .container-white{
-  background-color: #EEEEEE;
-  border-radius: 15px;
-  color: black;
-  box-shadow: 0 0 12px rgba(245, 245, 245, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 0 12px rgba(84,58,167, 0.2);
   padding: 24px;
+  border: 1px solid rgb(52, 52, 52);
 }
 
 .box-shadow-bottom {
@@ -89,16 +90,16 @@
 
 
 .green-cross-delete  {
-  color: #4ECCA3;
+  color: white;
 }
 
 .green-cross-delete:hover {
-  color: rgba(78,204,163, 0.7);
+  color: rgba(255, 255, 255, 0.488);
 }
 
 
 .open-plus-icon{
-  background-color: #4ECCA3;
+  background-color: #C42173;
   padding: 4px;
   font-size: 7px;
   border-radius: 5px;
@@ -106,7 +107,7 @@
 }
 
 .open-plus-icon:hover{
-  background-color: rgba(78,204,163, 0.7);
+  background-color: #c4217383;
 
 }
 
