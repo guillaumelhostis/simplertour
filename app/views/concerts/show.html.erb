@@ -1,16 +1,17 @@
-<div class="body-container" data-controller="concert">
+<div class="body-large-container" data-controller="concert">
 
-  <div class="mb-4 tour-titles">
-    <h1><%= @concert.name.upcase %></h1>
-    <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
-    <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
-  </div>
+
 
 
   <div class="d-flex justify-content-between">
     <div class="col-7">
+      <div class=" col-12 mb-4 tour-titles">
+        <h1><%= @concert.name.upcase %></h1>
+        <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
+        <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
+      </div>
       <%# VENUE %>
-      <div class="col-12 container-white mb-3">
+      <div class="col-12 container-white mb-2">
 
         <h2>VENUE</h2>
           <div id="venue-space">
@@ -45,9 +46,9 @@
 
 
       </div>
-      <div class="col-12 d-flex justify-content-between">
+      <div class="d-flex justify-content-between">
         <%# CREW %>
-        <div class="col-6 me-2 container-white">
+        <div class="w-100 me-1 container-white">
           <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="mb-0">CREW</h2>
             <%= link_to "EDIT CREW", crew_path(@crew), class: "button-green" %>
@@ -79,48 +80,76 @@
 
         </div>
         <%# CONTACTS%>
-        <div class="col-6 ms-2 container-white">
+        <div class="w-100 ms-1 container-white contacts-box">
           <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="mb-0">CONTACTS</h2>
-            <%= link_to "EDIT CREW", crew_path(@crew), class: "button-green" %>
+          </div>
+          <div class="listtogglecontact">
+            <% if !@contacts.empty?%>
+              <% @contacts.each do |contact| %>
+                <div class="contacts-concert d-flex justify-content-between align-items-center">
+                  <div class="w-100">
+                    <p class="m-0"><strong><%= contact.role %>:</strong> <%= contact.full_name %> </p>
+                    <p class="m-0"><em><a href="mailto:<%= contact.email %>"><%= contact.email %></a></em></p>
+                    <p class="m-0"> <em><%= contact.full_number %></em>  </p>
+                  </div>
+                  <div class="">
+                    <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon me-3"></i>'), tour_concert_remove_contact_path(@tour, @concert, contact),   data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                  </div>
+                </div>
+              <% end %>
+
+            <% end %>
           </div>
 
 
-            <ul >
-              <li> </li>
-              <li> </li>
-              <li> </li>
-              <li> </li>
-            </ul>
+          <div class="text-center mt-3">
+            <a href="#" data-action="click->concert#openModalContact" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
+          </div>
+
+
+          <div class="modal-new-contact" data-concert-target="modalcontact">
+            <div class="modal-new-contact-content">
+              <%= render partial: 'contact_form', locals: { tour: @tour, concert: @concert, contact: @contact, phoneprefixsorted: @phoneprefixsorted } %>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
 
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-5 ms-2">
 
       <%#------------------------- TIME TABLE ------------------------------------------------------------ %>
       <div class="col-12 container-white">
 
           <h2 class="box-shadow-bottom">TIMETABLE</h2>
 
-          <div class="listtoggle">
+          <div class="listtoggletimetable">
             <div id="timetable-entries">
               <% @timetable_entries.each_with_index do |timetable_entry, index| %>
                 <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
                   <div class="timetablehours pe-4">
                     <div class="d-flex justify-content-between">
-                      <p class="mb-0 me-2"><%= timetable_entry.hourminute.strftime('%H:%M')%></p>
-                      <% if timetable_entry.hourminuteend.nil?%>
-                        <p class="mb-0 ms-2"></p>
-                      <% else %>
-                        <p class="mb-0 ms-2"><%= timetable_entry.hourminuteend.strftime('%H:%M')%></p>
+                      <p class="mb-0 me-2"><%= timetable_entry.hourminute&.strftime('%H:%M')%></p>
+                      <p class="mb-0 ms-2"><%= timetable_entry.hourminuteend&.strftime('%H:%M') %></p>
 
-                      <% end %>
 
                     </div>
                   </div>
                   <div class="timetableinfos ms-4">
                     <p class="mb-0"><strong> <%= timetable_entry.information %></strong></p>
+                  </div>
+                  <div class="remove-timetable-entry">
+                    <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon me-3"></i>'), tour_concert_removetimetable_path(@tour, @concert, timetable_entry),  data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+
                   </div>
                 </div>
               <% end %>
@@ -160,7 +189,7 @@
 
 
       <%#------------------------- HOTEL ------------------------------------------------------------ %>
-      <div class="col-12 container-white mt-3">
+      <div class="col-12 container-white mt-2">
         <h2>HOTELS</h2>
           <div id="hotel-space">
 
@@ -168,44 +197,49 @@
               <p>No hotels yet</p>
             <% else %>
               <% @concert.concert_hotels.each_with_index do |concert_hotel, index| %>
-                <div class="d-flex align-items-center mb-2">
+                <div class="d-flex align-items-center">
+                  <div class="hotels-infos m-2">
+                    <p class="mb-0"><strong> <%= concert_hotel.hotel.name %></strong></p>
+                    <p class="mb-0"> <%= concert_hotel.hotel.address %> </p>
+                    <p class="mb-0"> <%= concert_hotel.hotel.city %> (<%= concert_hotel.hotel.country %>)</p>
+                  </div>
+                  <div class="d-flex align-items-center m-2">
 
-                    <% concert_hotel.users.map do |user| %>
-                      <div class=" me-2">
-                        <div class="remove-button">
-                          <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-                        </div>
-                        <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
-                          <% unless user.image.attached? %>
-                            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
-                          <% end %>
-                      </div>
-                    <% end %>
-                    <div class="text-center  mt-3 user-hotel-list-new">
-                      <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" ><i class="fas fa-plus open-plus-icon-userhotel"></i></a>
-                    </div>
+                      <% concert_hotel.users.map do |user| %>
 
-                        <%# -----------------------MODALTWO ----------------------------%>
-                    <div class="modal-two d-none" data-concert-target="modaltwo<%= index %>">
-                      <div class="modal-two-content" id="hour-pickr">
-                        <span class="close-modal-two" data-action="click->concert#closeModalTwo" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
-                        <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
-                          <div class="d-flex">
-                            <%= form.collection_select(:user_id, @crew.users, :id, :full_name, {}, { class: 'form-input me-3' }) %>
-
-                            <%= form.button 'ADD', type: :submit, class: 'button-green', data: { concert_hotel_id: concert_hotel.id } %>
+                        <div class="me-2 user-picture-delete">
+                          <div>
+                            <div class="remove-button">
+                              <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                            </div>
+                            <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+                              <% unless user.image.attached? %>
+                                <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar avatar-hotel"  %>
+                              <% end %>
                           </div>
-                        <% end %>
+                        </div>
+                      <% end %>
+                      <div class="text-center  user-hotel-list-new d-flex align-items-center">
+                        <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" ><i class="fas fa-plus open-plus-icon-userhotel"></i></a>
                       </div>
-                    </div>
-                      <%# -----------------------MODAL ----------------------------%>
+
+                          <%# -----------------------MODALTWO ----------------------------%>
+                      <div class="modal-two d-none" data-concert-target="modaltwo<%= index %>">
+                        <div class="modal-two-content" id="hour-pickr">
+                          <span class="close-modal-two" data-action="click->concert#closeModalTwo" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+                          <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
+                            <div class="d-flex">
+                              <%= form.collection_select(:user_id, @crew.users, :id, :full_name, {}, { class: 'form-input me-3' }) %>
+
+                              <%= form.button 'ADD', type: :submit, class: 'button-green', data: { concert_hotel_id: concert_hotel.id } %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                        <%# -----------------------MODAL ----------------------------%>
 
 
-                </div>
-                <div class="hotels-infos">
-                  <p class="mb-0"><strong> <%= concert_hotel.hotel.name %></strong></p>
-                  <p class="mb-0"> <%= concert_hotel.hotel.address %> </p>
-                  <p class="mb-0"> <%= concert_hotel.hotel.city %> (<%= concert_hotel.hotel.country %>)</p>
+                  </div>
                 </div>
 
 

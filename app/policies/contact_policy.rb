@@ -1,4 +1,4 @@
-class ConcertPolicy < ApplicationPolicy
+class ContactPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
@@ -20,14 +20,6 @@ class ConcertPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
-  end
-
-  def removetimetable?
-    true
-  end
-
-  def remove_contact?
     true
   end
 end

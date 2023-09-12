@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact"];
 
   openModal() {
     if (this.modalTarget) {
@@ -67,4 +67,18 @@ export default class extends Controller {
       this.modalthreeTarget.style.display = "none";
     }
   }
+
+  openModalContact() {
+    if (this.modalcontactTarget) {
+      this.modalcontactTarget.style.display = "block";
+      event.preventDefault();
+    }
+  }
+
+  closeModalContact(event) {
+    if (this.modalcontactTarget) {
+      this.modalcontactTarget.style.display = "none";
+    }
+  }
+
 }

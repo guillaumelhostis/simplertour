@@ -5,10 +5,24 @@ body::before {
   left: -130px;
   width: 40%;
   height: 70%;
-  background-color: #4ECCA3;
+  background-color: #c42121;
   border-radius: 86%;
   z-index: -1;
   filter: blur(95px);
+}
+
+/* Add a second blur circle */
+.custom-blur-circle::before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: -130px; /* Adjust the left position */
+  width: 40%;
+  height: 70%; /* Adjust the height */
+  background-color: rgba(84,58,167, 0.8); /* Choose a different color */
+  border-radius: 86%; /* Make it circular */
+  z-index: -1;
+  filter: blur(95px); /* Adjust the blur effect */
 }
 
 .body-container{
@@ -16,6 +30,15 @@ body::before {
   margin: 150px auto;
   color: white;
   position: relative;
-  z-index: 1; /* Ensure content is below the navbar */
+  z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
+
+}
+
+.body-large-container{
+  width: 95%;
+  margin: 150px auto;
+  color: white;
+  position: relative;
+  z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
 
 }
