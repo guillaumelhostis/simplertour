@@ -9,7 +9,7 @@
           <h2>SEARCH</h2>
           <%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
             <div>
-              <input data-crew-target="searchInput" type="text" id="crew-search" placeholder="Search crew" data-action="input->crew#search" class="form-input-black">
+              <input data-crew-target="searchInput" type="text" id="crew-search" placeholder="Search crew" data-action="input->crew#search" class="form-input">
               <div data-crew-target="results"></div>
               <%= select_tag "user_ids[]", options_for_select(@users.map { |user| ["#{user.first_name} #{user.last_name}", user.id] }, params[:user_ids]), multiple: true, data: { crew_target: "selectUsers" }, class: "d-none result-crew-search" %>
 
