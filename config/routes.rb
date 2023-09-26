@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get  'pages/user'
   get 'pages/tourman'
 
+  get 'pdf_generator/generate_pdf/:id', to: 'pdf_generator#generate_pdf', as: 'generate_pdf'
+
   resources :venues
   resources :hotels
 
