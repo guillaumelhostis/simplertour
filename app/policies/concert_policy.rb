@@ -30,4 +30,8 @@ class ConcertPolicy < ApplicationPolicy
   def remove_contact?
     true
   end
+
+  def generate_pdf?
+    true
+  end
 end
