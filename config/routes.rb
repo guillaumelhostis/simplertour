@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :timetable_entries, only: [:create, :destroy, :update]
       resources :contacts, only: [:create, :destroy, :update]
       resources :guests, only: [:create, :destroy, :update]
+      resources :notes, only: [:create, :destroy, :update]
       delete 'removetimetable/:timetable_entry_id', action: :removetimetable, as: 'removetimetable'
       delete 'remove_contact/:contact_id', action: :remove_contact, as: 'remove_contact'
       patch :remove_venue, on: :member

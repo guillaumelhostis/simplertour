@@ -11,6 +11,7 @@ class PdfGeneratorController < ApplicationController
     @crew = Crew.find(@tour.crew_id)
     @crew_users = CrewUser.where(crew_id: @crew)
     @contacts = Contact.where(concert_id: @concert.id)
+    @notes = Note.where(concert_id: @concert.id)
     @timetable = TimetableEntry.where(concert_id: @concert.id).order(hourminute: :asc)
     @hotels = ConcertHotel.where(concert_id: @concert.id)
 
@@ -290,6 +291,29 @@ class PdfGeneratorController < ApplicationController
               valign: :center, size: 8
           end
         end
+
+        cursor = cursor - 15
+
+        @notes.each_with_index do |note, index|
+          pdf.bounding_box([0, cursor], width: 540, height: 15) do
+            if index.odd?
+              pdf.fill_color 'e6e6e6' # Gray background for even lines
+            else
+              pdf.fill_color 'FFFFFF'  # White background for odd lines
+            end
+
+            pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
+
+            pdf.fill_color '000000' # Reset fill color for text
+
+            pdf.font 'Roboto'
+            pdf.text_box "#{note.description}", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
+              valign: :center, size: 8, inline_format: true
+
+          end
+          cursor = cursor - 15
+        end
+
 
 
 

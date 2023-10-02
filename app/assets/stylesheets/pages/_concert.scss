@@ -358,6 +358,9 @@ opacity: 0.5;
 
   /* Show scrollbar when hovering over the div */
   transition: scrollbar-color 0.5s;
+  border: 1px rgba(255, 255, 255, 0.2) solid;
+  border-radius: 5px;
+  padding: 10px;
 
 
 }

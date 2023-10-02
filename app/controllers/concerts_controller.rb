@@ -15,8 +15,11 @@ class ConcertsController < ApplicationController
 
     @contact = Contact.new
     @guest = Guest.new
+    @note = Note.new
+
     @concert = Concert.find(params[:tour_id])
     @contacts = @concert.contacts
+    @notes = @concert.notes
     @guests = @concert.guests
     @tour = Tour.find(params[:id])
     @crew = @tour.crew

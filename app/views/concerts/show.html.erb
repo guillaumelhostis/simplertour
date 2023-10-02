@@ -334,6 +334,23 @@
 
           </div>
       </div>
+      <%#------------------------- NOTES ------------------------------------------------------------ %>
+      <div class="col-12 container-white mt-2">
+        <h2>NOTES</h2>
+          <%= render partial: 'note_form', locals: { tour: @tour, concert: @concert, note: @note } %>
+          <div class="mt-3">
+            <% if @notes.empty? %>
+              <li class="list-unstyled d-flex align-items-center"> <p class="m-0"> No notes yet</p></li>
+            <% else %>
+              <% @notes.each do |note| %>
+              <li class="list-unstyled d-flex align-items-center"><i class="fa-solid fa-arrow-right me-3"></i> <p class="m-0"> <%= note.description %></p></li>
+            <% end %>
+
+            <% end %>
+
+          </div>
+
+      </div>
 
     </div>
   </div>
