@@ -14,7 +14,6 @@ class ConcertHotelsController < ApplicationController
   end
 
   def add_crew
-
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @concert_hotel = @concert.concert_hotels.find(params[:id])
@@ -22,13 +21,19 @@ class ConcertHotelsController < ApplicationController
     @concert_hotel_user = ConcertHotelUser.new(concert_hotel: @concert_hotel, user: @user)
     @concert_hotel_user.save
     authorize @concert_hotel
-
     redirect_to tour_concert_path(@concert, @tour)
+  end
 
+  def add_guest
 
-    # respond_to do |format|
-    #   format.js   # Render JavaScript response
-    # end
+    @tour = Tour.find(params[:tour_id])
+    @concert = @tour.concerts.find(params[:concert_id])
+    @concert_hotel = @concert.concert_hotels.find(params[:id])
+    @guest = Guest.find(params[:guest_id])
+    @concert_hotel_guest = ConcertHotelGuest.new(concert_hotel: @concert_hotel, guest: @guest)
+    @concert_hotel_guest.save
+    authorize @concert_hotel
+    redirect_to tour_concert_path(@concert, @tour)
   end
 
   def remove_user
@@ -52,6 +57,28 @@ class ConcertHotelsController < ApplicationController
     # respond_to do |format|
     #   format.js   # Render JavaScript response
     # end
+  end
+
+  def remove_guest
+
+
+    @tour = Tour.find(params[:tour_id])
+
+    @concert = @tour.concerts.find(params[:concert_id])
+
+    @concert_hotel = @concert.concert_hotels.find(params[:id])
+    @guest = Guest.find(params[:guest_id])
+
+
+    @concert_hotel_guest = @concert_hotel.concert_hotel_guests.find_by(guest: @guest)
+
+
+    authorize @concert_hotel
+    @concert_hotel_guest.destroy
+
+    redirect_to tour_concert_path(@concert, @tour)
+
+
   end
 
   def destroy

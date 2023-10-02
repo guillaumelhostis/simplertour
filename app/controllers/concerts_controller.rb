@@ -14,8 +14,10 @@ class ConcertsController < ApplicationController
 
 
     @contact = Contact.new
+    @guest = Guest.new
     @concert = Concert.find(params[:tour_id])
     @contacts = @concert.contacts
+    @guests = @concert.guests
     @tour = Tour.find(params[:id])
     @crew = @tour.crew
     @timeentry = TimetableEntry.new

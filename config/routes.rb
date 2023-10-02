@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :concerts, except: [:index] do
       resources :timetable_entries, only: [:create, :destroy, :update]
       resources :contacts, only: [:create, :destroy, :update]
+      resources :guests, only: [:create, :destroy, :update]
       delete 'removetimetable/:timetable_entry_id', action: :removetimetable, as: 'removetimetable'
       delete 'remove_contact/:contact_id', action: :remove_contact, as: 'remove_contact'
       patch :remove_venue, on: :member
@@ -32,7 +33,9 @@ Rails.application.routes.draw do
       resources :concert_hotels, only: [:create, :destroy] do
         member do
           delete 'remove_user/:user_id', action: :remove_user, as: 'remove_user'
+          delete 'remove_guest/:guest_id', action: :remove_guest, as: 'remove_guest'
           post 'add_crew', action: :add_crew, as: 'add_crew'
+          post 'add_guest', action: :add_guest, as: 'add_guest'
         end
       end
     end

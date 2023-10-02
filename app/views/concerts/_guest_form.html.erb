@@ -1,0 +1,17 @@
+
+  <span class="close-contert-modal " data-action="click->concert#closeModalGuest"><i class="fas fa-times black-icon"></i></span>
+  <div class="mt-2">
+    <%= simple_form_for [@tour, @concert, @guest] do |f| %>
+      <%= f.input :first_name, label: false, placeholder: "First Name", input_html: {class: 'form-input' }%>
+      <%= f.input :last_name, label: false, placeholder: "Last name", input_html: {class: 'form-input' }%>
+      <%= f.input :role, label: false, placeholder: "Role(s)",input_html: {class: 'form-input' }%>
+      <%= f.input :email,label: false, placeholder: "Email", input_html: {class: 'form-input' }%>
+      <div class="d-flex justify-content-around">
+        <%= f.input :country_code, collection: @phoneprefixsorted,  label: false, prompt: "+", input_html: { class: 'form-input' } %>
+        <%= f.input :phone_number, label: false, input_html: {class: 'form-input' }, placeholder: "Phone Number"%>
+      </div>
+      <div class="text-center">
+        <%= f.submit "ADD GUEST", class:"button-green" %>
+      </div>
+    <% end %>
+  </div>

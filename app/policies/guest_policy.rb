@@ -1,4 +1,4 @@
-class ConcertHotelPolicy < ApplicationPolicy
+class GuestPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
@@ -20,22 +20,6 @@ class ConcertHotelPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
-  end
-
-  def add_crew?
-    true
-  end
-
-  def add_guest?
-    true
-  end
-
-  def remove_user?
-    true
-  end
-
-  def remove_guest?
     true
   end
 end
