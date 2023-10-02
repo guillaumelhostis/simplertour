@@ -3,6 +3,16 @@ class ToursController < ApplicationController
 
   def index
     @tours = policy_scope(Tour)
+    @even_index_tours = []
+    @odd_index_tours = []
+    @tours.each_with_index do |tour, index|
+      if index.even?
+        @even_index_tours << tour
+      else
+        @odd_index_tours << tour
+      end
+    end
+
   end
 
   def show

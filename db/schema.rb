@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_12_080852) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_02_133120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_080852) do
     t.datetime "updated_at", null: false
     t.index ["concert_hotel_id"], name: "index_concert_hotel_crews_on_concert_hotel_id"
     t.index ["crew_id"], name: "index_concert_hotel_crews_on_crew_id"
+  end
+
+  create_table "concert_hotel_guests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "guest_id"
+    t.bigint "concert_hotel_id"
+    t.index ["concert_hotel_id"], name: "index_concert_hotel_guests_on_concert_hotel_id"
+    t.index ["guest_id"], name: "index_concert_hotel_guests_on_guest_id"
   end
 
   create_table "concert_hotel_users", force: :cascade do |t|
@@ -108,6 +117,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_080852) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.bigint "concert_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "role"
+    t.integer "phone_number"
+    t.string "country_code", default: "+33"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["concert_id"], name: "index_guests_on_concert_id"
   end
 
   create_table "hotels", force: :cascade do |t|
@@ -205,6 +227,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_080852) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "concert_hotel_crews", "concert_hotels"
   add_foreign_key "concert_hotel_crews", "crews"
+  add_foreign_key "concert_hotel_guests", "concert_hotels"
+  add_foreign_key "concert_hotel_guests", "guests"
   add_foreign_key "concert_hotel_users", "concert_hotels"
   add_foreign_key "concert_hotel_users", "users"
   add_foreign_key "concert_hotels", "concerts"
@@ -214,6 +238,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_080852) do
   add_foreign_key "contacts", "concerts"
   add_foreign_key "crew_users", "crews"
   add_foreign_key "crew_users", "users"
+  add_foreign_key "guests", "concerts"
   add_foreign_key "timetable_entries", "concerts"
   add_foreign_key "tours", "crews"
   add_foreign_key "tours", "tourmen"
