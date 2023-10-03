@@ -17,6 +17,7 @@ class Concert < ApplicationRecord
   has_many :hotels, through: :concert_hotels
   has_many :timetable_entries, dependent: :destroy
   has_many :contacts, dependent: :destroy
+  has_many :checklists, dependent: :destroy
   has_many :guests, dependent: :destroy
   has_many :notes, dependent: :destroy
   validates :status, presence: true, inclusion: { in: STATUS_CHOICES }

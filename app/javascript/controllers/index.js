@@ -23,6 +23,9 @@ application.register("flatpickr", FlatpickrController)
 import ConcertController from "./concert_controller"
 application.register("concert", ConcertController)
 
+import ChecklistController from "./checklist_controller"
+application.register("checklist", ChecklistController)
+
 
 
 
