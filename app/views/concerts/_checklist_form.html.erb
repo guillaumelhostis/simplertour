@@ -1,0 +1,7 @@
+<div class="mt-2 mb-4">
+    <%= simple_form_for [@tour, @concert, @checklist] do |f| %>
+      <%= f.input :description, label: false, placeholder: "Task", input_html: {class: 'form-input' }%>
+      <%= f.submit "NEW CHECKBOXS", class:"button-green" %>
+
+    <% end %>
+  </div>

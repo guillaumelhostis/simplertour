@@ -352,6 +352,27 @@
 
       </div>
 
+      <%#------------------------- CHECKBOXES ------------------------------------------------------------ %>
+      <div class="col-12 container-white mt-2">
+        <h2>CHECKBOXES</h2>
+          <%= render partial: 'checklist_form', locals: { tour: @tour, concert: @concert, checklist: @checklist} %>
+          <% @checklists.each_with_index do |checklist, index| %>
+            <div class="checklist-item">
+              <div class="d-flex">
+                <div class="status me-1" data-controller="checklist">
+                    <%= simple_form_for [@tour, @concert, checklist], data: {class: "m-0"} do |f| %>
+                      <div class="d-flex align-items-center form-checklist-div">
+                        <%= f.input :status, label: "#{checklist.description}", as: :boolean, input_html: { data: { action: 'change->checklist#updateStatus', checklist_target: 'checkbox', index: "#{index}", id: "#{checklist.id}", tour: "#{@tour.id}", concert: "#{@concert.id}" } }%>
+                        <%= f.submit "UPDATE STATUS", class:"d-none" %>
+                      </div>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+      </div>
+
     </div>
   </div>
 

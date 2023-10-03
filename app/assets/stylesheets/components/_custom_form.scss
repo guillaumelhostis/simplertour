@@ -197,3 +197,14 @@ select[name="user[birth_day]"] option[value=""] {
   font-weight: 300;
   font-size: 16px;
 }
+
+
+.form-checklist-div fieldset {
+  margin-bottom: 3px !important;
+}
+
+.form-checklist-div fieldset label {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300;
+  font-size: 16px;
+}
