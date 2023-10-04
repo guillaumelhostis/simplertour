@@ -27,7 +27,10 @@ class ConcertsController < ApplicationController
     @crew = @tour.crew
     @timeentry = TimetableEntry.new
     @timetable_entries = TimetableEntry.where(concert_id: @concert).order(hourminute: :asc)
-
+    status = @concert.calculate_status
+    @status_text = Concert::STATUS_MAPPING[status]
+    @concert.status = status
+    @concert.save
     @crew_users = @crew.users
     authorize @concert
   end

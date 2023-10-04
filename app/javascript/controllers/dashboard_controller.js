@@ -85,8 +85,12 @@ export default class extends Controller {
   const concertDateToIdMap = {};
   const concertDates = JSON.parse(this.calendarTarget.getAttribute("data-concert-dates"));
   const concertIndex = JSON.parse(this.calendarTarget.getAttribute("data-concert-index"));
+  const concertStatus = JSON.parse(this.calendarTarget.getAttribute("data-concert-status"));
   for (let i = 0; i < concertDates.length; i++) {
-    concertDateToIdMap[concertDates[i]] = concertIndex[i];
+    concertDateToIdMap[concertDates[i]] = {
+      id: concertIndex[i],
+      status: concertStatus[i] // Add the status information to the map
+    };
   }
 
 
@@ -103,8 +107,16 @@ export default class extends Controller {
     if (parsedConcertDates.includes(ariaLabel.replace(/\s/g, ''))) {
       const matchingConcertId = concertDateToIdMap[ariaLabel.replace(/\s/g, '')];
       const dayNumber = parseInt(ariaLabel.split(' ')[1], 10); // Extract and parse the day number
-      day.classList.add("background-color-red");
-      day.innerHTML = `<a href="/tours/${matchingConcertId}/concerts/${tourIndex}">${dayNumber}</a>`;
+      if (matchingConcertId.status === 0) {
+        day.classList.add("background-color-red");
+      } else if (matchingConcertId.status === 1) {
+        day.classList.add("background-color-orange");
+      } else if (matchingConcertId.status === 2) {
+        day.classList.add("background-color-green");
+      } else if (matchingConcertId.status === 3) {
+        day.classList.add("background-color-grey");
+      }
+      day.innerHTML = `<a href="/tours/${matchingConcertId.id}/concerts/${tourIndex}">${dayNumber}</a>`;
     }
   });
   }

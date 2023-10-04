@@ -25,4 +25,18 @@ class Concert < ApplicationRecord
   def status_name
     STATUS_MAPPING[status]
   end
+
+  def calculate_status
+    if date < Date.today
+      return 3 # Past
+    elsif checklists.empty?(&:status)
+      return 0 # Not started
+    elsif checklists.all?(&:status)
+      return 2 # All Good
+    elsif checklists.any?(&:status)
+      return 1 # On Going
+    elsif checklists.none?(&:status)
+      return 0 # Not started
+    end
+  end
 end
