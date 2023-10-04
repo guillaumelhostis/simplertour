@@ -22,19 +22,22 @@ class ToursController < ApplicationController
     @concerts = @tour.concerts
     @concert_dates = []
     @concert_index = []
+    @concert_status = []
 
     @concerts.each do |concert|
-
-      # @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
       @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
-
     end
 
     @concerts.each do |concert|
-
-      # @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
       @concert_index << concert.id
+    end
 
+    @concerts.each do |concert|
+      status = concert.calculate_status
+      concert.status = status
+      concert.save
+
+      @concert_status << concert.status
     end
 
     @concert = Concert.new
@@ -46,6 +49,7 @@ class ToursController < ApplicationController
   end
 
   def create
+
     @tour = Tour.new(tour_params)
     @tour.tourman_id = current_tourman.id
     authorize @tour
