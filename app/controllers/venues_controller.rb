@@ -19,6 +19,9 @@ class VenuesController < ApplicationController
 
     # @venue = Venue.find(params[:concert][:venue_id])
     if @venue.save
+      params[:venue][:files].each do |file|
+        @venue.files.attach(file)
+      end
       redirect_to venue_path(@venue), notice: 'Concert was successfully created.'
     else
       redirect_to new_venue_path, notice: 'Could not add a new show something went wrong'
@@ -27,16 +30,21 @@ class VenuesController < ApplicationController
 
   def edit
     @venue = Venue.find(params[:id])
+    @existing_files = @venue.files
 
     authorize @venue
   end
 
   def update
-    @venue = Venue.update(venue_params)
+    @venue = Venue.find(params[:id])
 
-    authorize @venue
+    if @venue.update(venue_params)
+      authorize @venue
+      redirect_to venue_path(@venue)
+    else
+      redirect_to edit_venue_path(@venue), notice: 'Something went wrong'
+    end
 
-    redirect_to venue_path(@venue)
   end
 
 
@@ -51,7 +59,7 @@ class VenuesController < ApplicationController
   private
 
   def venue_params
-    params.require(:venue).permit(:name, :capacity, :postcode, :address, :city, :country, :tourman_id)
+    params.require(:venue).permit(:name, :capacity, :postcode, :address, :city, :country, :tourman_id, files: [])
   end
 
 
