@@ -25,6 +25,22 @@ class ChecklistsController < ApplicationController
     end
   end
 
+# app/controllers/checklists_controller.rb
+  def import
+    @concert = Concert.find(params[:concert_id])
+    template_id = params[:template_id]
+
+    if template_id == 'new'
+      # Redirect the user to create a new template
+      redirect_to new_concert_checklist_template_path(@concert)
+    else
+      template = ChecklistTemplate.find(template_id)
+      # Rest of the import logic as previously described
+      # ...
+    end
+  end
+
+
   private
 
   def set_concert

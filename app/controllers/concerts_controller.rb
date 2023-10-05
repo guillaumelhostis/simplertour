@@ -32,6 +32,7 @@ class ConcertsController < ApplicationController
     @concert.status = status
     @concert.save
     @crew_users = @crew.users
+    @checklist_template = ChecklistTemplate.new
     authorize @concert
   end
 

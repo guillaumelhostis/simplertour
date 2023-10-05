@@ -1,0 +1,14 @@
+<div class="body-container">
+  <h2 class="mb-3">Create New Checklist Template</h2>
+
+  <%= simple_form_for (@template) do |f| %>
+
+    <%= f.input :name,
+        label: false,
+        placeholder: "Name",
+        input_html: { class: 'form-input' }  %>
+    <%=f.input :concert, :as => :hidden, :input_html => { :value => @concert }  %>
+    <%=f.input :tour, :as => :hidden, :input_html => { :value => @tour }  %>
+    <%= f.submit "NEW CHECKBOXES TEMPLATE", class:"button-green" %>
+  <% end %>
+</div>
