@@ -1,0 +1,33 @@
+<div class="col-12 container-white mb-2">
+  <h2>VENUE</h2>
+  <div id="venue-space">
+    <% if @concert.venue %>
+      <ul class="list-unstyled">
+        <li><p><strong>Address:</strong> <%= @concert.venue.address %></p></li>
+        <li><p><strong>City:</strong> <%= @concert.venue.city %> (<%= @concert.venue.country %>) </p></li>
+        <li><p><strong>Capacity:</strong> <%= @concert.venue.capacity %> </p></li>
+      </ul>
+      <div class="d-flex">
+        <%= button_to 'CHANGE VENUE', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'button-green me-3' %>
+        <%= link_to 'UPDATE VENUE INFOS', edit_venue_path(@concert.venue.id),  remote: true, class: 'button-green me-3' %>
+        <a href="#" data-action="click->concert#openModalVenueAttachments" class="button-green">ATTACHMENTS</a>
+        <div class="modal-venue-attachments" data-concert-target="venueattachments">
+          <div class="modal-venue-attachments-content">
+            <%= render partial: 'venue_attachments', locals: { concert: @concert} %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <p><%= link_to 'NEW VENUE', new_venue_path, class: 'button-green'%></p>
+      <div class="d-flex align-items-center">
+      <p class="mb-0 me-3">Or:</p>
+            <%= form_with(model: [@tour, @concert]) do |form| %>
+            <div class="d-flex">
+              <%= form.collection_select(:venue_id, Venue.where(tourman_id: current_tourman.id), :id, :name, { prompt: 'Search in DB' }, class:"form-input-black me-2") %>
+              <%= form.submit 'Assign Venue', class:"button-green" %>
+            </div>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

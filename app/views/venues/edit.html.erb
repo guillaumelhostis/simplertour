@@ -38,12 +38,17 @@
         prompt: "Select a country",
         input_html: { class: 'form-input' } %>
 
-
     <%= f.input :capacity,
         autofocus: true,
         label: false,
         placeholder: "Capacity",
         input_html: { class: 'form-input' }  %>
+
+    <%= f.input :files, as: :file,
+        label: false,
+
+        prompt: "Attachements",
+        input_html: { class: 'form-input', onchange: 'updateFileName(this)', multiple: true } %>
 
     <%= f.submit "UPDATE VENUE", class:"button-green" %>
   <% end %>

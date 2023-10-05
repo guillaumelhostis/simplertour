@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "venueattachments"];
 
   openModal() {
     if (this.modalTarget) {
@@ -91,6 +91,20 @@ export default class extends Controller {
   closeModalGuest(event) {
     if (this.modalguestTarget) {
       this.modalguestTarget.style.display = "none";
+    }
+  }
+
+  openModalVenueAttachments(event) {
+    if (this.venueattachmentsTarget) {
+      event.preventDefault();
+      this.venueattachmentsTarget.style.display = "block";
+    }
+  }
+
+  closeModalVenueAttachments(event) {
+    console.log("test")
+    if (this.venueattachmentsTarget) {
+      this.venueattachmentsTarget.style.display = "none";
     }
   }
 

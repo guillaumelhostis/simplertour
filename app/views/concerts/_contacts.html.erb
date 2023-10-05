@@ -1,0 +1,34 @@
+ <div class="w-100 ms-1 container-white contacts-box">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h2 class="mb-0">CONTACTS</h2>
+          </div>
+          <div class="listtogglecontact">
+            <% if !@contacts.empty?%>
+              <% @contacts.each do |contact| %>
+                <div class="contacts-concert d-flex justify-content-between align-items-center">
+                  <div class="w-100">
+                    <p class="m-0"><strong><%= contact.role %>:</strong> <%= contact.full_name %> </p>
+                    <p class="m-0"><em><a href="mailto:<%= contact.email %>"><%= contact.email %></a></em></p>
+                    <p class="m-0"> <em><%= contact.full_number %></em>  </p>
+                  </div>
+                  <div class="">
+                    <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon me-3"></i>'), tour_concert_remove_contact_path(@tour, @concert, contact),   data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                  </div>
+                </div>
+              <% end %>
+
+            <% end %>
+          </div>
+
+
+          <div class="text-center mt-3">
+            <a href="#" data-action="click->concert#openModalContact" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
+          </div>
+
+
+          <div class="modal-new-contact" data-concert-target="modalcontact">
+            <div class="modal-new-contact-content">
+              <%= render partial: 'contact_form', locals: { tour: @tour, concert: @concert, contact: @contact, phoneprefixsorted: @phoneprefixsorted } %>
+            </div>
+          </div>
+        </div>

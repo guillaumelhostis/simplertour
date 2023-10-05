@@ -1,0 +1,59 @@
+ <div class="col-12 container-white">
+          <h2 class="box-shadow-bottom">TIMETABLE</h2>
+          <div class="listtoggletimetable">
+            <div id="timetable-entries">
+              <% @timetable_entries.each_with_index do |timetable_entry, index| %>
+                <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
+                  <div class="timetablehours pe-4">
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-0 me-2"><%= timetable_entry.hourminute&.strftime('%H:%M')%></p>
+                      <% if timetable_entry.hourminuteend.nil? %>
+                         <p class="mb-0 ms-5">
+                      <% else %>
+                        <p class="mb-0 ms-2"><%= timetable_entry.hourminuteend&.strftime('%H:%M') %></p>
+                      <% end %>
+
+                    </div>
+                  </div>
+                  <div class="timetableinfos ms-4">
+                    <p class="mb-0"><strong> <%= timetable_entry.information %></strong></p>
+                  </div>
+                  <div class="remove-timetable-entry">
+                    <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon me-3"></i>'), tour_concert_removetimetable_path(@tour, @concert, timetable_entry),  data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="text-center mt-3">
+            <a href="#" data-action="click->concert#openModal" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
+          </div>
+
+          <div class="modal-new-timetable" data-concert-target="modal">
+
+            <div class="modal-new-timetable-content">
+              <span class="close-contert-modal" data-action="click->concert#closeModal"><i class="fas fa-times black-icon"></i></span>
+              <%= form_for [@tour, @concert, @timeentry] do |f| %>
+              <div class=" mb-3">
+                <div class="d-flex mb-2">
+                  <div class="from-to"><p class="m-0 me-2"><strong>From: </strong></p></div>
+                  <%= f.time_field :hourminute, class: 'hour_pickr form-input-hour ' %>
+                </div>
+                <div class="d-flex">
+                  <div class="from-to"><p class="m-0 me-2"><strong>To:     </strong></p></div>
+                  <%= f.time_field :hourminuteend, class: 'hour_pickr form-input-hour ' %>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= f.text_field :information, class: 'hour_pickr form-input-address ', placeholder:"Event" %>
+              </div>
+              <div class="mb-0 text-center">
+                <%= f.submit "NEW ENTRY", data: { action: "submit->concert#closeModal"}, class:"button-green" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+      </div>

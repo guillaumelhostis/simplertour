@@ -1,0 +1,52 @@
+        <div class="w-100 me-1 container-white">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h2 class="mb-0">CREW</h2>
+            <%= link_to "EDIT CREW", crew_path(@crew), class: "button-green" %>
+            <a href="#" data-action="click->concert#openModalGuest" class="button-green">ADD GUEST</a>
+          </div>
+          <div class="modal-new-guest" data-concert-target="modalguest">
+            <div class="modal-new-guest-content">
+              <%= render partial: 'guest_form', locals: { tour: @tour, concert: @concert, guest: @guest, phoneprefixsorted: @phoneprefixsorted } %>
+            </div>
+          </div>
+          <div class="listtogglecontact">
+            <ul class="list-unstyled">
+
+              <% @crew_users.each do |member| %>
+                <li class="mb-2">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center ">
+                      <div>
+                        <%= image_tag(member.image, class: "avatar me-3") if member.image.attached? %>
+                        <% unless member.image.attached? %>
+                          <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar me-3"  %>
+                        <% end %>
+                      </div>
+                      <div>
+                        <strong><p class="m-0"> <%= member.full_name %></p></strong>
+                      </div>
+                    </div>
+                    <div class="crew-concert-role-icon"><%= member.user_role_in_team(@crew, member)%></div>
+                  </div>
+
+                </li>
+              <% end %>
+              <% @guests.each do |guest| %>
+                <li class="mb-2">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center ">
+                      <div>
+                        <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar me-3"  %>
+                      </div>
+                      <div>
+                        <strong><p class="m-0"> <%= guest.full_name %></p></strong>
+                      </div>
+                    </div>
+                    <div class="crew-concert-role-icon"><%= guest.role %></div>
+                  </div>
+
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
