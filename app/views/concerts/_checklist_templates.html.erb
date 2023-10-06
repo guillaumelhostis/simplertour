@@ -1,0 +1,14 @@
+
+<span class="close-contert-modal " data-action="click->concert#closeModalChecklistTemplates"><i class="fas fa-times black-icon"></i></span>
+<div class="text-center mb-4">
+  <h3>MY CHECKBOXES TEMPLATES</h3>
+</div>
+<% @checklist_templates.each do |checklist_template| %>
+  <li class="d-flex align-items-center justify-content-between mb-2">
+    <div class="d-flex align-items-center">
+      <i class="fa-solid fa-list me-4"></i>
+      <p class="m-0 me-2"><%= checklist_template.name %></p>
+    </div>
+    <%= link_to "import", import_tour_concert_checklists_path(@tour, @concert, checklist_template ), class: "button-green" %>
+  </li>
+<% end %>

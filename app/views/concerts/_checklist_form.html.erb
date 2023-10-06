@@ -1,7 +1,20 @@
-<div class="mt-2 mb-4">
-    <%= simple_form_for [@tour, @concert, @checklist] do |f| %>
-      <%= f.input :description, label: false, placeholder: "Task", input_html: {class: 'form-input' }%>
-      <%= f.submit "NEW CHECKBOX", class:"button-green" %>
+<div class="mt-2 mb-1">
+    <div class="d-flex mb-4">
+      <%= link_to "CREATE TEMPLATE", new_checklist_template_path(@checklist_template, concert: @concert, tour: @tour), class: "button-green me-2" %>
+      <a href="#" data-action="click->concert#openModalChecklistTemplates" class="button-green">IMPORT FROM TEMPLATE</a>
+    </div>
 
+    <div class="modal-checklist-templates" data-concert-target="checklistTemplates">
+      <div class="modal-checklist-templates-content">
+        <%= render partial: 'checklist_templates', locals: { checklist_templates: @checklist_templates } %>
+      </div>
+    </div>
+
+    <%= simple_form_for [@tour, @concert, @checklist] do |f| %>
+      <div class="d-flex mb-2">
+        <%= f.input :description, label: false, placeholder: "Task", input_html: {class: 'form-input' }%>
+        <%= f.submit "NEW TASK", class:"button-green me-2 mb-3 ms-3" %>
+      </div>
     <% end %>
+
   </div>

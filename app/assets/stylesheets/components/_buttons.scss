@@ -16,3 +16,19 @@
 .white-icon {
   color: white;
 }
+
+.button-delete{
+  background-color: #C42173;
+  color: white;
+  padding: 4px 6px;
+  border-radius: 56%;
+  font-size: 7px;
+  border: none  !important;
+}
+
+.button-delete:hover {
+  background-color: #cc4e8d8b;
+  opacity: 0.4;
+  transition: 0.2s;
+  color: white;
+}

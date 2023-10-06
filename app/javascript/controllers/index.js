@@ -26,7 +26,8 @@ application.register("concert", ConcertController)
 import ChecklistController from "./checklist_controller"
 application.register("checklist", ChecklistController)
 
-
+import ChecklistTemplateController from "./checklist_template_controller"
+application.register("checklist-template", ChecklistTemplateController)
 
 
 // Eager load all controllers defined in the import map under controllers/**/*_controller

@@ -27,17 +27,17 @@ class ChecklistsController < ApplicationController
 
 # app/controllers/checklists_controller.rb
   def import
+    @tour = Tour.find(params[:tour_id])
     @concert = Concert.find(params[:concert_id])
-    template_id = params[:template_id]
-
-    if template_id == 'new'
-      # Redirect the user to create a new template
-      redirect_to new_concert_checklist_template_path(@concert)
-    else
-      template = ChecklistTemplate.find(template_id)
-      # Rest of the import logic as previously described
-      # ...
+    template_id = params[:format].to_i
+    template_descriptions = ChecklistTemplate.find(template_id).checklist_template_descriptions
+    template_descriptions.each do |template_description|
+      checklist = @concert.checklists.build(description: template_description.description)
+      authorize checklist
+      checklist.save
     end
+    redirect_to tour_concert_path(@concert, @tour), notice: "Checklist template added."
+
   end
 
 

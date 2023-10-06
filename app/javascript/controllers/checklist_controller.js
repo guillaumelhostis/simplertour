@@ -7,8 +7,7 @@ export default class extends Controller {
   static targets = ['checkbox'];
 
   connect() {
-    console.log('Checklist controller connected');
-    console.log(this.checkboxTarget)
+
   }
 
 
