@@ -34,6 +34,20 @@ class ConcertsController < ApplicationController
     @crew_users = @crew.users
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
+    if @concert.venue_id.present?
+      @venue = Venue.find(@concert.venue_id)
+      @venues = []
+      @venues <<  @venue
+      @markers =  @venues.map do |venue|
+        {
+          lat: venue.latitude,
+          lng: venue.longitude
+        }
+      end
+    end
+
+
+
     authorize @concert
   end
 

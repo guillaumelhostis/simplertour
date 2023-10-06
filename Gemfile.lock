@@ -128,6 +128,7 @@ GEM
     flatpickr (4.6.13.0)
     font-awesome-sass (6.4.2)
       sassc (~> 2.0)
+    geocoder (1.8.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -311,6 +312,7 @@ DEPENDENCIES
   dotenv-rails
   flatpickr
   font-awesome-sass (~> 6.1)
+  geocoder
   importmap-rails
   jbuilder
   mini_magick
