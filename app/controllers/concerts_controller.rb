@@ -32,6 +32,8 @@ class ConcertsController < ApplicationController
     @concert.status = status
     @concert.save
     @crew_users = @crew.users
+    @checklist_template = ChecklistTemplate.new
+    @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
     authorize @concert
   end
 

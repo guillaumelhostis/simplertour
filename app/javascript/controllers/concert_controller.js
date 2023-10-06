@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "venueattachments"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "venueattachments", "checklistTemplates"];
 
   openModal() {
     if (this.modalTarget) {
@@ -53,7 +53,6 @@ export default class extends Controller {
     roleTarget.classList.remove('d-block');
 
   }
-
 
   openModalThree() {
     if (this.modalthreeTarget) {
@@ -108,4 +107,17 @@ export default class extends Controller {
     }
   }
 
+  openModalChecklistTemplates(event) {
+    if (this.checklistTemplatesTarget) {
+      event.preventDefault();
+      this.checklistTemplatesTarget.style.display = "block";
+    }
+  }
+
+  closeModalChecklistTemplates(event) {
+    console.log("test")
+    if (this.checklistTemplatesTarget) {
+      this.checklistTemplatesTarget.style.display = "none";
+    }
+  }
 }

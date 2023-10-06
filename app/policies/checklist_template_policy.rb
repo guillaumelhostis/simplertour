@@ -1,4 +1,4 @@
-class ChecklistPolicy < ApplicationPolicy
+class ChecklistTemplatePolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
@@ -20,10 +20,6 @@ class ChecklistPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
-  end
-
-  def import?
     true
   end
 end

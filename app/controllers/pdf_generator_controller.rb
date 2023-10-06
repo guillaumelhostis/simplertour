@@ -253,14 +253,23 @@ class PdfGeneratorController < ApplicationController
 
           pdf.bounding_box([0, cursor], width: 540, height: 15) do
             pdf.font 'Roboto'
-            hotel_users = ConcertHotelUser.where(concert_hotel_id: hotel.hotel_id)
+            user_ids = @crew_users.map(&:user_id)
+
+            hotel_users = []
+            user_ids.each do |id|
+
+              hotel_users << ConcertHotelUser.find_by(concert_hotel_id: hotel.id, user_id: id  )
+
+            end
+
             hotel_guests = ConcertHotelGuest.where(concert_hotel_id: hotel.hotel_id)
-            user_names = hotel_users.map { |user| User.find(user.user_id).full_name }
+            user_names = hotel_users.compact.map { |user| User.find(user.user_id).full_name }
             guest_names = hotel_guests.map { |guest| Guest.find(guest.guest_id).full_name }
             user_names_string = user_names.join(', ')
             guest_names_string = guest_names.join(', ')
 
             hotel_name = "<b>#{Hotel.find(hotel.hotel_id).name}</b> (<font size='7'>#{user_names_string} #{guest_names_string} </font>)"
+
             pdf.text_box hotel_name, at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8, inline_format: true
           end

@@ -25,7 +25,8 @@
       <%= render partial: 'timetable', locals: { tour: @tour, concert: @concert, timeentry: @timeentry, timetable_entries: @timetable_entries } %>
       <%= render partial: 'hotels', locals: { tour: @tour, concert: @concert} %>
       <%= render partial: 'notes', locals: { tour: @tour, concert: @concert, note: @note, notes: @notes} %>
-      <%= render partial: 'checkboxes', locals: { tour: @tour, concert: @concert, checklist: @checklist, checklists: @checklists} %>
+      <%= render partial: 'checkboxes', locals: { tour: @tour, concert: @concert, checklist: @checklist, checklists: @checklists, checklist_template: @checklist_template } %>
+
     </div>
   </div>
 </div>

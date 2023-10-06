@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_03_073529) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_073529) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "checklist_template_descriptions", force: :cascade do |t|
+    t.string "description"
+    t.bigint "checklist_template_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checklist_template_id"], name: "index_checklist_template_descriptions_on_checklist_template_id"
+  end
+
+  create_table "checklist_templates", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "tourman_id"
+    t.index ["tourman_id"], name: "index_checklist_templates_on_tourman_id"
   end
 
   create_table "checklists", force: :cascade do |t|
@@ -242,6 +258,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_073529) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "checklist_template_descriptions", "checklist_templates"
+  add_foreign_key "checklist_templates", "tourmen"
   add_foreign_key "checklists", "concerts"
   add_foreign_key "concert_hotel_crews", "concert_hotels"
   add_foreign_key "concert_hotel_crews", "crews"

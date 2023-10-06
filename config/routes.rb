@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :venues
   resources :hotels
+  resources :checklist_templates, only: [:new, :create]
 
 
   resources :tours do
@@ -27,7 +28,11 @@ Rails.application.routes.draw do
       resources :contacts, only: [:create, :destroy, :update]
       resources :guests, only: [:create, :destroy, :update]
       resources :notes, only: [:create, :destroy, :update]
-      resources :checklists, only: [:create, :destroy, :update]
+      resources :checklists, only: [:create, :destroy, :update] do
+        collection do
+          get 'import'
+        end
+      end
       delete 'removetimetable/:timetable_entry_id', action: :removetimetable, as: 'removetimetable'
       delete 'remove_contact/:contact_id', action: :remove_contact, as: 'remove_contact'
       patch :remove_venue, on: :member
