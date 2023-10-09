@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "venueattachments", "checklistTemplates"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "modaltransport", "modaltransportuser*", "venueattachments", "checklistTemplates"];
 
   openModal() {
     if (this.modalTarget) {
@@ -119,5 +119,36 @@ export default class extends Controller {
     if (this.checklistTemplatesTarget) {
       this.checklistTemplatesTarget.style.display = "none";
     }
+  }
+
+  openModalTransport(event) {
+    if (this.modaltransportTarget) {
+      event.preventDefault();
+      this.modaltransportTarget.style.display = "block";
+    }
+  }
+
+  closeModalTransport(event) {
+    console.log("test")
+    if (this.modaltransportTarget) {
+      this.modaltransportTarget.style.display = "none";
+    }
+  }
+
+  openModalTransportUser(event) {
+    console.log("hey")
+    const index = event.currentTarget.getAttribute("data-index");
+    console.log(index)
+    const modaltransportuserTarget = this.targets.find(`modaltransportuser${index}`);
+    console.log(modaltransportuserTarget)
+    modaltransportuserTarget.style.display = "block";
+    event.preventDefault();
+
+  }
+
+  closeModalTransportUser(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const modaltransportuserTarget = this.targets.find(`modaltransportuser${index}`);
+    modaltransportuserTarget.style.display = "none";
   }
 }

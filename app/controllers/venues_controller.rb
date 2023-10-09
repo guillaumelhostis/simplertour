@@ -1,5 +1,4 @@
 class VenuesController < ApplicationController
-
   def new
     @venue = Venue.new
     authorize @venue
@@ -7,17 +6,13 @@ class VenuesController < ApplicationController
 
   def show
     @venue = Venue.find(params[:id])
-
     authorize @venue
   end
-
 
   def create
     @venue = Venue.new(venue_params)
     authorize @venue
     @venue.tourman_id = current_tourman.id
-
-    # @venue = Venue.find(params[:concert][:venue_id])
     if @venue.save
       params[:venue][:files].each do |file|
         @venue.files.attach(file)
@@ -31,13 +26,11 @@ class VenuesController < ApplicationController
   def edit
     @venue = Venue.find(params[:id])
     @existing_files = @venue.files
-
     authorize @venue
   end
 
   def update
     @venue = Venue.find(params[:id])
-
     if @venue.update(venue_params)
       authorize @venue
       redirect_to venue_path(@venue)
@@ -46,8 +39,6 @@ class VenuesController < ApplicationController
     end
 
   end
-
-
 
   def destroy
     @venue = Venue.find(params[:id])
@@ -61,6 +52,4 @@ class VenuesController < ApplicationController
   def venue_params
     params.require(:venue).permit(:name, :capacity, :postcode, :address, :city, :country, :tourman_id, files: [])
   end
-
-
 end

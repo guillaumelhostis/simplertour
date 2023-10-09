@@ -32,6 +32,10 @@ application.register("checklist-template", ChecklistTemplateController)
 import ConcertmapController from "./concertmap_controller"
 application.register("concertmap", ConcertmapController)
 
+import AddressAutocompleteController from "./address_autocomplete_controller"
+application.register("address-autocomplete", AddressAutocompleteController)
+
+
 
 // Eager load all controllers defined in the import map under controllers/**/*_controller
 // import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"

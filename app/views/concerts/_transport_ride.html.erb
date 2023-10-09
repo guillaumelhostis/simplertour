@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <div class="d-flex transport-slot-users align-items-center">
+    <% transport.transport_users.each do |transportuser| %>
+      <% user = User.find(transportuser.user_id) %>
+      <div class="mb-2 me-2 mt-2">
+        <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+        <% unless user.image.attached? %>
+          <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
+        <% end %>
+      </div>
+    <% end %>
+    <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
+
+  </div>
+  <div class="d-flex align-items-center transport-slot">
+    <div class="me-4">
+      <p class="m-0"><%= transport.way_of_transport %></p>
+    </div>
+    <div>
+      <div>
+        <p class="m-0">Depart: <b><%= transport.time_of_depart.strftime("%H:%M") %></b></p>
+        <p class="m-0">From: <b><%= transport.place_of_depart %></b></p>
+      </div>
+      <div>
+        <p class="m-0">Arrival: <b><%= transport.time_of_arrival.strftime("%H:%M")%></b></p>
+        <p class="m-0">To: <b><%= transport.place_of_arrival %></b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal-new-transport-user" data-concert-target="modaltransportuser<%= index %>">
+    <div class="modal-new-transport-user-content">
+      <span class="close-contert-modal " data-action="click->concert#closeModalTransportUser" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+      <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
+        <%= f.input :user_id, collection: @crew.users, label: 'Select Crew User', label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
+        <%= f.button :submit, 'ADD CREW MEMBER', class: 'button-green' %>
+      <% end %>
+    </div>
+  </div>

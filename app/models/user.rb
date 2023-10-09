@@ -8,6 +8,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   has_many :crew_users
   has_many :crews, through: :crew_users
+  has_many :transport_users
+  has_many :transports, through: :transport_users
 
 
 
