@@ -17,6 +17,8 @@ class ConcertsController < ApplicationController
     @guest = Guest.new
     @note = Note.new
     @checklist = Checklist.new
+    @transport = Transport.new
+    @transport_user = TransportUser.new
 
     @concert = Concert.find(params[:tour_id])
     @contacts = @concert.contacts
@@ -34,6 +36,27 @@ class ConcertsController < ApplicationController
     @crew_users = @crew.users
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
+    @geocoders = []
+    if @concert.venue_id.present?
+      @venue = Venue.find(@concert.venue_id)
+      @geocoders <<  @venue
+    end
+    if @concert.concert_hotels.present?
+      hotel_ids_array = @concert.concert_hotels.pluck(:hotel_id)
+      hotel_ids_array.each do |hotel|
+        @geocoders <<  Hotel.find(hotel)
+      end
+    end
+    @markers =  @geocoders.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {location: location})
+      }
+    end
+
+
+
     authorize @concert
   end
 

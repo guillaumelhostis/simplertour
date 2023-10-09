@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_151401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,6 +167,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
     t.integer "tourman_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -222,6 +224,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
     t.index ["tourman_id"], name: "index_tours_on_tourman_id"
   end
 
+  create_table "transport_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "transport_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transport_id"], name: "index_transport_users_on_transport_id"
+    t.index ["user_id"], name: "index_transport_users_on_user_id"
+  end
+
+  create_table "transports", force: :cascade do |t|
+    t.datetime "time_of_depart"
+    t.datetime "time_of_arrival"
+    t.string "place_of_depart"
+    t.string "place_of_arrival"
+    t.string "way_of_transport"
+    t.bigint "concert_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "arrival_latitude"
+    t.float "arrival_longitude"
+    t.float "depart_latitude"
+    t.float "depart_longitude"
+    t.index ["concert_id"], name: "index_transports_on_concert_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -254,6 +281,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tourman_id"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -279,4 +308,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_141747) do
   add_foreign_key "timetable_entries", "concerts"
   add_foreign_key "tours", "crews"
   add_foreign_key "tours", "tourmen"
+  add_foreign_key "transport_users", "transports"
+  add_foreign_key "transport_users", "users"
+  add_foreign_key "transports", "concerts"
 end

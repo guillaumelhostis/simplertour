@@ -1,0 +1,30 @@
+.map-card {
+  color: white;
+}
+
+.map-card h2 {
+  font-size: 13px;
+  margin: 0px;
+}
+
+.mapboxgl-popup-content  {
+  padding: 10px 10px 10px !important;
+  background-color: #232931!important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 12px rgba(84,58,167, 0.2) !important;
+  border: 1px solid #919191 !important;
+  overflow: hidden;
+}
+
+.circle-map-card {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(84, 58, 167, 0.4);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  filter: blur(30px);
+
+}

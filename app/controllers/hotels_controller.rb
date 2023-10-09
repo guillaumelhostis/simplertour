@@ -11,10 +11,11 @@ class HotelsController < ApplicationController
   end
 
   def create
+
     @hotel = Hotel.new(hotel_params)
     authorize @hotel
     @hotel.tourman_id = current_tourman.id
-    # @venue = Venue.find(params[:concert][:venue_id])
+
     if @hotel.save
       redirect_to hotel_path(@hotel), notice: 'Concert was successfully created.'
     else

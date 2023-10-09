@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     resources :concerts, except: [:index] do
       resources :timetable_entries, only: [:create, :destroy, :update]
       resources :contacts, only: [:create, :destroy, :update]
+      resources :transports, only: [:create, :destroy, :update] do
+        resources :transport_users, only: [:create]
+      end
       resources :guests, only: [:create, :destroy, :update]
       resources :notes, only: [:create, :destroy, :update]
       resources :checklists, only: [:create, :destroy, :update] do
