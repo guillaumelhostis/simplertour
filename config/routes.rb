@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :timetable_entries, only: [:create, :destroy, :update]
       resources :contacts, only: [:create, :destroy, :update]
       resources :transports, only: [:create, :destroy, :update] do
-        resources :transport_users, only: [:create]
+        resources :transport_users, only: [:create, :update]
       end
       resources :guests, only: [:create, :destroy, :update]
       resources :notes, only: [:create, :destroy, :update]

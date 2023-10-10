@@ -1,7 +1,7 @@
 <span class="close-contert-modal " data-action="click->concert#closeModalTransport"><i class="fas fa-times black-icon"></i></span>
   <div class="mt-2">
     <%= simple_form_for [@tour, @concert, @transport] do |f| %>
-      <%= f.input :way_of_transport, label: false, placeholder: "Transport mode", input_html: {class: 'form-input' }%>
+      <%= f.input :way_of_transport, collection: Transport::WAY_OF_TRANSPORT_OPTIONS, prompt: 'Select Way of Transport', label: false, placeholder: "Transport mode", input_html: {class: 'form-input' }%>
       <div class="d-flex justify-content-around">
         <%= f.input :time_of_depart, as: :time, label: false, placeholder: "Time of departure", input_html: {class: 'form-input' }%>
         <%= f.input :place_of_depart, label: false, placeholder: "Place of departure", input_html: {class: 'form-input' }%>

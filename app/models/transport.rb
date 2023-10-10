@@ -1,6 +1,6 @@
 class Transport < ApplicationRecord
   belongs_to :concert
-  has_many :transport_users
+  has_many :transport_users, dependent: :destroy
   has_many :users, through: :transport_users
 
   geocoded_by :place_of_arrival
@@ -8,6 +8,8 @@ class Transport < ApplicationRecord
 
   after_validation :geocode_place_of_arrival, if: :will_save_change_to_place_of_arrival?
   after_validation :geocode_place_of_depart, if: :will_save_change_to_place_of_depart?
+
+  WAY_OF_TRANSPORT_OPTIONS = ["Train", "Bus", "Car", "Flight", "Van", "Trailer", "Other"]
 
   private
 

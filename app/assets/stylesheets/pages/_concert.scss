@@ -470,14 +470,26 @@ opacity: 0.5;
 }
 
 .transport-slot {
-  border-bottom: rgba(255, 255, 255, 0.512)  1px solid;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  border: rgb(134, 134, 134)  1px solid;
+
+  border-radius: 8px;
+  padding: 10px;
+  padding-left: 20px;
+  background: rgba(35,41,49,0.5);
+  box-shadow: 0 0 15px rgba(163, 163, 163, 0.1);
 }
 
-.transport-slot-users{
-  border-bottom: rgba(255, 255, 255, 0.512)  1px solid;
+.transport-slot p {
+  font-size: 12px;
 }
+
+.transport-slot a {
+  font-size: 8px;
+}
+
+// .transport-slot-users{
+//   border-bottom: rgba(255, 255, 255, 0.512)  1px solid;
+// }
 
 .modal-new-transport-user{
   display: none;
@@ -498,6 +510,76 @@ opacity: 0.5;
   padding: 20px;
   color: white;
   width: 419px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: 0.8s;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.emoji-round-white {
+  background-color: white;
+  border-radius: 50%;
+  padding: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 15px rgba(163, 163, 163, 0.3);
+}
+
+.modal-new-transport-attachments{
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0.8s;
+}
+
+.modal-new-transport-attachments-content {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15% auto;
+  padding: 20px;
+  color: white;
+  width: 800px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: 0.8s;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.transport-infos {
+  width: 175px;
+}
+
+.modal-new-transport-notes{
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0.8s;
+}
+
+.modal-new-transport-notes-content {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15% auto;
+  padding: 20px;
+  color: white;
+  width: 800px;
   max-width: 600px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;

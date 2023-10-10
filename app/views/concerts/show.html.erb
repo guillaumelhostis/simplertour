@@ -21,6 +21,13 @@
         <%= render partial: 'contacts', locals: { tour: @tour, concert: @concert, contacts: @contacts, phoneprefixsorted: @phoneprefixsorted } %>
       </div>
       <%= render partial: 'transport', locals: { tour: @tour, concert: @concert } %>
+      <div class="">
+        <div style="width: 100%; height: 350px;  border-radius: 10px;"
+        data-controller="concertmap"
+        data-concertmap-markers-value="<%= @markers.to_json %>"
+        data-concertmap-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+  </div>
     </div>
     <div class="col-5 ms-2">
       <%= render partial: 'timetable', locals: { tour: @tour, concert: @concert, timeentry: @timeentry, timetable_entries: @timetable_entries } %>
@@ -29,11 +36,5 @@
       <%= render partial: 'checkboxes', locals: { tour: @tour, concert: @concert, checklist: @checklist, checklists: @checklists, checklist_template: @checklist_template } %>
     </div>
   </div>
-  <div class="col-7">
-    <div style="width: 100%; height: 350px; margin-top: 50px; border-radius: 10px;"
-    data-controller="concertmap"
-    data-concertmap-markers-value="<%= @markers.to_json %>"
-    data-concertmap-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
-  </div>
+
 </div>
