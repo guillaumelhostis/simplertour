@@ -3,7 +3,6 @@ class ChecklistsController < ApplicationController
   before_action :set_checklist, only: [:update]
 
   def create
-
     @checklist = @concert.checklists.build(checklist_params)
     authorize @checklist
     if @checklist.save
@@ -13,7 +12,6 @@ class ChecklistsController < ApplicationController
       redirect_to tour_concert_path(@concert, @tour)
     end
   end
-
 
   def update
     respond_to do |format|
@@ -25,7 +23,15 @@ class ChecklistsController < ApplicationController
     end
   end
 
-# app/controllers/checklists_controller.rb
+  def destroy
+    @concert = Concert.find(params[:concert_id])
+    @tour = Tour.find(params[:tour_id])
+    @checklist = Checklist.find(params[:id])
+    @checklist.destroy
+    authorize @checklist
+    redirect_to tour_concert_path(@concert, @tour), notice: 'Checkbox Deleted'
+  end
+
   def import
     @tour = Tour.find(params[:tour_id])
     @concert = Concert.find(params[:concert_id])
@@ -39,7 +45,6 @@ class ChecklistsController < ApplicationController
     redirect_to tour_concert_path(@concert, @tour), notice: "Checklist template added."
 
   end
-
 
   private
 

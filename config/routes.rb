@@ -27,7 +27,11 @@ Rails.application.routes.draw do
       resources :timetable_entries, only: [:create, :destroy, :update]
       resources :contacts, only: [:create, :destroy, :update]
       resources :transports, only: [:create, :destroy, :update] do
-        resources :transport_users, only: [:create, :update]
+        resources :transport_users, only: [:create, :update, :destroy] do
+          member do
+            delete 'destroy_attachment/:attachment_id', action: :destroy_attachment, as: :destroy_attachment
+          end
+        end
       end
       resources :guests, only: [:create, :destroy, :update]
       resources :notes, only: [:create, :destroy, :update]

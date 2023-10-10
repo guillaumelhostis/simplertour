@@ -18,17 +18,31 @@ class TransportUsersController < ApplicationController
     @concert = Concert.find(params[:concert_id])
     @tour = Tour.find(params[:tour_id])
     @transport_user = TransportUser.find(params[:id])
-
     authorize @transport_user
-
-
     if @transport_user.update(transport_user_params)
-
       redirect_to tour_concert_path(@concert, @tour), notice: 'Attachment added'
     else
       redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
     end
+  end
 
+  def destroy
+    @tour = Tour.find(params[:tour_id])
+    @concert = @tour.concerts.find(params[:concert_id])
+    @transport_user = TransportUser.find(params[:id])
+    @transport_user.destroy
+    authorize @transport_user
+    redirect_to tour_concert_path(@concert, @tour), notice: 'User Delete'
+  end
+
+  def destroy_attachment
+    @tour = Tour.find(params[:tour_id])
+    @concert = Concert.find(params[:concert_id])
+    @transport_user = TransportUser.find(params[:id])
+    @image = ActiveStorage::Attachment.find(params[:attachment_id])
+    authorize @transport_user
+    @image.purge
+    redirect_to tour_concert_path(@concert, @tour), notice: 'Attachment deleted'
   end
 
   private

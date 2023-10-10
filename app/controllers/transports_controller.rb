@@ -39,6 +39,17 @@ class TransportsController < ApplicationController
     end
   end
 
+  def destroy
+    @tour = Tour.find(params[:tour_id])
+    @concert = @tour.concerts.find(params[:concert_id])
+    @transport = Transport.find(params[:id])
+
+    @transport.destroy
+    authorize @transport
+
+    redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
+  end
+
 
 
   private
