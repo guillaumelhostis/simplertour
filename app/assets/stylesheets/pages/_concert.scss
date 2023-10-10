@@ -487,10 +487,6 @@ opacity: 0.5;
   font-size: 8px;
 }
 
-// .transport-slot-users{
-//   border-bottom: rgba(255, 255, 255, 0.512)  1px solid;
-// }
-
 .modal-new-transport-user{
   display: none;
   position: fixed;
@@ -586,4 +582,64 @@ opacity: 0.5;
   transition: 0.8s;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+}
+
+.transports-emoji-links a{
+  font-size: 15px;
+}
+
+.attachment-file{
+  background-color: #2f3236;
+  margin: 0px;
+  padding: 8px;
+  color: white;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.attachment-file:hover{
+ opacity: 0.7;
+}
+
+.attachment-file a:hover{
+
+  color: white;
+
+
+}
+
+.concert-note .open-plus-icon{
+  display:none;
+}
+
+.concert-note:hover .open-plus-icon{
+  transition: 0.5s;
+  display:block;
+}
+
+.transport-slot:hover .open-plus-icon {
+  transition: 0.5s;
+  display:block;
+}
+
+.transport-slot .open-plus-icon {
+  display:none;
+}
+
+.contacts-concert .open-plus-icon {
+  display:none;
+}
+
+.contacts-concert:hover .open-plus-icon {
+  transition: display 0.5s;
+  display:block;
+}
+
+.checklist-item .open-plus-icon {
+  display:none;
+}
+
+.checklist-item:hover .open-plus-icon {
+  transition: display 0.5s;
+  display:block;
 }

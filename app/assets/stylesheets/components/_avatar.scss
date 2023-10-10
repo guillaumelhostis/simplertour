@@ -27,3 +27,19 @@
   height: 200px;
   border-radius: 50%;
 }
+
+.avatar-delete:hover .delete-icon-avatar{
+  display: block;
+}
+
+.avatar-delete {
+  position: relative;
+
+}
+
+.delete-icon-avatar{
+  position: absolute;
+  top: -13px;
+  left: 32px;
+  display: none;
+}

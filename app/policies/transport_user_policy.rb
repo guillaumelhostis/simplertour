@@ -22,4 +22,8 @@ class TransportUserPolicy < ApplicationPolicy
   def destroy?
     true
   end
+
+  def destroy_attachment?
+    true
+  end
 end

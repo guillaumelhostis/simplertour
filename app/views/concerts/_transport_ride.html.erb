@@ -23,16 +23,20 @@
         <p class="m-0"> <b>To: </b><%= transport.place_of_arrival %></p>
       </div>
     </div>
-    <div class="me-4">
+    <div class="me-4 d-flex align-items-center">
       <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>"  class="button-green"> CREW MEMBERS </a>
     </div>
-    <div class="me-4">
+    <div class="me-4 d-flex align-items-center">
       <a href="#" data-action="click->concert#openModalTransportAttachments" data-index="<%= index %>"  class="button-green"> ATTACHMENTS </a>
     </div>
-    <div class="me-4">
+    <div class="me-4 transports-emoji-links">
       <a href="#" data-action="click->concert#openModalTransportNotes" data-index="<%= index %>" > 📝 </a>
     </div>
+    <div class="me-4 transports-emoji-links">
+      <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'),tour_concert_transport_path(@tour, @concert, transport),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+    </div>
   </div>
+
 </div>
 
 <div class="modal-new-transport-user" data-concert-target="modaltransportuser<%= index %>">
@@ -41,11 +45,14 @@
     <div class="d-flex transport-slot-users align-items-center justify-content-center">
       <% transport.transport_users.each do |transportuser| %>
         <% user = User.find(transportuser.user_id) %>
-        <div class="mb-2 me-2 mt-2">
-          <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+        <div class="mb-2 me-2 mt-2 avatar-delete">
+          <%= image_tag(user.image, class: "avatar ms-1 me-1") if user.image.attached? %>
           <% unless user.image.attached? %>
-            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
+            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar ms-1 me-1"  %>
           <% end %>
+          <div class="delete-icon-avatar">
+            <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), tour_concert_transport_transport_user_path(@tour, @concert, transport, transportuser),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+          </div>
         </div>
       <% end %>
     </div>
@@ -83,14 +90,15 @@
                   <%= f.submit "UPLOAD", class:"button-green mb-3 ms-3 me-3" %>
                 </div>
               <% end %>
-
             </div>
             <div class="col-3 d-flex align-items-center mb-3">
               <% transportuser.files.each do |file| %>
-                <p class="m-0 me-2"><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %></p>
+                <p class="attachment-file">
+                  <%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %>
+                  <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), destroy_attachment_tour_concert_transport_transport_user_path(@tour, @concert, transport, transportuser, attachment_id: file.id), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                </p>
               <% end %>
             </div>
-
           </div>
         <% end %>
   </div>

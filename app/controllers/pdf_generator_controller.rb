@@ -14,13 +14,9 @@ class PdfGeneratorController < ApplicationController
     @notes = Note.where(concert_id: @concert.id)
     @timetable = TimetableEntry.where(concert_id: @concert.id).order(hourminute: :asc)
     @hotels = ConcertHotel.where(concert_id: @concert.id)
-
-
+    @transports = @concert.transports
 
     authorize @concert
-
-
-
 
     respond_to do |format|
       format.pdf do
@@ -34,9 +30,6 @@ class PdfGeneratorController < ApplicationController
             bold_italic: { file: "#{font_path}/Roboto-BoldItalic.ttf" }
           }
         )
-
-
-
 
         # Loop through your instances and add data to the PDF
 
@@ -321,6 +314,56 @@ class PdfGeneratorController < ApplicationController
 
           end
           cursor = cursor - 15
+        end
+
+        cursor = cursor - 5
+
+        pdf.bounding_box([0, cursor], width: 540, height: 15) do
+          pdf.fill_color '666666' # Light gray fill color
+          pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
+          pdf.fill_color '000000' # Set the text color to black
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+            pdf.text_box "TRANSPORTS", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
+              valign: :center, size: 8
+          end
+        end
+
+        cursor = cursor - 15
+
+        @transports.each_with_index do |transport, index|
+          pdf.bounding_box([0, cursor], width: 540, height: 15) do
+            if index.odd?
+              pdf.fill_color 'e6e6e6' # Gray background for even lines
+            else
+              pdf.fill_color 'FFFFFF'  # White background for odd lines
+            end
+
+            pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
+
+            pdf.fill_color '000000' # Reset fill color for text
+
+            pdf.font 'Roboto'
+            pdf.text_box "<b>#{transport.way_of_transport.upcase}</b> from: <b>#{transport.place_of_depart}</b> at <b>#{transport.time_of_depart.strftime("%H:%M")}</b>  to: <b>#{transport.place_of_arrival}</b> at <b>#{transport.time_of_arrival.strftime("%H:%M")}</b>", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
+              valign: :center, size: 8, inline_format: true
+
+          end
+          cursor = cursor - 10
+          pdf.bounding_box([0, cursor], width: 540, height: 15) do
+            if index.odd?
+              pdf.fill_color 'e6e6e6' # Gray background for even lines
+            else
+              pdf.fill_color 'FFFFFF'  # White background for odd lines
+            end
+            pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
+            pdf.fill_color '000000' # Reset fill color for text
+            user_ids_array = transport.transport_users.pluck(:user_id)
+            transport_users = User.where(id: user_ids_array).map(&:full_name).join(', ')
+            pdf.font 'Roboto'
+            pdf.text_box "<i>Travelling: #{transport_users} </i>", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
+              valign: :center, size: 8, inline_format: true
+          end
+          cursor = cursor - 15
+
         end
 
 
