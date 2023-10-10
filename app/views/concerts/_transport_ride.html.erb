@@ -1,40 +1,110 @@
 <div class="mb-3">
-  <div class="d-flex transport-slot-users align-items-center">
-    <% transport.transport_users.each do |transportuser| %>
-      <% user = User.find(transportuser.user_id) %>
-      <div class="mb-2 me-2 mt-2">
-        <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
-        <% unless user.image.attached? %>
-          <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
-        <% end %>
-      </div>
-    <% end %>
-    <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
-
-  </div>
   <div class="d-flex align-items-center transport-slot">
     <div class="me-4">
-      <p class="m-0"><%= transport.way_of_transport %></p>
+      <% emoji = case transport.way_of_transport %>
+        <%when "Train" then "🚂" %>
+        <%when "Bus" then "🚌" %>
+        <%when "Car" then "🚙" %>
+        <%when "Van" then "🚐" %>
+        <%when "Flight" then "✈️" %>
+        <%when "Trailer" then "🚛"%>
+        <%when "Other" then "🚀" %>
+        <%else "" %>
+      <% end %>
+      <div class="emoji-round-white"><p class="m-0"><%= emoji %></p></div>
     </div>
-    <div>
+    <div class="me-4 transport-infos">
       <div>
-        <p class="m-0">Depart: <b><%= transport.time_of_depart.strftime("%H:%M") %></b></p>
-        <p class="m-0">From: <b><%= transport.place_of_depart %></b></p>
+        <p class="m-0"><b>Depart:</b> <%= transport.time_of_depart.strftime("%H:%M") %></p>
+        <p class="m-0"><b>From: </b> <%= transport.place_of_depart %></p>
       </div>
       <div>
-        <p class="m-0">Arrival: <b><%= transport.time_of_arrival.strftime("%H:%M")%></b></p>
-        <p class="m-0">To: <b><%= transport.place_of_arrival %></b></p>
+        <p class="m-0"><b>Arrival:</b> <%= transport.time_of_arrival.strftime("%H:%M")%></p>
+        <p class="m-0"> <b>To: </b><%= transport.place_of_arrival %></p>
+      </div>
+    </div>
+    <div class="me-4">
+      <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>"  class="button-green"> CREW MEMBERS </a>
+    </div>
+    <div class="me-4">
+      <a href="#" data-action="click->concert#openModalTransportAttachments" data-index="<%= index %>"  class="button-green"> ATTACHMENTS </a>
+    </div>
+    <div class="me-4">
+      <a href="#" data-action="click->concert#openModalTransportNotes" data-index="<%= index %>" > 📝 </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-new-transport-user" data-concert-target="modaltransportuser<%= index %>">
+  <div class="modal-new-transport-user-content">
+    <div class="text-center mb-3"><p class="m-0">Travelling</p></div>
+    <div class="d-flex transport-slot-users align-items-center justify-content-center">
+      <% transport.transport_users.each do |transportuser| %>
+        <% user = User.find(transportuser.user_id) %>
+        <div class="mb-2 me-2 mt-2">
+          <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+          <% unless user.image.attached? %>
+            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <span class="close-contert-modal " data-action="click->concert#closeModalTransportUser" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+    <div class="d-flex justify-content-center">
+      <div class="mt-4 col-6 text-center">
+        <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
+          <%= f.input :user_id, collection: @crew.users, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
+          <%= f.button :submit, 'ADD CREW MEMBER', class: 'button-green' %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
-  <div class="modal-new-transport-user" data-concert-target="modaltransportuser<%= index %>">
-    <div class="modal-new-transport-user-content">
-      <span class="close-contert-modal " data-action="click->concert#closeModalTransportUser" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
-      <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
-        <%= f.input :user_id, collection: @crew.users, label: 'Select Crew User', label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
-        <%= f.button :submit, 'ADD CREW MEMBER', class: 'button-green' %>
-      <% end %>
-    </div>
+<div class="modal-new-transport-attachments" data-concert-target="modaltransportattachments<%= index %>">
+  <div class="modal-new-transport-attachments-content">
+    <span class="close-contert-modal " data-action="click->concert#closeModalTransportAttachments" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+        <% transport.transport_users.each do |transportuser| %>
+          <% user = User.find(transportuser.user_id) %>
+          <div class="mb-2 me-2 mt-2 d-flex align-items-center">
+            <div>
+              <%= image_tag(user.image, class: "avatar mb-3 me-3") if user.image.attached? %>
+              <% unless user.image.attached? %>
+                <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar mb-3 me-3"  %>
+              <% end %>
+            </div>
+            <div class="col-7">
+              <%= simple_form_for([@tour, @concert, transport, transportuser])  do |f| %>
+                <div class="d-flex align-items-center">
+                  <%= f.input :files, as: :file,
+                      label: false,
+                      prompt: "Attachements",
+                      input_html: { class: 'form-input', onchange: 'updateFileName(this)', multiple: true } %>
+                  <%= f.submit "UPLOAD", class:"button-green mb-3 ms-3 me-3" %>
+                </div>
+              <% end %>
+
+            </div>
+            <div class="col-3 d-flex align-items-center mb-3">
+              <% transportuser.files.each do |file| %>
+                <p class="m-0 me-2"><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %></p>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>
   </div>
+</div>
+
+<div class="modal-new-transport-notes" data-concert-target="modaltransportnotes<%= index %>">
+  <div class="modal-new-transport-notes-content">
+    <span class="close-contert-modal " data-action="click->concert#closeModalTransportNotes" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+      <%= simple_form_for [@tour, @concert, transport] do |f| %>
+          <%= f.input :notes, as: :text, label: false, placeholder: "Notes", input_html: {class: 'form-input' }%>
+
+        <div class="text-center">
+          <%= f.submit "UPDATE NOTES", class:"button-green" %>
+        </div>
+      <% end %>
+  </div>
+</div>

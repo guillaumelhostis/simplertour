@@ -14,7 +14,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "modaltransport", "modaltransportuser*", "venueattachments", "checklistTemplates"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "modaltransport", "modaltransportuser*", "modaltransportattachments*", "modaltransportnotes*","venueattachments", "checklistTemplates"];
 
   openModal() {
     if (this.modalTarget) {
@@ -150,5 +150,33 @@ export default class extends Controller {
     const index = event.currentTarget.getAttribute("data-index");
     const modaltransportuserTarget = this.targets.find(`modaltransportuser${index}`);
     modaltransportuserTarget.style.display = "none";
+  }
+
+  openModalTransportAttachments(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const modaltransportattachmentsTarget = this.targets.find(`modaltransportattachments${index}`);
+    modaltransportattachmentsTarget.style.display = "block";
+    event.preventDefault();
+
+  }
+
+  closeModalTransportAttachments(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const modaltransportattachmentsTarget = this.targets.find(`modaltransportattachments${index}`);
+    modaltransportattachmentsTarget.style.display = "none";
+  }
+
+  openModalTransportNotes(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const modaltransportnotesTarget = this.targets.find(`modaltransportnotes${index}`);
+    modaltransportnotesTarget.style.display = "block";
+    event.preventDefault();
+
+  }
+
+  closeModalTransportNotes(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const modaltransportnotesTarget = this.targets.find(`modaltransportnotes${index}`);
+    modaltransportnotesTarget.style.display = "none";
   }
 }

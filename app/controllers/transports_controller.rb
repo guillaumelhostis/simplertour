@@ -24,11 +24,26 @@ class TransportsController < ApplicationController
     end
   end
 
+  def update
+
+    @transport = Transport.find(params[:id])
+    @tour = Tour.find(params[:tour_id])
+    @concert = @tour.concerts.find(params[:concert_id])
+
+
+    authorize @transport
+    if @transport.update(transport_params)
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
+  end
+
 
 
   private
 
   def transport_params
-    params.require(:transport).permit(:time_of_depart, :time_of_arrival, :way_of_transport, :concert_id, :place_of_arrival, :place_of_depart)
+    params.require(:transport).permit(:time_of_depart, :time_of_arrival, :notes, :way_of_transport, :concert_id, :place_of_arrival, :place_of_depart)
   end
 end
