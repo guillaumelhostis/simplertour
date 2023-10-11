@@ -1,0 +1,52 @@
+<div class="modal-two d-none" data-concert-target="modaltwo<%= index %>">
+  <div class="modal-two-content" id="hour-pickr">
+    <span class="close-modal-two" data-action="click->concert#closeModalTwo" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
+    <div class="text-center mb-3"><p class="m-0">CREW MEMBERS</p></div>
+    <div class="d-flex transport-slot-users align-items-center justify-content-center mb-3">
+      <% concert_hotel.users.map do |user| %>
+          <div class="me-2 avatar-delete">
+              <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+              <% unless user.image.attached? %>
+                <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar avatar-hotel"  %>
+              <% end %>
+              <div class="delete-icon-avatar">
+                <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              </div>
+          </div>
+      <% end %>
+    </div>
+    <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
+      <div class="d-flex align-items-center justify-content-center ">
+        <div class="col-6 me-2">
+          <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
+        </div>
+        <div class="text-center">
+          <%= form.button 'ADD', type: :submit, class: 'button-green mb-2', data: { concert_hotel_id: concert_hotel.id } %>
+        </div>
+      </div>
+    <% end %>
+    <div class="text-center mb-3 mt-3"><p class="m-0">GUESTS</p></div>
+    <div class="d-flex transport-slot-users align-items-center justify-content-center mb-3">
+      <% concert_hotel.guests.map do |guest| %>
+        <div class="me-2 avatar-delete">
+          <div>
+            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
+            <div class="delete-icon-avatar">
+              <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), remove_guest_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, guest), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= form_with(url: add_guest_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
+      <div class="d-flex align-items-center justify-content-center ">
+        <div class="col-6 me-2">
+          <%= form.collection_select(:guest_id, @concert.guests, :id, :full_name, { prompt: 'Select Guest' }, { class: 'form-input mb-2 p-1 me-2' }) %>
+        </div>
+        <div class="text-center">
+          <%= form.button 'ADD', type: :submit, class: 'button-green mb-2', data: { concert_hotel_id: concert_hotel.id } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

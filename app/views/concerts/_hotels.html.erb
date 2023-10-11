@@ -1,109 +1,39 @@
 <div class="col-12 container-white mt-2">
         <h2>HOTELS</h2>
           <div id="hotel-space">
-
-            <% if @concert.hotels.empty? %>
-              <p>No hotels yet</p>
-            <% else %>
-              <% @concert.concert_hotels.each_with_index do |concert_hotel, index| %>
-                <div class="d-flex align-items-center">
-                  <div class="hotels-infos m-2">
-                    <p class="mb-0"><strong> <%= concert_hotel.hotel.name %></strong></p>
-                    <p class="mb-0"> <%= concert_hotel.hotel.address %> </p>
-                    <p class="mb-0"> <%= concert_hotel.hotel.city %> (<%= concert_hotel.hotel.country %>)</p>
-                  </div>
-                  <div class="d-flex align-items-center m-2">
-
-                      <% concert_hotel.users.map do |user| %>
-
-                        <div class="me-2 user-picture-delete">
-                          <div>
-                            <div class="remove-button">
-                              <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-                            </div>
-                            <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
-                              <% unless user.image.attached? %>
-                                <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar avatar-hotel"  %>
-                              <% end %>
-                          </div>
-                        </div>
-                      <% end %>
-                      <% concert_hotel.guests.map do |guest| %>
-
-                        <div class="me-2 user-picture-delete">
-                          <div>
-                            <div class="remove-button">
-                              <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), remove_guest_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, guest), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
-                            </div>
-                            <div>
-                              <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
-                            </div>
-                          </div>
-                        </div>
-                      <% end %>
-
-                      <div class="text-center  user-hotel-list-new d-flex align-items-center">
-                        <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" ><i class="fas fa-plus open-plus-icon-userhotel"></i></a>
+            <div class="listtogglehotels">
+              <% if @concert.hotels.empty? %>
+                <p>No hotels yet</p>
+              <% else %>
+                <% @concert.concert_hotels.each_with_index do |concert_hotel, index| %>
+                  <div class="d-flex align-items-center">
+                    <div class="hotels-infos m-2 d-flex align-items-center justify-content-between">
+                      <div>
+                        <p class="mb-0"><strong> <%= concert_hotel.hotel.name %></strong></p>
+                        <p class="mb-0"> <%= concert_hotel.hotel.address %> </p>
+                        <p class="mb-0"> <%= concert_hotel.hotel.city %> (<%= concert_hotel.hotel.country %>)</p>
                       </div>
-
-                          <%# -----------------------MODALTWO ----------------------------%>
-                      <div class="modal-two d-none" data-concert-target="modaltwo<%= index %>">
-                        <div class="modal-two-content" id="hour-pickr">
-                          <span class="close-modal-two" data-action="click->concert#closeModalTwo" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
-                          <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
-                              <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select a user' }, { class: 'form-input mb-2' }) %>
-                              <div class="text-center">
-                                <%= form.button 'ADD TEAM MEMBER', type: :submit, class: 'button-green mb-2', data: { concert_hotel_id: concert_hotel.id } %>
-                              </div>
-                          <% end %>
-                          <%= form_with(url: add_guest_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
-                            <div class="">
-                              <%= form.collection_select(:guest_id, @concert.guests, :id, :full_name, { prompt: 'Select a guest' }, { class: 'form-input mb-2' }) %>
-                              <div class="text-center">
-                                <%= form.button 'ADD GUEST', type: :submit, class: 'button-green', data: { concert_hotel_id: concert_hotel.id } %>
-                              </div>
-                            </div>
-                          <% end %>
-                        </div>
+                      <div class="me-4 transports-emoji-links">
+                        <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), tour_concert_concert_hotel_path(@tour, @concert, concert_hotel),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
                       </div>
-                        <%# -----------------------MODAL ----------------------------%>
+                    </div>
 
 
+                    <div class="d-flex align-items-center m-2">
+                        <div class="text-center  user-hotel-list-new d-flex align-items-center">
+                          <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" class="button-green" >CREW MEMBERS</a>
+                        </div>
+                        <%= render partial: 'hotel_users', locals: { tour: @tour, concert: @concert, index: index, concert_hotel: concert_hotel } %>
+
+                    </div>
                   </div>
-                </div>
-
-
+                <% end %>
 
               <% end %>
-
-            <% end %>
-
-
+            </div>
             <div class="text-center mt-3">
               <a href="#" data-action="click->concert#openModalThree" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
             </div>
-
-              <%# --------------------------------MODALTHREE %>
-            <div class="modal-new-hotel" data-concert-target="modalthree">
-
-              <div class="modal-new-hotel-content">
-                <span class="close-modal-new-hotel" data-action="click->concert#closeModalThree"><i class="fas fa-times black-icon"></i></span>
-
-                <div class="add-new-hotel mt-3">
-                  <%= link_to 'ADD A NEW HOTEL', new_hotel_path, class: "button-green" %>
-                  <div class="d-flex mt-3 justify-content-start align-items-center">
-
-                    <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
-                      <div class="d-flex align-items-center">
-                        <div class="me-3"> <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }), class:"form-input", prompt: "Search in DB" %></div>
-                        <div><%= submit_tag "ADD HOTEL", class:"button-green" %></div>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-                    <%# --------------------------------MODALTHREE %>
-
+            <%= render partial: 'new_hotel', locals: { tour: @tour, concert: @concert } %>
           </div>
       </div>

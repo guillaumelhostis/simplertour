@@ -1,0 +1,39 @@
+<%= simple_form_for(@hotel) do |f| %>
+
+    <%= f.input :name,
+        label: false,
+        placeholder: "Hotel Name",
+        input_html: { class: 'form-input' }  %>
+
+    <%= f.input :address,
+        label: false,
+        placeholder: "Address",
+        input_html: { class: 'form-input' } %>
+    <div class="d-flex justify-content-between">
+      <%= f.input :postcode,
+          label: false,
+          placeholder: "Post Code",
+          input_html: { class: 'form-input' } %>
+
+      <%= f.input :city,
+          label: false,
+          placeholder: "City",
+          input_html: { class: 'form-input' }
+      %>
+      <%= hidden_field_tag :concert, @concert.id %>
+      <%= hidden_field_tag :tour, @tour.id %>
+
+      <%= f.input :country,
+          label: false,
+          prompt: "Select a country",
+          input_html: { class: 'form-input' }  %>
+    </div>
+    <div class="d-flex justify-content-between">
+      <%= f.input :standing,
+          label: false,
+          placeholder: "Standing",
+          input_html: { class: 'form-input' } %>
+
+      <%= f.submit "NEW HOTEL", class:"button-green mb-3" %>
+    </div>
+  <% end %>
