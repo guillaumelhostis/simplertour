@@ -185,8 +185,8 @@ opacity: 0.5;
   padding: 15px;
   color: white;
   // border: 1px solid #888;
-  width: 420px;
-  max-width: 600px;
+  width: 1000px;
+  max-width: 1600px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   transition: 0.8s;
@@ -642,4 +642,28 @@ opacity: 0.5;
 .checklist-item:hover .open-plus-icon {
   transition: display 0.5s;
   display:block;
+}
+
+#hotel-space .user-hotel-list-new a {
+  font-size: 8px;
+
+}
+
+.hotels-infos .transports-emoji-links {
+  display: none;
+}
+
+.hotels-infos:hover .transports-emoji-links {
+  display: block;
+}
+
+
+.listtogglehotels {
+  max-height: 200px;
+  overflow-y: scroll;
+  scrollbar-color: #999 #333;
+  border: 1px rgba(255, 255, 255, 0.2) solid;
+  border-radius: 5px;
+  padding: 10px;
+  transition: scrollbar-color 0.5s;
 }

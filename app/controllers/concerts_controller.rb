@@ -19,6 +19,7 @@ class ConcertsController < ApplicationController
     @checklist = Checklist.new
     @transport = Transport.new
     @transport_user = TransportUser.new
+    @hotel = Hotel.new
 
     @concert = Concert.find(params[:tour_id])
     @contacts = @concert.contacts
