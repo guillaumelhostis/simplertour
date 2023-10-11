@@ -8,7 +8,8 @@
       <div class="dropdown simpler-tour-dropdown-menu">
         <button class="dropbtn"><i class="fas fa-bars white-icon"></i></button>
         <div class="dropdown-content" id="myDropdown">
-          <a href="#">MY TOURS</a>
+          <%= link_to "MY TOURS", tours_path if tourman_signed_in? %>
+          <%= link_to "MY TOURS", pages_user_path  if user_signed_in? %>
           <a href="#">ABOUT US</a>
           <a href="#">FAQ</a>
         </div>
@@ -16,7 +17,8 @@
       <!-- Normal menu for regular screens -->
       <div class="simpler-tour-menu-links">
 
-        <%= link_to "MY TOURS", tours_path %>
+        <%= link_to "MY TOURS", tours_path if tourman_signed_in? %>
+        <%= link_to "MY TOURS", pages_user_path if user_signed_in? %>
         <a href="#">ABOUT US</a>
         <a href="#">FAQ</a>
       </div>

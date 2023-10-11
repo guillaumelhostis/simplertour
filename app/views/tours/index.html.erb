@@ -1,7 +1,5 @@
 <div class="body-container">
-
   <div class="mb-3 d-flex align-items-center"><h1 class="me-3">MY TOURS</h1> <%= link_to "NEW TOUR", new_tour_path, class:"button-green" %></div>
-
   <div class="d-flex justify-content-between">
     <div class="col-5">
       <% @odd_index_tours.each_with_index do |tour, index| %>
@@ -18,7 +16,6 @@
                       <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
                       <p><strong>from</strong> <%= tour.starting %> <strong>to</strong> <%= tour.ending %></p>
                     </div>
-
                   </div>
                 <% end %>
               </li>

@@ -1,0 +1,10 @@
+.list-toggle-user-concerts {
+  max-height: 400px;
+  overflow-y: scroll;
+  scrollbar-color: #999 #333;
+  border: 1px rgba(255, 255, 255, 0.2) solid;
+  border-radius: 5px;
+  padding: 22px;
+  transition: scrollbar-color 0.5s;
+  background: rgba(35,41,49,0.5);
+}
