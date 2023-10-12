@@ -1,0 +1,18 @@
+<div class="col-12 container-white mb-2">
+  <h2>VENUE INFOS</h2>
+    <% if @concert.venue %>
+      <ul class="list-unstyled mb-1">
+        <li><p class="mb-1"><strong>Address:</strong> <%= @concert.venue.address %></p></li>
+        <li><p class="mb-1"><strong>City:</strong> <%= @concert.venue.city %> (<%= @concert.venue.country %>) </p></li>
+        <li><p class="mb-1"><strong>Capacity:</strong> <%= @concert.venue.capacity %> </p></li>
+        <li>
+          <div class="d-flex align-items-center">
+            <p class="mb-1 me-2"><strong>Attachments:</strong></p>
+            <% @concert.venue.files.each do |file| %>
+              <p class="list-unstyled attachment-file me-2 mb-1"><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %></p>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+</div>

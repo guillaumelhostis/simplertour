@@ -1,0 +1,17 @@
+<div class="body-large-container" data-controller="user-concert">
+  <div class="d-flex justify-content-between">
+    <div class="col-7">
+      <div class=" col-12 mb-4 tour-titles">
+        <h1><%= @concert.name.upcase %></h1>
+        <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
+        <%= link_to "BACK TO DASHBOARD", pages_user_dashboard_path, class: 'button-green'  %>
+      </div>
+      <%= render partial: 'venue_infos', locals: { tour: @tour, concert: @concert } %>
+      <%= render partial: 'user_transports', locals: { tour: @tour, concert: @concert } %>
+    </div>
+
+    <div class="col-5 ms-2">
+      <%= render partial: 'user_timetable', locals: { tour: @tour, concert: @concert, timetable_entries: @timetable_entries } %>
+    </div>
+  </div>
+</div>

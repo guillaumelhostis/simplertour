@@ -471,7 +471,6 @@ opacity: 0.5;
 
 .transport-slot {
   border: rgb(134, 134, 134)  1px solid;
-
   border-radius: 8px;
   padding: 10px;
   padding-left: 20px;
@@ -591,9 +590,11 @@ opacity: 0.5;
 .attachment-file{
   background-color: #2f3236;
   margin: 0px;
-  padding: 8px;
+  padding: 4px;
+  padding-left: 14px;
+  padding-right: 14px;
   color: white;
-  border-radius: 5px;
+  border-radius: 30px;
   font-size: 10px;
 }
 

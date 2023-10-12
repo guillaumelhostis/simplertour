@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get '/pages/search', to: 'pages#search'
 
   root to: 'pages#home'
-  get  'pages/user'
+  get  'pages/user_dashboard'
+  get 'pages/user_concert_dashboard'
   get 'pages/tourman'
 
   get 'pdf_generator/generate_pdf/:id', to: 'pdf_generator#generate_pdf', as: 'generate_pdf'
