@@ -1,0 +1,57 @@
+<div class="body-large-container">
+  <div class="d-flex justify-content-between">
+    <div class="col-6">
+      <h1 class="mb-3">HELLO <%= current_user.first_name.upcase %></h1>
+      <% if !@today_concerts.empty? %>
+        <h2>TODAY SHOW <%= Date.current.strftime("%b %d %Y").upcase %></h2>
+      <% else %>
+        <h2>YOU DON'T HAVE SHOWS TODAY</h2>
+      <% end %>
+
+      <% @today_concerts.each do |today_concert| %>
+          <div class="user-today-show-card col-5">
+            <% tour = Tour.find(today_concert.tour_id) %>
+            <div class="user-today-show-card-img">
+              <%= image_tag(tour.picture) if tour.picture.attached? %>
+              <% unless tour.picture.attached? %>
+                <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+              <% end %>
+            </div>
+            <div class="user-today-show-card-content">
+              <h2><%= today_concert.name.upcase %> - <%= today_concert.location.upcase %></h2>
+              <div class="d-flex align-items-center mb-3">
+                <h3><%= tour.title.upcase%> - <%= tour.artist.upcase %></h3>
+              </div>
+              <div>
+                <%= link_to "ROADBOOK PDF", "#" , class: "button-green" %>
+                <%= link_to "ALL INFOS", pages_user_concert_dashboard_path(data_concert: today_concert, data_tour: tour), class: "button-green" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <div class="col-5 ">
+      <h2>UPCOMING SHOWS</h2>
+      <div class="list-toggle-user-concerts">
+        <% @upcoming_concerts.each do |concert| %>
+          <div class="user-tour-card col-5">
+            <% tour = Tour.find(concert.tour_id) %>
+            <div class="user-tour-card-img">
+              <%= image_tag(tour.picture) if tour.picture.attached? %>
+              <% unless tour.picture.attached? %>
+                <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+              <% end %>
+            </div>
+            <div class="user-tour-card-content">
+              <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
+              <p> <b><%= concert.date.strftime("%b %d %Y").upcase %>: <%= concert.name.upcase %></b> - <%= concert.location %> </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
