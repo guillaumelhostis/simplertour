@@ -38,4 +38,16 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def delete_note?
     true
   end
+
+  def update_timetable?
+    true
+  end
+
+  def new_timetable?
+    true
+  end
+
+  def delete_timetable?
+    true
+  end
 end

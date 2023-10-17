@@ -3,7 +3,8 @@
   <div class="listtoggletimetable">
     <div id="timetable-entries">
       <% @timetable_entries_data.each_with_index do |timetable_entry, index| %>
-        <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
+
+        <div class="timetable-entry d-flex justify-content-between align-items-center p-2 <%= index.even? ? 'even' : 'odd' %>">
           <div class="timetablehours pe-4">
             <div class="d-flex justify-content-between">
               <p class="mb-0 me-2"><%= DateTime.parse(timetable_entry["hourminute"]).strftime('%H:%M')  %></p>
@@ -13,8 +14,40 @@
           <div class="timetableinfos ms-4">
             <p class="mb-0"><strong> <%= timetable_entry["information"] %></strong></p>
           </div>
+            <input data-concert-template-target="entry<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateEntry"  type="text" placeholder="Update Entry" class="form-input-dark p-1">
+              <p class="mb-0 me-2 ms-2 text-dark">from</p>
+            <input data-concert-template-target="start<%= index %>" data-index="<%= index %>" data-action="input->concert-template#updateStart"  type="time" placeholder="Update Entry" class="form-input-dark p-1">
+              <p class="mb-0 me-2 ms-2  text-dark">to</p>
+            <input data-concert-template-target="end<%= index %>" data-index="<%= index %>" data-action="input->concert-template#updateEnd"  type="time" placeholder="Update Entry" class="form-input-dark p-1">
+            <%= form_with(url: update_timetable_concert_template_path(@concert_template)) do |form| %>
+              <%= form.hidden_field :entry, value: "", data: { concert_template_target: "entryTemplate#{index}" } %>
+              <%= form.hidden_field :start, value: "", data: { concert_template_target: "startTemplate#{index}" } %>
+              <%= form.hidden_field :end, value: "", data: { concert_template_target: "endTemplate#{index}" } %>
+              <%= form.hidden_field :index, value: "#{index}" %>
+              <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2'  %>
+            <% end %>
+            <%= form_with(url: delete_timetable_concert_template_path(@concert_template)) do |form| %>
+              <%= form.hidden_field :index, value: "#{index}" %>
+              <%= form.button 'DELETE', type: :submit, class: 'button-green ms-2 '  %>
+            <% end %>
+
         </div>
       <% end %>
+
+
+        <div class=" d-flex justify-content-between align-items-center p-2 mt-4">
+          <input data-concert-template-target="newentry" data-action="keyup->concert-template#newEntry"  type="text" placeholder="New Entry" class="form-input p-1">
+          <p class="mb-0 me-2 ms-2">from</p>
+          <input data-concert-template-target="newstart"  data-action="input->concert-template#newStart"  type="time" placeholder="Update Entry" class="form-input p-1">
+          <p class="mb-0 me-2 ms-2">to</p>
+          <input data-concert-template-target="newend" data-action="input->concert-template#newEnd"  type="time" placeholder="Update Entry" class="form-input p-1">
+          <%= form_with(url: new_timetable_concert_template_path(@concert_template)) do |form| %>
+            <%= form.hidden_field :entry, value: "", data: { concert_template_target: "newentryTemplate" } %>
+            <%= form.hidden_field :start, value: "", data: { concert_template_target: "newstartTemplate" } %>
+            <%= form.hidden_field :end, value: "", data: { concert_template_target: "newendTemplate" } %>
+            <%= form.button 'NEW', type: :submit, class: 'button-green ms-2'  %>
+          <% end %>
+        </div>
     </div>
   </div>
 </div>

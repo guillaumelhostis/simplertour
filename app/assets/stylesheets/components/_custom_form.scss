@@ -219,3 +219,15 @@ select[name="user[birth_day]"] option[value=""] {
 .file-upload {
   margin: 0px !important;
 }
+
+.form-input-dark {
+  background-color: rgba(255,255,255,0);
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 0, 0.478);
+  color: black;
+  width: 100%;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300;
+  font-size: 16px;
+
+}

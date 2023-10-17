@@ -27,11 +27,14 @@ class ConcertTemplatesController < ApplicationController
     authorize  @concert_template
     data = JSON.parse(@concert_template.data)
     @contacts_data = data['contacts']
-    @timetable_entries_data = data['timetable_entries'].sort_by! { |entry| entry['hourminute'] }
+
+    @timetable_entries_data = data['timetable_entries']&.sort_by! { |entry| entry['hourminute'] }
+
     @hotels_data = data['hotels']
     @transports_data = data['transports']
     @notes_data = data['notes']
     @checklists_data = data['checklists']
+
   end
 
   def update_notes
@@ -54,8 +57,42 @@ class ConcertTemplatesController < ApplicationController
 
   def delete_note
     @concert_template = ConcertTemplate.find(params[:id])
+
     data = JSON.parse(@concert_template.data)
     data["notes"].delete_at(params[:index].to_i)
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
+
+  def update_timetable
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["timetable_entries"][params[:index].to_i]["information"] = params[:entry]
+    data["timetable_entries"][params[:index].to_i]["hourminute"] = params[:start].to_time
+    data["timetable_entries"][params[:index].to_i]["hourminuteend"] = params[:end].to_time
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Timetable updated'
+  end
+
+  def new_timetable
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["timetable_entries"] << {"information"=>params[:entry], "hourminute"=>params[:start].to_time,"hourminuteend"=>params[:end].to_time }
+
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
+
+  def delete_timetable
+
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    @timetable_entries_data = data['timetable_entries']&.sort_by! { |entry| entry['hourminute'] }
+
+    @timetable_entries_data.delete_at(params[:index].to_i)
     authorize  @concert_template
     @concert_template.update(data: data.to_json)
     redirect_to concert_template_path(@concert_template), notice: 'Template updated'

@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       post 'update_notes', action: :update_notes, as: 'update_notes'
       post 'new_note', action: :new_note, as: 'new_note'
       post 'delete_note', action: :delete_note, as: 'delete_note'
+      post 'update_timetable', action: :update_timetable, as: 'update_timetable'
+      post 'new_timetable', action: :new_timetable, as: 'new_timetable'
+      post 'delete_timetable', action: :delete_timetable, as: 'delete_timetable'
     end
   end
 
