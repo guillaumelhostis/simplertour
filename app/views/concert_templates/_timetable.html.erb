@@ -1,0 +1,20 @@
+ <div class="col-12 container-white">
+  <h2 class="box-shadow-bottom">TIMETABLE (<%= @concert_template.name.upcase %>)</h2>
+  <div class="listtoggletimetable">
+    <div id="timetable-entries">
+      <% @timetable_entries_data.each_with_index do |timetable_entry, index| %>
+        <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
+          <div class="timetablehours pe-4">
+            <div class="d-flex justify-content-between">
+              <p class="mb-0 me-2"><%= DateTime.parse(timetable_entry["hourminute"]).strftime('%H:%M')  %></p>
+              <p class="mb-0 ms-2"><%= DateTime.parse(timetable_entry["hourminuteend"]).strftime('%H:%M') %></p>
+            </div>
+          </div>
+          <div class="timetableinfos ms-4">
+            <p class="mb-0"><strong> <%= timetable_entry["information"] %></strong></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

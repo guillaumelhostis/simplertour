@@ -11,12 +11,11 @@ class ConcertsController < ApplicationController
   def show
     @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
     @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
-
-
     @contact = Contact.new
     @guest = Guest.new
     @note = Note.new
     @checklist = Checklist.new
+    @concert_template = ConcertTemplate.new
     @transport = Transport.new
     @transport_user = TransportUser.new
     @hotel = Hotel.new
@@ -37,27 +36,34 @@ class ConcertsController < ApplicationController
     @crew_users = @crew.users
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
-    @geocoders = []
+    @hotel_geocoders = []
+    @venue_geocoders = []
     if @concert.venue_id.present?
       @venue = Venue.find(@concert.venue_id)
-      @geocoders <<  @venue
+      @venue_geocoders <<  @venue
     end
     if @concert.concert_hotels.present?
       hotel_ids_array = @concert.concert_hotels.pluck(:hotel_id)
       hotel_ids_array.each do |hotel|
-        @geocoders <<  Hotel.find(hotel)
+        @hotel_geocoders <<  Hotel.find(hotel)
       end
     end
-    @markers =  @geocoders.map do |location|
+    @venue_markers =  @venue_geocoders.map do |location|
       {
         lat: location.latitude,
         lng: location.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {location: location})
+        info_window_html: render_to_string(partial: "info_window", locals: {location: location}),
+        marker_html: render_to_string(partial: "venue_marker")
       }
     end
-
-
-
+    @hotel_markers =  @hotel_geocoders.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {location: location}),
+        marker_html: render_to_string(partial: "hotel_marker")
+      }
+    end
     authorize @concert
   end
 

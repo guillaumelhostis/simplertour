@@ -17,6 +17,7 @@ class ToursController < ApplicationController
 
   def show
     authorize @tour
+    current_date = Date.current
     @crew = Crew.find(@tour.crew_id)
     @crew_users = @crew.users
     @concerts = @tour.concerts
@@ -41,6 +42,7 @@ class ToursController < ApplicationController
     end
 
     @concert = Concert.new
+    @today_concerts = @concerts.select { |concert| concert.date == current_date }
   end
 
   def new

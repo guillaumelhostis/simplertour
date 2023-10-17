@@ -38,6 +38,12 @@ application.register("address-autocomplete", AddressAutocompleteController)
 import UserConcertController from "./user_concert_controller"
 application.register("user-concert", UserConcertController)
 
+import MapUserConcertController from "./map_user_concert_controller"
+application.register("map-user-concert", MapUserConcertController)
+
+import ConcertTemplateController from "./concert_template_controller"
+application.register("concert-template", ConcertTemplateController)
+
 
 
 // Eager load all controllers defined in the import map under controllers/**/*_controller

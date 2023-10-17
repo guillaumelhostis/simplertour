@@ -1,0 +1,27 @@
+<div class="body-large-container" data-controller="concert-template">
+  <div class=" col-12 mb-4 tour-titles">
+    <h1><%= @concert_template.name.upcase %></h1>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="col-12">
+      <div class="mb-2">
+        <%= render partial: 'timetable', locals: { timetable_entries: @timetable_entries_data, concert_template: @concert_template } %>
+      </div>
+      <div class="mb-2">
+        <%= render partial: 'transport', locals: { transports_data: @transports_data, concert_template: @concert_template } %>
+      </div>
+       <div class="mb-2">
+        <%= render partial: 'contacts', locals: { contacts_data: @contacts_data, phoneprefixsorted: @phoneprefixsorted, concert_template: @concert_template } %>
+      </div>
+      <div class="mb-2">
+        <%= render partial: 'hotels', locals: {  hotels_data: @hotels_data, concert_template: @concert_template} %>
+      </div>
+      <div class="mb-2">
+        <%= render partial: 'notes', locals: { notes_data: @notes_data, concert_template: @concert_template} %>
+      </div>
+      <div class="mb-2">
+        <%= render partial: 'checkboxes', locals: { checklists_data: @checklists_data, concert_template: @concert_template } %>
+      </div>
+    </div>
+  </div>
+</div>

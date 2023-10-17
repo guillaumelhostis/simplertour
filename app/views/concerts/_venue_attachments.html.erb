@@ -1,5 +1,5 @@
 
 <span class="close-contert-modal " data-action="click->concert#closeModalVenueAttachments"><i class="fas fa-times black-icon"></i></span>
 <% @concert.venue.files.each do |file| %>
-  <li class="list-unstyled"><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %></li>
+  <p class="list-unstyled attachment-file mb-2"><%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %></p>
 <% end %>

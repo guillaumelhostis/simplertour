@@ -1,0 +1,32 @@
+<div class="col-12 container-white mb-2">
+  <h2>TRANSPORTS (<%= @concert_template.name.upcase %>)</h2>
+  <% @transports_data.each do |transport_data| %>
+    <div class="mb-3">
+      <div class="d-flex align-items-center transport-slot">
+        <div class="me-4">
+          <% emoji = case transport_data["way_of_transport"] %>
+            <%when "Train" then "🚂" %>
+            <%when "Bus" then "🚌" %>
+            <%when "Car" then "🚙" %>
+            <%when "Van" then "🚐" %>
+            <%when "Flight" then "✈️" %>
+            <%when "Trailer" then "🚛"%>
+            <%when "Other" then "🚀" %>
+            <%else "" %>
+          <% end %>
+          <div class="emoji-round-white"><p class="m-0"><%= emoji %></p></div>
+        </div>
+        <div class="me-4 transport-infos">
+          <div>
+            <p class="m-0"><b>Depart:</b> <%= DateTime.parse(transport_data["time_of_depart"]).strftime("%H:%M") %></p>
+            <p class="m-0"><b>From: </b> <%= transport_data["place_of_depart"] %></p>
+          </div>
+          <div>
+            <p class="m-0"><b>Arrival:</b> <%= DateTime.parse(transport_data["time_of_arrival"]).strftime("%H:%M")%></p>
+            <p class="m-0"> <b>To: </b><%= transport_data["place_of_arrival"] %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

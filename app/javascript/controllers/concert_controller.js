@@ -4,7 +4,6 @@ import flatpickr from "flatpickr";
 // Connects to data-controller="concert"
 export default class extends Controller {
   connect() {
-
     console.log("concert controller connected")
     flatpickr(".hour-pickr", {
       noCalendar: true,
@@ -14,7 +13,7 @@ export default class extends Controller {
     })
   }
 
-  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "modaltransport", "modaltransportuser*", "modaltransportattachments*", "modaltransportnotes*","venueattachments", "checklistTemplates"];
+  static targets = ["modal", "modaltwo*", "modalthree", "modalcontact", "modalguest", "modaltransport", "modaltransportuser*", "modaltransportattachments*", "modaltransportnotes*","venueattachments", "checklistTemplates", "modaltemplate", "templateName", "linkTemplate"];
 
   openModal() {
     if (this.modalTarget) {
@@ -178,5 +177,25 @@ export default class extends Controller {
     const index = event.currentTarget.getAttribute("data-index");
     const modaltransportnotesTarget = this.targets.find(`modaltransportnotes${index}`);
     modaltransportnotesTarget.style.display = "none";
+  }
+
+  openModalTemplate(event) {
+    const modaltransportnotesTarget = this.targets.find(`modaltemplate`);
+    modaltransportnotesTarget.style.display = "block";
+    event.preventDefault();
+  }
+
+  closeModalTemplate(event) {
+    const modaltransportnotesTarget = this.targets.find(`modaltemplate`);
+    modaltransportnotesTarget.style.display = "none";
+  }
+
+  updateLink() {
+    const link = this.linkTemplateTarget;
+    const templateName = this.templateNameTarget.value;
+    link.dataset.templateName = templateName;
+    const linkPath = link.getAttribute("href");
+    const updatedLinkPath = linkPath.split("?")[0] + "?template_name=" + templateName;
+    link.setAttribute("href", updatedLinkPath);
   }
 }

@@ -1,0 +1,19 @@
+ <div class="w-100 container-white contacts-box">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">CONTACTS (<%= @concert_template.name.upcase %>)</h2>
+  </div>
+  <div class="listtogglecontact">
+    <% if !@contacts_data.empty?%>
+      <% @contacts_data.each do |contact| %>
+
+        <div class="contacts-concert d-flex justify-content-between align-items-center">
+          <div class="w-100">
+            <p class="m-0"><strong><%= contact["role"] %>:</strong> <%= contact["full_name"] %> </p>
+            <p class="m-0"><em><a href="mailto:<%= contact["email"] %>"><%= contact["email"] %></a></em></p>
+            <p class="m-0"> <em><%= contact["country_code"] %> <%= contact["phone_number"] %></em>  </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

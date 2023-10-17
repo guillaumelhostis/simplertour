@@ -8,10 +8,21 @@
       </div>
       <%= render partial: 'venue_infos', locals: { tour: @tour, concert: @concert } %>
       <%= render partial: 'user_transports', locals: { tour: @tour, concert: @concert } %>
+      <div style="width: 100%; height: 350px;  border-radius: 10px;"
+        data-controller="map-user-concert"
+        data-map-user-concert-hotelmarkers-value="<%= @hotel_markers.to_json %>"
+        data-map-user-concert-venuemarkers-value="<%= @venue_markers.to_json %>"
+        data-map-user-concert-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
 
     <div class="col-5 ms-2">
       <%= render partial: 'user_timetable', locals: { tour: @tour, concert: @concert, timetable_entries: @timetable_entries } %>
+      <%= render partial: 'user_hotel', locals: { tour: @tour, concert: @concert, user_hotels: @user_hotels } %>
+      <%= render partial: 'crew_infos', locals: { tour: @tour, concert: @concert, crew_users: @crew_users, guests: @guests } %>
+      <%= render partial: 'contacts_infos', locals: { tour: @tour, concert: @concert, contacts: @contacts, phoneprefixsorted: @phoneprefixsorted } %>
     </div>
+    </div>
+
   </div>
 </div>

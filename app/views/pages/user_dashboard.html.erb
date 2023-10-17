@@ -1,7 +1,7 @@
 <div class="body-large-container">
   <div class="d-flex justify-content-between">
     <div class="col-6">
-      <h1 class="mb-3">HELLO <%= current_user.first_name.upcase %></h1>
+
       <% if !@today_concerts.empty? %>
         <h2>TODAY SHOW <%= Date.current.strftime("%b %d %Y").upcase %></h2>
       <% else %>

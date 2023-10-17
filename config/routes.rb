@@ -21,6 +21,13 @@ Rails.application.routes.draw do
   resources :venues
   resources :hotels
   resources :checklist_templates, only: [:new, :create]
+  resources :concert_templates, only: [:new, :create, :show] do
+    member do
+      post 'update_notes', action: :update_notes, as: 'update_notes'
+      post 'new_note', action: :new_note, as: 'new_note'
+      post 'delete_note', action: :delete_note, as: 'delete_note'
+    end
+  end
 
 
   resources :tours do

@@ -1,0 +1,26 @@
+<div class="col-12 container-white mt-2">
+  <h2>HOTEL(S)</h2>
+    <div id="hotel-space">
+      <div class="listtogglehotels">
+        <% if @user_hotels.empty? %>
+          <p>No hotels yet</p>
+        <% else %>
+          <% @user_hotels.each_with_index do |user_hotel, index| %>
+            <% hotel = Hotel.find(user_hotel.hotel_id) %>
+            <div class="d-flex align-items-center justify-content-around">
+              <div class="hotels-infos m-2 d-flex align-items-center justify-content-between">
+                <div>
+                  <p class="mb-0"><strong> <%= hotel.name %></strong></p>
+                  <p class="mb-0"> <%= hotel.address %> </p>
+                  <p class="mb-0"> <%= hotel.city %> (<%= hotel.country %>)</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center justify-content-center">
+                <a href="#" data-action="" data-index="<%= index %>"  class="button-green"> MORE INFOS </a>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+</div>

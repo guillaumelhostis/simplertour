@@ -1,0 +1,18 @@
+<div class="col-12 container-white mt-2">
+  <h2>HOTELS (<%= @concert_template.name.upcase %>)</h2>
+    <div id="hotel-space">
+      <div class="listtogglehotels">
+          <% @hotels_data.each do |hotel_data| %>
+            <div class="d-flex align-items-center">
+              <div class="hotels-infos m-2 d-flex align-items-center justify-content-between">
+                <div>
+                  <p class="mb-0"><strong> <%= hotel_data["name"] %></strong></p>
+                  <p class="mb-0"> <%= hotel_data["address"] %> </p>
+                  <p class="mb-0"> <%= hotel_data["city"] %> (<%= hotel_data["country"] %>)</p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+      </div>
+    </div>
+</div>
