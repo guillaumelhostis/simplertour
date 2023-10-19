@@ -87,12 +87,38 @@ class ConcertTemplatesController < ApplicationController
   end
 
   def delete_timetable
-
     @concert_template = ConcertTemplate.find(params[:id])
     data = JSON.parse(@concert_template.data)
     @timetable_entries_data = data['timetable_entries']&.sort_by! { |entry| entry['hourminute'] }
 
     @timetable_entries_data.delete_at(params[:index].to_i)
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
+
+  def update_checkbox
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["checklists"][params[:index].to_i]["description"] = params[:checkbox_description]
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
+
+  def delete_checkbox
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["checklists"].delete_at(params[:index].to_i)
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
+
+  def new_checkbox
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["checklists"] << {"description"=>params[:note_description]}
     authorize  @concert_template
     @concert_template.update(data: data.to_json)
     redirect_to concert_template_path(@concert_template), notice: 'Template updated'

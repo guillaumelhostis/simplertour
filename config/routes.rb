@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       post 'new_note', action: :new_note, as: 'new_note'
       post 'delete_note', action: :delete_note, as: 'delete_note'
       post 'update_timetable', action: :update_timetable, as: 'update_timetable'
+      post 'update_checkbox', action: :update_checkbox, as: 'update_checkbox'
+      post 'new_checkbox', action: :new_checkbox, as: 'new_checkbox'
+      post 'delete_checkbox', action: :delete_checkbox, as: 'delete_checkbox'
       post 'new_timetable', action: :new_timetable, as: 'new_timetable'
       post 'delete_timetable', action: :delete_timetable, as: 'delete_timetable'
     end

@@ -6,7 +6,7 @@ export default class extends Controller {
     console.log("concert templat connected")
   }
 
-  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate"];
+  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription"];
 
   updateNote(event) {
     const index = event.currentTarget.getAttribute("data-index");
@@ -62,6 +62,20 @@ export default class extends Controller {
   newEnd(event) {
     const link = this.targets.find(`newendTemplate`);
     const noteDescription = this.targets.find(`newend`).value;
+    link.value = noteDescription;
+  }
+
+  updateCheckbox(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`checkboxLinkTemplate${index}`);
+    const noteDescription = this.targets.find(`checkboxDescription${index}`).value;
+    link.value = noteDescription;
+    console.log(noteDescription)
+  }
+
+  newCheckbox(event) {
+    const link = this.targets.find(`newCheckboxTemplate`);
+    const noteDescription = this.targets.find(`newCheckboxDescription`).value;
     link.value = noteDescription;
   }
 

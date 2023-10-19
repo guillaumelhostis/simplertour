@@ -50,4 +50,16 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def delete_timetable?
     true
   end
+
+  def update_checkbox?
+    true
+  end
+
+  def delete_checkbox?
+    true
+  end
+
+  def new_checkbox?
+    true
+  end
 end
