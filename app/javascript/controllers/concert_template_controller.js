@@ -6,7 +6,7 @@ export default class extends Controller {
     console.log("concert templat connected")
   }
 
-  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription"];
+  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate"];
 
   updateNote(event) {
     const index = event.currentTarget.getAttribute("data-index");
@@ -79,4 +79,59 @@ export default class extends Controller {
     link.value = noteDescription;
   }
 
+  updateArrivalPlace(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`placeArrivalTemplate${index}`);
+    const noteDescription = this.targets.find(`placeArrival${index}`).value;
+    link.value = noteDescription;
+    console.log(link)
+  }
+
+  updateArrivalTime(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`timeArrivalTemplate${index}`);
+    const noteDescription = this.targets.find(`timeArrival${index}`).value;
+    link.value = noteDescription;
+    console.log(link)
+  }
+
+  updateDepartPlace(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`placeDepartTemplate${index}`);
+    const noteDescription = this.targets.find(`placeDepart${index}`).value;
+    link.value = noteDescription;
+    console.log(link)
+  }
+
+  updateDepartTime(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`timeDepartTemplate${index}`);
+    const noteDescription = this.targets.find(`timeDepart${index}`).value;
+    link.value = noteDescription;
+    console.log(link)
+  }
+
+  newDepartPlace(event) {
+    const link = this.targets.find(`newDepartPlaceTemplate`);
+    const noteDescription = this.targets.find(`newDepartPlace`).value;
+    link.value = noteDescription;
+  }
+
+  newDepartTime(event) {
+    const link = this.targets.find(`newDepartTimeTemplate`);
+    const noteDescription = this.targets.find(`newDepartTime`).value;
+    link.value = noteDescription;
+  }
+
+  newArrivalTime(event) {
+    const link = this.targets.find(`newArrivalPlaceTemplate`);
+    const noteDescription = this.targets.find(`newArrivalPlace`).value;
+    link.value = noteDescription;
+  }
+
+  newArrivalPlace(event) {
+    const link = this.targets.find(`newArrivalTimeTemplate`);
+    const noteDescription = this.targets.find(`newArrivalTime`).value;
+    link.value = noteDescription;
+  }
 }

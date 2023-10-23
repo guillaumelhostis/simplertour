@@ -15,7 +15,7 @@
           <% end %>
           <%= form_with(url: delete_checkbox_concert_template_path(@concert_template)) do |form| %>
             <%= form.hidden_field :index, value: "#{index}" %>
-            <%= form.button 'DELETE', type: :submit, class: 'button-green ms-2'  %>
+            <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2'  %>
           <% end %>
         </div>
       </div>

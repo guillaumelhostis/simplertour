@@ -123,4 +123,29 @@ class ConcertTemplatesController < ApplicationController
     @concert_template.update(data: data.to_json)
     redirect_to concert_template_path(@concert_template), notice: 'Template updated'
   end
+
+  def new_transport
+    raise
+  end
+
+  def update_transport
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["transports"][params[:index].to_i]["place_of_depart"] = params[:place_depart]
+    data["transports"][params[:index].to_i]["place_of_arrival"] = params[:place_arrival]
+    data["transports"][params[:index].to_i]["time_of_depart"] = params[:time_depart].to_time
+    data["transports"][params[:index].to_i]["time_of_arrival"] = params[:time_arrival].to_time
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Transport updated'
+  end
+
+  def delete_transport
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["transports"].delete_at(params[:index].to_i)
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Template updated'
+  end
 end

@@ -32,9 +32,11 @@ Rails.application.routes.draw do
       post 'delete_checkbox', action: :delete_checkbox, as: 'delete_checkbox'
       post 'new_timetable', action: :new_timetable, as: 'new_timetable'
       post 'delete_timetable', action: :delete_timetable, as: 'delete_timetable'
+      post 'new_transport', action: :new_transport, as: "new_transport"
+      post 'update_transport', action: :update_transport, as: "update_transport"
+      post 'delete_transport', action: :delete_transport, as: "delete_transport"
     end
   end
-
 
   resources :tours do
     resources :concerts, except: [:index] do

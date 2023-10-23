@@ -62,4 +62,16 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def new_checkbox?
     true
   end
+
+  def update_transport?
+    true
+  end
+
+  def delete_transport?
+    true
+  end
+
+  def new_transport?
+    true
+  end
 end

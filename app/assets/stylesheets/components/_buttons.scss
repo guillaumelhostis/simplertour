@@ -1,16 +1,17 @@
 .button-green{
-  background-color: #C42173;
+  // background-color: #C42173;
   color: white;
   padding: 7px 22px;
   border-radius: 10px;
   font-size: 10px;
   border: none  !important;
+  background-image: linear-gradient(to bottom, #C42173, #A91B63);
 }
 
 .button-green:hover {
-  background-color: #cc4e8d8b;
   transition: 0.4s;
   color: white;
+  background-image: linear-gradient(to bottom, #c42173cf, #a91b62ce);
 }
 
 .white-icon {
@@ -18,17 +19,17 @@
 }
 
 .button-delete{
-  background-color: #C42173;
+  // background-color: #E84763;
   color: white;
-  padding: 4px 6px;
-  border-radius: 56%;
-  font-size: 7px;
+  padding: 7px 22px;
+  border-radius: 10px;
+  font-size: 10px;
   border: none  !important;
+  background-image: linear-gradient(to bottom, #E84763, #e65e74);
 }
 
 .button-delete:hover {
-  background-color: #cc4e8d8b;
-  opacity: 0.4;
-  transition: 0.2s;
-  color: white;
+  background-image: linear-gradient(to bottom, #e84762de, #e65e75df); /* Reduce the alpha channel to control opacity */
+  color: white; /* Keep the text color unaffected */
+  transition: 0.4s;
 }
