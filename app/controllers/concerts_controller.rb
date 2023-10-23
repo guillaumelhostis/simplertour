@@ -9,6 +9,8 @@ class ConcertsController < ApplicationController
   end
 
   def show
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @tours = Tour.where(tourman_id: current_tourman.id)
     @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
     @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
     @contact = Contact.new

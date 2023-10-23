@@ -2,16 +2,46 @@
   <h2>HOTELS (<%= @concert_template.name.upcase %>)</h2>
     <div id="hotel-space">
       <div class="listtogglehotels">
-          <% @hotels_data.each do |hotel_data| %>
-            <div class="d-flex align-items-center">
-              <div class="hotels-infos m-2 d-flex align-items-center justify-content-between">
+          <% @hotels_data.each_with_index do |hotel_data, index| %>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="hotels-infos m-2 d-flex align-items-center justify-content-between ">
                 <div>
                   <p class="mb-0"><strong> <%= hotel_data["name"] %></strong></p>
                   <p class="mb-0"> <%= hotel_data["address"] %> </p>
                   <p class="mb-0"> <%= hotel_data["city"] %> (<%= hotel_data["country"] %>)</p>
                 </div>
               </div>
+              <div class="col-2 ">
+                <input data-concert-template-target="updateHotelName<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Name" class="form-input p-1 mb-1">
+                <input data-concert-template-target="updateHotelAddress<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Address" class="form-input p-1 mt-1">
+              </div>
+              <div class="col-2 ">
+                <input data-concert-template-target="updateHotelPostCode<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Postcode" class="form-input p-1 mb-1">
+                <input data-concert-template-target="updateHotelCity<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update City" class="form-input p-1 mt-1">
+              </div>
+              <div class="col-4">
+                <%= form_with(url: update_hotel_concert_template_path(@concert_template)) do |form| %>
+                  <div class=" d-flex justify-content-between align-items-center">
+                    <div class="me-2">
+                      <%= form.select :hotel_country, ISO3166::Country.all_translated, { prompt: 'Country' }, class: 'form-input p-1 ms-2 mb-1' %>
+                      <%= form.select :standing, [1,2,3,4,5], { prompt: 'Standing' }, class: 'form-input p-1 ms-2 mt-1' %>
+                    </div>
+                    <%= form.hidden_field :hotel_name, value: "", data: { concert_template_target: "updateHotelNameTemplate#{index}" } %>
+                    <%= form.hidden_field :hotel_address, value: "", data: { concert_template_target: "updateHotelAddressTemplate#{index}" } %>
+                    <%= form.hidden_field :hotel_postcode, value: "", data: { concert_template_target: "updateHotelPostCodeTemplate#{index}" } %>
+                    <%= form.hidden_field :hotel_city, value: "", data: { concert_template_target: "updateHotelCityTemplate#{index}" } %>
+                    <%= form.hidden_field :index, value: "#{index}" %>
+                    <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2'  %>
+                  </div>
+                <% end %>
+
+              </div>
+                                <%= form_with(url: delete_hotel_concert_template_path(@concert_template)) do |form| %>
+                    <%= form.hidden_field :index, value: "#{index}" %>
+                    <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
+                  <% end %>
             </div>
+
           <% end %>
       </div>
     </div>

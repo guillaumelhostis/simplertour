@@ -21,7 +21,7 @@
 
                     <div class="d-flex align-items-center m-2">
                         <div class="text-center  user-hotel-list-new d-flex align-items-center">
-                          <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" class="button-green" >CREW MEMBERS</a>
+                          <a href="#" data-action="click->concert#openModalTwo" data-index="<%= index %>" class="button-green" >CREW</a>
                         </div>
                         <%= render partial: 'hotel_users', locals: { tour: @tour, concert: @concert, index: index, concert_hotel: concert_hotel } %>
 
@@ -32,7 +32,7 @@
               <% end %>
             </div>
             <div class="text-center mt-3">
-              <a href="#" data-action="click->concert#openModalThree" ><i class="fas fa-plus open-plus-icon-timetable"></i></a>
+              <a href="#" data-action="click->concert#openModalThree" class="button-plus" ><strong>+</strong></a>
             </div>
             <%= render partial: 'new_hotel', locals: { tour: @tour, concert: @concert } %>
           </div>

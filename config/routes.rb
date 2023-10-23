@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       post 'new_transport', action: :new_transport, as: "new_transport"
       post 'update_transport', action: :update_transport, as: "update_transport"
       post 'delete_transport', action: :delete_transport, as: "delete_transport"
+      post 'update_name', action: :update_name, as: "update_name"
+      post 'delete_template', action: :delete_template, as: "delete_template"
+      post 'update_hotel', action: :update_hotel, as: "update_hotel"
+      post 'delete_hotel', action: :delete_hotel, as: "delete_hotel"
+      post 'new_hotel', action: :new_hotel, as: "new_hotel"
     end
   end
 

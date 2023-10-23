@@ -74,4 +74,12 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def new_transport?
     true
   end
+
+  def update_name?
+    true
+  end
+
+  def delete_template?
+    true
+  end
 end

@@ -1,7 +1,7 @@
         <div class="w-100 me-1 container-white">
           <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="mb-0">CREW</h2>
-            <%= link_to "EDIT CREW", crew_path(@crew), class: "button-green" %>
+            <%= link_to "EDIT", crew_path(@crew), class: "button-green" %>
             <a href="#" data-action="click->concert#openModalGuest" class="button-green">ADD GUEST</a>
           </div>
           <div class="modal-new-guest" data-concert-target="modalguest">

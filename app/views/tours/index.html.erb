@@ -1,46 +1,4 @@
 <div class="body-container">
-  <div class="mb-3 d-flex align-items-center"><h1 class="me-3">MY TOURS</h1> <%= link_to "NEW TOUR", new_tour_path, class:"button-green" %></div>
-  <div class="d-flex justify-content-between">
-    <div class="col-5">
-      <% @even_index_tours.each_with_index do |tour, index| %>
-              <li class="list-unstyled">
-                <%= link_to tour_path(tour) do %>
-                  <div class="tour-card col-5">
-                    <div class="tour-card-img">
-                      <%= image_tag(tour.picture) if tour.picture.attached? %>
-                      <% unless tour.picture.attached? %>
-                        <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
-                      <% end %>
-                    </div>
-                    <div class="tour-card-content">
-                      <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
-                      <p><strong>from</strong> <%= tour.starting %> <strong>to</strong> <%= tour.ending %></p>
-                    </div>
 
-                  </div>
-                <% end %>
-              </li>
-      <% end %>
-    </div>
-    <div class="col-5">
-      <% @odd_index_tours.each_with_index do |tour, index| %>
-              <li class="list-unstyled">
-                <%= link_to tour_path(tour) do %>
-                  <div class="tour-card col-5">
-                    <div class="tour-card-img">
-                      <%= image_tag(tour.picture) if tour.picture.attached? %>
-                      <% unless tour.picture.attached? %>
-                        <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
-                      <% end %>
-                    </div>
-                    <div class="tour-card-content">
-                      <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
-                      <p><strong>from</strong> <%= tour.starting %> <strong>to</strong> <%= tour.ending %></p>
-                    </div>
-                  </div>
-                <% end %>
-              </li>
-      <% end %>
-    </div>
-  </div>
+  <%= render "form", tour: @tour %>
 </div>

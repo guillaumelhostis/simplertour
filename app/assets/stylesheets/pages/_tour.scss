@@ -1,17 +1,17 @@
 .tour-card-img-square {
 
-  height:132px;
-  width: 132px;
+  height:90px;
+  width: 90px;
 
 
 }
 
 .tour-card-img-square img{
-  width: 132px; /* Ensure the image never exceeds the width of its container */
+  width: 90px; /* Ensure the image never exceeds the width of its container */
   height: 100%; /* Ensure the image never exceeds the height of its container */
 
   object-fit: cover;
-  border: 2px solid white;
+  border-radius: 8px;
 }
 
 

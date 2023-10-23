@@ -1,6 +1,18 @@
-<div class="body-large-container" data-controller="concert-template">
-  <div class=" col-12 mb-4 tour-titles">
-    <h1><%= @concert_template.name.upcase %></h1>
+<div class="body-container" data-controller="concert-template">
+  <div class=" col-6 mb-4 tour-titles  ">
+    <div class="d-flex align-items-center">
+      <h1 class="me-3 mb-2 "><%= @concert_template.name.upcase %></h1>
+      <%= form_with(url: delete_template_concert_template_path(@concert_template)) do |form| %>
+        <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 mb-2 '  %>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <input data-concert-template-target="name"  data-action="keyup->concert-template#updateName"  type="text" placeholder="Change Template Name" class="form-input p-1 me-3  ">
+      <%= form_with(url: update_name_concert_template_path(@concert_template)) do |form| %>
+        <%= form.hidden_field :name, value: "", data: { concert_template_target: "nameTemplate" } %>
+        <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2  '  %>
+      <% end %>
+    </div>
   </div>
   <div class="d-flex justify-content-between">
     <div class="col-12">

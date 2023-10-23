@@ -6,7 +6,7 @@ export default class extends Controller {
     console.log("concert templat connected")
   }
 
-  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate"];
+  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate", "name", "nameTemplate", "newWayTemplate", "newWay"];
 
   updateNote(event) {
     const index = event.currentTarget.getAttribute("data-index");
@@ -115,6 +115,7 @@ export default class extends Controller {
     const link = this.targets.find(`newDepartPlaceTemplate`);
     const noteDescription = this.targets.find(`newDepartPlace`).value;
     link.value = noteDescription;
+    console.log(link)
   }
 
   newDepartTime(event) {
@@ -123,15 +124,21 @@ export default class extends Controller {
     link.value = noteDescription;
   }
 
-  newArrivalTime(event) {
+  newArrivalPlace(event) {
     const link = this.targets.find(`newArrivalPlaceTemplate`);
     const noteDescription = this.targets.find(`newArrivalPlace`).value;
     link.value = noteDescription;
   }
 
-  newArrivalPlace(event) {
+  newArrivalTime(event) {
     const link = this.targets.find(`newArrivalTimeTemplate`);
     const noteDescription = this.targets.find(`newArrivalTime`).value;
+    link.value = noteDescription;
+  }
+
+  updateName(event) {
+    const link = this.targets.find(`nameTemplate`);
+    const noteDescription = this.targets.find(`name`).value;
     link.value = noteDescription;
   }
 }

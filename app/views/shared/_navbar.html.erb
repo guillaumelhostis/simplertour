@@ -1,8 +1,16 @@
-<div class="navbar navbar-expand-sm  navbar-lewagon ">
+<div class="navbar navbar-expand-sm   <%= tourman_signed_in? ? 'navbar-lewagon-logged-in' : 'navbar-lewagon-logged-out' %> ">
   <div class="d-flex w-100">
-    <div class="simpler-tour-home">
-      <div class="simpler-tour-home-link"><strong><%= link_to 'SIMPLER TOUR', root_path %></strong></div>
-    </div>
+    <% if !tourman_signed_in? %>
+      <div class="simpler-tour-home">
+
+          <div class="simpler-tour-home-link">
+            <strong>
+                <%= link_to 'SIMPLER TOUR', root_path %>
+            </strong>
+          </div>
+
+      </div>
+    <% end %>
     <div class="navbar-navigation-container">
       <!-- Dropdown menu button for smaller screens -->
       <div class="dropdown simpler-tour-dropdown-menu">
@@ -15,13 +23,7 @@
         </div>
       </div>
       <!-- Normal menu for regular screens -->
-      <div class="simpler-tour-menu-links">
 
-        <%= link_to "MY TOURS", tours_path if tourman_signed_in? %>
-        <%= link_to "MY TOURS", pages_user_dashboard_path if user_signed_in? %>
-        <a href="#">ABOUT US</a>
-        <a href="#">FAQ</a>
-      </div>
 
       <div class="simpler-tour-navbar-end">
         <% if !tourman_signed_in? %>

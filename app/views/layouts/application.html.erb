@@ -34,6 +34,12 @@
             </div>
           </div>
       </div>
+      <div>
+        <% if tourman_signed_in?  %>
+          <%= render "sidebar/tourman_sidebar" %>
+        <% elsif user_signed_in? %>
+        <% end %>
+      </div>
 
 
 

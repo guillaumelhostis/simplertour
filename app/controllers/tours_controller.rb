@@ -3,6 +3,7 @@ class ToursController < ApplicationController
 
   def index
     @tours = policy_scope(Tour)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @even_index_tours = []
     @odd_index_tours = []
     @tours.each_with_index do |tour, index|
@@ -12,10 +13,12 @@ class ToursController < ApplicationController
         @odd_index_tours << tour
       end
     end
-
+    @tour = Tour.new
   end
 
   def show
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     authorize @tour
     current_date = Date.current
     @crew = Crew.find(@tour.crew_id)
@@ -43,9 +46,12 @@ class ToursController < ApplicationController
 
     @concert = Concert.new
     @today_concerts = @concerts.select { |concert| concert.date == current_date }
+    current_date = Date.current
+    @upcoming_concerts =  @concerts.select { |concert| concert.date > current_date }
   end
 
   def new
+    @tours = Tour.where(tourman_id: current_tourman.id)
     @tour= Tour.new
     authorize @tour
   end
@@ -61,7 +67,7 @@ class ToursController < ApplicationController
     @tour.crew_id = @newcrew.id
     @tour.save
 
-    redirect_to crew_path(@newcrew)
+    redirect_to tours_path()
   end
 
   def edit

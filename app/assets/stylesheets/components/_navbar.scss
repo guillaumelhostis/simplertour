@@ -1,6 +1,6 @@
-.navbar-lewagon {
+.navbar-lewagon-logged-out {
   background: rgba(255, 255, 255, 0.1);
-  width: 95%;
+  width: 100%;
   height: 60px;
   position: fixed;
   z-index: 888;
@@ -8,8 +8,8 @@
   left: 0;
   right: 0;
   margin: 0 auto; /* Center horizontally */
-  border-radius: 15px;
-  margin-top: 40px;
+  // border-radius: 15px;
+  // margin-top: 40px;
   display: flex; /* Use flexbox */
   justify-content: space-between; /* Center horizontally */
   align-items: center; /* Center vertically */
@@ -17,6 +17,31 @@
   backdrop-filter: blur(5px); /* Apply the blur effect */
   -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
 }
+
+.navbar-lewagon-logged-in {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0);
+
+  width: 20%;
+  height: 60px;
+  position: fixed;
+  margin-top: 8px;
+  z-index: 888;
+  top: 8px;
+
+  right: 0;
+  margin: 0 auto; /* Center horizontally */
+  // border-radius: 15px;
+  // margin-top: 40px;
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  color: white;
+  // backdrop-filter: blur(5px); /* Apply the blur effect */
+  // -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
+
+}
+
 
 .simpler-tour-home {
   padding: 0px 30px;
@@ -68,7 +93,8 @@
 }
 
 .simpler-tour-navbar-end{
-  padding: 0px 30px;
+  padding: 0px 50px;
+
 }
 
 /* Dropdown styles for smaller screens */

@@ -59,6 +59,7 @@ class PagesController < ApplicationController
   end
 
   def tourman
+    @tours = Tour.where(tourman_id: current_tourman.id)
   end
 
   def search

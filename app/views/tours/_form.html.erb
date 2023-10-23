@@ -1,31 +1,27 @@
-<div class="body-container">
+
 <h1 class="mb-2">NEW TOUR</h1>
-  <div class="row">
-    <div class="col-6">
-      <%= simple_form_for(@tour) do |f| %>
 
 
-          <%= f.input :title, :label => "Tour Name", label: false,
-                            placeholder: "Tour Name", input_html: { class: 'form-input' }%>
-          <%= f.input :artist, :label => "Artist Name", label: false,
-                            placeholder: "Artist Name", input_html: { class: 'form-input' }%>
-          <%= f.input :genre, :label => "Genre",                         label: false,
-                            placeholder: "Genre", input_html: { class: 'form-input' } %>
-          <%= f.input :starting, :label => "Starting",
-                            placeholder: "Starting", input_html: { class: 'form-input' }%>
-          <%= f.input :ending, :label => "Ending",
-                            placeholder: "Ending", input_html: { class: 'form-input' } %>
-    </div>
-    <div class="col-6 text-end">
-          <%= f.input :picture, as: :file,
-                  label: false,
+    <%= simple_form_for(@tour) do |f| %>
 
-                  prompt: "Profile Picture",
-                  input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
 
-          <%= f.submit "NEW TOUR", class: "button-green"%>
+        <%= f.input :title, :label => "Tour Name", label: false,
+                          placeholder: "Tour Name", input_html: { class: 'form-input' }%>
+        <%= f.input :artist, :label => "Artist Name", label: false,
+                          placeholder: "Artist Name", input_html: { class: 'form-input' }%>
+        <%= f.input :genre, :label => "Genre",                         label: false,
+                          placeholder: "Genre", input_html: { class: 'form-input' } %>
+        <%= f.input :starting, :label => "Starting",
+                          placeholder: "Starting", input_html: { class: 'form-input' }%>
+        <%= f.input :ending, :label => "Ending",
+                          placeholder: "Ending", input_html: { class: 'form-input' } %>
 
-      <% end %>
-    </div>
-  </div>
-</div>
+        <%= f.input :picture, as: :file,
+                label: false,
+
+                prompt: "Profile Picture",
+                input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
+
+        <%= f.submit "NEW TOUR", class: "button-green"%>
+
+    <% end %>

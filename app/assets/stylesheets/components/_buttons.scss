@@ -3,7 +3,7 @@
   color: white;
   padding: 7px 22px;
   border-radius: 10px;
-  font-size: 10px;
+  font-size: 8px;
   border: none  !important;
   background-image: linear-gradient(to bottom, #C42173, #A91B63);
 }
@@ -23,7 +23,7 @@
   color: white;
   padding: 7px 22px;
   border-radius: 10px;
-  font-size: 10px;
+  font-size: 8px;
   border: none  !important;
   background-image: linear-gradient(to bottom, #E84763, #e65e74);
 }
@@ -32,4 +32,20 @@
   background-image: linear-gradient(to bottom, #e84762de, #e65e75df); /* Reduce the alpha channel to control opacity */
   color: white; /* Keep the text color unaffected */
   transition: 0.4s;
+}
+
+.button-plus{
+  // background-color: #C42173;
+  color: white;
+  padding: 0px 5px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: none  !important;
+  background-image: linear-gradient(to bottom, #C42173, #A91B63);
+}
+
+.button-plus:hover {
+  transition: 0.4s;
+  color: white;
+  background-image: linear-gradient(to bottom, #c42173cf, #a91b62ce);
 }
