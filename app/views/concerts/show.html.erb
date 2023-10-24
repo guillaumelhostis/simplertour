@@ -1,8 +1,11 @@
-<div class="body-large-container" data-controller="concert">
+<div class="body-container" data-controller="concert">
   <div class="d-flex justify-content-between">
     <div class="col-7">
       <div class=" col-12 mb-4 tour-titles">
-        <h1><%= @concert.name.upcase %></h1>
+        <div class="d-flex align-items-center">
+          <h1><%= @concert.name.upcase %> </h1>
+          <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: "button-green ms-2" %>
+        </div>
         <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
         <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
         <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
@@ -14,6 +17,13 @@
                     timetable: @timetable_entries.to_json),
                     class: "button-green",
                     target: "_blank"  %>
+
+        <a href="#" data-action="click->concert#openModalTemplate" class="button-green" >GENERATE TEMPLATE</a>
+        <div class="modal-new-template" data-concert-target="modaltemplate">
+          <div class="modal-new-template-content">
+            <%= render partial: 'modal_new_template' %>
+          </div>
+        </div>
       </div>
       <%= render partial: 'venue', locals: { tour: @tour, concert: @concert } %>
       <div class="d-flex justify-content-between mb-2">
@@ -24,7 +34,8 @@
       <div class="">
         <div style="width: 100%; height: 350px;  border-radius: 10px;"
         data-controller="concertmap"
-        data-concertmap-markers-value="<%= @markers.to_json %>"
+        data-concertmap-venuemarkers-value="<%= @venue_markers.to_json %>"
+        data-concertmap-hotelmarkers-value="<%= @hotel_markers.to_json %>"
         data-concertmap-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
   </div>

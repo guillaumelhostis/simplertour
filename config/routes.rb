@@ -21,7 +21,28 @@ Rails.application.routes.draw do
   resources :venues
   resources :hotels
   resources :checklist_templates, only: [:new, :create]
-
+  resources :concert_templates, only: [:new, :create, :show] do
+    member do
+      post 'update_notes', action: :update_notes, as: 'update_notes'
+      post 'new_note', action: :new_note, as: 'new_note'
+      post 'delete_note', action: :delete_note, as: 'delete_note'
+      post 'update_timetable', action: :update_timetable, as: 'update_timetable'
+      post 'update_checkbox', action: :update_checkbox, as: 'update_checkbox'
+      post 'new_checkbox', action: :new_checkbox, as: 'new_checkbox'
+      post 'delete_checkbox', action: :delete_checkbox, as: 'delete_checkbox'
+      post 'new_timetable', action: :new_timetable, as: 'new_timetable'
+      post 'delete_timetable', action: :delete_timetable, as: 'delete_timetable'
+      post 'new_transport', action: :new_transport, as: "new_transport"
+      post 'update_transport', action: :update_transport, as: "update_transport"
+      post 'delete_transport', action: :delete_transport, as: "delete_transport"
+      post 'update_name', action: :update_name, as: "update_name"
+      post 'delete_template', action: :delete_template, as: "delete_template"
+      post 'update_hotel', action: :update_hotel, as: "update_hotel"
+      post 'delete_hotel', action: :delete_hotel, as: "delete_hotel"
+      post 'new_hotel', action: :new_hotel, as: "new_hotel"
+      post 'create_from_template', action: :create_from_template, as: 'create_from_template'
+    end
+  end
 
   resources :tours do
     resources :concerts, except: [:index] do

@@ -13,6 +13,7 @@ class Concert < ApplicationRecord
   belongs_to :tour
   belongs_to :venue, optional: true
   belongs_to :hotel, optional: true
+  before_destroy :remove_associations
   has_many :concert_hotels, dependent: :destroy
   has_many :hotels, through: :concert_hotels
   has_many :transports, dependent: :destroy
@@ -38,6 +39,35 @@ class Concert < ApplicationRecord
       return 1 # On Going
     elsif checklists.none?(&:status)
       return 0 # Not started
+    end
+  end
+
+  private
+
+  def remove_associations
+    checklists.each do |checklist|
+      checklist.update(concert_id: nil)
+      checklist.destroy
+    end
+    timetable_entries.each do |timetable_entry|
+      timetable_entry.update(concert_id: nil)
+      timetable_entry.destroy
+    end
+    transports.each do |transport|
+      transport.update(concert_id: nil)
+      transport.destroy
+    end
+    notes.each do |note|
+      note.update(concert_id: nil)
+      note.destroy
+    end
+    concert_hotels.each do |concert_hotel|
+      concert_hotel.update(concert_id: nil)
+      concert_hotel.destroy
+    end
+    contacts.each do |contact|
+      contact.update(concert_id: nil)
+      contact.destroy
     end
   end
 end

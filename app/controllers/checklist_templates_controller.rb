@@ -1,7 +1,8 @@
 class ChecklistTemplatesController < ApplicationController
 
   def new
-
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @concert = params[:concert]
     @tour = params[:tour]
     @template = ChecklistTemplate.new

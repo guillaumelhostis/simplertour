@@ -1,11 +1,11 @@
-<div class="body-large-container">
+<div class="body-container">
   <div class="d-flex justify-content-between">
     <div class="col-6">
-      <h1 class="mb-3">HELLO <%= current_user.first_name.upcase %></h1>
+
       <% if !@today_concerts.empty? %>
         <h2>TODAY SHOW <%= Date.current.strftime("%b %d %Y").upcase %></h2>
       <% else %>
-        <h2>YOU DON'T HAVE SHOWS TODAY</h2>
+        <h2>NO SHOW TODAY</h2>
       <% end %>
 
       <% @today_concerts.each do |today_concert| %>
@@ -30,28 +30,37 @@
           </div>
         <% end %>
     </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="col-6">
+      <h2>TICKETS</h2>
+
+    </div>
     <div class="col-5 ">
       <h2>UPCOMING SHOWS</h2>
-      <div class="list-toggle-user-concerts">
+      <div class="upcoming-concerts">
         <% @upcoming_concerts.each do |concert| %>
-          <div class="user-tour-card col-5">
-            <% tour = Tour.find(concert.tour_id) %>
-            <div class="user-tour-card-img">
-              <%= image_tag(tour.picture) if tour.picture.attached? %>
-              <% unless tour.picture.attached? %>
-                <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
-              <% end %>
+          <% tour = Tour.find(concert.tour_id) %>
+            <div class="side-bar-tour-card col-5 justify-content-between ">
+              <% tour = Tour.find(concert.tour_id) %>
+                <div class="side-bar-tour-card-img col-4">
+                  <%= image_tag(tour.picture) if tour.picture.attached? %>
+                  <% unless tour.picture.attached? %>
+                    <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+                  <% end %>
+                </div>
+
+                  <div class="user-side-bar-tour-card-content col-6">
+                    <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
+                    <p> <b><%= concert.date.strftime("%b %d %Y").upcase %>: <%= concert.name.upcase %></b> - <%= concert.location %> </p>
+                  </div>
+                  <div class="d-flex align-items-center  col-2 me-2">
+                    <%= link_to "INFOS", pages_user_concert_dashboard_path(data_concert: concert, data_tour: tour), class: "button-green" %>
+                  </div>
+
             </div>
-            <div class="user-tour-card-content">
-              <h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3>
-              <p> <b><%= concert.date.strftime("%b %d %Y").upcase %>: <%= concert.name.upcase %></b> - <%= concert.location %> </p>
-            </div>
-          </div>
         <% end %>
       </div>
     </div>
   </div>
-
-
-
 </div>

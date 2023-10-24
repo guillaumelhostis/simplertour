@@ -119,7 +119,7 @@
 }
 
 .hotels-infos  p {
-  font-size: 13px;
+  font-size: 12px;
 
 }
 
@@ -212,7 +212,7 @@ opacity: 0.5;
 
   /* Show scrollbar when hovering over the div */
   transition: scrollbar-color 0.5s;
-
+  border-radius: 8px;
 
 }
 
@@ -260,7 +260,7 @@ opacity: 0.5;
 }
 
 .contacts-concert p{
-  font-size: 13px
+  font-size: 12px
 }
 
 .contacts-concert a{
@@ -667,4 +667,48 @@ opacity: 0.5;
   border-radius: 5px;
   padding: 10px;
   transition: scrollbar-color 0.5s;
+}
+
+.modal-new-template{
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0.8s;
+}
+
+.modal-new-template-content {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15% auto;
+  padding: 20px;
+  color: white;
+  width: 419px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: 0.8s;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.upcoming-concerts {
+  max-height: 300px;
+  overflow-y: scroll;
+  scrollbar-color: #999 #333;
+  transition: scrollbar-color 0.5s;
+
+}
+
+.upcoming-concerts:-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+
+.upcoming-concerts:-webkit-scrollbar-thumb:hover {
+  background: #000;
 }

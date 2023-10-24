@@ -5,7 +5,8 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    venuemarkers: Array,
+    hotelmarkers: Array
   }
 
   connect() {
@@ -22,10 +23,21 @@ export default class extends Controller {
   }
 
   #addMarkersToMap() {
-    console.log(this.markersValue)
-    this.markersValue.forEach((marker) => {
+
+    this.hotelmarkersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-      new mapboxgl.Marker()
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+      new mapboxgl.Marker(customMarker)
+        .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup)
+        .addTo(this.map)
+    })
+    this.venuemarkersValue.forEach((marker) => {
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+      new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
         .addTo(this.map)
@@ -34,7 +46,7 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+    this.hotelmarkersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
   }
 }

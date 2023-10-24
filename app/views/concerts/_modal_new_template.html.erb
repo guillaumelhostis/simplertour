@@ -1,0 +1,6 @@
+<span class="close-contert-modal " data-action="click->concert#closeModalTemplate"><i class="fas fa-times black-icon"></i></span>
+
+<input data-concert-target="templateName" data-action="keyup->concert#updateLink"  type="text" placeholder="Enter template name" class="form-input p-1 mb-2">
+<div class="text-center">
+  <%= link_to "GENERATE TEMPLATE", new_concert_template_path(@concert),  class: "button-green me-2", data: { template_name: "", concert_target: "linkTemplate" } %>
+</div>

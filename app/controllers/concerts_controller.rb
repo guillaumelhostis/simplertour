@@ -1,22 +1,20 @@
 class ConcertsController < ApplicationController
 
-
-
-
   def new
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.build
   end
 
   def show
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @tours = Tour.where(tourman_id: current_tourman.id)
     @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
     @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
-
-
     @contact = Contact.new
     @guest = Guest.new
     @note = Note.new
     @checklist = Checklist.new
+    @concert_template = ConcertTemplate.new
     @transport = Transport.new
     @transport_user = TransportUser.new
     @hotel = Hotel.new
@@ -37,27 +35,34 @@ class ConcertsController < ApplicationController
     @crew_users = @crew.users
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
-    @geocoders = []
+    @hotel_geocoders = []
+    @venue_geocoders = []
     if @concert.venue_id.present?
       @venue = Venue.find(@concert.venue_id)
-      @geocoders <<  @venue
+      @venue_geocoders <<  @venue
     end
     if @concert.concert_hotels.present?
       hotel_ids_array = @concert.concert_hotels.pluck(:hotel_id)
       hotel_ids_array.each do |hotel|
-        @geocoders <<  Hotel.find(hotel)
+        @hotel_geocoders <<  Hotel.find(hotel)
       end
     end
-    @markers =  @geocoders.map do |location|
+    @venue_markers =  @venue_geocoders.map do |location|
       {
         lat: location.latitude,
         lng: location.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {location: location})
+        info_window_html: render_to_string(partial: "info_window", locals: {location: location}),
+        marker_html: render_to_string(partial: "venue_marker")
       }
     end
-
-
-
+    @hotel_markers =  @hotel_geocoders.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {location: location}),
+        marker_html: render_to_string(partial: "hotel_marker")
+      }
+    end
     authorize @concert
   end
 
@@ -99,6 +104,7 @@ class ConcertsController < ApplicationController
   end
 
   def destroy
+
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:id])
     authorize @concert
@@ -132,8 +138,6 @@ class ConcertsController < ApplicationController
   end
 
   def remove_contact
-
-
     @contact = Contact.find(params[:contact_id].to_i)
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
@@ -141,8 +145,9 @@ class ConcertsController < ApplicationController
 
     @contact.destroy
     redirect_to tour_concert_path(@tour, @concert), notice: 'Contact Delete'
-
   end
+
+
 
   private
 

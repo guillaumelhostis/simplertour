@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:user]
   before_action :authenticate_tourman!, only: [:tourman]
-  before_action :set_concerts, only: [:user_dashboard]
+  before_action :set_concerts, only: [:user_dashboard, :user_concert_dashboard]
 
   def home
   end
@@ -14,15 +14,52 @@ class PagesController < ApplicationController
   end
 
   def user_concert_dashboard
+    @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
+    @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
     @concert = Concert.find(params[:data_concert].to_i)
     @tour = Tour.find(params[:data_tour].to_i)
     @timetable_entries = TimetableEntry.where(concert_id: @concert).order(hourminute: :asc)
     @user_transports = @concert.transports.select { |transport| transport.users.include?(current_user) }
+    @user_hotels =  []
+    @concert.concert_hotels.each do |concert_hotel|
+      @user_hotels << concert_hotel if concert_hotel.users.include?(current_user)
+    end
+    @crew = @tour.crew
+    @crew_users = @crew.users
+    @guests = @concert.guests
+    @contacts = @concert.contacts
+    @hotel_geocoders = []
+    @venue_geocoders = []
+    if @concert.venue_id.present?
+      @venue = Venue.find(@concert.venue_id)
+      @venue_geocoders <<  @venue
+    end
+    if @user_hotels.present?
+      hotel_ids_array = @user_hotels.pluck(:hotel_id)
+      hotel_ids_array.each do |hotel|
+        @hotel_geocoders <<  Hotel.find(hotel)
+      end
+    end
+    @hotel_markers =  @hotel_geocoders.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        marker_html: render_to_string(partial: "hotel_marker")
+      }
+    end
 
+    @venue_markers =  @venue_geocoders.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        marker_html: render_to_string(partial: "venue_marker")
+      }
+    end
 
   end
 
   def tourman
+    @tours = Tour.where(tourman_id: current_tourman.id)
   end
 
   def search

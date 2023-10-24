@@ -1,9 +1,10 @@
 <div class="body-container">
   <div data-controller="crew">
-    <h1 class="mb-3"><%= @crew.name.upcase %></h1>
-
-
-    <div class="row">
+    <div class="d-flex align-items-center mb-3">
+      <h1 class="me-3"><%= @crew.name.upcase %></h1>
+      <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class:"button-green" %>
+    </div>
+    <div class="row justify-content-between">
       <div class="col-4  me-3">
         <div class="container-white">
           <h2>SEARCH</h2>
@@ -23,18 +24,28 @@
           <%# <label for="user_ids">Select Users:</label> %>
             <%#= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
       </div>
-      <div class="col-7 container-transparent">
+      <div class="col-7">
         <div class="container-white">
-          <div class="box-shadow-bottom"><h2>CREW MEMBERS</h2></div>
+          <div class="box-shadow-bottom d-flex align-items-center justify-content-between">
+            <h2>CREW MEMBERS</h2>
+            <p class="m-0">Assign a role</>
+          </div>
           <div class="listtoggle">
             <ul class="list-unstyled">
               <% @crew_users.each_with_index do |crew_user, index|%>
+                  <% member = User.find(crew_user[:user_id]) %>
 
                   <li>
                     <div class="list-crew-members d-flex justify-content-between align-items-center">
                       <div class="d-flex align-items-center">
 
                           <%= link_to raw('<i class="fas fa-times-circle green-cross-delete me-3"></i>'), unassign_user_crew_path(@crew, crew_user.user), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+                          <div>
+                            <%= image_tag(member.image, class: "avatar me-3") if member.image.attached? %>
+                            <% unless member.image.attached? %>
+                              <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar me-3"  %>
+                            <% end %>
+                          </div>
                           <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p></div>
 
 
@@ -71,8 +82,13 @@
 
         </div>
       </div>
-      <div class="col-12 text-start mt-5"><%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class:"button-green" %></div>
     </div>
+  </div>
+  <div class="container-white mt-3">
+    <p class="m-0">
+      <i class="fa-solid fa-circle-info me-3"></i>
+      Your Crew refers to the main team of the show, it will be automatically be assigned to all your shows.
+    </p>
   </div>
 </div>
 

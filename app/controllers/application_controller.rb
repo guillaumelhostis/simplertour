@@ -28,6 +28,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :birth_day, :address, :post_code, :city, :phone_number, :country ])
   end
 
+  def after_sign_in_path_for(resource)
+    if current_tourman
+      stored_location_for(resource) ||  tours_path
+    elsif current_user
+      stored_location_for(resource) || pages_user_dashboard_path
+    end
+  end
+
 
   private
 

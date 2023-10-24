@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_094421) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_19_132326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,6 +101,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_094421) do
     t.datetime "updated_at", null: false
     t.index ["concert_id"], name: "index_concert_hotels_on_concert_id"
     t.index ["hotel_id"], name: "index_concert_hotels_on_hotel_id"
+  end
+
+  create_table "concert_templates", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "data"
+    t.string "name"
+    t.bigint "tourman_id"
+    t.index ["tourman_id"], name: "index_concert_templates_on_tourman_id"
   end
 
   create_table "concerts", force: :cascade do |t|
@@ -299,6 +308,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_094421) do
   add_foreign_key "concert_hotel_users", "users"
   add_foreign_key "concert_hotels", "concerts"
   add_foreign_key "concert_hotels", "hotels"
+  add_foreign_key "concert_templates", "tourmen"
   add_foreign_key "concerts", "tours"
   add_foreign_key "concerts", "venues"
   add_foreign_key "contacts", "concerts"

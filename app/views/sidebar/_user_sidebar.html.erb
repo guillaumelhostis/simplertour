@@ -1,0 +1,33 @@
+<div class="side-bar-container">
+  <div class="side-bar-home ">
+    <strong>
+      <span>SIMPLER TOUR</span>
+    </strong>
+  </div>
+  <div class="side-bar-menu">
+    <strong>
+      <div class="mb-3 d-flex align-items-center justify-content-between"> <span class="text-white">TOURS</span>  </div>
+    </strong>
+    <div class="side-bar-tour mb-3">
+      <% @tours.each do |tour| %>
+
+        <li class="list-unstyled">
+
+            <div class="side-bar-tour-card col-5">
+              <div class="side-bar-tour-card-img">
+                <%= image_tag(tour.picture) if tour.picture.attached? %>
+                <% unless tour.picture.attached? %>
+                  <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+                <% end %>
+              </div>
+              <div class="side-bar-tour-card-content d-flex align-items-center">
+                <span><h2><%= tour.artist.upcase %></h2> <h3><%= tour.title.upcase%></h3></span>
+              </div>
+
+            </div>
+
+        </li>
+      <% end %>
+    </div>
+  </div>
+</div>

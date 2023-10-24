@@ -1,0 +1,24 @@
+.container-transparent {
+  background-color: rgba(245, 245, 245, 0);
+  border-radius: 15px;
+  color: black;
+  padding: 0px;
+}
+
+.container-white{
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background-color: rgba(35, 41, 49, 0.5);
+  border: 1px solid #9191911c;
+  box-shadow: 0 0 8px rgba(84,58,167, 0.1);
+  padding: 15px;
+
+}
+
+.homepage-container {
+  width: 80%;
+  margin: 150px auto;
+  color: white;
+  position: relative;
+  z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
+}

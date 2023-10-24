@@ -26,12 +26,18 @@ body::before {
 }
 
 .body-container{
-  width: 80%;
-  margin: 150px auto;
+  width: calc(100% - 277px);
+  left: 268px;
+  top: 8px;
   color: white;
   position: relative;
+  // position: fixed;
+  border-radius: 8px;
   z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
-
+  background-color: #0e111496;
+  border: 1px solid #9191917f;
+  // height: 97.6%;
+  padding: 15px;
 }
 
 .body-large-container{

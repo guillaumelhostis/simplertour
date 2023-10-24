@@ -4,7 +4,6 @@ class TourPolicy < ApplicationPolicy
     def resolve
       scope.where(tourman_id: user.tourman.id)
     end
-
   end
 
   def show?
@@ -22,6 +21,4 @@ class TourPolicy < ApplicationPolicy
   def destroy?
     record.tourman_id == @tourman.id
   end
-
-
 end

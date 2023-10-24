@@ -1,0 +1,45 @@
+<div class="col-12 container-white mt-2">
+  <h2>NOTES (<%= @concert_template.name.upcase %>)</h2>
+    <div class="mt-3">
+      <% if @notes_data.empty? %>
+          <p class="m-0"> No notes yet</p>
+      <% else %>
+        <% @notes_data.each_with_index do |note_data, index| %>
+          <div class="list-unstyled d-flex align-items-center concert-note mb-1">
+            <div class="d-flex align-items-center  col-6">
+              <i class="fa-solid fa-note-sticky me-3"> </i>
+              <p class="m-0 me-3"> <%= note_data["description"] %></p>
+            </div>
+            <div class="col-6 d-flex align-items-center ">
+              <input data-concert-template-target="noteDescription<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateNote"  type="text" placeholder="Update Note" class="form-input p-1 ">
+              <%= form_with(url: update_notes_concert_template_path(@concert_template)) do |form| %>
+                <%= form.hidden_field :note_description, value: "", data: { concert_template_target: "noteLinkTemplate#{index}" } %>
+                <%= form.hidden_field :index, value: "", data: { concert_template_target: "noteIndexTemplate#{index}" } %>
+                <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2 '  %>
+              <% end %>
+              <%= form_with(url: delete_note_concert_template_path(@concert_template)) do |form| %>
+                <%= form.hidden_field :index, value: "#{index}" %>
+                <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="d-flex align-items-center">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6 d-flex align-items-center">
+          <input data-concert-template-target="newNoteDescription" data-action="keyup->concert-template#newNote"  type="text" placeholder="New Note" class="form-input p-1 mb-2">
+          <%= form_with(url: new_note_concert_template_path(@concert_template)) do |form| %>
+            <%= form.hidden_field :note_description, value: "", data: { concert_template_target: "newNoteTemplate" } %>
+            <%= form.button 'NEW', type: :submit, class: 'button-green ms-2 mb-2'  %>
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+
+</div>
