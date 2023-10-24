@@ -30,10 +30,7 @@ export default class extends Controller {
 
   openModalTwo(event) {
     const index = event.currentTarget.getAttribute("data-index");
-    console.log(index)
     const roleTarget = this.targets.find(`modaltwo${index}`);
-    console.log(roleTarget)
-
     roleTarget.classList.remove('d-none');
     roleTarget.classList.add('d-block');
     event.preventDefault();

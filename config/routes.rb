@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       post 'update_hotel', action: :update_hotel, as: "update_hotel"
       post 'delete_hotel', action: :delete_hotel, as: "delete_hotel"
       post 'new_hotel', action: :new_hotel, as: "new_hotel"
+      post 'create_from_template', action: :create_from_template, as: 'create_from_template'
     end
   end
 

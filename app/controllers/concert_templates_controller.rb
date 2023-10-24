@@ -220,4 +220,37 @@ class ConcertTemplatesController < ApplicationController
     @concert_template.update(data: data.to_json)
     redirect_to concert_template_path(@concert_template), notice: 'Hotel Added'
   end
+
+  def create_from_template
+    @concert_template = ConcertTemplate.find(params[:id])
+    authorize  @concert_template
+    tour= Tour.find(params[:tour].to_i)
+    data = JSON.parse(@concert_template.data)
+    new_concert = Concert.new(tour_id: params[:tour].to_i, name: params[:venue], location: params[:city], date: params[:date].to_date)
+    new_concert.save
+    data["checklists"].each do |checklist|
+      checklist = Checklist.new(concert_id: new_concert.id, description: checklist["description"] )
+      checklist.save
+    end
+    data["timetable_entries"].each do |timetable_entry|
+      new_timetable_entry = TimetableEntry.new(concert_id: new_concert.id, information: timetable_entry["information"], hourminute: timetable_entry["hourminute"], hourminuteend: timetable_entry["hourminuteend"])
+      new_timetable_entry.save
+    end
+
+    data["transports"].each do |transport|
+      new_transport = Transport.new(concert_id: new_concert.id, time_of_depart: transport["time_of_depart"] , time_of_arrival: transport["time_of_arrival"]  , place_of_depart: transport["place_of_depart"], place_of_arrival: transport["place_of_arrival"], way_of_transport: transport["way_of_transport"])
+      new_transport.save
+    end
+    data["notes"].each do |note|
+      new_note = Note.new(concert_id: new_concert.id, description: note["description"])
+      new_note.save
+    end
+    data["hotels"].each do |hotel|
+      new_hotel = Hotel.new(name: hotel["name"], address: hotel["address"], city: hotel["city"], postcode: hotel["postcode"], country: hotel["country"], standing: hotel["standing"], tourman_id: hotel["tourman_id"] )
+      new_hotel.save
+      new_concert_hotel = ConcertHotel.new(concert_id: new_concert.id, hotel_id: new_hotel.id)
+      new_concert_hotel.save
+    end
+    redirect_to tour_concert_path(new_concert, tour), notice: 'Concert was successfully created'
+  end
 end

@@ -44,6 +44,10 @@ application.register("map-user-concert", MapUserConcertController)
 import ConcertTemplateController from "./concert_template_controller"
 application.register("concert-template", ConcertTemplateController)
 
+import TourController from "./tour_controller"
+application.register("tour", TourController)
+
+
 
 
 // Eager load all controllers defined in the import map under controllers/**/*_controller

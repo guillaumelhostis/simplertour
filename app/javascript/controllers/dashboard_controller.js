@@ -7,10 +7,8 @@ export default class extends Controller {
 
 
   connect() {
-    console.log("controller flatpickr")
+
     this.initFlatpickr();
-
-
   }
 
   initFlatpickr() {
@@ -43,8 +41,6 @@ export default class extends Controller {
     // Reapply custom classes when the month changes
     this.applyCustomClasses(instance);
   }
-
-
 
   handleDateChange(selectedDates, dateStr, instance) {
     const concertDateToIdMap = {};
@@ -135,4 +131,6 @@ export default class extends Controller {
       });
     });
   }
+
+
 }

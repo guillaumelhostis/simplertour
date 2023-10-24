@@ -94,4 +94,8 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def new_hotel?
     true
   end
+
+  def create_from_template?
+    true
+  end
 end

@@ -1,8 +1,5 @@
 class ConcertsController < ApplicationController
 
-
-
-
   def new
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.build
@@ -140,8 +137,6 @@ class ConcertsController < ApplicationController
   end
 
   def remove_contact
-
-
     @contact = Contact.find(params[:contact_id].to_i)
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
@@ -149,8 +144,9 @@ class ConcertsController < ApplicationController
 
     @contact.destroy
     redirect_to tour_concert_path(@tour, @concert), notice: 'Contact Delete'
-
   end
+
+
 
   private
 

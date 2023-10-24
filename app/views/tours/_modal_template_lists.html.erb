@@ -1,0 +1,24 @@
+<span class="close-contert-modal " data-action="click->tour#closeTemplateListModal"><i class="fas fa-times black-icon"></i></span>
+<div class="text-center">
+  <h2>TEMPLATES</h2>
+</div>
+<div class="template-lists">
+  <div class="text-center">
+    <% @concert_templates.each do |concert_template| %>
+      <li class="list-unstyled mb-1 template-list">
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="m-0 "><%= concert_template.name %></p>
+          <%= form_with(url: create_from_template_concert_template_path(concert_template)) do |form| %>
+            <div class="col-12 d-flex align-items-center justify-content-between">
+              <%= form.hidden_field :tour, value: @tour.id %>
+              <%= form.date_field :date,  class: 'form-input me-1' %>
+              <%= form.text_field :city, placeholder: "City",  class: 'form-input me-1' %>
+              <%= form.text_field :venue, placeholder: "Venue",   class: 'form-input me_1' %>
+              <%= form.button "CREATE", type: :submit, class: 'button-green ms-2'  %>
+            </div>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </div>
+</div>

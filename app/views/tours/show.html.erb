@@ -29,11 +29,16 @@
     </div>
   </div>
 </div>
-<div class="body-container mt-2">
+<div class="body-container mt-2" data-controller="tour">
   <div class="d-flex align-items-center">
     <h2 class="m-0">ADD A NEW SHOW</h2>
     <div class="d-flex align-items-center ms-4">
-      <a href="#" data-action="" class="button-green" >CREATE FROM TEMPLATE</a>
+      <a href="#" data-action="click->tour#openTemplateListModal" class="button-green" >CREATE FROM TEMPLATE</a>
+      <div class="modal-template-lists" data-tour-target="modaltemplatelist">
+        <div class="modal-template-lists-content">
+          <%= render partial: 'modal_template_lists' %>
+        </div>
+      </div>
     </div>
   </div>
   <div class=" mt-3">

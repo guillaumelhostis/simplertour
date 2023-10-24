@@ -5,6 +5,7 @@
       <%= form_with(url: delete_template_concert_template_path(@concert_template)) do |form| %>
         <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 mb-2 '  %>
       <% end %>
+
     </div>
     <div class="d-flex align-items-center">
       <input data-concert-template-target="name"  data-action="keyup->concert-template#updateName"  type="text" placeholder="Change Template Name" class="form-input p-1 me-3  ">
