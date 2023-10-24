@@ -187,10 +187,37 @@ class ConcertTemplatesController < ApplicationController
     authorize  @concert_template
     @concert_template.delete
     redirect_to tours_path, notice: 'Template Delete'
-
   end
 
   def update_hotel
-    raise
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["hotels"][params[:index].to_i]["name"] = params[:hotel_name]
+    data["hotels"][params[:index].to_i]["address"] = params[:hotel_address]
+    data["hotels"][params[:index].to_i]["postcode"] = params[:hotel_postcode]
+    data["hotels"][params[:index].to_i]["city"] = params[:hotel_city]
+    data["hotels"][params[:index].to_i]["standing"] = params[:standing]
+    data["hotels"][params[:index].to_i]["country"] = params[:hotel_country]
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Hotel Updated'
+  end
+
+  def delete_hotel
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["hotels"].delete_at(params[:index].to_i)
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Hotel Delete'
+  end
+
+  def new_hotel
+    @concert_template = ConcertTemplate.find(params[:id])
+    data = JSON.parse(@concert_template.data)
+    data["hotels"] << {"name"=>params[:hotel_name], "address"=>params[:hotel_address], "city"=>params[:hotel_city], "postcode"=>params[:hotel_postcode], "country"=>params[:hotel_country], "standing"=>params[:standing]}
+    authorize  @concert_template
+    @concert_template.update(data: data.to_json)
+    redirect_to concert_template_path(@concert_template), notice: 'Hotel Added'
   end
 end

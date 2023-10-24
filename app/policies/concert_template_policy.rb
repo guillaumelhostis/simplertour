@@ -82,4 +82,16 @@ class ConcertTemplatePolicy < ApplicationPolicy
   def delete_template?
     true
   end
+
+  def update_hotel?
+    true
+  end
+
+  def delete_hotel?
+    true
+  end
+
+  def new_hotel?
+    true
+  end
 end

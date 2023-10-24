@@ -6,7 +6,7 @@ export default class extends Controller {
     console.log("concert templat connected")
   }
 
-  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate", "name", "nameTemplate", "newWayTemplate", "newWay"];
+  static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate", "name", "nameTemplate", "newWayTemplate", "newWay", "updateHotelName*", "updateHotelAddress*", "updateHotelPostCode*", "updateHotelCity*", "updateHotelNameTemplate*", "updateHotelAddressTemplate*", "updateHotelPostCodeTemplate*", "updateHotelCityTemplate*","newHotelNameTemplate", "newHotelName", "newHotelCityTemplate", "newHotelCity", "newHotelPostCodeTemplate", "newHotelPostCode", "newHotelAddressTemplate", "newHotelAddress" ];
 
   updateNote(event) {
     const index = event.currentTarget.getAttribute("data-index");
@@ -139,6 +139,62 @@ export default class extends Controller {
   updateName(event) {
     const link = this.targets.find(`nameTemplate`);
     const noteDescription = this.targets.find(`name`).value;
+    link.value = noteDescription;
+  }
+
+  updateHotelName(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`updateHotelNameTemplate${index}`);
+    const noteDescription = this.targets.find(`updateHotelName${index}`).value;
+    link.value = noteDescription;
+
+  }
+
+  updateHotelAddress(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`updateHotelAddressTemplate${index}`);
+    const noteDescription = this.targets.find(`updateHotelAddress${index}`).value;
+    link.value = noteDescription;
+
+  }
+
+  updateHotelPostCode(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`updateHotelPostCodeTemplate${index}`);
+    const noteDescription = this.targets.find(`updateHotelPostCode${index}`).value;
+    link.value = noteDescription;
+
+  }
+
+  updateHotelCity(event) {
+    const index = event.currentTarget.getAttribute("data-index");
+    const link = this.targets.find(`updateHotelCityTemplate${index}`);
+    const noteDescription = this.targets.find(`updateHotelCity${index}`).value;
+    link.value = noteDescription;
+
+  }
+
+  newHotelName(event) {
+    const link = this.targets.find(`newHotelNameTemplate`);
+    const noteDescription = this.targets.find(`newHotelName`).value;
+    link.value = noteDescription;
+  }
+
+  newHotelAddress(event) {
+    const link = this.targets.find(`newHotelAddressTemplate`);
+    const noteDescription = this.targets.find(`newHotelAddress`).value;
+    link.value = noteDescription;
+  }
+
+  newHotelPostCode(event) {
+    const link = this.targets.find(`newHotelPostCodeTemplate`);
+    const noteDescription = this.targets.find(`newHotelPostCode`).value;
+    link.value = noteDescription;
+  }
+
+  newHotelCity(event) {
+    const link = this.targets.find(`newHotelCityTemplate`);
+    const noteDescription = this.targets.find(`newHotelCity`).value;
     link.value = noteDescription;
   }
 }

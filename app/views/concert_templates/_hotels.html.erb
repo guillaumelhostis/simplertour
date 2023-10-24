@@ -12,12 +12,12 @@
                 </div>
               </div>
               <div class="col-2 ">
-                <input data-concert-template-target="updateHotelName<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Name" class="form-input p-1 mb-1">
-                <input data-concert-template-target="updateHotelAddress<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Address" class="form-input p-1 mt-1">
+                <input data-concert-template-target="updateHotelName<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateHotelName"  type="text" placeholder="Update Name" class="form-input p-1 mb-1">
+                <input data-concert-template-target="updateHotelAddress<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateHotelAddress"  type="text" placeholder="Update Address" class="form-input p-1 mt-1">
               </div>
               <div class="col-2 ">
-                <input data-concert-template-target="updateHotelPostCode<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update Postcode" class="form-input p-1 mb-1">
-                <input data-concert-template-target="updateHotelCity<%= index %>" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="Update City" class="form-input p-1 mt-1">
+                <input data-concert-template-target="updateHotelPostCode<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateHotelPostCode"  type="text" placeholder="Update Postcode" class="form-input p-1 mb-1">
+                <input data-concert-template-target="updateHotelCity<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateHotelCity"  type="text" placeholder="Update City" class="form-input p-1 mt-1">
               </div>
               <div class="col-4">
                 <%= form_with(url: update_hotel_concert_template_path(@concert_template)) do |form| %>
@@ -36,13 +36,48 @@
                 <% end %>
 
               </div>
-                                <%= form_with(url: delete_hotel_concert_template_path(@concert_template)) do |form| %>
-                    <%= form.hidden_field :index, value: "#{index}" %>
-                    <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
-                  <% end %>
+                <%= form_with(url: delete_hotel_concert_template_path(@concert_template)) do |form| %>
+                  <%= form.hidden_field :index, value: "#{index}" %>
+                  <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
+                <% end %>
             </div>
 
           <% end %>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <div class="col-2">
+                <input data-concert-template-target="newHotelName"  data-action="keyup->concert-template#newHotelName"  type="text" placeholder="Name" class="form-input p-1 ">
+              </div>
+              <div class="col-2">
+                <input data-concert-template-target="newHotelAddress"  data-action="keyup->concert-template#newHotelAddress"  type="text" placeholder="Address" class="form-input p-1 ">
+              </div>
+              <div class="col-1">
+                <input data-concert-template-target="newHotelPostCode" data-action="keyup->concert-template#newHotelPostCode"  type="text" placeholder="Postcode" class="form-input p-1 ">
+              </div>
+              <div class="col-1">
+                <input data-concert-template-target="newHotelCity"  data-action="keyup->concert-template#newHotelCity"  type="text" placeholder="City" class="form-input p-1 ">
+              </div>
+              <div class="col-4">
+                <%= form_with(url: new_hotel_concert_template_path(@concert_template)) do |form| %>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-4">
+                      <%= form.select :hotel_country, ISO3166::Country.all_translated, { prompt: 'Country' }, class: 'form-input p-1 ' %>
+                    </div>
+                    <div class="col-2">
+                      <%= form.select :standing, [1,2,3,4,5], { prompt: 'Standing' }, class: 'form-input p-1 ' %>
+                    </div>
+                    <%= form.hidden_field :hotel_name, value: "", data: { concert_template_target: "newHotelNameTemplate" } %>
+                    <%= form.hidden_field :hotel_address, value: "", data: { concert_template_target: "newHotelAddressTemplate" } %>
+                    <%= form.hidden_field :hotel_postcode, value: "", data: { concert_template_target: "newHotelPostCodeTemplate" } %>
+                    <%= form.hidden_field :hotel_city, value: "", data: { concert_template_target: "newHotelCityTemplate" } %>
+                    <div class="col-2 me-3">
+                      <%= form.button 'NEW', type: :submit, class: 'button-green '  %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
       </div>
     </div>
 </div>

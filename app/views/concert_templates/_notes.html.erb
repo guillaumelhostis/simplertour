@@ -5,7 +5,7 @@
           <p class="m-0"> No notes yet</p>
       <% else %>
         <% @notes_data.each_with_index do |note_data, index| %>
-          <div class="list-unstyled d-flex align-items-center concert-note mb-3">
+          <div class="list-unstyled d-flex align-items-center concert-note mb-1">
             <div class="d-flex align-items-center  col-6">
               <i class="fa-solid fa-note-sticky me-3"> </i>
               <p class="m-0 me-3"> <%= note_data["description"] %></p>

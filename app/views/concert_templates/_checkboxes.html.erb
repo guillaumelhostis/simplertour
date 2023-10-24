@@ -1,7 +1,7 @@
 <div class="col-12 container-white mt-2">
   <h2>CHECKBOXES (<%= @concert_template.name.upcase %>)</h2>
     <% @checklists_data.each_with_index do |checklist_data, index| %>
-      <div class="d-flex align-items-center form-checklist-div justify-content-between mb-3">
+      <div class="d-flex align-items-center form-checklist-div justify-content-between mb-1">
         <div class="col-6 d-flex align-items-center">
           <i class="fa-regular fa-square-check me-3"></i>
           <p class="m-0"><%= checklist_data["description"] %></p>
