@@ -35,14 +35,12 @@
           </div>
       </div>
       <div>
-        <% if tourman_signed_in?  %>
+        <% if tourman_signed_in? && controller_name != 'pages_controller' && action_name != 'home' %>
           <%= render "sidebar/tourman_sidebar" %>
-        <% elsif user_signed_in? %>
+        <% elsif user_signed_in? && controller_name != 'pages_controller' && action_name != 'home' %>
+          <%= render "sidebar/user_sidebar" %>
         <% end %>
       </div>
-
-
-
       <%= yield %>
       <%= render "shared/flashes" %>
     </section>

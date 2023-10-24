@@ -22,7 +22,7 @@
   padding: 20px;
   background: rgba(255, 255, 255, 0);
 
-  width: 20%;
+  // width: 20%;
   height: 60px;
   position: fixed;
   margin-top: 8px;
@@ -89,13 +89,10 @@
 .navbar-navigation-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  // width: 100%;
 }
 
-.simpler-tour-navbar-end{
-  padding: 0px 50px;
 
-}
 
 /* Dropdown styles for smaller screens */
 .dropdown {

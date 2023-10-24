@@ -30,9 +30,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if current_tourman
-      stored_location_for(resource) ||  pages_tourman_path
+      stored_location_for(resource) ||  tours_path
     elsif current_user
-      stored_location_for(resource) || root_path
+      stored_location_for(resource) || pages_user_dashboard_path
     end
   end
 

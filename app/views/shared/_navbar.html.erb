@@ -1,15 +1,15 @@
-<div class="navbar navbar-expand-sm   <%= tourman_signed_in? ? 'navbar-lewagon-logged-in' : 'navbar-lewagon-logged-out' %> ">
-  <div class="d-flex w-100">
-    <% if !tourman_signed_in? %>
+<div class="navbar navbar-expand-sm   <%= tourman_signed_in? || user_signed_in?   ? 'navbar-lewagon-logged-in' : 'navbar-lewagon-logged-out' %> ">
+    <% if !tourman_signed_in?  %>
+      <% if user_signed_in?  %>
+      <% else %>
       <div class="simpler-tour-home">
-
           <div class="simpler-tour-home-link">
             <strong>
                 <%= link_to 'SIMPLER TOUR', root_path %>
             </strong>
           </div>
-
       </div>
+      <% end %>
     <% end %>
     <div class="navbar-navigation-container">
       <!-- Dropdown menu button for smaller screens -->
@@ -23,12 +23,10 @@
         </div>
       </div>
       <!-- Normal menu for regular screens -->
-
-
-      <div class="simpler-tour-navbar-end">
+      <div class="simpler-tour-navbar-end d-flex align-items-center">
         <% if !tourman_signed_in? %>
           <% if !user_signed_in? %>
-            <a href="#" class="button-green" data-action="click->navbar#openModal">LOGIN</a>
+            <a href="#" class="button-green me-3" data-action="click->navbar#openModal">LOGIN</a>
           <% else user_signed_in? %>
             <div class="d-flex align-items-center welcome-navbar">
               <p class="mb-0 me-3">Hello <%= current_user.first_name %></p>
@@ -55,7 +53,8 @@
             </button>
             <div class="dropdown-content-picture" data-navbar-target="content">
               <%= link_to "SIGN OUT", destroy_tourman_session_path, 'data-turbo-method': :delete, class: "button-green mb-1 text-center" %>
-              <%= link_to "UPDATE ACCOUNT", edit_tourman_registration_path, class: "button-green" %>
+              <%= link_to "UPDATE ACCOUNT", edit_tourman_registration_path, class: "button-green mb-1" %>
+              <%= link_to "DASHBOARD", tours_path, class: "button-green mb-1" %>
             </div>
           </div>
         <% end %>
@@ -63,6 +62,6 @@
 
 
     </div>
-  </div>
+
 
 </div>

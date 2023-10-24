@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:user]
   before_action :authenticate_tourman!, only: [:tourman]
-  before_action :set_concerts, only: [:user_dashboard]
+  before_action :set_concerts, only: [:user_dashboard, :user_concert_dashboard]
 
   def home
   end

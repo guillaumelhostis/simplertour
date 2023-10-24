@@ -52,6 +52,7 @@ class ToursController < ApplicationController
 
   def new
     @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @tour= Tour.new
     authorize @tour
   end
