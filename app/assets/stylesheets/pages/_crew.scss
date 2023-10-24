@@ -2,7 +2,7 @@
 .box-shadow-bottom {
 
 
-  box-shadow: 0px 15px 10px -14px rgba(0, 0, 0, 0.1);
+  border-bottom: #9191911c 1px solid;
   padding-bottom: 4px;
   // box-shadow: 0 0 12px rgba(245, 245, 245, 0.1);
 }
@@ -77,12 +77,12 @@
 
 
 .green-cross-delete  {
-  color: #C42173;
+  color: #E84763;
 
 }
 
 .green-cross-delete:hover {
-  color: rgba(255, 255, 255, 0.488);
+  color: #e65e74;
 }
 
 

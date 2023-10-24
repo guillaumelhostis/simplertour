@@ -65,5 +65,9 @@ class Concert < ApplicationRecord
       concert_hotel.update(concert_id: nil)
       concert_hotel.destroy
     end
+    contacts.each do |contact|
+      contact.update(concert_id: nil)
+      contact.destroy
+    end
   end
 end

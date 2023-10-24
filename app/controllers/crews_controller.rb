@@ -7,6 +7,8 @@ class CrewsController < ApplicationController
   end
 
   def show
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     authorize @crew
     @users = User.all
     @crew_users = CrewUser.where(crew_id: @crew).order(created_at: :asc)

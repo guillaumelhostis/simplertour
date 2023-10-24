@@ -104,6 +104,7 @@ class ConcertsController < ApplicationController
   end
 
   def destroy
+
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:id])
     authorize @concert
