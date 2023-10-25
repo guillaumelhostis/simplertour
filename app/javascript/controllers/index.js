@@ -2,50 +2,53 @@
 
 import { application } from "controllers/application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
 
-import HomeController from "./home_controller"
-application.register("home", HomeController)
+// import HelloController from "./hello_controller"
+// application.register("hello", HelloController)
 
-import NavbarController from "./navbar_controller"
-application.register("navbar", NavbarController)
+// import HomeController from "./home_controller"
+// application.register("home", HomeController)
 
-import CrewController from "./crew_controller"
-application.register("crew", CrewController)
+// import NavbarController from "./navbar_controller"
+// application.register("navbar", NavbarController)
 
-import DashboardController from "./dashboard_controller"
-application.register("dashboard", DashboardController)
+// import CrewController from "./crew_controller"
+// application.register("crew", CrewController)
 
-import FlatpickrController from "./flatpickr_controller"
-application.register("flatpickr", FlatpickrController)
+// import DashboardController from "./dashboard_controller"
+// application.register("dashboard", DashboardController)
 
-import ConcertController from "./concert_controller"
-application.register("concert", ConcertController)
+// import FlatpickrController from "./flatpickr_controller"
+// application.register("flatpickr", FlatpickrController)
 
-import ChecklistController from "./checklist_controller"
-application.register("checklist", ChecklistController)
+// import ConcertController from "./concert_controller"
+// application.register("concert", ConcertController)
 
-import ChecklistTemplateController from "./checklist_template_controller"
-application.register("checklist-template", ChecklistTemplateController)
+// import ChecklistController from "./checklist_controller"
+// application.register("checklist", ChecklistController)
 
-import ConcertmapController from "./concertmap_controller"
-application.register("concertmap", ConcertmapController)
+// import ChecklistTemplateController from "./checklist_template_controller"
+// application.register("checklist-template", ChecklistTemplateController)
 
-import AddressAutocompleteController from "./address_autocomplete_controller"
-application.register("address-autocomplete", AddressAutocompleteController)
+// import ConcertmapController from "./concertmap_controller"
+// application.register("concertmap", ConcertmapController)
 
-import UserConcertController from "./user_concert_controller"
-application.register("user-concert", UserConcertController)
+// import AddressAutocompleteController from "./address_autocomplete_controller"
+// application.register("address-autocomplete", AddressAutocompleteController)
 
-import MapUserConcertController from "./map_user_concert_controller"
-application.register("map-user-concert", MapUserConcertController)
+// import UserConcertController from "./user_concert_controller"
+// application.register("user-concert", UserConcertController)
 
-import ConcertTemplateController from "./concert_template_controller"
-application.register("concert-template", ConcertTemplateController)
+// import MapUserConcertController from "./map_user_concert_controller"
+// application.register("map-user-concert", MapUserConcertController)
 
-import TourController from "./tour_controller"
-application.register("tour", TourController)
+// import ConcertTemplateController from "./concert_template_controller"
+// application.register("concert-template", ConcertTemplateController)
+
+// import TourController from "./tour_controller"
+// application.register("tour", TourController)
 
 
 
