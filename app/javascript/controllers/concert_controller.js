@@ -4,7 +4,7 @@ import flatpickr from "flatpickr";
 // Connects to data-controller="concert"
 export default class extends Controller {
   connect() {
-    console.log("concert controller connected")
+
     flatpickr(".hour-pickr", {
       noCalendar: true,
       enableTime: true,

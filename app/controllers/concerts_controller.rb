@@ -18,7 +18,6 @@ class ConcertsController < ApplicationController
     @transport = Transport.new
     @transport_user = TransportUser.new
     @hotel = Hotel.new
-
     @concert = Concert.find(params[:tour_id])
     @contacts = @concert.contacts
     @checklists = @concert.checklists
@@ -141,12 +140,25 @@ class ConcertsController < ApplicationController
     @contact = Contact.find(params[:contact_id].to_i)
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
+
     authorize @concert
 
     @contact.destroy
     redirect_to tour_concert_path(@tour, @concert), notice: 'Contact Delete'
   end
 
+  def roadbook_email
+    @concert = Concert.find(params[:tour_id].to_i)
+    authorize @concert
+    @tour = Tour.find(params[:concert_id].to_i)
+    @crew = @tour.crew
+    @crew_users = @crew.users
+
+    @crew_users.each do |user|
+      RoadbookMailer.roadbook_email(user).deliver_now
+    end
+    redirect_to tour_concert_path(@concert, @tour), notice: 'Mails sent'
+  end
 
 
   private

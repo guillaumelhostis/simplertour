@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="concert-template"
 export default class extends Controller {
   connect() {
-    console.log("concert templat connected")
+
   }
 
   static targets = ["noteDescription*", "noteLinkTemplate*", "newNoteDescription", "newNoteTemplate", "entry*", "start*", "end*", "newentry", "newstart", "newend", "newentryTemplate", "newstartTemplate", "newendTemplate",  "checkboxDescription*", "checkboxLinkTemplate*", "newCheckboxTemplate", "newCheckboxDescription", "placeDepart*", "timeDepart*", "timeArrival*", "placeArrival*", "placeDepartTemplate*", "timeDepartTemplate*", "placeArrivalTemplate*", "timeArrivalTemplate*", "newArrivalTime", "newArrivalPlace", "newDepartTime", "newDepartPlace", "newDepartPlaceTemplate", "newDepartTimeTemplate", "newArrivalPlaceTemplate", "newArrivalTimeTemplate", "name", "nameTemplate", "newWayTemplate", "newWay", "updateHotelName*", "updateHotelAddress*", "updateHotelPostCode*", "updateHotelCity*", "updateHotelNameTemplate*", "updateHotelAddressTemplate*", "updateHotelPostCodeTemplate*", "updateHotelCityTemplate*","newHotelNameTemplate", "newHotelName", "newHotelCityTemplate", "newHotelCity", "newHotelPostCodeTemplate", "newHotelPostCode", "newHotelAddressTemplate", "newHotelAddress" ];

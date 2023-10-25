@@ -74,6 +74,9 @@ Rails.application.routes.draw do
           post 'add_guest', action: :add_guest, as: 'add_guest'
         end
       end
+
+      get 'roadbook_email', action: :roadbook_email, as: "roadbook_email"
+
     end
   end
 
