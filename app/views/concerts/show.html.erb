@@ -19,6 +19,7 @@
                     target: "_blank"  %>
 
         <a href="#" data-action="click->concert#openModalTemplate" class="button-green" >GENERATE TEMPLATE</a>
+        <%= link_to "SEND EMAIL", tour_concert_roadbook_email_path(@concert, @tour), class: "button-green" %>
         <div class="modal-new-template" data-concert-target="modaltemplate">
           <div class="modal-new-template-content">
             <%= render partial: 'modal_new_template' %>

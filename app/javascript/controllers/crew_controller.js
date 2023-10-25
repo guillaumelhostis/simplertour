@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="crew"
 export default class extends Controller {
   connect() {
-    console.log('CrewController')
+
   }
   static targets = ["searchInput", "results", "selectUsers", "role*", "form*", "submit*", "crewuserrole*", "removerole*", "divplusorminus*"];
 

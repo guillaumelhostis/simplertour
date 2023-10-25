@@ -34,4 +34,8 @@ class ConcertPolicy < ApplicationPolicy
   def generate_pdf?
     true
   end
+
+  def roadbook_email?
+    true
+  end
 end

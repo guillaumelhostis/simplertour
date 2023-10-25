@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="tour"
 export default class extends Controller {
   connect() {
-    console.log("tour controller connected")
+
   }
 
   static targets = ["modaltemplatelist"]
