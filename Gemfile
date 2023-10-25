@@ -55,6 +55,8 @@ gem 'flatpickr'
 # Use Sass to process CSS
 gem 'sass-rails', '~> 6.0.0'
 
+gem "sassc-rails"
+
 #installing Devise
 gem "devise"
 gem "pundit"

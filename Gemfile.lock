@@ -319,6 +319,7 @@ DEPENDENCIES
   rails (~> 7.0.5)
   redis (~> 4.0)
   sass-rails (~> 6.0.0)
+  sassc-rails
   selenium-webdriver
   simple_form!
   sprockets-rails
