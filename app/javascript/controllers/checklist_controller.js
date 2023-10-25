@@ -1,7 +1,4 @@
-// app/javascript/controllers/checklist_controller.js
-import { Controller } from 'stimulus';
-
-
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['checkbox'];
@@ -9,8 +6,6 @@ export default class extends Controller {
   connect() {
 
   }
-
-
 
   updateStatus(event) {
     event.preventDefault()
