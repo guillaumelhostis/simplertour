@@ -15,7 +15,7 @@ gem "pg", "~> 1.1"
 # Use Cloudinary for load image
 gem 'cloudinary'
 # Protect my api key rails
-gem "dotenv-rails", groups: [:development, :test]
+# gem "dotenv-rails", groups: [:development, :test]
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -25,6 +25,8 @@ gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
+
+gem 'matrix'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -61,8 +63,7 @@ gem "country_select"
 #PDF Generation
 gem 'prawn'
 
-gem "mini_magick"
-gem 'rmagick'
+
 
 gem "geocoder"
 
