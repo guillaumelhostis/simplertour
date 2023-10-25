@@ -1,15 +1,21 @@
 class VenuesController < ApplicationController
   def new
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.new
     authorize @venue
   end
 
   def show
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.find(params[:id])
     authorize @venue
   end
 
   def create
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.new(venue_params)
     authorize @venue
     @venue.tourman_id = current_tourman.id
@@ -24,12 +30,16 @@ class VenuesController < ApplicationController
   end
 
   def edit
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.find(params[:id])
     @existing_files = @venue.files
     authorize @venue
   end
 
   def update
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.find(params[:id])
     if @venue.update(venue_params)
       authorize @venue
@@ -41,6 +51,8 @@ class VenuesController < ApplicationController
   end
 
   def destroy
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.find(params[:id])
     authorize @venue
     @venue.destroy
