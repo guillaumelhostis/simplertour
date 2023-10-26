@@ -4,10 +4,10 @@
             <div id="timetable-entries">
               <% @timetable_entries.each_with_index do |timetable_entry, index| %>
                 <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
-                  <div class="timetablehours pe-4">
+                  <div class="timetablehours ps-2 pe-2">
                     <div class="d-flex justify-content-between">
-                      <div class="timetable-time-size"><p class="mb-0 me-2"><%= timetable_entry.hourminute&.strftime('%H:%M')%></p></div>
-                      <div class="timetable-time-size">
+                      <div class="timetable-time-size text-center"><p class="mb-0 me-2"><%= timetable_entry.hourminute&.strftime('%H:%M')%></p></div>
+                      <div class="timetable-time-size text-center">
                         <% if timetable_entry.hourminuteend.nil? %>
                           <p class="mb-0 ms-2"></p>
                         <% else %>
