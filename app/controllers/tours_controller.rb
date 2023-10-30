@@ -48,6 +48,7 @@ class ToursController < ApplicationController
     @today_concerts = @concerts.select { |concert| concert.date == current_date }
     current_date = Date.current
     @upcoming_concerts =  @concerts.select { |concert| concert.date > current_date }
+    @upcoming_concerts = @upcoming_concerts.sort_by { |concert| concert.date }
   end
 
   def new
@@ -83,6 +84,7 @@ class ToursController < ApplicationController
   end
 
   def destroy
+
     authorize @tour
 
     @tour.destroy

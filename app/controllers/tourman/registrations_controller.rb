@@ -19,6 +19,8 @@ class Tourman::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @tours = Tour.where(tourman_id: current_tourman.id)
     @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
     @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
     super
@@ -26,6 +28,8 @@ class Tourman::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @tours = Tour.where(tourman_id: current_tourman.id)
     super
   end
 

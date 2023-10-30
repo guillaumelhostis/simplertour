@@ -12,17 +12,19 @@
             <div>
               <input data-crew-target="searchInput" type="text" id="crew-search" placeholder="Search crew" data-action="input->crew#search" class="form-input">
               <div data-crew-target="results"></div>
-              <%= select_tag "user_ids[]", options_for_select(@users.map { |user| ["#{user.first_name} #{user.last_name}", user.id] }, params[:user_ids]), multiple: true, data: { crew_target: "selectUsers" }, class: "d-none result-crew-search" %>
+              <%= select_tag "user_ids[]", options_for_select(@users.map {
+                |user| [ "#{user.first_name} #{user.last_name} #{image_tag(user.image, alt: user.full_name) if user.image.attached?}", user.id]
+                },
+                params[:user_ids]),
+                multiple: true,
+                data: { crew_target: "selectUsers" },
+                class: "d-none result-crew-search" %>
 
             </div>
-
-            <%# <label for="role">Select Role:</label> %>
-            <%#= text_field_tag "role" %>
             <%= submit_tag "ADD TO CREW",  class: "button-green mt-3"%>
           <% end %>
         </div>
-          <%# <label for="user_ids">Select Users:</label> %>
-            <%#= select_tag "user_ids[]", options_from_collection_for_select(@users, "id", "first_name"), multiple: true %>
+
       </div>
       <div class="col-7">
         <div class="container-white">
@@ -43,7 +45,7 @@
                           <div>
                             <%= image_tag(member.image, class: "avatar me-3") if member.image.attached? %>
                             <% unless member.image.attached? %>
-                              <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar me-3"  %>
+                              <%= image_tag "profile.png", class: "avatar me-3" %>
                             <% end %>
                           </div>
                           <div><p><%= crew_user.user.first_name %> <%= crew_user.user.last_name %></p></div>

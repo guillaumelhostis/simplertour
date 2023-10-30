@@ -23,6 +23,10 @@ class ConcertPolicy < ApplicationPolicy
     true
   end
 
+  def remove_venue?
+    true
+  end
+
   def removetimetable?
     true
   end

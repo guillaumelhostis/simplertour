@@ -11,8 +11,8 @@
         <h1><%= @tour.title.upcase %></h1>
         <h2 class="mb-0"><%= @tour.artist.upcase%></h2>
       </div>
-
     </div>
+    <%= link_to "DELETE", tour_path(@tour),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-green ms-2" %>
   </div>
 </div>
 <div class="body-container mt-2">

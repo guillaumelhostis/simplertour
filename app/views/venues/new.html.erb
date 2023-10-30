@@ -49,6 +49,8 @@
 
           prompt: "Attachements",
           input_html: { class: 'form-input', onchange: 'updateFileName(this)', multiple: true } %>
+      <%= f.input :concert, as: :hidden, input_html: { value: @concert.id } %>
+      <%= f.input :tour, as: :hidden, input_html: { value: @tour.id } %>
 
       <%= f.submit "NEW VENUE", class:"button-green" %>
     <% end %>

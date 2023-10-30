@@ -369,27 +369,6 @@ class PdfGeneratorController < ApplicationController
 
         end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         # Save the PDF to a file or send it as a download
         pdf_file = Tempfile.new(["instances", ".pdf"])
         pdf_file.binmode

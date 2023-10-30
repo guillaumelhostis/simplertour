@@ -4,20 +4,21 @@
       <div class=" col-12 mb-4 tour-titles">
         <div class="d-flex align-items-center">
           <h1><%= @concert.name.upcase %> </h1>
-          <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: "button-green ms-2" %>
+          <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
         </div>
         <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
         <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
-        <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
-                    format: :pdf,
-                    tour: @tour,
-                    venue: @concert.venue,
-                    crew: @crew_users.to_json,
-                    contacts: @contacts.to_json,
-                    timetable: @timetable_entries.to_json),
-                    class: "button-green",
-                    target: "_blank"  %>
-
+        <% if @concert.venue %>
+          <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
+              format: :pdf,
+              tour: @tour,
+              venue: @concert.venue,
+              crew: @crew_users.to_json,
+              contacts: @contacts.to_json,
+              timetable: @timetable_entries.to_json),
+              class: "button-green",
+              target: "_blank"  %>
+        <% end %>
         <a href="#" data-action="click->concert#openModalTemplate" class="button-green" >GENERATE TEMPLATE</a>
         <%= link_to "SEND EMAIL", tour_concert_roadbook_email_path(@concert, @tour), class: "button-green" %>
         <div class="modal-new-template" data-concert-target="modaltemplate">
@@ -48,5 +49,4 @@
       <%= render partial: 'checkboxes', locals: { tour: @tour, concert: @concert, checklist: @checklist, checklists: @checklists, checklist_template: @checklist_template } %>
     </div>
   </div>
-
 </div>
