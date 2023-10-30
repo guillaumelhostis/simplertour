@@ -265,9 +265,6 @@ opacity: 0.5;
 
 .contacts-concert a{
   color: white;
-
-
-
 }
 
 .contacts-concert a:hover{
@@ -708,7 +705,11 @@ opacity: 0.5;
   background: #333;
 }
 
-
 .upcoming-concerts:-webkit-scrollbar-thumb:hover {
   background: #000;
+}
+
+.timetable-time-size {
+  width: 42px;
+
 }

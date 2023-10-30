@@ -8,7 +8,7 @@
           <div class="timetablehours pe-4">
             <div class="d-flex justify-content-between">
               <p class="mb-0 me-2"><%= DateTime.parse(timetable_entry["hourminute"]).strftime('%H:%M')  %></p>
-              <p class="mb-0 ms-2"><%= DateTime.parse(timetable_entry["hourminuteend"]).strftime('%H:%M') %></p>
+              <p class="mb-0 ms-2"><%= timetable_entry["hourminuteend"]&.then { |time| DateTime.parse(time)&.strftime('%H:%M') }  %></p>
             </div>
           </div>
           <div class="timetableinfos ms-4">

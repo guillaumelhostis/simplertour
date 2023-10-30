@@ -6,9 +6,11 @@ class Tourman::RegistrationsController < Devise::RegistrationsController
   skip_before_action :verify_authenticity_token
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
+    @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
+    super
+  end
 
   # POST /resource
   def create
@@ -16,9 +18,11 @@ class Tourman::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
+    @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
+    super
+  end
 
   # PUT /resource
   def update
