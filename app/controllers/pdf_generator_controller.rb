@@ -26,10 +26,10 @@ class PdfGeneratorController < ApplicationController
 
         pdf.font_families.update(
           'Roboto' => {
-            normal: { file: "#{font_path}/Roboto-regular.ttf" },
-            italic: { file: "#{font_path}/Roboto-italic.ttf" },
-            bold: { file: "#{font_path}/Roboto-bold.ttf" },
-            bold_italic: { file: "#{font_path}/Roboto-boldItalic.ttf" }
+            normal: { file: "#{font_path}/Roboto-Regular.ttf" },
+            italic: { file: "#{font_path}/Roboto-Italic.ttf" },
+            bold: { file: "#{font_path}/Roboto-Bold.ttf" },
+            bold_italic: { file: "#{font_path}/Roboto-BoldItalic.ttf" }
           }
         )
 
@@ -48,7 +48,7 @@ class PdfGeneratorController < ApplicationController
           tour_picture = StringIO.open(@tour.picture.download)
           pdf.image tour_picture, fit: [image_width, pdf.bounds.height]
 
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "#{@tour.artist.upcase}", at: [0, pdf.bounds.top - 10 ], # Adjust the vertical position here
               width: text_width,
               align: :center, size: 16
@@ -68,7 +68,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "FDR", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
              valign: :center, size: 8
           end
@@ -88,7 +88,7 @@ class PdfGeneratorController < ApplicationController
             pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
 
             pdf.fill_color '000000' # Reset fill color for text
-            pdf.font("#{Rails.root}/app/assets/fonts/Roboto-regular.ttf") do
+            pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf") do
             # Column 1: timetable.hourminute
               pdf.text_box timetable.hourminute&.strftime('%H:%M'), at: [pdf.bounds.left + 5, pdf.bounds.top],
                 valign: :center, size: 8
@@ -119,7 +119,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "VENUE INFOS", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
@@ -154,7 +154,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "CONTACTS", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
@@ -194,7 +194,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "TODAY CREW", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
@@ -237,7 +237,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "HOTELS", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
@@ -291,7 +291,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "NOTES", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
@@ -325,7 +325,7 @@ class PdfGeneratorController < ApplicationController
           pdf.fill_color '666666' # Light gray fill color
           pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height) }
           pdf.fill_color '000000' # Set the text color to black
-          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-bold.ttf") do
+          pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "TRANSPORTS", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8
           end
