@@ -34,6 +34,7 @@ class PdfGeneratorController < ApplicationController
         )
 
         # Loop through your instances and add data to the PDF
+        # Loop through your instances and add data to the PDF
 
         pdf.stroke_axis(step_length: 20, color: '0000FF')
 
