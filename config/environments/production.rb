@@ -29,6 +29,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://https://asimplertour-879790effe3c.herokuapp.com/"
