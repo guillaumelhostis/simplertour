@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center">
       <h1 class="me-3 mb-2 "><%= @concert_template.name.upcase %></h1>
       <%= form_with(url: delete_template_concert_template_path(@concert_template)) do |form| %>
-        <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 mb-2 '  %>
+        <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 mb-2 ', data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }  %>
       <% end %>
 
     </div>

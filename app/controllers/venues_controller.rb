@@ -1,5 +1,9 @@
 class VenuesController < ApplicationController
   def new
+    @concert = Concert.find(params[:format].to_i)
+    @tour = Tour.find(@concert.tour_id)
+
+
     @tours = Tour.where(tourman_id: current_tourman.id)
     @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.new
@@ -14,6 +18,8 @@ class VenuesController < ApplicationController
   end
 
   def create
+    @concert = Concert.find(params[:venue][:concert].to_i)
+    @tour = Tour.find(@concert.tour_id)
     @tours = Tour.where(tourman_id: current_tourman.id)
     @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @venue = Venue.new(venue_params)
@@ -23,9 +29,16 @@ class VenuesController < ApplicationController
       params[:venue][:files].each do |file|
         @venue.files.attach(file)
       end
-      redirect_to venue_path(@venue), notice: 'Concert was successfully created.'
+      if params[:venue][:concert].present?
+        @concert.venue_id = @venue.id
+        @concert.name = @venue.name
+        @concert.save
+        redirect_to tour_concert_path(@concert, @tour), notice: 'Hotel Created'
+      else
+        redirect_to new_venue_path, notice: 'Hotel Created'
+      end
     else
-      redirect_to new_venue_path, notice: 'Could not add a new show something went wrong'
+      redirect_to new_venue_path, notice: 'Something went wrong'
     end
   end
 

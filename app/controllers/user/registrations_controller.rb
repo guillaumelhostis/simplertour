@@ -19,6 +19,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    set_concerts
     @phoneprefix = ISO3166::Country.all.map { |country| "#{country.country_code}" }
     @phoneprefixsorted = @phoneprefix.uniq.sort_by(&:to_i).map {|c| "+#{c}"}
     super
@@ -26,6 +27,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    set_concerts
     super
   end
 
@@ -53,6 +55,16 @@ class User::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:image])
+  end
+
+  def set_concerts
+    @crews = Crew.all
+    user_crews = @crews.select { |crew| crew.users.include?(current_user) }
+    @tours = []
+    user_crews.each { |user_crew| @tours << Tour.find_by(crew_id: user_crew.id ) }
+    @concerts = []
+    @tours.each { |tour| @concerts << Concert.where(tour_id: tour.id) }
+    @concerts = @concerts.flatten
   end
 
   # The path used after sign up.

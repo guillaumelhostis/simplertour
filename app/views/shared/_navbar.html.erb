@@ -48,7 +48,7 @@
             <button class="dropbtn", data-action="click->navbar#toggle">
               <%= image_tag(current_tourman.picture, class: "avatar") if current_tourman.picture.attached? %>
               <% unless current_tourman.picture.attached? %>
-                <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+                <%= image_tag "profile.png", class: "avatar" %>
               <% end %>
             </button>
             <div class="dropdown-content-picture" data-navbar-target="content">

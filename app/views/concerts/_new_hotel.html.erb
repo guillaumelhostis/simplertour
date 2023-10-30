@@ -12,7 +12,7 @@
           <div class="d-flex mt-3 justify-content-start align-items-center">
             <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>
               <div class="d-flex align-items-center">
-                <div class="me-3"> <%= select_tag :hotel_id, options_for_select(Hotel.all.map { |h| [h.name, h.id] }), class:"form-input p-1", prompt: "Search in DB" %></div>
+                <div class="me-3"> <%= select_tag :hotel_id, options_for_select(Hotel.where(tourman_id: current_tourman.id).all.map { |h| [h.name, h.id] }), class:"form-input p-1", prompt: "Search in DB" %> </div>
                 <div><%= submit_tag "ADD HOTEL", class:"button-green" %></div>
               </div>
             <% end %>

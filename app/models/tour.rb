@@ -4,6 +4,15 @@ class Tour < ApplicationRecord
   has_many :concerts, dependent: :destroy
   accepts_nested_attributes_for :concerts
   has_one_attached :picture
+  before_destroy :remove_associations
 
+  private
 
+  def remove_associations
+    concerts.each do |concert|
+      concert.update(tour_id: nil)
+      concert.destroy
+    end
+
+  end
 end

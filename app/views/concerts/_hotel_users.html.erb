@@ -7,7 +7,7 @@
           <div class="me-2 avatar-delete">
               <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
               <% unless user.image.attached? %>
-                <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar avatar-hotel"  %>
+                <%=image_tag "profile.png", class: "avatar avatar-hotel"  %>
               <% end %>
               <div class="delete-icon-avatar">
                 <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
@@ -30,7 +30,7 @@
       <% concert_hotel.guests.map do |guest| %>
         <div class="me-2 avatar-delete">
           <div>
-            <%=image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar"  %>
+            <%=image_tag "profile.png", class: "avatar"  %>
             <div class="delete-icon-avatar">
               <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), remove_guest_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, guest), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
             </div>

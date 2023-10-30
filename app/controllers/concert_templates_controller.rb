@@ -233,8 +233,11 @@ class ConcertTemplatesController < ApplicationController
       checklist.save
     end
     data["timetable_entries"].each do |timetable_entry|
-      new_timetable_entry = TimetableEntry.new(concert_id: new_concert.id, information: timetable_entry["information"], hourminute: timetable_entry["hourminute"], hourminuteend: timetable_entry["hourminuteend"])
-      new_timetable_entry.save
+
+      if timetable_entry["hourminute"] != nil
+        new_timetable_entry = TimetableEntry.new(concert_id: new_concert.id, information: timetable_entry["information"], hourminute: timetable_entry["hourminute"], hourminuteend: timetable_entry["hourminuteend"])
+        new_timetable_entry.save
+      end
     end
 
     data["transports"].each do |transport|
@@ -246,10 +249,12 @@ class ConcertTemplatesController < ApplicationController
       new_note.save
     end
     data["hotels"].each do |hotel|
-      new_hotel = Hotel.new(name: hotel["name"], address: hotel["address"], city: hotel["city"], postcode: hotel["postcode"], country: hotel["country"], standing: hotel["standing"], tourman_id: hotel["tourman_id"] )
-      new_hotel.save
-      new_concert_hotel = ConcertHotel.new(concert_id: new_concert.id, hotel_id: new_hotel.id)
-      new_concert_hotel.save
+      unless Hotel.find_by(name: hotel["name"])
+        new_hotel = Hotel.new(name: hotel["name"], address: hotel["address"], city: hotel["city"], postcode: hotel["postcode"], country: hotel["country"], standing: hotel["standing"], tourman_id: hotel["tourman_id"] )
+        new_hotel.save
+        new_concert_hotel = ConcertHotel.new(concert_id: new_concert.id, hotel_id: new_hotel.id)
+        new_concert_hotel.save
+      end
     end
     redirect_to tour_concert_path(new_concert, tour), notice: 'Concert was successfully created'
   end

@@ -7,8 +7,20 @@
         <div class="timetable-entry d-flex justify-content-between align-items-center p-2 <%= index.even? ? 'even' : 'odd' %>">
           <div class="timetablehours pe-4">
             <div class="d-flex justify-content-between">
-              <p class="mb-0 me-2"><%= DateTime.parse(timetable_entry["hourminute"]).strftime('%H:%M')  %></p>
-              <p class="mb-0 ms-2"><%= timetable_entry["hourminuteend"]&.then { |time| DateTime.parse(time)&.strftime('%H:%M') }  %></p>
+              <p class="mb-0 me-2 timetable-time-size ">
+                <% if timetable_entry["hourminute"] %>
+                  <%= timetable_entry["hourminute"]&.then { |time| DateTime.parse(time)&.strftime('%H:%M') } %>
+                <% else %>
+                  empty
+                <% end %>
+              </p>
+              <p class="mb-0 ms-2 timetable-time-size ">
+                <% if timetable_entry["hourminuteend"] %>
+                  <%= timetable_entry["hourminuteend"]&.then { |time| DateTime.parse(time)&.strftime('%H:%M') }  %>
+                <% else %>
+                  no entry
+                <% end %>
+              </p>
             </div>
           </div>
           <div class="timetableinfos ms-4">

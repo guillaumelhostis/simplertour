@@ -112,21 +112,17 @@ class ConcertsController < ApplicationController
   end
 
   def remove_venue
-
+    @tour = Tour.find(params[:id].to_i)
     @concert = Concert.find(params[:tour_id])
     @concert.update(venue_id: nil)
-
-    respond_to do |format|
-      format.js
-    end
+    authorize @concert
+    # respond_to do |format|
+    #   format.js
+    # end
+    redirect_to tour_concert_path(@tour, @concert), notice: 'Venue Removed'
   end
 
   def removetimetable
-
-
-    # @concert = Concert.find(params[:tour_id].to_i)
-
-
     @timetable_entry = TimetableEntry.find(params[:timetable_entry_id].to_i)
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
