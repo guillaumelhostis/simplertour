@@ -30,12 +30,15 @@
               </div>
             </div>
             <div class="d-flex">
-              <div class="col-4">
+              <div class="col-3">
                 <%= f.input :birth_day,
                             as: :string,
                             label: false,
                             placeholder: "Age",
                             input_html: { class: 'form-input', type: :date } %>
+              </div>
+              <div class="col-1">
+                <%= f.input :country_code, collection: @phoneprefixsorted,  label: false, prompt: "+", input_html: { class: 'form-input' } %>
               </div>
               <div class="col-8">
                 <%= f.input :phone_number,
@@ -58,6 +61,7 @@
 
 
             <%= f.input :address,
+                        as: :text,
                         required: true,
                         autofocus: true, label: false,
                         placeholder: "Address",
