@@ -17,9 +17,9 @@
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center ">
                       <div>
-                        <%= image_tag(member.image, class: "avatar me-3") if member.image.attached? %>
+                        <%= image_tag(member.image, class: "avatar me-3 avatar-title", title: member.full_name) if member.image.attached? %>
                         <% unless member.image.attached? %>
-                          <%= image_tag "profile.png", class: "avatar me-3" %>
+                          <%= image_tag "profile.png", class: "avatar me-3 avatar-title", title: member.full_name %>
                         <% end %>
                       </div>
                       <div>
