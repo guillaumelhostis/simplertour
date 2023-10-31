@@ -60,7 +60,8 @@
     <div class="d-flex justify-content-center">
       <div class="mt-4 col-6 text-center">
         <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
-          <%= f.input :user_id, collection: @crew.users, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
+
+          <%= f.input :user_id, collection: @users_on_this_concert, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
           <%= f.button :submit, 'ADD CREW MEMBER', class: 'button-green' %>
         <% end %>
       </div>

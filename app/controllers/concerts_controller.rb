@@ -33,7 +33,15 @@ class ConcertsController < ApplicationController
     @status_text = Concert::STATUS_MAPPING[status]
     @concert.status = status
     @concert.save
-    @crew_users = @crew.users
+    @crew_users = @crew.crew_users
+    @crew_user_concert = CrewUserConcert.new
+    @users_on_this_concert = []
+
+    @crew_user_concerts = @concert.crew_user_concerts
+    @crew_user_concerts.each do |crew_user_concert|
+      @users_on_this_concert << crew_user_concert.crew_user.user
+    end
+
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
     @hotel_geocoders = []

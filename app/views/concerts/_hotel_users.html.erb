@@ -18,7 +18,7 @@
     <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
       <div class="d-flex align-items-center justify-content-center ">
         <div class="col-6 me-2">
-          <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
+          <%= form.collection_select(:user_id, @users_on_this_concert, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
         </div>
         <div class="text-center">
           <%= form.button 'ADD', type: :submit, class: 'button-green mb-2', data: { concert_hotel_id: concert_hotel.id } %>

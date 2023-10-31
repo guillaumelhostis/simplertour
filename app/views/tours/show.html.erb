@@ -134,3 +134,22 @@
     </div>
   </div>
 </div>
+<div class="body-container mt-2">
+  <div class="d-flex align-items-center">
+    <h2 class="m-0">CREW</h2>
+    <%= link_to "EDIT", crew_path(@crew), class: "button-green ms-3" %>
+  </div>
+  <div class="row row-cols-6 mt-3">
+    <% @crew_users.each do |crew_user| %>
+      <div class="text-center mb-3">
+        <%= image_tag(crew_user.image, class: "avatar me-3 avatar-title col", title: crew_user.full_name) if crew_user.image.attached? %>
+          <% unless crew_user.image.attached? %>
+            <%= image_tag "profile.png", class: "avatar me-3 avatar-title col", title: crew_user.full_name %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+
+
+</div>

@@ -1,32 +1,36 @@
         <div class="w-100 me-1 container-white">
           <div class="d-flex align-items-center justify-content-between mb-3">
-            <h2 class="mb-0">CREW</h2>
-            <%= link_to "EDIT", crew_path(@crew), class: "button-green" %>
+            <h2 class="mb-0">TEAM</h2>
+            <%#= link_to "EDIT", crew_path(@crew), class: "button-green" %>
             <a href="#" data-action="click->concert#openModalGuest" class="button-green">ADD GUEST</a>
           </div>
           <div class="modal-new-guest" data-concert-target="modalguest">
             <div class="modal-new-guest-content">
-              <%= render partial: 'guest_form', locals: { tour: @tour, concert: @concert, guest: @guest, phoneprefixsorted: @phoneprefixsorted } %>
+              <%= render partial: 'guest_form', locals: { tour: @tour, concert: @concert, guest: @guest} %>
             </div>
           </div>
           <div class="listtogglecontact">
             <ul class="list-unstyled">
 
-              <% @crew_users.each do |member| %>
+              <% @crew_user_concerts.each do |member| %>
+                <% user = member.crew_user.user %>
                 <li class="mb-2">
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center ">
                       <div>
-                        <%= image_tag(member.image, class: "avatar me-3 avatar-title", title: member.full_name) if member.image.attached? %>
-                        <% unless member.image.attached? %>
-                          <%= image_tag "profile.png", class: "avatar me-3 avatar-title", title: member.full_name %>
+                        <%= image_tag(user.image, class: "avatar me-3 avatar-title", title: user.full_name) if user.image.attached? %>
+                        <% unless user.image.attached? %>
+                          <%= image_tag "profile.png", class: "avatar me-3 avatar-title", title: user.full_name %>
                         <% end %>
                       </div>
                       <div>
-                        <strong><p class="m-0"> <%= member.full_name %></p></strong>
+                        <strong><p class="m-0"> <%= user.full_name %></p></strong>
                       </div>
                     </div>
-                    <div class="crew-concert-role-icon"><%= member.user_role_in_team(@crew, member)%></div>
+                    <div class="d-flex align-items-center crew-user-concert-delete">
+                      <div class="crew-concert-role-icon me-2"><%= user.user_role_in_team(@crew, user)%></div>
+                      <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), tour_concert_crew_user_concert_path(@tour, @concert, member), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+                    </div>
                   </div>
 
                 </li>
