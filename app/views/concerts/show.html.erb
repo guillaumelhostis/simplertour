@@ -47,6 +47,7 @@
       <%= render partial: 'hotels', locals: { tour: @tour, concert: @concert} %>
       <%= render partial: 'notes', locals: { tour: @tour, concert: @concert, note: @note, notes: @notes} %>
       <%= render partial: 'checkboxes', locals: { tour: @tour, concert: @concert, checklist: @checklist, checklists: @checklists, checklist_template: @checklist_template } %>
+      <%= render partial: 'guest_lists', locals: { tour: @tour, concert: @concert, guest_lists: @guest_lists, guest_list: @guest_list } %>
     </div>
   </div>
 </div>

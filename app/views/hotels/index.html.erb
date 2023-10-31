@@ -1,0 +1,19 @@
+<div class="body-container">
+  <h1> YOUR HOTELS</h1>
+    <div class="row row-cols-3 mt-3">
+      <% @hotels.each do |hotel| %>
+        <div class="col">
+          <%= link_to edit_hotel_path(hotel) do %>
+            <div class="venue-card d-flex align-items-center">
+                <div>
+                  <h3> <strong><%= hotel.name.upcase %></strong></h3>
+                  <h2> <%= hotel.city.upcase %></h2>
+                  <p class="m-0"> <i><%= hotel.standing %> *</i></p>
+
+                </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+</div>

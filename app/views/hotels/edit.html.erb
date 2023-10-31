@@ -1,11 +1,10 @@
 
 <div class="body-container">
   <div class="d-flex align-items-center mb-4">
-    <h2 class="m-0"><%= @venue.name.upcase %> </h2>
-     <%= link_to "DELETE", venue_path(@venue),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
+    <h2 class="m-0"><%= @hotel.name.upcase %> </h2>
+    <%= link_to "DELETE", hotel_path(@hotel),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
   </div>
-
-  <%= simple_form_for(@venue) do |f| %>
+  <%= simple_form_for(@hotel) do |f| %>
 
     <%= f.input :name,
         autofocus: true,
@@ -41,18 +40,13 @@
         prompt: "Select a country",
         input_html: { class: 'form-input' } %>
 
-    <%= f.input :capacity,
+    <%= f.input :standing,
         autofocus: true,
         label: false,
         placeholder: "Capacity",
         input_html: { class: 'form-input' }  %>
 
-    <%= f.input :files, as: :file,
-        label: false,
 
-        prompt: "Attachements",
-        input_html: { class: 'form-input form-file-upload', onchange: 'updateFileName(this)', multiple: true } %>
-
-    <%= f.submit "UPDATE VENUE", class:"button-green" %>
+    <%= f.submit "UPDATE HOTEL", class:"button-green" %>
   <% end %>
 </div>

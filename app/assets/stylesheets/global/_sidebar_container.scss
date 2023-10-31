@@ -29,6 +29,9 @@
   padding: 15px;
   background-color: #0e111496;
   border: 1px solid #9191917f;
+  overflow-y: scroll;
+  scrollbar-color: #999 #333;
+  transition: scrollbar-color 0.5s;
 }
 
 .side-bar-container .side-bar-menu::-webkit-scrollbar-thumb {
@@ -98,7 +101,6 @@
 
 .user-side-bar-tour-card-content {
   padding: 10px 0px;
-
 }
 
 
@@ -108,11 +110,9 @@
   color: white;
   margin-bottom: 8px;
   width: 100%;
-
 }
 
 .templates_list {
-
   max-height: 100px;
   overflow-y: scroll;
   scrollbar-color: #999 #333;

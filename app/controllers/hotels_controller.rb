@@ -1,5 +1,12 @@
 class HotelsController < ApplicationController
 
+  def index
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @hotels = policy_scope(Hotel)
+
+  end
+
   def new
     @hotel = Hotel.new
     authorize @hotel
@@ -8,6 +15,26 @@ class HotelsController < ApplicationController
   def show
     @hotel = Hotel.find(params[:id])
     authorize @hotel
+  end
+
+
+  def edit
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @hotel = Hotel.find(params[:id])
+    authorize @hotel
+  end
+
+  def update
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @hotel = Hotel.find(params[:id])
+    if @hotel.update(hotel_params)
+      authorize @hotel
+      redirect_to hotels_path
+    else
+      redirect_to edit_hotel_path(@hotel), notice: 'Something went wrong'
+    end
   end
 
   def create
@@ -30,11 +57,13 @@ class HotelsController < ApplicationController
   end
 
   def destroy
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @hotel = Hotel.find(params[:id])
     authorize @hotel
     @hotel.destroy
     authorize @hotel
-    redirect_to tours_path, notice: 'Venue was successfully destroyed.'
+    redirect_to tours_path, notice: 'Hotel was successfully destroyed.'
   end
 
   private
