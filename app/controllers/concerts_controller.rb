@@ -25,6 +25,8 @@ class ConcertsController < ApplicationController
     @guests = @concert.guests
     @tour = Tour.find(params[:id])
     @crew = @tour.crew
+    @guest_lists =  @concert.guest_lists
+    @guest_list =  GuestList.new
     @timeentry = TimetableEntry.new
     @timetable_entries = TimetableEntry.where(concert_id: @concert).order(hourminute: :asc)
     status = @concert.calculate_status

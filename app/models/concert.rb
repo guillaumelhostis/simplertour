@@ -22,6 +22,7 @@ class Concert < ApplicationRecord
   has_many :checklists, dependent: :destroy
   has_many :guests, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_many :guest_lists, dependent: :destroy
   validates :status, presence: true, inclusion: { in: STATUS_CHOICES }
 
   def status_name
@@ -68,6 +69,10 @@ class Concert < ApplicationRecord
     contacts.each do |contact|
       contact.update(concert_id: nil)
       contact.destroy
+    end
+    guest_lists.each do |guest_list|
+      guest_list.update(concert_id: nil)
+      guest_list.destroy
     end
   end
 end

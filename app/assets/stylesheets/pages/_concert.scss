@@ -711,7 +711,23 @@ opacity: 0.5;
 
 .timetable-time-size {
   width: 42px;
+}
+
+.guest-list{
+  background: rgba(35,41,49,0.5);
+
+  padding: 4px;
+
+}
+
+.guest-list a{
+  display: flex;
+
+}
 
 
+.guest-list:hover{
+  box-shadow: 0 0 8px rgba(245, 245, 245, 0.1);
+  transition: 0.3s;
 
 }

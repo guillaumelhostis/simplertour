@@ -1,10 +1,9 @@
 class VenuePolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
-    def resolve
-      scope.all
-    end
-
+      def resolve
+        scope.where(tourman_id: user.tourman.id)
+      end
   end
 
   def show?

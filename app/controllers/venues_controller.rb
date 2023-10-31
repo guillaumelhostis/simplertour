@@ -1,4 +1,16 @@
 class VenuesController < ApplicationController
+
+  def index
+
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+    @venues = policy_scope(Venue).order('name ASC')
+
+    if params[:query].present?
+      @venues = Venue.search_by_name_and_city(params[:query])
+    end
+  end
+
   def new
     @concert = Concert.find(params[:format].to_i)
     @tour = Tour.find(@concert.tour_id)
@@ -56,7 +68,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     if @venue.update(venue_params)
       authorize @venue
-      redirect_to venue_path(@venue)
+      redirect_to venues_path
     else
       redirect_to edit_venue_path(@venue), notice: 'Something went wrong'
     end
@@ -69,7 +81,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     authorize @venue
     @venue.destroy
-    redirect_to tours_path, notice: 'Venue was successfully destroyed.'
+    redirect_to venues_path, notice: 'Venue was successfully destroyed.'
   end
 
   private
