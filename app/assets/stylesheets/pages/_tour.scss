@@ -201,3 +201,18 @@
   width: 100%;
   padding: 5px;
 }
+
+
+.user-role-in-team {
+  background-color: red;
+  width: 70%;
+  margin: 0 auto;
+  padding: 6px;
+
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom, #E84763, #e65e74);
+    p {
+      font-size: 8px;
+      font-weight: 500;
+    }
+  }

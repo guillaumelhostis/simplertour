@@ -141,12 +141,19 @@
   </div>
   <div class="row row-cols-6 mt-3">
     <% @crew_users.each do |crew_user| %>
-      <div class="text-center mb-3">
-        <%= image_tag(crew_user.image, class: "avatar me-3 avatar-title col", title: crew_user.full_name) if crew_user.image.attached? %>
+
+      <div class="text-center mb-3 ">
+        <%= image_tag(crew_user.image, class: "avatar avatar-title col", title: crew_user.full_name) if crew_user.image.attached? %>
           <% unless crew_user.image.attached? %>
-            <%= image_tag "profile.png", class: "avatar me-3 avatar-title col", title: crew_user.full_name %>
+            <%= image_tag "profile.png", class: "avatar  avatar-title col", title: crew_user.full_name %>
         <% end %>
+        <div class="text-center user-role-in-team mt-2">
+          <p class="m-0  "><%= crew_user.user_role_in_team(@crew, crew_user).upcase %></p>
+        </div>
       </div>
+
+
+
     <% end %>
 
   </div>

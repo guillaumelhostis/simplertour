@@ -34,6 +34,7 @@ class ConcertsController < ApplicationController
     @concert.status = status
     @concert.save
     @crew_users = @crew.crew_users
+
     @crew_user_concert = CrewUserConcert.new
     @users_on_this_concert = []
 
