@@ -350,8 +350,8 @@ opacity: 0.5;
   padding: 20px;
   color: white;
   // border: 1px solid #888;
-  width: 420px;
-  max-width: 600px;
+  width: 900px;
+  max-width: 900px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   transition: 0.8s;
@@ -730,4 +730,8 @@ opacity: 0.5;
   box-shadow: 0 0 8px rgba(245, 245, 245, 0.1);
   transition: 0.3s;
 
+}
+
+.crew-user-concert-delete a {
+  display: flex;
 }

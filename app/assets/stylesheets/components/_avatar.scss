@@ -43,3 +43,19 @@
   left: 32px;
   display: none;
 }
+
+
+.avatar-title:hover::before {
+  content: attr(title); /* Display the title attribute as content */
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: px;
+  z-index: 1;
+  /* You can adjust the position as per your requirements */
+  top: -30px; /* Adjust to move the tooltip up */
+  left: 0;
+  transform: translateX(-50%);
+
+}

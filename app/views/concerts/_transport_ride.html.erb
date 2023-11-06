@@ -46,9 +46,9 @@
       <% transport.transport_users.each do |transportuser| %>
         <% user = User.find(transportuser.user_id) %>
         <div class="mb-2 me-2 mt-2 avatar-delete">
-          <%= image_tag(user.image, class: "avatar ms-1 me-1") if user.image.attached? %>
+          <%= image_tag(user.image, class: "avatar ms-1 me-1 avatar-title ", title: user.full_name ) if user.image.attached? %>
           <% unless user.image.attached? %>
-            <%=image_tag "profile.png", class: "avatar ms-1 me-1"  %>
+            <%=image_tag "profile.png", class: "avatar ms-1 me-1 avatar-title ", title: user.full_name   %>
           <% end %>
           <div class="delete-icon-avatar">
             <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), tour_concert_transport_transport_user_path(@tour, @concert, transport, transportuser),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
@@ -60,7 +60,8 @@
     <div class="d-flex justify-content-center">
       <div class="mt-4 col-6 text-center">
         <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
-          <%= f.input :user_id, collection: @crew.users, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
+
+          <%= f.input :user_id, collection: @users_on_this_concert, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
           <%= f.button :submit, 'ADD CREW MEMBER', class: 'button-green' %>
         <% end %>
       </div>
@@ -75,9 +76,9 @@
           <% user = User.find(transportuser.user_id) %>
           <div class="mb-2 me-2 mt-2 d-flex align-items-center">
             <div>
-              <%= image_tag(user.image, class: "avatar mb-3 me-3") if user.image.attached? %>
+              <%= image_tag(user.image, class: "avatar mb-3 me-3 avatar-title ", title: user.full_name ) if user.image.attached? %>
               <% unless user.image.attached? %>
-                <%=image_tag "profile.png", class: "avatar mb-3 me-3"  %>
+                <%=image_tag "profile.png", class: "avatar mb-3 me-3 avatar-title ", title: user.full_name   %>
               <% end %>
             </div>
             <div class="col-7">

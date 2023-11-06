@@ -56,6 +56,7 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :crew_user_concerts, only: [:create, :destroy]
       resources :guests, only: [:create, :destroy, :update]
       resources :notes, only: [:create, :destroy, :update]
       resources :checklists, only: [:create, :destroy, :update] do

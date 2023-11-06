@@ -29,7 +29,7 @@
       </div>
       <%= render partial: 'venue', locals: { tour: @tour, concert: @concert } %>
       <div class="d-flex justify-content-between mb-2">
-        <%= render partial: 'crew', locals: { tour: @tour, concert: @concert, guests: @guests, crew_users: @crew_users, crew: @crew, phoneprefixsorted: @phoneprefixsorted } %>
+        <%= render partial: 'crew', locals: { tour: @tour, concert: @concert, guests: @guests, crew_user_concerts: @crew_user_concerts, crew_user_concert: @crew_user_concert} %>
         <%= render partial: 'contacts', locals: { tour: @tour, concert: @concert, contacts: @contacts, phoneprefixsorted: @phoneprefixsorted } %>
       </div>
       <%= render partial: 'transport', locals: { tour: @tour, concert: @concert } %>

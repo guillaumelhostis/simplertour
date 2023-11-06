@@ -29,7 +29,12 @@ class CrewsController < ApplicationController
       authorize @crew
     else
       @users.each do |user|
-        CrewUser.create(user: user, crew: @crew, role: role)
+        new_crew_user = CrewUser.create(user: user, crew: @crew, role: role)
+        tour = Tour.find_by(crew_id: @crew.id )
+        concerts= tour.concerts
+        concerts.each do |concert|
+          CrewUserConcert.create(concert_id: concert.id, crew_user_id: new_crew_user.id )
+        end
       end
       authorize @crew
       @crew.save
@@ -71,8 +76,10 @@ class CrewsController < ApplicationController
   end
 
   def unassign_user
+
     @crew = Crew.find(params[:id])
     @user = User.find(params[:user_id])
+
     @crew.users.delete(@user)
     authorize @crew
 

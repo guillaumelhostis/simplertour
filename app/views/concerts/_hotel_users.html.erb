@@ -5,9 +5,9 @@
     <div class="d-flex transport-slot-users align-items-center justify-content-center mb-3">
       <% concert_hotel.users.map do |user| %>
           <div class="me-2 avatar-delete">
-              <%= image_tag(user.image, class: "avatar") if user.image.attached? %>
+              <%= image_tag(user.image, class: "avatar avatar-title", title: user.full_name) if user.image.attached? %>
               <% unless user.image.attached? %>
-                <%=image_tag "profile.png", class: "avatar avatar-hotel"  %>
+                <%=image_tag "profile.png", class: "avatar avatar-title ", title: user.full_name  %>
               <% end %>
               <div class="delete-icon-avatar">
                 <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), remove_user_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel, user),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
@@ -18,7 +18,7 @@
     <%= form_with(url: add_crew_tour_concert_concert_hotel_path(@tour, @concert, concert_hotel), local: true, data: { remote: true }) do |form| %>
       <div class="d-flex align-items-center justify-content-center ">
         <div class="col-6 me-2">
-          <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
+          <%= form.collection_select(:user_id, @users_on_this_concert, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
         </div>
         <div class="text-center">
           <%= form.button 'ADD', type: :submit, class: 'button-green mb-2', data: { concert_hotel_id: concert_hotel.id } %>

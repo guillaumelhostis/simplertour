@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :transports, through: :transport_users
 
 
-
   def set_default_role
     self.role ||= :tech
   end
