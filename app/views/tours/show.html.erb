@@ -147,7 +147,8 @@
           <% unless crew_user.image.attached? %>
             <%= image_tag "profile.png", class: "avatar  avatar-title col", title: crew_user.full_name %>
         <% end %>
-        <div class="text-center user-role-in-team mt-2">
+        <div class="mt-2 mb-2"> <p class="m-0"><%= crew_user.full_name %></p></div>
+        <div class="text-center user-role-in-team ">
           <p class="m-0  "><%= crew_user.user_role_in_team(@crew, crew_user).upcase %></p>
         </div>
       </div>

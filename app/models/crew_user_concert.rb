@@ -2,6 +2,7 @@ class CrewUserConcert < ApplicationRecord
   belongs_to :crew_user
   belongs_to :concert
   before_destroy :remove_associations
+  validates_uniqueness_of :concert_id, scope: :crew_user_id
 
   private
 
