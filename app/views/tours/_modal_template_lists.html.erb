@@ -14,7 +14,9 @@
               <%= form.date_field :date,  class: 'form-input me-1' %>
               <%= form.text_field :city, placeholder: "City",  class: 'form-input me-1' %>
               <%= form.text_field :venue, placeholder: "Venue",   class: 'form-input me_1' %>
-              <%= form.button "CREATE", type: :submit, class: 'button-green ms-2'  %>
+              <div class="submit-create-from-template-lg">
+                <%= form.button "ADD", type: :submit, class: 'button-green ms-2'  %>
+              </div>
             </div>
           <% end %>
         </div>

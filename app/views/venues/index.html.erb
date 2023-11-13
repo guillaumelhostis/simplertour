@@ -1,6 +1,6 @@
 <div class="body-container">
   <h1> YOUR VENUES</h1>
-    <div class="col-4">
+    <div class="col-lg-4">
       <%= form_with url: venues_path, method: :get, class: "d-flex align-items-center mt-2" do %>
         <%= text_field_tag :query,
               params[:query],
@@ -10,20 +10,38 @@
         <%= submit_tag "SEARCH", name: "", class: "button-green ms-3" %>
       <% end %>
     </div>
-
-    <div class="row row-cols-3 mt-3">
-      <% @venues.each do |venue| %>
-        <div class="col">
-          <%= link_to edit_venue_path(venue) do %>
-            <div class="venue-card d-flex align-items-center">
-                <div>
-                  <h3> <strong><%= venue.name.upcase %></strong></h3>
-                  <h2> <%= venue.city.upcase %></h2>
-                  <p class="m-0"> <i>Capacity: <%= venue.capacity %></i></p>
-                </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+    <div class="venues-list-lg">
+      <div class="row row-cols-3 mt-3">
+        <% @venues.each do |venue| %>
+          <div class="col">
+            <%= link_to edit_venue_path(venue) do %>
+              <div class="venue-card d-flex align-items-center">
+                  <div>
+                    <h3> <strong><%= venue.name.upcase %></strong></h3>
+                    <h2> <%= venue.city.upcase %></h2>
+                    <p class="m-0"> <i>Capacity: <%= venue.capacity %></i></p>
+                  </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="venues-list-phones">
+      <div class="row mt-3">
+        <% @venues.each do |venue| %>
+          <div class="col-12">
+            <%= link_to edit_venue_path(venue) do %>
+              <div class="venue-card d-flex align-items-center">
+                  <div>
+                    <h3> <strong><%= venue.name.upcase %></strong></h3>
+                    <h3> <%= venue.city.upcase %></h3>
+                    <p class="m-0"> <i>Capacity: <%= venue.capacity %></i></p>
+                  </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
 </div>

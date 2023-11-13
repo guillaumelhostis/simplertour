@@ -1,0 +1,73 @@
+
+@media screen and (max-width: 480px) {
+
+  .timetable-entry {
+    p {
+      font-size: 7px;
+    }
+
+    width: 410%;
+  }
+
+  .transport-slot  {
+    width: 100%;
+    margin: 0px !important;
+    border: 0px;
+  }
+
+  .timetable-time-size {
+    width: 20px;
+  }
+
+  .transport-card-template {
+    flex-direction: column;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.479);
+    padding: 8px;
+
+    .button-green {
+      margin: 9px 0px !important;
+    }
+  }
+
+  .transport-slot-edit-input{
+
+  }
+
+  .transport-slot-edit {
+    flex-direction: column;
+    margin: 0px !important;
+  }
+
+  .form-input-dark {
+    font-size: 8px;
+  }
+
+  .form-input-dark::placeholder {
+    font-size: 8px;
+  }
+
+  .form-input{
+    height: 15px;
+    font-size: 10px;
+  }
+
+
+  .form-input::placeholder {
+    height: 15px;
+    font-size: 10px;
+  }
+
+  .new-timetable-entry-template {
+    flex-direction: column;
+
+    .button-green {
+      margin: 9px 0px !important;
+    }
+    .button-delete {
+      margin: 9px 0px !important;
+    }
+  }
+
+
+}

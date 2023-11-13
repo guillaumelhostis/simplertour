@@ -85,3 +85,25 @@ body::before {
   border: 1px solid white;
   margin-right: 15px;
 }
+
+@media screen and (max-width: 480px) {
+
+  .body-container{
+    width: calc(100% - 117px);
+    left: 106px;
+    top: 8px;
+    color: white;
+    position: relative;
+    // position: fixed;
+    border-radius: 8px;
+    z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
+    background-color: #0e111496;
+    border: 1px solid #9191917f;
+    // height: 97.6%;
+    padding: 15px;
+  }
+
+  .body-container h2 {
+    font-size:14px ;
+  }
+}

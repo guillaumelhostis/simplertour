@@ -12,16 +12,7 @@
       <% end %>
     <% end %>
     <div class="navbar-navigation-container">
-      <!-- Dropdown menu button for smaller screens -->
-      <div class="dropdown simpler-tour-dropdown-menu">
-        <button class="dropbtn"><i class="fas fa-bars white-icon"></i></button>
-        <div class="dropdown-content" id="myDropdown">
-          <%= link_to "MY TOURS", tours_path if tourman_signed_in? %>
-          <%= link_to "MY TOURS", pages_user_dashboard_path  if user_signed_in? %>
-          <a href="#">ABOUT US</a>
-          <a href="#">FAQ</a>
-        </div>
-      </div>
+
       <!-- Normal menu for regular screens -->
       <div class="simpler-tour-navbar-end d-flex align-items-center">
         <% if !tourman_signed_in? %>
@@ -29,39 +20,41 @@
             <a href="#" class="button-green me-3" data-action="click->navbar#openModal">LOGIN</a>
           <% else user_signed_in? %>
             <div class="d-flex align-items-center welcome-navbar">
-              <p class="mb-0 me-3">Hello <%= current_user.first_name %></p>
-              <button class="dropbtn", data-action="click->navbar#toggle">
-                <%= image_tag(current_user.image, class: "avatar") if current_user.image.attached? %>
-                <% unless current_user.image.attached? %>
-                  <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
-                <% end %>
-              </button>
-              <div class="dropdown-content-picture" data-navbar-target="content">
-                <%= link_to "SIGN OUT", destroy_user_session_path, 'data-turbo-method': :delete, class: "button-green mb-1 text-center" %>
-                <%= link_to "UPDATE ACCOUNT", edit_user_registration_path, class: "button-green" %>
+              <div class="hello-user">
+                <p class="mb-0 me-3">Hello <%= current_user.first_name %></p>
+                <button class="dropbtn", data-action="click->navbar#toggle">
+                  <%= image_tag(current_user.image, class: "avatar") if current_user.image.attached? %>
+                  <% unless current_user.image.attached? %>
+                    <%= image_tag "https://static.vecteezy.com/ti/gratis-vector/p3/7319933-black-avatar-person-icons-user-profile-icon-vector.jpg", class: "avatar" %>
+                  <% end %>
+                </button>
+                <div class="dropdown-content-picture" data-navbar-target="content">
+                  <%= link_to "SIGN OUT", destroy_user_session_path, 'data-turbo-method': :delete, class: "button-green mb-1 text-center" %>
+                  <%= link_to "UPDATE ACCOUNT", edit_user_registration_path, class: "button-green" %>
+                </div>
               </div>
+
             </div>
           <% end %>
         <% elsif tourman_signed_in? %>
           <div class="d-flex align-items-center welcome-navbar">
-            <p class="mb-0 me-3">Hello <%= current_tourman.first_name %></p>
-            <button class="dropbtn", data-action="click->navbar#toggle">
-              <%= image_tag(current_tourman.picture, class: "avatar") if current_tourman.picture.attached? %>
-              <% unless current_tourman.picture.attached? %>
-                <%= image_tag "profile.png", class: "avatar" %>
-              <% end %>
-            </button>
-            <div class="dropdown-content-picture" data-navbar-target="content">
-              <%= link_to "SIGN OUT", destroy_tourman_session_path, 'data-turbo-method': :delete, class: "button-green mb-1 text-center" %>
-              <%= link_to "UPDATE ACCOUNT", edit_tourman_registration_path, class: "button-green mb-1 text-center" %>
-              <%= link_to "DASHBOARD", tours_path, class: "button-green mb-1 text-center" %>
+            <div class="hello-user d-flex align-items-center">
+              <p class="mb-0 me-3">Hello <%= current_tourman.first_name %></p>
+              <button class="dropbtn", data-action="click->navbar#toggle">
+                <%= image_tag(current_tourman.picture, class: "avatar") if current_tourman.picture.attached? %>
+                <% unless current_tourman.picture.attached? %>
+                  <%= image_tag "profile.png", class: "avatar" %>
+                <% end %>
+              </button>
+              <div class="dropdown-content-picture" data-navbar-target="content">
+                <%= link_to "SIGN OUT", destroy_tourman_session_path, 'data-turbo-method': :delete, class: "button-green mb-1 text-center" %>
+                <%= link_to "UPDATE ACCOUNT", edit_tourman_registration_path, class: "button-green mb-1 text-center" %>
+                <%= link_to "DASHBOARD", tours_path, class: "button-green mb-1 text-center" %>
+              </div>
             </div>
+
           </div>
         <% end %>
       </div>
-
-
     </div>
-
-
 </div>
