@@ -8,8 +8,15 @@
         <li><p><strong>Capacity:</strong> <%= @concert.venue.capacity %> </p></li>
       </ul>
       <div class="d-flex">
-        <%= button_to 'REMOVE VENUE', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'button-green me-3' %>
-        <%= link_to 'UPDATE VENUE INFOS', edit_venue_path(@concert.venue.id),  remote: true, class: 'button-green me-3' %>
+        <div class="dropdown me-2">
+          <button class="button-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            ACTIONS
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><%= button_to 'REMOVE VENUE', remove_venue_tour_concert_path(@concert), method: :patch, remote: true, class: 'dropdown-item' %></li>
+            <li><%= link_to 'UPDATE VENUE INFOS', edit_venue_path(@concert.venue.id),  remote: true, class: 'dropdown-item ' %></li>
+          </ul>
+        </div>
         <a href="#" data-action="click->concert#openModalVenueAttachments" class="button-green">ATTACHMENTS</a>
         <div class="modal-venue-attachments" data-concert-target="venueattachments">
           <div class="modal-venue-attachments-content">

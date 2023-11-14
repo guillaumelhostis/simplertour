@@ -1,25 +1,22 @@
 
   <span class="close-contert-modal " data-action="click->concert#closeModalGuest"><i class="fas fa-times black-icon"></i></span>
-  <div class="d-flex mt-2">
-    <div class="col-6">
-    <div class="text-center mb-2">
-      <h2>ADD A TEAM MEMBER</h2>
-    </div>
-
-    <%= form_with(url: tour_concert_crew_user_concerts_path(@tour, @concert, @crew_user_concert), local: true, data: { remote: true }) do |form| %>
-      <div class="d-flex align-items-center justify-content-center ">
-        <div class="col-6 me-2">
-          <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
-        </div>
-        <div class="text-center">
-          <%= form.button 'ADD', type: :submit, class: 'button-green mb-2'%>
-        </div>
+  <div class="d-flex mt-2 modal-guest-concert-phones">
+    <div class="col-lg-6">
+      <div class="text-center mb-2">
+        <h2>ADD A TEAM MEMBER</h2>
       </div>
-    <% end %>
-
-
+      <%= form_with(url: tour_concert_crew_user_concerts_path(@tour, @concert, @crew_user_concert), local: true, data: { remote: true }) do |form| %>
+        <div class="d-flex align-items-center justify-content-center ">
+          <div class="col-6 me-2">
+            <%= form.collection_select(:user_id, @crew.users, :id, :full_name, { prompt: 'Select Crew member' }, { class: 'form-input mb-2 p-1 me-2' }) %>
+          </div>
+          <div class="text-center">
+            <%= form.button 'ADD', type: :submit, class: 'button-green mb-2'%>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-6">
+    <div class="col-lg-66">
       <div class="text-center mb-2">
         <h2>ADD A GUEST FOR THIS SHOW</h2>
       </div>

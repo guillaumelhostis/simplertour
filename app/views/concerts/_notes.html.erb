@@ -7,7 +7,7 @@
             <% else %>
               <% @notes.each do |note| %>
 
-                <li class="list-unstyled d-flex align-items-center concert-note">
+                <li class="list-unstyled d-flex align-items-center  concert-note-phones">
                   <i class="fa-solid fa-note-sticky me-3"> </i>
                   <p class="m-0 me-3"> <%= note.description %></p>
                   <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'), tour_concert_note_path(@tour, @concert, note), data: { turbo_method: :delete, confirm: 'Are you sure?' } %>

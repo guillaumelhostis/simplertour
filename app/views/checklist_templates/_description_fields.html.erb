@@ -2,7 +2,7 @@
 
 <%= f.fields_for :checklist_template_descriptions do |description_fields| %>
   <% description_fields_index = f.index %>
-  <div class="nested-fields d-flex align-items-center">
+  <div class="nested-fields d-flex align-items-center new-task-phones">
     <%= description_fields.input :description, label: false, placeholder: "Task #{description_fields_index}", input_html: { name: "checklist_template[checklist_template_descriptions_attributes][#{description_fields_index}][description]", class:"form-input " } %>
     <%= link_to 'X', "#", class: "remove-nested-field  button-delete", data: { id: description_fields.object_id } %>
   </div>

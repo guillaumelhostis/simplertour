@@ -2,29 +2,31 @@
   <h2>CHECKBOXES (<%= @concert_template.name.upcase %>)</h2>
     <% @checklists_data.each_with_index do |checklist_data, index| %>
       <div class="d-flex align-items-center form-checklist-div justify-content-between mb-1">
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-lg-6 d-flex align-items-center">
           <i class="fa-regular fa-square-check me-3"></i>
           <p class="m-0"><%= checklist_data["description"] %></p>
         </div>
-        <div class="d-flex align-items-center col-6">
+        <div class="d-flex align-items-center col-lg-6 form-checklist-div-edit">
           <input data-concert-template-target="checkboxDescription<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateCheckbox"  type="text" placeholder="Update Checkbox" class="form-input p-1">
           <%= form_with(url: update_checkbox_concert_template_path(@concert_template)) do |form| %>
             <%= form.hidden_field :checkbox_description, value: "", data: { concert_template_target: "checkboxLinkTemplate#{index}" } %>
             <%= form.hidden_field :index, value: "#{index}" %>
-            <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2'  %>
-          <% end %>
-          <%= form_with(url: delete_checkbox_concert_template_path(@concert_template)) do |form| %>
-            <%= form.hidden_field :index, value: "#{index}" %>
-            <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2'  %>
-          <% end %>
+            <div class="d-flex align-items-center">
+                <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2'  %>
+                <% end %>
+                <%= form_with(url: delete_checkbox_concert_template_path(@concert_template)) do |form| %>
+                  <%= form.hidden_field :index, value: "#{index}" %>
+                  <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2'  %>
+                <% end %>
+            </div>
         </div>
       </div>
     <% end %>
     <div class="d-flex align-items-center">
-      <div class="col-6">
+      <div class="col-lg-6">
 
       </div>
-      <div class="col-6 d-flex align-items-center">
+      <div class="col-lg-6 d-flex align-items-center">
         <input data-concert-template-target="newCheckboxDescription" data-action="keyup->concert-template#newCheckbox"  type="text" placeholder="New Checkbox" class="form-input p-1 mb-2">
         <%= form_with(url: new_checkbox_concert_template_path(@concert_template)) do |form| %>
           <%= form.hidden_field :note_description, value: "", data: { concert_template_target: "newCheckboxTemplate" } %>

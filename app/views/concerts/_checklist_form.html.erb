@@ -11,7 +11,7 @@
     </div>
 
     <%= simple_form_for [@tour, @concert, @checklist] do |f| %>
-      <div class="d-flex mb-2">
+      <div class="d-flex mb-2 align-items-center new-checkbox-action-phones">
         <%= f.input :description, label: false, placeholder: "Task", input_html: {class: 'form-input' }%>
         <%= f.submit "NEW TASK", class:"button-green me-2 mb-3 ms-3" %>
       </div>

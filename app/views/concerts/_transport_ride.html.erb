@@ -1,5 +1,5 @@
 <div class="mb-3">
-  <div class="d-flex align-items-center transport-slot">
+  <div class="d-flex align-items-center transport-slot transport-slot-phones">
     <div class="me-4">
       <% emoji = case transport.way_of_transport %>
         <%when "Train" then "🚂" %>
@@ -23,18 +23,23 @@
         <p class="m-0"> <b>To: </b><%= transport.place_of_arrival %></p>
       </div>
     </div>
-    <div class="me-4 d-flex align-items-center">
-      <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>"  class="button-green"> CREW </a>
+    <div class="d-flex align-items-center action-transport-slot">
+      <div class="me-4 d-flex align-items-center">
+        <a href="#" data-action="click->concert#openModalTransportUser" data-index="<%= index %>"  class="button-green"> CREW </a>
+      </div>
+      <div class="me-4 d-flex align-items-center">
+        <a href="#" data-action="click->concert#openModalTransportAttachments" data-index="<%= index %>"  class="button-green"> ATTACHMENTS </a>
+      </div>
     </div>
-    <div class="me-4 d-flex align-items-center">
-      <a href="#" data-action="click->concert#openModalTransportAttachments" data-index="<%= index %>"  class="button-green"> ATTACHMENTS </a>
+    <div class="d-flex align-items-center action-transport-slot">
+      <div class="me-4 transports-emoji-links">
+        <a href="#" data-action="click->concert#openModalTransportNotes" data-index="<%= index %>" > 📝 </a>
+      </div>
+      <div class="me-4 transports-emoji-links">
+        <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'),tour_concert_transport_path(@tour, @concert, transport),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+      </div>
     </div>
-    <div class="me-4 transports-emoji-links">
-      <a href="#" data-action="click->concert#openModalTransportNotes" data-index="<%= index %>" > 📝 </a>
-    </div>
-    <div class="me-4 transports-emoji-links">
-      <%= link_to raw('<i class="fa-solid fa-minus open-plus-icon"></i>'),tour_concert_transport_path(@tour, @concert, transport),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-    </div>
+
   </div>
 
 </div>
@@ -58,7 +63,7 @@
     </div>
     <span class="close-contert-modal " data-action="click->concert#closeModalTransportUser" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
     <div class="d-flex justify-content-center">
-      <div class="mt-4 col-6 text-center">
+      <div class="mt-4 col-lg-6 text-center">
         <%= simple_form_for [@tour, @concert, transport, @transport_user] do |f| %>
 
           <%= f.input :user_id, collection: @users_on_this_concert, label: false, prompt:'Select Crew User',  label_method: :full_name, value_method: :id, input_html: {class: 'form-input' } %>
@@ -74,14 +79,14 @@
     <span class="close-contert-modal " data-action="click->concert#closeModalTransportAttachments" data-index="<%= index %>"><i class="fas fa-times black-icon"></i></span>
         <% transport.transport_users.each do |transportuser| %>
           <% user = User.find(transportuser.user_id) %>
-          <div class="mb-2 me-2 mt-2 d-flex align-items-center">
+          <div class="mb-2 me-2 mt-2 d-flex align-items-center transport-user-attachments-phones">
             <div>
               <%= image_tag(user.image, class: "avatar mb-3 me-3 avatar-title ", title: user.full_name ) if user.image.attached? %>
               <% unless user.image.attached? %>
                 <%=image_tag "profile.png", class: "avatar mb-3 me-3 avatar-title ", title: user.full_name   %>
               <% end %>
             </div>
-            <div class="col-7">
+            <div class="col-lg-7 transport-user-attachments-upload-phones">
               <%= simple_form_for([@tour, @concert, transport, transportuser])  do |f| %>
                 <div class="d-flex align-items-center">
                   <%= f.input :files, as: :file,
@@ -92,7 +97,7 @@
                 </div>
               <% end %>
             </div>
-            <div class="col-3 d-flex align-items-center mb-3">
+            <div class="col-lg-3 d-flex align-items-center transport-user-attachments-phones mb-3">
               <% transportuser.files.each do |file| %>
                 <p class="attachment-file">
                   <%= link_to file.filename, rails_blob_path(file, disposition: 'attachment'), target: '_blank' %>
