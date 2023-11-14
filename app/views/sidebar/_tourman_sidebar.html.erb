@@ -29,7 +29,15 @@
       <% end %>
     </div>
     <strong>
-      <div class="mb-3 d-flex align-items-center justify-content-between"> <span class="text-white">TEMPLATES</span> <%= link_to "+", new_concert_template_path, class:" ms-2 button-plus" %>  </div>
+      <div class="mb-3 d-flex align-items-center justify-content-between">
+        <div id="templates-sidebar-screens">
+          <span class="text-white">TEMPLATES</span>
+        </div>
+        <div id="templates-sidebar-phones">
+          <span class="text-white"><i class="fa-solid fa-paintbrush"></i></span>
+        </div>
+        <%= link_to "+", new_concert_template_path, class:" ms-2 button-plus" %>
+      </div>
     </strong>
     <div class="templates_list mb-3">
       <% @concert_templates.each do |concert_template| %>
@@ -55,6 +63,5 @@
           <span class="text-white">VENUES</span> </div>
         <% end %>
     </strong>
-
   </div>
 </div>

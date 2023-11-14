@@ -1,11 +1,11 @@
-<div class="body-container">
+<div class="body-container crew-container">
   <div data-controller="crew">
     <div class="d-flex align-items-center mb-3">
       <h1 class="me-3"><%= @crew.name.upcase %></h1>
-      <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class:"button-green" %>
+      <%#= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class:"button-green" %>
     </div>
     <div class="row justify-content-between">
-      <div class="col-4  me-3">
+      <div class="col-lg-4  me-3 mb-3">
         <div class="container-white">
           <h2>SEARCH</h2>
           <%= form_tag(assign_users_crew_path(@crew), method: :post) do %>
@@ -26,17 +26,16 @@
         </div>
 
       </div>
-      <div class="col-7">
+      <div class="col-lg-7">
         <div class="container-white">
           <div class="box-shadow-bottom d-flex align-items-center justify-content-between">
             <h2>CREW MEMBERS</h2>
             <p class="m-0">Assign a role</>
           </div>
           <div class="listtoggle">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled list-crew-users-phones">
               <% @crew_users.each_with_index do |crew_user, index|%>
                   <% member = User.find(crew_user[:user_id]) %>
-
                   <li>
                     <div class="list-crew-members d-flex justify-content-between align-items-center">
                       <div class="d-flex align-items-center">

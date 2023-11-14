@@ -3,8 +3,8 @@
           <div class="listtoggletimetable">
             <div id="timetable-entries">
               <% @timetable_entries.each_with_index do |timetable_entry, index| %>
-                <div class="timetable-entry d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
-                  <div class="timetablehours ps-2 pe-2">
+                <div class="timetable-entry timetable-entry-phones d-flex justify-content-between p-2 <%= index.even? ? 'even' : 'odd' %>">
+                  <div class="timetablehours timetablehours-phones d-flex align-items-center ps-2 pe-2">
                     <div class="d-flex justify-content-between">
                       <div class="timetable-time-size text-center"><p class="mb-0 me-2"><%= timetable_entry.hourminute&.strftime('%H:%M')%></p></div>
                       <div class="timetable-time-size text-center">
@@ -16,7 +16,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="timetableinfos ms-4">
+                  <div class="timetableinfos  d-flex align-items-center ms-4">
                     <p class="mb-0"><strong> <%= timetable_entry.information %></strong></p>
                   </div>
                   <div class="remove-timetable-entry">

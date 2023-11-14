@@ -606,11 +606,11 @@ opacity: 0.5;
 
 }
 
-.concert-note .open-plus-icon{
+.concert-note-phones .open-plus-icon{
   display:none;
 }
 
-.concert-note:hover .open-plus-icon{
+.concert-note-phones:hover .open-plus-icon{
   transition: 0.5s;
   display:block;
 }
@@ -734,4 +734,242 @@ opacity: 0.5;
 
 .crew-user-concert-delete a {
   display: flex;
+}
+
+.concert-menu-phones {
+  display: none;
+}
+
+.concert-menu-screens {
+  display: block;
+}
+
+.dropdown-menu {
+  padding: 0px !important;
+  border-radius: 8px !important;
+  background-image: linear-gradient(to bottom, #C42173, #A91B63);
+  .dropdown-item {
+    // background-color: #C42173;
+    color: white;
+    padding: 7px 22px;
+    border-radius: 10px;
+    font-size: 8px;
+    border: none  !important;
+  }
+
+  .dropdown-item:hover {
+    transition: 0.4s;
+    color: white;
+    background-image: linear-gradient(to bottom, #C42173, #A91B63) !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .concert-infos-container {
+    flex-direction: column;
+  }
+
+  .concert-infos-container-crew-contact {
+    flex-direction: column;
+  }
+
+  .concert-menu-phones {
+    display: block;
+  }
+
+  .concert-menu-screens {
+    display: none;
+  }
+  .dropdown-menu {
+    padding: 0px !important;
+    border-radius: 8px !important;
+    background-image: linear-gradient(to bottom, #C42173, #A91B63);
+    .dropdown-item {
+      // background-color: #C42173;
+      color: white;
+      padding: 7px 22px;
+      border-radius: 10px;
+      font-size: 8px;
+      border: none  !important;
+    }
+
+    .dropdown-item:hover {
+      transition: 0.4s;
+      color: white;
+      background-image: linear-gradient(to bottom, #C42173, #A91B63) !important;
+    }
+  }
+
+  .modal-venue-attachments-content {
+    margin: 60% auto;
+    width: 200px;
+    max-width: 200px;
+    text-align: center;
+    h2 {
+      font-size: 20px;
+    }
+    a {
+      font-size: 9px;
+    }
+  }
+
+  .modal-new-guest-content {
+    margin: 60% auto;
+    width: 200px;
+    max-width: 200px;
+    h2 {
+      font-size: 20px;
+    }
+    .modal-guest-concert-phones {
+      flex-direction: column;
+      align-items: baseline !important;
+
+    }
+  }
+
+  .modal-new-contact-content {
+    margin: 60% auto;
+    width: 200px;
+    max-width: 200px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .contacts-box {
+    margin: 0px !important;
+    margin-top: 8px !important;
+  }
+
+  .transport-slot-phones {
+    border: rgb(134, 134, 134)  1px solid !important;
+    padding: 10px !important;
+
+  }
+
+  .action-transport-slot {
+    margin-top: 8px;
+    div {
+      margin-right: 8px !important;
+    }
+  }
+
+
+  .modal-new-transport-user-content {
+    margin: 60% auto;
+    width: 200px;
+    max-width: 200px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .modal-new-transport-attachments-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+    max-height: 300px;
+
+    overflow-y: scroll;
+    scrollbar-color: #999 #333;
+    transition: scrollbar-color 0.5s;
+  }
+
+  .modal-new-transport-notes-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .transport-user-attachments-phones {
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
+  .transport-user-attachments-upload-phones {
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
+  .modal-new-transport-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .modal-new-timetable-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+
+
+  .new-hotel-form-phones {
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
+  .modal-new-hotel-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .modal-checklist-templates-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .new-checkbox-action-phones {
+    div {
+      margin: 0px !important;
+      margin-right: 8px !important;
+    }
+    .button-green {
+      margin: 0px !important;
+    }
+  }
+
+  .modal-two-content {
+    margin: 60% auto;
+    width: 300px;
+    max-width: 300px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .concert-infos-container-bis {
+    margin: 0px !important;
+    margin-top: 8px !important;
+  }
+
+  .timetable-entry-phones {
+    width: 100% !important;
+  }
+
+  .timetablehours-phones {
+    border: 0px !important;
+  }
 }

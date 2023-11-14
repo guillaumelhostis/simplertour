@@ -1,41 +1,43 @@
 <div class="col-12 container-white mb-2">
   <h2>TRANSPORTS (<%= @concert_template.name.upcase %>)</h2>
   <% @transports_data.each_with_index do |transport_data, index| %>
-    <div class="mb-3 d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center transport-slot  me-3 col-4">
-        <div class="me-4">
-          <% emoji = case transport_data["way_of_transport"] %>
-            <%when "Train" then "🚂" %>
-            <%when "Bus" then "🚌" %>
-            <%when "Car" then "🚙" %>
-            <%when "Van" then "🚐" %>
-            <%when "Flight" then "✈️" %>
-            <%when "Trailer" then "🚛"%>
-            <%when "Other" then "🚀" %>
-            <%else "" %>
-          <% end %>
-          <div class="emoji-round-white"><p class="m-0"><%= emoji %></p></div>
-        </div>
-        <div class="me-4 transport-infos">
-          <div>
-            <p class="m-0"><b>Depart:</b> <%= DateTime.parse(transport_data["time_of_depart"]).strftime("%H:%M") %></p>
-            <p class="m-0"><b>From: </b> <%= transport_data["place_of_depart"] %></p>
+    <div class="mb-3 d-flex align-items-center justify-content-between transport-card-template">
+
+        <div class="d-flex align-items-center transport-slot  me-3 col-lg-4">
+          <div class="me-4">
+            <% emoji = case transport_data["way_of_transport"] %>
+              <%when "Train" then "🚂" %>
+              <%when "Bus" then "🚌" %>
+              <%when "Car" then "🚙" %>
+              <%when "Van" then "🚐" %>
+              <%when "Flight" then "✈️" %>
+              <%when "Trailer" then "🚛"%>
+              <%when "Other" then "🚀" %>
+              <%else "" %>
+            <% end %>
+            <div class="emoji-round-white"><p class="m-0"><%= emoji %></p></div>
           </div>
-          <div>
-            <p class="m-0"><b>Arrival:</b> <%= DateTime.parse(transport_data["time_of_arrival"]).strftime("%H:%M")%></p>
-            <p class="m-0"> <b>To: </b><%= transport_data["place_of_arrival"] %></p>
+          <div class="me-4 transport-infos">
+            <div>
+              <p class="m-0"><b>Depart:</b> <%= DateTime.parse(transport_data["time_of_depart"]).strftime("%H:%M") %></p>
+              <p class="m-0"><b>From: </b> <%= transport_data["place_of_depart"] %></p>
+            </div>
+            <div>
+              <p class="m-0"><b>Arrival:</b> <%= DateTime.parse(transport_data["time_of_arrival"]).strftime("%H:%M")%></p>
+              <p class="m-0"> <b>To: </b><%= transport_data["place_of_arrival"] %></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-7">
-        <div class="d-flex align-items-center  col-12 m-2">
-          <div>
-            <div class="d-flex align-items-center mb-2">
+
+      <div class="col-lg-7 ">
+        <div class="d-flex align-items-center  col-12 m-2 transport-slot-edit">
+          <div class="w-100">
+            <div class="d-flex align-items-center mb-2 transport-slot-edit-input">
               <input data-concert-template-target="placeDepart<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateDepartPlace"  type="text" placeholder="Update Place of departure" class="form-input p-1 ">
               <p class="mb-0 me-2 ms-2">at</p>
               <input data-concert-template-target="timeDepart<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateDepartTime"  type="time" placeholder="Update Time of departure" class="form-input p-1 ">
             </div>
-            <div class="d-flex align-items-center mt-2">
+            <div class="d-flex align-items-center mt-2 transport-slot-edit-input">
               <input data-concert-template-target="placeArrival<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateArrivalPlace"  type="text" placeholder="Update Place of arrival" class="form-input p-1 ">
               <p class="mb-0 me-2 ms-2">at</p>
               <input data-concert-template-target="timeArrival<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateArrivalTime"  type="time" placeholder="Update Time of arrival" class="form-input p-1 ">
@@ -47,27 +49,28 @@
             <%= form.hidden_field :place_arrival, value: "", data: { concert_template_target: "placeArrivalTemplate#{index}" } %>
             <%= form.hidden_field :time_arrival, value: "", data: { concert_template_target: "timeArrivalTemplate#{index}" } %>
             <%= form.hidden_field :index, value: "#{index}" %>
-            <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2 '  %>
-          <% end %>
-          <%= form_with(url: delete_transport_concert_template_path(@concert_template)) do |form| %>
-            <%= form.hidden_field :index, value: "#{index}" %>
-            <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
-          <% end %>
+            <div class="d-flex  align-items-center">
+              <%= form.button 'UPDATE', type: :submit, class: 'button-green ms-2 '  %>
+              <% end %>
+              <%= form_with(url: delete_transport_concert_template_path(@concert_template)) do |form| %>
+                <%= form.hidden_field :index, value: "#{index}" %>
+                <%= form.button 'DELETE', type: :submit, class: 'button-delete ms-2 '  %>
+              <% end %>
+            </div>
         </div>
       </div>
     </div>
   <% end %>
-  <div class="d-flex mt-4 justify-content-between align-items-center">
-    <div class="d-flex justify-content-between align-items-center col-8">
-      <input data-concert-template-target="newDepartPlace" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="New Depart Place" class="form-input p-1">
+  <div class="d-flex mt-4 justify-content-between align-items-center  transport-slot-new">
+    <div class="d-flex justify-content-between align-items-center col-lg-8 transport-slot-new-infos">
       <p class="mb-0 me-2 ms-2">from</p>
+      <input data-concert-template-target="newDepartPlace" data-action="keyup->concert-template#newDepartPlace"  type="text" placeholder="New Depart Place" class="form-input p-1">
       <input data-concert-template-target="newDepartTime"  data-action="input->concert-template#newDepartTime"  type="time" placeholder="Update Entry" class="form-input p-1">
       <p class="mb-0 me-2 ms-2">to</p>
       <input data-concert-template-target="newArrivalPlace" data-action="keyup->concert-template#newArrivalPlace"  type="text" placeholder="New Arrival Place" class="form-input p-1">
-      <p class="mb-0 me-2 ms-2">from</p>
       <input data-concert-template-target="newArrivalTime"  data-action="input->concert-template#newArrivalTime"  type="time" placeholder="Update Entry" class="form-input p-1">
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <%= form_with(url: new_transport_concert_template_path(@concert_template)) do |form| %>
         <div class=" d-flex justify-content-between align-items-center">
           <%= form.select :way_of_transport, Transport::WAY_OF_TRANSPORT_OPTIONS, { prompt: 'Select a Way of Transport' }, class: 'form-input p-1 ms-2' %>
@@ -80,5 +83,4 @@
       <% end %>
     </div>
   </div>
-
 </div>

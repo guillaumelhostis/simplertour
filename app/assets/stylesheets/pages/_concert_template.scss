@@ -1,0 +1,204 @@
+
+@media screen and (max-width: 480px) {
+
+  .timetable-entry {
+    p {
+      font-size: 7px;
+    }
+
+    width: 410%;
+  }
+
+  .transport-slot  {
+    width: 100%;
+    margin: 0px !important;
+    border: 0px;
+    flex-direction: column !important;
+    align-items: baseline !important;
+    padding: 5px;
+
+  }
+
+  .transport-slot-new {
+    flex-direction: column !important;
+    align-items: baseline !important;
+    p {
+      margin-left: 0px !important;
+    }
+    .form-input {
+      margin-left: 0px !important;
+    }
+  }
+
+  .transport-infos {
+    flex-direction: column !important;
+    align-items: baseline !important;
+    margin-right: 0px !important;
+    margin-top: 9px;
+  }
+
+  .transport-slot-new-infos {
+    flex-direction: column !important;
+    align-items: baseline !important;
+    .form-input {
+      margin-bottom: 8px;
+    }
+  }
+
+  .timetable-time-size {
+    width: 20px;
+  }
+
+  .transport-card-template {
+    flex-direction: column;
+    align-items: baseline !important;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.479);
+    padding: 8px;
+
+    .button-green {
+      margin: 9px 0px !important;
+    }
+  }
+
+
+  .transport-slot-edit {
+    flex-direction: column;
+    align-items: baseline !important;
+    margin: 0px !important;
+    padding: 5px;
+  }
+
+  .form-input-dark {
+    font-size: 8px;
+  }
+
+  .form-input-dark::placeholder {
+    font-size: 8px;
+  }
+
+  .form-input{
+    height: 15px;
+    font-size: 10px;
+  }
+
+
+  .form-input::placeholder {
+    height: 15px;
+    font-size: 10px;
+  }
+
+  .new-timetable-entry-template {
+    flex-direction: column;
+    align-items: baseline !important;
+
+    .button-green {
+      margin: 9px 0px !important;
+    }
+    .button-delete {
+      margin: 9px 0px !important;
+    }
+    p {
+      margin-left: 0px !important;
+    }
+  }
+
+  .hotel-infos-template {
+    flex-direction: column;
+    align-items: baseline !important;
+    div {
+      margin-left: 0px !important;
+    }
+  }
+
+  .hotel-infos-template-country {
+    flex-direction: column;
+    align-items: baseline !important;
+    .button-green {
+      margin: 0px !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  .hotels-infos {
+    width: 150px;
+    border: 0px;
+  }
+
+  .hotels-infos-edit {
+    flex-direction: column;
+    align-items: baseline !important;
+    .form-input {
+      margin: 0px  !important;
+      margin-bottom: 8px;
+    }
+    .button-delete {
+      margin: 0px !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  .hotel-infos-template-new {
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
+  .hotel-infos-template-new-submit {
+    flex-direction: column;
+    align-items: baseline !important;
+    div {
+      margin: 0px !important;
+    }
+  }
+
+  .hotel-infos-template-country-select {
+    margin: 0px !important;
+    width: 90%;
+  }
+
+  .concert-note {
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
+  .concert-note-edit {
+    flex-direction: column;
+    width: 100%;
+    align-items: baseline !important;
+    .form-input {
+      margin-top: 8px;
+    }
+    .button-green {
+      margin: 0px !important;
+      margin-top: 8px !important;
+      margin-right: 8px !important ;
+    }
+    .button-delete {
+      margin: 0px !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  .form-checklist-div {
+    flex-direction: column;
+    align-items: baseline !important;
+    .form-input {
+      margin-top: 8px;
+    }
+  }
+
+  .form-checklist-div-edit {
+    flex-direction: column;
+    width: 100%;
+    align-items: baseline !important;
+    .button-green {
+      margin: 0px !important;
+      margin-top: 8px !important;
+      margin-right: 8px !important ;
+    }
+    .button-delete {
+      margin: 0px !important;
+      margin-top: 8px !important;
+    }
+  }
+}

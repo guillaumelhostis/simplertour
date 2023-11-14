@@ -3,7 +3,6 @@
   <div class="listtoggletimetable">
     <div id="timetable-entries">
       <% @timetable_entries_data.each_with_index do |timetable_entry, index| %>
-
         <div class="timetable-entry d-flex justify-content-between align-items-center p-2 <%= index.even? ? 'even' : 'odd' %>">
           <div class="timetablehours pe-4">
             <div class="d-flex justify-content-between">
@@ -26,6 +25,7 @@
           <div class="timetableinfos ms-4">
             <p class="mb-0"><strong> <%= timetable_entry["information"] %></strong></p>
           </div>
+
             <input data-concert-template-target="entry<%= index %>" data-index="<%= index %>" data-action="keyup->concert-template#updateEntry"  type="text" placeholder="Update Entry" class="form-input-dark p-1">
               <p class="mb-0 me-2 ms-2 text-dark">from</p>
             <input data-concert-template-target="start<%= index %>" data-index="<%= index %>" data-action="input->concert-template#updateStart"  type="time" placeholder="Update Entry" class="form-input-dark p-1">
@@ -50,7 +50,7 @@
 
     </div>
   </div>
-  <div class=" d-flex justify-content-between align-items-center  mt-4">
+  <div class=" d-flex justify-content-between align-items-center  mt-4 new-timetable-entry-template">
     <input data-concert-template-target="newentry" data-action="keyup->concert-template#newEntry"  type="text" placeholder="New Entry" class="form-input p-1">
     <p class="mb-0 me-2 ms-2">from</p>
     <input data-concert-template-target="newstart"  data-action="input->concert-template#newStart"  type="time" placeholder="Update Entry" class="form-input p-1">

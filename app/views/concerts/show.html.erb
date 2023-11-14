@@ -1,34 +1,74 @@
 <div class="body-container" data-controller="concert">
-  <div class="d-flex justify-content-between">
-    <div class="col-7">
-      <div class=" col-12 mb-4 tour-titles">
-        <div class="d-flex align-items-center">
-          <h1><%= @concert.name.upcase %> </h1>
-          <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
+  <div class="d-flex justify-content-between concert-infos-container">
+    <div class="col-lg-7">
+      <div class="concert-menu-screens">
+        <div class=" col-lg-12 mb-4 tour-titles">
+          <div class="d-flex align-items-center">
+            <h1><%= @concert.name.upcase %> </h1>
+            <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
+          </div>
+          <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
+          <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
+          <% if @concert.venue %>
+            <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
+                format: :pdf,
+                tour: @tour,
+                venue: @concert.venue,
+                crew: @crew_users.to_json,
+                contacts: @contacts.to_json,
+                timetable: @timetable_entries.to_json),
+                class: "button-green",
+                target: "_blank"  %>
+          <% end %>
+          <a href="#" data-action="click->concert#openModalTemplate" class="button-green" >GENERATE TEMPLATE</a>
+          <%= link_to "SEND EMAIL", tour_concert_roadbook_email_path(@concert, @tour), class: "button-green" %>
+          <div class="modal-new-template" data-concert-target="modaltemplate">
+            <div class="modal-new-template-content">
+              <%= render partial: 'modal_new_template' %>
+            </div>
+          </div>
         </div>
-        <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
-        <%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'button-green'  %>
-        <% if @concert.venue %>
-          <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
-              format: :pdf,
-              tour: @tour,
-              venue: @concert.venue,
-              crew: @crew_users.to_json,
-              contacts: @contacts.to_json,
-              timetable: @timetable_entries.to_json),
-              class: "button-green",
-              target: "_blank"  %>
-        <% end %>
-        <a href="#" data-action="click->concert#openModalTemplate" class="button-green" >GENERATE TEMPLATE</a>
-        <%= link_to "SEND EMAIL", tour_concert_roadbook_email_path(@concert, @tour), class: "button-green" %>
-        <div class="modal-new-template" data-concert-target="modaltemplate">
-          <div class="modal-new-template-content">
-            <%= render partial: 'modal_new_template' %>
+      </div>
+      <div class="concert-menu-phones">
+        <div class=" col-lg-12 mb-4 tour-titles">
+          <div class="d-flex align-items-center">
+            <h1><%= @concert.name.upcase %> </h1>
+            <%= link_to "DELETE", tour_concert_path(@tour, @concert),  data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "button-delete ms-3" %>
+          </div>
+          <h2><%= @concert.date.strftime("%b %d %Y").upcase %></h2>
+          <div class="dropdown">
+            <button class="button-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              ACTIONS
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><%= link_to "BACK TO DASHBOARD", tour_path(@tour.id), class: 'dropdown-item'  %></li>
+              <% if @concert.venue %>
+                <li>
+                  <%= link_to "GENERATE PDF", generate_pdf_path(@concert.id,
+                      format: :pdf,
+                      tour: @tour,
+                      venue: @concert.venue,
+                      crew: @crew_users.to_json,
+                      contacts: @contacts.to_json,
+                      timetable: @timetable_entries.to_json),
+                      class: "dropdown-item",
+                      target: "_blank"  %>
+                </li>
+              <% end %>
+
+              <%# <li><a href="#" data-action="click->concert#openModalTemplate" class="dropdown-item" >GENERATE TEMPLATE</a></li> %>
+              <li><%= link_to "SEND EMAIL", tour_concert_roadbook_email_path(@concert, @tour), class: "dropdown-item" %></li>
+            </ul>
+          </div>
+          <div class="modal-new-template" data-concert-target="modaltemplate">
+            <div class="modal-new-template-content">
+              <%= render partial: 'modal_new_template' %>
+            </div>
           </div>
         </div>
       </div>
       <%= render partial: 'venue', locals: { tour: @tour, concert: @concert } %>
-      <div class="d-flex justify-content-between mb-2">
+      <div class="d-flex justify-content-between mb-2 concert-infos-container-crew-contact">
         <%= render partial: 'crew', locals: { tour: @tour, concert: @concert, guests: @guests, crew_user_concerts: @crew_user_concerts, crew_user_concert: @crew_user_concert} %>
         <%= render partial: 'contacts', locals: { tour: @tour, concert: @concert, contacts: @contacts, phoneprefixsorted: @phoneprefixsorted } %>
       </div>
@@ -40,9 +80,9 @@
         data-concertmap-hotelmarkers-value="<%= @hotel_markers.to_json %>"
         data-concertmap-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
-  </div>
     </div>
-    <div class="col-5 ms-2">
+    </div>
+    <div class="col-lg-5 ms-2 concert-infos-container-bis">
       <%= render partial: 'timetable', locals: { tour: @tour, concert: @concert, timeentry: @timeentry, timetable_entries: @timetable_entries } %>
       <%= render partial: 'hotels', locals: { tour: @tour, concert: @concert} %>
       <%= render partial: 'notes', locals: { tour: @tour, concert: @concert, note: @note, notes: @notes} %>

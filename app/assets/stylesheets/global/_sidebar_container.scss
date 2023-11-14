@@ -1,6 +1,5 @@
 .side-bar-container {
 
-
   position: fixed;
   height: 100%;
   width: 250px;
@@ -38,7 +37,6 @@
   background: #333;
 }
 
-/* Handle on hover */
 .side-bar-container .side-bar-menu::-webkit-scrollbar-thumb:hover {
   background: #000;
 }
@@ -49,7 +47,6 @@
   scrollbar-color: #999 #333;
   transition: scrollbar-color 0.5s;
 }
-
 
 .side-bar-tour-card{
   background: rgba(35,41,49,0.5);
@@ -68,8 +65,6 @@
   transition: 0.3s;
 }
 
-
-
 .side-bar-tour-card h2{
   font-size: 11px;
   margin: 0px;
@@ -79,7 +74,6 @@
   font-size: 11px;
   margin: 0px;
 }
-
 
 .side-bar-tour-card-img {
   height: 60px;
@@ -103,7 +97,6 @@
   padding: 10px 0px;
 }
 
-
 .templates_items {
   background: rgba(35,41,49,0.5);
   border-radius: 5px;
@@ -117,4 +110,47 @@
   overflow-y: scroll;
   scrollbar-color: #999 #333;
   transition: scrollbar-color 0.5s;
+}
+
+#templates-sidebar-phones {
+  display: none;
+}
+
+#templates-sidebar-screens {
+  display: block;
+}
+
+@media screen and (max-width: 480px) {
+
+  .side-bar-container {
+    position: fixed;
+    height: 100%;
+    width: 90px;
+    top: 0px;
+    left: 9px;
+  }
+
+  .side-bar-home span {
+    font-size: 12px;
+  }
+
+  .side-bar-menu span {
+    font-size: 12px;
+  }
+
+  .side-bar-tour-card-content {
+    display: none !important;
+  }
+
+  #templates-sidebar-phones {
+    display: block;
+  }
+
+  #templates-sidebar-screens {
+    display: none;
+  }
+
+  .templates_list p {
+    font-size: 7px;
+  }
 }

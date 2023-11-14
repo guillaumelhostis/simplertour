@@ -15,8 +15,22 @@
 }
 
 
+
+.tour-crew-list-lg {
+  display: block;
+}
+
+.tour-crew-list-phones {
+  display: none;
+}
+
 .tour-titles h2{
   font-size: 32px;;
+}
+
+.upcoming-tour-card-content {
+  padding: 10px;
+  padding-left: 21px;
 }
 
 
@@ -215,4 +229,117 @@
       font-size: 8px;
       font-weight: 500;
     }
+  }
+
+  .see-more-screens {
+    display: block;
+  }
+
+  .see-more-phones {
+    display: none;
+  }
+
+  .delete-tour-phones {
+      display: none;
+  }
+
+  .delete-tour-large-screen {
+    display: block;
+  }
+
+  .new-show-form {
+    display: flex;
+  }
+
+  @media screen and (max-width: 480px) {
+
+    .tour-titles {
+      h1{
+        font-size: 13px;
+      }
+      h2{
+        font-size: 13px;
+      }
+    }
+
+    .concert-status-list {
+      p {
+        font-size: 7px;
+      }
+    }
+
+    .user-today-show-card {
+      height: 85px !important;
+    }
+
+    .user-today-show-card-img{
+      height: 83px !important;
+      width: 86px !important;
+      img {
+        width: 84px !important;
+      }
+    }
+
+    .user-today-show-card-content {
+      padding: 8px !important;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h2 {
+        margin: 0px;
+      }
+    }
+
+    .see-more-screens {
+      display:none;
+    }
+
+    .see-more-phones {
+      display:block;
+      a {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .delete-tour-phones {
+      display: block;
+    }
+
+    .delete-tour-large-screen {
+      display: none;
+    }
+
+    .new-show-form {
+      flex-direction: column;
+      .form-input  {
+        margin: 0px !important;
+        margin-bottom: 1rem !important;
+      }
+
+      .button-green {
+        margin: 0px !important;
+        margin-bottom: 1rem !important;
+      }
+    }
+
+    .tour-crew-list-lg {
+      display: none;
+    }
+
+    .tour-crew-list-phones {
+      display: block;
+    }
+
+    .modal-template-lists-content {
+      margin: 60% auto;
+      width: 350px;
+      max-width: 350px;
+      text-align: center;
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+
   }

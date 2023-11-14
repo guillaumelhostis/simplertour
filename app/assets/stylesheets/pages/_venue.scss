@@ -22,3 +22,26 @@
   font-size: 11px;
   margin: 0px;
 }
+
+.venues-list-lg {
+  display: block;
+}
+
+.venues-list-phones {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+
+  .venues-list-lg {
+    display: none;
+  }
+
+  .venues-list-phones {
+    display: block;
+
+  }
+
+
+
+}

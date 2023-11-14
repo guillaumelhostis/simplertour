@@ -92,8 +92,6 @@
   // width: 100%;
 }
 
-
-
 /* Dropdown styles for smaller screens */
 .dropdown {
   position: relative;
@@ -154,11 +152,10 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   transition: 0.8s;
+  text-align: center;
   backdrop-filter: blur(5px); /* Apply the blur effect */
   -webkit-backdrop-filter: blur(5px); /* For older versions of Safari */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
 
 }
 
@@ -182,25 +179,29 @@
   color: white;
 }
 
-/* Change the link color on hover */
+
 .dropdown-content-picture a:hover {
   background-color: #ddd;
 }
 
-/* Show the dropdown content when the show class is present */
+
 .dropdown-content-picture.show {
   display: block;
 }
 
+@media screen and (max-width: 480px) {
 
-@media screen and (max-width: 850px) {
-  /* Hide the original menu links for smaller screens */
-  .simpler-tour-menu-links {
-    display: none;
+  .hello-user  {
+    display: none !important;
   }
 
-  .simpler-tour-dropdown-menu {
-    display: block;
-    padding-left: 30px ;
+  .modal-navbar-content {
+    margin: 60% auto;
+    width: 200px;
+    max-width: 200px;
+    text-align: center;
+    h2 {
+      font-size: 20px;
+    }
   }
 }

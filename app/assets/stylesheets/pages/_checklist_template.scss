@@ -1,0 +1,14 @@
+.new-task-phones {
+  div {
+    margin: 0px !important;
+    margin-right: 8px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .checklist-template-phones {
+    flex-direction: column !important;
+    align-items: baseline !important;
+  }
+
+}

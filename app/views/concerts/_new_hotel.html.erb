@@ -2,12 +2,12 @@
   <div class="modal-new-hotel-content">
     <span class="close-modal-new-hotel" data-action="click->concert#closeModalThree"><i class="fas fa-times black-icon"></i></span>
     <div class="add-new-hotel mt-3">
-      <div class="d-flex justify-content-between">
-        <div class="col-5">
+      <div class="d-flex justify-content-between new-hotel-form-phones">
+        <div class="col-lg-5">
           <div class="text-center mb-3"><p class="m-0">CREATE NEW HOTEL</p></div>
           <%= render partial: 'new_hotel_form', locals: { hotel: @hotel, concert: @concert, tour: @tour} %>
         </div>
-        <div class="col-5">
+        <div class="col-lg-5">
           <div class="text-center mb-3"><p class="m-0">SEARCH EXISTING HOTEL IN DB</p></div>
           <div class="d-flex mt-3 justify-content-start align-items-center">
             <%= form_tag tour_concert_concert_hotels_path(@tour, @concert), method: :post do %>

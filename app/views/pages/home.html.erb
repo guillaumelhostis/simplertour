@@ -12,19 +12,14 @@
         <div class="modal-content">
           <!-- Modal content goes here -->
           <span class="close" data-action="click->home#closeModal"><i class="fas fa-times black-icon"></i></span>
-          <div class="text-center mb-3">
-            <h2>SELECT YOUR ROLE</h2>
-          </div>
 
-          <div class="d-flex justify-content-around mb-3">
-            <div>
+            <div class="mb-3">
               <%= link_to "SIGN IN AS A TOUR MANAGER", new_tourman_registration_path, class: "button-green" %>
             </div>
-            <div>
+
+            <div class="mb-3">
               <%= link_to "SIGN IN AS A CREW MEMBER", new_user_registration_path, class: "button-green" %>
             </div>
-          </div>
-
         </div>
       </div>
       <% if !tourman_signed_in?  && !user_signed_in?%>
