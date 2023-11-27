@@ -8,7 +8,6 @@ class ChecklistsController < ApplicationController
     if @checklist.save
       redirect_to tour_concert_path(@concert, @tour), notice: "Checklist item added."
     else
-
       redirect_to tour_concert_path(@concert, @tour)
     end
   end
@@ -43,7 +42,6 @@ class ChecklistsController < ApplicationController
       checklist.save
     end
     redirect_to tour_concert_path(@concert, @tour), notice: "Checklist template added."
-
   end
 
   private

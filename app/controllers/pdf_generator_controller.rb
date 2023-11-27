@@ -1,10 +1,7 @@
 # app/controllers/pdf_generator_controller.rb
 class PdfGeneratorController < ApplicationController
   def generate_pdf
-    # Fetch the data you want to display in the PDF
     require 'prawn/measurement_extensions'
-
-
     @concert = Concert.find(params[:id])
     @tour = Tour.find(params[:tour])
     @venue = Venue.find(params[:venue])
@@ -22,8 +19,6 @@ class PdfGeneratorController < ApplicationController
       format.pdf do
         pdf = Prawn::Document.new
         font_path = "#{Rails.root}/app/assets/fonts"
-
-
         pdf.font_families.update(
           'Roboto' => {
             normal: { file: "#{font_path}/Roboto-Regular.ttf" },
@@ -33,13 +28,7 @@ class PdfGeneratorController < ApplicationController
           }
         )
 
-        # Loop through your instances and add data to the PDF
-        # Loop through your instances and add data to the PDF
-
         pdf.stroke_axis(step_length: 20, color: '0000FF')
-
-
-        #HEADER
         pdf.bounding_box([0, 720], width: 540, height: 90) do
           # Define the width for the image section and text section
           image_width = 100
@@ -84,15 +73,12 @@ class PdfGeneratorController < ApplicationController
             else
               pdf.fill_color 'FFFFFF'  # White background for odd lines
             end
-
             pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
-
             pdf.fill_color '000000' # Reset fill color for text
             pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Regular.ttf") do
             # Column 1: timetable.hourminute
               pdf.text_box timetable.hourminute&.strftime('%H:%M'), at: [pdf.bounds.left + 5, pdf.bounds.top],
                 valign: :center, size: 8
-
               # Column 2: timetable.hourminuteend
               if !timetable.hourminuteend.nil?
                 pdf.text_box timetable.hourminuteend&.strftime('%H:%M'), at: [pdf.bounds.left + 40, pdf.bounds.top],
@@ -134,9 +120,7 @@ class PdfGeneratorController < ApplicationController
           pdf.text_box "#{@venue.address} #{@venue.postcode} #{@venue.city} #{@venue.country}", at: [pdf.bounds.left + 60, pdf.bounds.top],
           valign: :center, size: 8, inline_format: true
         end
-
         cursor = cursor - 10
-
         pdf.bounding_box([0, cursor], width: 540, height: 15) do
           pdf.font 'Roboto'
           pdf.text_box "<b>Capacity:</b>", at: [pdf.bounds.left + 5, pdf.bounds.top],
@@ -144,7 +128,6 @@ class PdfGeneratorController < ApplicationController
           pdf.text_box " #{@venue.capacity} ", at: [pdf.bounds.left + 60, pdf.bounds.top],
           valign: :center, size: 8, inline_format: true
         end
-
         cursor = cursor - 20
 
 
@@ -209,23 +192,15 @@ class PdfGeneratorController < ApplicationController
             else
               pdf.fill_color 'FFFFFF'  # White background for odd lines
             end
-
             pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
-
             pdf.fill_color '000000' # Reset fill color for text
-
             pdf.font 'Roboto'
-
-           #{User.find(crew_user.user_id).first_name}#{' '}#{User.find(crew_user.user_id).last_name} #{' ' * 3}  <color rgb='0000FF'>#{User.find(crew_user.user_id).email}</i></color>"
-
             pdf.text_box "<b>#{crew_user.role}:</b>", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8, inline_format: true
             pdf.text_box "#{User.find(crew_user.user_id).first_name}#{' '}#{User.find(crew_user.user_id).last_name}", at: [pdf.bounds.left + 60, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
             valign: :center, size: 8, inline_format: true
             pdf.text_box " <color rgb='0000FF'>#{User.find(crew_user.user_id).email}</i></color>", at: [pdf.bounds.left + 170, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
             valign: :center, size: 8, inline_format: true
-
-
           end
           cursor = cursor - 15
         end

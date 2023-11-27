@@ -25,12 +25,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-
   private
-
-
-
-
-
 
 end

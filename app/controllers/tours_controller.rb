@@ -27,15 +27,12 @@ class ToursController < ApplicationController
     @concert_dates = []
     @concert_index = []
     @concert_status = []
-
     @concerts.each do |concert|
       @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
     end
-
     @concerts.each do |concert|
       @concert_index << concert.id
     end
-
     @concerts.each do |concert|
       status = concert.calculate_status
       concert.status = status
@@ -43,7 +40,6 @@ class ToursController < ApplicationController
 
       @concert_status << concert.status
     end
-
     @concert = Concert.new
     @today_concerts = @concerts.select { |concert| concert.date == current_date }
     current_date = Date.current
@@ -59,7 +55,6 @@ class ToursController < ApplicationController
   end
 
   def create
-
     @tour = Tour.new(tour_params)
     @tour.tourman_id = current_tourman.id
     authorize @tour
@@ -68,7 +63,6 @@ class ToursController < ApplicationController
     @newcrew.save
     @tour.crew_id = @newcrew.id
     @tour.save
-
     redirect_to tours_path()
   end
 
@@ -79,17 +73,12 @@ class ToursController < ApplicationController
   def update
     authorize @tour
     @tour.update(tour_params)
-
     redirect_to tour_path(@tour)
   end
 
   def destroy
-
     authorize @tour
-
     @tour.destroy
-
-    # No need for app/views/restaurants/destroy.html.erb
     redirect_to tours_path, status: :see_other
   end
 

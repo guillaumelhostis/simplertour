@@ -1,9 +1,9 @@
 class TransportsController < ApplicationController
+
   def create
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @transport = Transport.new(transport_params)
-
     concert_date = @concert.date
     arrival_hour = @transport.time_of_arrival.hour
     arrival_minute = @transport.time_of_arrival.min
@@ -14,9 +14,7 @@ class TransportsController < ApplicationController
     @transport.time_of_arrival = new_time_of_arrival
     @transport.time_of_depart = new_time_of_depart
     @transport.concert_id = @concert.id
-
     authorize @transport
-
     if @transport.save
       redirect_to tour_concert_path(@concert, @tour)
     else
@@ -25,12 +23,9 @@ class TransportsController < ApplicationController
   end
 
   def update
-
     @transport = Transport.find(params[:id])
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
-
-
     authorize @transport
     if @transport.update(transport_params)
       redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
@@ -43,14 +38,10 @@ class TransportsController < ApplicationController
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @transport = Transport.find(params[:id])
-
     @transport.destroy
     authorize @transport
-
     redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
   end
-
-
 
   private
 

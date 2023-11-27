@@ -1,7 +1,6 @@
 class CrewsController < ApplicationController
   before_action :set_crew, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @crews = policy_scope(Crew)
   end
@@ -12,18 +11,13 @@ class CrewsController < ApplicationController
     authorize @crew
     @users = User.all
     @crew_users = CrewUser.where(crew_id: @crew).order(created_at: :asc)
-
-
     @tour = Tour.find_by(crew_id: @crew.id)
   end
-
 
   def assign_users
     @crew = Crew.find(params[:id])
     @users = User.where(id: params[:user_ids])
-
     role = params[:role]
-
     if @crew.users.exists?(id: @users.ids[0])
       redirect_to @crew, notice: "User is already in the team #{@crew.name}"
       authorize @crew
@@ -43,14 +37,9 @@ class CrewsController < ApplicationController
   end
 
   def assign_users_role
-
     @crew = Crew.find(params[:id])
-
     @crewuser = CrewUser.find_by(user_id: params[:format], crew_id: params[:id] )
-
-
     role = params[:role]
-
     authorize @crew
     if @crewuser.update(role: role)
       render json: { success: true, message: 'Role updated successfully', role: @crewuser.role }
@@ -60,13 +49,10 @@ class CrewsController < ApplicationController
   end
 
   def update_role_in_crew_member
-
-
     @crew = Crew.find(params[:id])
     @crewuser = CrewUser.find_by(user_id: params[:user_id], crew_id: params[:id] )
     @crewuser.role = nil
     authorize @crew
-
     if @crewuser.save
       render json: { success: true, message: 'Role updated successfully', role: @crewuser.role }
     else
@@ -76,25 +62,18 @@ class CrewsController < ApplicationController
   end
 
   def unassign_user
-
     @crew = Crew.find(params[:id])
     @user = User.find(params[:user_id])
-
     @crew.users.delete(@user)
     authorize @crew
-
     redirect_to @crew, notice: 'User was successfully unassigned from the team.'
   end
-
-
 
   private
 
   def crew_params
     params.require(:crew).permit(:name)
   end
-
-
 
   def set_crew
     @crew = Crew.find(params[:id])

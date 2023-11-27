@@ -4,7 +4,6 @@ class HotelsController < ApplicationController
     @tours = Tour.where(tourman_id: current_tourman.id)
     @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @hotels = policy_scope(Hotel)
-
   end
 
   def new
@@ -16,7 +15,6 @@ class HotelsController < ApplicationController
     @hotel = Hotel.find(params[:id])
     authorize @hotel
   end
-
 
   def edit
     @tours = Tour.where(tourman_id: current_tourman.id)
@@ -71,6 +69,4 @@ class HotelsController < ApplicationController
   def hotel_params
     params.require(:hotel).permit(:name, :standing, :postcode, :address, :city, :country, :tourman_id)
   end
-
-
 end

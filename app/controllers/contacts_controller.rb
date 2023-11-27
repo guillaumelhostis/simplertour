@@ -3,19 +3,14 @@ class ContactsController < ApplicationController
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @contact = Contact.new(contact_params)
-
-
     @contact.concert_id = @concert.id
     authorize @contact
-
     if @contact.save
       redirect_to tour_concert_path(@concert, @tour)
     else
       redirect_to tour_concert_path(@concert, @tour), notice: 'New contact added'
     end
   end
-
-
 
   private
 

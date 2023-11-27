@@ -2,13 +2,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate!
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pundit::Authorization
-
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
-
-
   protect_from_forgery with: :exception
-
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def user_not_authorized
@@ -35,7 +31,6 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || pages_user_dashboard_path
     end
   end
-
 
   private
 
