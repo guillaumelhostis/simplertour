@@ -34,15 +34,12 @@ class ConcertsController < ApplicationController
     @concert.status = status
     @concert.save
     @crew_users = @crew.crew_users
-
     @crew_user_concert = CrewUserConcert.new
     @users_on_this_concert = []
-
     @crew_user_concerts = @concert.crew_user_concerts
     @crew_user_concerts.each do |crew_user_concert|
       @users_on_this_concert << crew_user_concert.crew_user.user
     end
-
     @checklist_template = ChecklistTemplate.new
     @checklist_templates = ChecklistTemplate.where(tourman_id: current_tourman.id)
     @hotel_geocoders = []
@@ -80,11 +77,7 @@ class ConcertsController < ApplicationController
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.build(concert_params)
     authorize @concert
-
-
-    # @venue = Venue.find(params[:concert][:venue_id])
     @concert.venue = nil
-    # @concert.hotel = nil
     if @concert.save
       redirect_to tour_path(@tour), notice: 'Concert was successfully created.'
     else
@@ -101,12 +94,8 @@ class ConcertsController < ApplicationController
   def update
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:id])
-
-
     authorize @concert
-
     if @concert.update(concert_params)
-
       redirect_to tour_concert_path(@concert), notice: 'Concert was successfully updated.'
     else
       render :show
@@ -114,7 +103,6 @@ class ConcertsController < ApplicationController
   end
 
   def destroy
-
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:id])
     authorize @concert
@@ -127,9 +115,6 @@ class ConcertsController < ApplicationController
     @concert = Concert.find(params[:tour_id])
     @concert.update(venue_id: nil)
     authorize @concert
-    # respond_to do |format|
-    #   format.js
-    # end
     redirect_to tour_concert_path(@tour, @concert), notice: 'Venue Removed'
   end
 
@@ -138,7 +123,6 @@ class ConcertsController < ApplicationController
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
     authorize @concert
-
     @timetable_entry.destroy
     redirect_to tour_concert_path(@tour, @concert), notice: 'Timetable updated'
   end
@@ -147,9 +131,7 @@ class ConcertsController < ApplicationController
     @contact = Contact.find(params[:contact_id].to_i)
     @concert = Concert.find(params[:concert_id].to_i)
     @tour = Tour.find(params[:tour_id].to_i)
-
     authorize @concert
-
     @contact.destroy
     redirect_to tour_concert_path(@tour, @concert), notice: 'Contact Delete'
   end
@@ -160,19 +142,15 @@ class ConcertsController < ApplicationController
     @tour = Tour.find(params[:concert_id].to_i)
     @crew = @tour.crew
     @crew_users = @crew.users
-
     @crew_users.each do |user|
       RoadbookMailer.roadbook_email(user).deliver_now
     end
     redirect_to tour_concert_path(@concert, @tour), notice: 'Mails sent'
   end
 
-
   private
 
   def concert_params
     params.require(:concert).permit(:date, :location, :name, :venue_id, hotel_ids: [])
   end
-
-
 end

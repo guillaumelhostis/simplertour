@@ -25,7 +25,6 @@ class ConcertHotelsController < ApplicationController
   end
 
   def add_guest
-
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
     @concert_hotel = @concert.concert_hotels.find(params[:id])
@@ -37,48 +36,25 @@ class ConcertHotelsController < ApplicationController
   end
 
   def remove_user
-
     @tour = Tour.find(params[:tour_id])
-
     @concert = @tour.concerts.find(params[:concert_id])
-
     @concert_hotel = @concert.concert_hotels.find(params[:id])
     @user = User.find(params[:user_id])
-
-
     @concert_hotel_user = @concert_hotel.concert_hotel_users.find_by(user: @user)
-
-
     authorize @concert_hotel
     @concert_hotel_user.destroy
-
     redirect_to tour_concert_path(@concert, @tour)
-
-    # respond_to do |format|
-    #   format.js   # Render JavaScript response
-    # end
   end
 
   def remove_guest
-
-
     @tour = Tour.find(params[:tour_id])
-
     @concert = @tour.concerts.find(params[:concert_id])
-
     @concert_hotel = @concert.concert_hotels.find(params[:id])
     @guest = Guest.find(params[:guest_id])
-
-
     @concert_hotel_guest = @concert_hotel.concert_hotel_guests.find_by(guest: @guest)
-
-
     authorize @concert_hotel
     @concert_hotel_guest.destroy
-
     redirect_to tour_concert_path(@concert, @tour)
-
-
   end
 
   def destroy
@@ -87,11 +63,9 @@ class ConcertHotelsController < ApplicationController
     @concert_hotel.destroy
     @tour = Tour.find(params[:tour_id])
     @concert = @tour.concerts.find(params[:concert_id])
-
     respond_to do |format|
       format.html { redirect_to tour_concert_path(@tour, @concert), notice: 'Concert hotel was successfully removed.' }
       format.json { head :no_content }
     end
   end
-
 end

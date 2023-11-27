@@ -47,7 +47,6 @@ class PagesController < ApplicationController
         marker_html: render_to_string(partial: "hotel_marker")
       }
     end
-
     @venue_markers =  @venue_geocoders.map do |location|
       {
         lat: location.latitude,
@@ -55,7 +54,6 @@ class PagesController < ApplicationController
         marker_html: render_to_string(partial: "venue_marker")
       }
     end
-
   end
 
   def tourman
@@ -64,11 +62,7 @@ class PagesController < ApplicationController
 
   def search
     query = params[:query]
-
-    # Implement your user search logic here, e.g., using ActiveRecord
     @users = User.where('LOWER(first_name) LIKE :query OR LOWER(last_name) LIKE :query', query: "%#{query.downcase}%")
-
-
     render json: @users
   end
 

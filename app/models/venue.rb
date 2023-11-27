@@ -14,7 +14,6 @@ class Venue < ApplicationRecord
 
   def files=(attachables)
     attachables = Array(attachables).compact_blank
-
     if attachables.any?
       attachment_changes["files"] =
         ActiveStorage::Attached::Changes::CreateMany.new("files", self, files.blobs + attachables)

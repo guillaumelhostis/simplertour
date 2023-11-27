@@ -1,5 +1,6 @@
 
 class TransportUsersController < ApplicationController
+
   def create
     @transport = Transport.find(params[:transport_id])
     @user = User.find(params[:transport_user][:user_id])
@@ -50,5 +51,4 @@ class TransportUsersController < ApplicationController
   def transport_user_params
     params.require(:transport_user).permit(files: [])
   end
-
 end

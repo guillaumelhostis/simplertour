@@ -21,8 +21,6 @@ class NotesController < ApplicationController
     redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Deleted'
   end
 
-
-
   private
 
   def note_params
