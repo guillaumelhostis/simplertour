@@ -1,44 +1,32 @@
-
 <div class="body-container">
   <h1 class="mb-3">NEW VENUE</h1>
   <div>
     <%= simple_form_for(@venue) do |f| %>
-
       <%= f.input :name,
           autofocus: true,
           label: false,
           placeholder: "Venue Name",
           input_html: { class: 'form-input' }  %>
-
-
       <%= f.input :address,
           autofocus: true,
           label: false,
           placeholder: "Address",
           input_html: { class: 'form-input' }  %>
-
-
       <%= f.input :postcode,
           autofocus: true,
           label: false,
           placeholder: "Post Code",
           input_html: { class: 'form-input' }  %>
-
-
       <%= f.input :city,
           autofocus: true,
           label: false,
           placeholder: "City",
           input_html: { class: 'form-input' }  %>
-
-
       <%= f.input :country,
           autofocus: true,
           label: false,
           prompt: "Select a country",
           input_html: { class: 'form-input' } %>
-
-
       <%= f.input :capacity,
           autofocus: true,
           label: false,
@@ -46,12 +34,9 @@
           input_html: { class: 'form-input' }  %>
       <%= f.input :files, as: :file,
           label: false,
-
           prompt: "Attachements",
           input_html: { class: 'form-input', onchange: 'updateFileName(this)', multiple: true } %>
       <%= f.input :concert, as: :hidden, input_html: { value: @concert.id } %>
-      <%= f.input :tour, as: :hidden, input_html: { value: @tour.id } %>
-
       <%= f.submit "NEW VENUE", class:"button-green" %>
     <% end %>
   </div>
