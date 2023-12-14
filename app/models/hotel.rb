@@ -5,6 +5,7 @@ class Hotel < ApplicationRecord
   belongs_to :tourman
   geocoded_by :full_street_address
   after_validation :geocode, if: :will_save_change_to_address?
+  validates :name, :address, :postcode, :city, :country, :standing, presence: true
 
   def full_street_address
     [address, postcode, city, country].compact.join(', ')
