@@ -1,5 +1,4 @@
 class VenueCreationService
-  include Pundit
 
   def initialize(venue_params, current_tourman, concert)
     @venue_params = venue_params
@@ -28,7 +27,7 @@ class VenueCreationService
     @venue = Venue.new(@venue_params.merge(tourman_id: @current_tourman.id))
   end
 
-  def save_venue_with_files
+  def save_venue
     @success = @venue.save
   end
 

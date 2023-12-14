@@ -39,8 +39,11 @@ class VenuesController < ApplicationController
   end
 
   def destroy
-    @venue.destroy
-    redirect_to venues_path, notice: 'Venue was successfully destroyed.'
+    if @venue.destroy
+      redirect_to venues_path, notice: 'Venue was successfully destroyed'
+    else
+      redirect_to edit_venue_path(@venue), notice: 'Something went wrong'
+    end
   end
 
   private
