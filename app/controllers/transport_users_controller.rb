@@ -1,25 +1,20 @@
-
 class TransportUsersController < ApplicationController
+  before_action :set_concert_and_tour, only: [:create, :udpate, :destroy, :destroy_attachment]
+  before_action :set_transport_user, only: [:update, :destroy, :destroy_attachment]
 
   def create
     @transport = Transport.find(params[:transport_id])
     @user = User.find(params[:transport_user][:user_id])
     @transport_user = TransportUser.new(transport: @transport, user: @user)
-    @concert = Concert.find(params[:concert_id])
-    @tour = Tour.find(params[:tour_id])
     authorize @transport_user
     if @transport_user.save
-      redirect_to tour_concert_path(@concert, @tour), notice: 'User added'
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Team member added'
     else
       redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
     end
   end
 
   def update
-    @concert = Concert.find(params[:concert_id])
-    @tour = Tour.find(params[:tour_id])
-    @transport_user = TransportUser.find(params[:id])
-    authorize @transport_user
     if @transport_user.update(transport_user_params)
       redirect_to tour_concert_path(@concert, @tour), notice: 'Attachment added'
     else
@@ -28,27 +23,35 @@ class TransportUsersController < ApplicationController
   end
 
   def destroy
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @transport_user = TransportUser.find(params[:id])
-    @transport_user.destroy
-    authorize @transport_user
-    redirect_to tour_concert_path(@concert, @tour), notice: 'User Delete'
+    if @transport_user.destroy
+      redirect_to tour_concert_path(@concert, @tour), notice: 'User Delete'
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 
   def destroy_attachment
-    @tour = Tour.find(params[:tour_id])
-    @concert = Concert.find(params[:concert_id])
-    @transport_user = TransportUser.find(params[:id])
-    @image = ActiveStorage::Attachment.find(params[:attachment_id])
-    authorize @transport_user
-    @image.purge
-    redirect_to tour_concert_path(@concert, @tour), notice: 'Attachment deleted'
+    @attachment = ActiveStorage::Attachment.find(params[:attachment_id])
+    if @attachment.purge
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Attachment deleted'
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 
   private
 
   def transport_user_params
     params.require(:transport_user).permit(files: [])
+  end
+
+  def set_concert_and_tour
+    @tour = Tour.find(params[:tour_id])
+    @concert = Concert.find(params[:concert_id])
+  end
+
+  def set_transport_user
+    @transport_user = TransportUser.find(params[:id])
+    authorize @transport_user
   end
 end
