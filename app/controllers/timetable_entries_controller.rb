@@ -2,14 +2,14 @@ class TimetableEntriesController < ApplicationController
 
   def create
     @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
+    @concert = Concert.find(params[:concert_id])
     @timeentry = TimetableEntry.new(timetable_entries_params)
     @timeentry.concert_id = @concert.id
     authorize @timeentry
     if @timeentry.save
-      redirect_to tour_concert_path(@concert, @tour)
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Entry added'
     else
-      redirect_to tour_concert_path(@concert, @tour), notice: 'You have to insert at least an event and a Start Time'
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Oupsi something went wrong'
     end
   end
 

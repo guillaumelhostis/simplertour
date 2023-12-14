@@ -1,85 +1,48 @@
 class ToursController < ApplicationController
-  before_action :set_tour, only: [:show, :edit, :update, :destroy]
+  before_action :set_tour, only: [:show, :destroy]
+  before_action :set_tour_and_concert_templates , only: [:index, :show, :new]
 
   def index
-    @tours = policy_scope(Tour)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
-    @even_index_tours = []
-    @odd_index_tours = []
-    @tours.each_with_index do |tour, index|
-      if index.even?
-        @even_index_tours << tour
-      else
-        @odd_index_tours << tour
-      end
-    end
     @tour = Tour.new
+    @tours = policy_scope(Tour)
   end
 
   def show
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
-    authorize @tour
-    current_date = Date.current
-    @crew = Crew.find(@tour.crew_id)
-    @crew_users = @crew.users
-    @concerts = @tour.concerts
-    @concert_dates = []
-    @concert_index = []
-    @concert_status = []
-    @concerts.each do |concert|
-      @concert_dates << concert.date.strftime("%B %e, %Y").gsub(/[[:space:]]/, '')
-    end
-    @concerts.each do |concert|
-      @concert_index << concert.id
-    end
-    @concerts.each do |concert|
-      status = concert.calculate_status
-      concert.status = status
-      concert.save
-
-      @concert_status << concert.status
-    end
-    @concert = Concert.new
-    @today_concerts = @concerts.select { |concert| concert.date == current_date }
-    current_date = Date.current
-    @upcoming_concerts =  @concerts.select { |concert| concert.date > current_date }
-    @upcoming_concerts = @upcoming_concerts.sort_by { |concert| concert.date }
+      service = TourShowService.new(@tour)
+      service.call
+      @crew = service.crew
+      @crew_users = service.crew_users
+      @concerts = service.concerts
+      @concert_dates = service.concert_dates
+      @concert_index = service.concert_index
+      @concert_status = service.concert_status
+      @concert = Concert.new
+      @today_concerts = service.today_concerts
+      @upcoming_concerts = service.upcoming_concerts
   end
 
   def new
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @tour= Tour.new
     authorize @tour
   end
 
   def create
-    @tour = Tour.new(tour_params)
-    @tour.tourman_id = current_tourman.id
-    authorize @tour
-    @tour.save
-    @newcrew = Crew.new(name: "Team #{@tour.title}")
-    @newcrew.save
-    @tour.crew_id = @newcrew.id
-    @tour.save
-    redirect_to tours_path()
-  end
-
-  def edit
-    authorize @tour
-  end
-
-  def update
-    authorize @tour
-    @tour.update(tour_params)
-    redirect_to tour_path(@tour)
+    service = TourCreationService.new(tour_params, current_tourman)
+    service.call
+    authorize service.tour
+    if service.success
+      redirect_to tour_path(service.tour), notice: "#{service.tour.title} created"
+    else
+      redirect_to tours_path, notice: "Something went wrong"
+    end
   end
 
   def destroy
-    authorize @tour
-    @tour.destroy
-    redirect_to tours_path, status: :see_other
+    if @tour.destroy
+      redirect_to tours_path, notice: "Tour destroyed"
+    else
+      redirect_to tour_path(@tour), notice: "Something went wrong"
+    end
   end
 
   private
@@ -89,6 +52,16 @@ class ToursController < ApplicationController
   end
 
   def set_tour
-    @tour = Tour.find(params[:id])
+    @tour = Tour.find_by(id: params[:id])
+    if @tour.present?
+      authorize @tour
+    else
+      redirect_to tours_path, notice: "This Tour doesn't exist"
+    end
+  end
+
+  def set_tour_and_concert_templates
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
   end
 end

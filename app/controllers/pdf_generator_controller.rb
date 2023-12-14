@@ -1,4 +1,3 @@
-# app/controllers/pdf_generator_controller.rb
 class PdfGeneratorController < ApplicationController
   def generate_pdf
     require 'prawn/measurement_extensions'
@@ -27,16 +26,13 @@ class PdfGeneratorController < ApplicationController
             bold_italic: { file: "#{font_path}/Roboto-BoldItalic.ttf" }
           }
         )
-
         pdf.stroke_axis(step_length: 20, color: '0000FF')
         pdf.bounding_box([0, 720], width: 540, height: 90) do
           # Define the width for the image section and text section
           image_width = 100
           text_width = pdf.bounds.width
-
           tour_picture = StringIO.open(@tour.picture.download)
           pdf.image tour_picture, fit: [image_width, pdf.bounds.height]
-
           pdf.font("#{Rails.root}/app/assets/fonts/Roboto-Bold.ttf") do
             pdf.text_box "#{@tour.artist.upcase}", at: [0, pdf.bounds.top - 10 ], # Adjust the vertical position here
               width: text_width,
@@ -84,10 +80,8 @@ class PdfGeneratorController < ApplicationController
                 pdf.text_box timetable.hourminuteend&.strftime('%H:%M'), at: [pdf.bounds.left + 40, pdf.bounds.top],
                 valign: :center, size: 8
               end
-
               pdf.text_box "|", at: [pdf.bounds.left + 100, pdf.bounds.top],
                 valign: :center, size: 8
-
               # Column 3: timetable.information
               pdf.text_box timetable.information, at: [pdf.bounds.left + 140, pdf.bounds.top],
                 valign: :center, size: 8
@@ -281,15 +275,11 @@ class PdfGeneratorController < ApplicationController
             else
               pdf.fill_color 'FFFFFF'  # White background for odd lines
             end
-
             pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
-
             pdf.fill_color '000000' # Reset fill color for text
-
             pdf.font 'Roboto'
             pdf.text_box "#{note.description}", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8, inline_format: true
-
           end
           cursor = cursor - 15
         end
@@ -315,11 +305,8 @@ class PdfGeneratorController < ApplicationController
             else
               pdf.fill_color 'FFFFFF'  # White background for odd lines
             end
-
             pdf.transparent(0.5) { pdf.fill_rectangle([pdf.bounds.left, pdf.bounds.top], pdf.bounds.width, pdf.bounds.height)}
-
             pdf.fill_color '000000' # Reset fill color for text
-
             pdf.font 'Roboto'
             pdf.text_box "<b>#{transport.way_of_transport.upcase}</b> from: <b>#{transport.place_of_depart}</b> at <b>#{transport.time_of_depart.strftime("%H:%M")}</b>  to: <b>#{transport.place_of_arrival}</b> at <b>#{transport.time_of_arrival.strftime("%H:%M")}</b>", at: [pdf.bounds.left + 5, pdf.bounds.top], width: pdf.bounds.width, height: pdf.bounds.height,
               valign: :center, size: 8, inline_format: true
