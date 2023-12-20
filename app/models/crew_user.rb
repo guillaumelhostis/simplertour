@@ -9,9 +9,7 @@ class CrewUser < ApplicationRecord
 
   def delete_crew_user_concert
     crew_user_concerts.each do |crew_user_concert|
-      crew_user_concert.update(concert_id: nil, crew_user: nil)
       crew_user_concert.destroy
     end
   end
-
 end

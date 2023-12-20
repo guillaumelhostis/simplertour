@@ -1,8 +1,10 @@
 class ConcertHotelsController < ApplicationController
+  before_action :set_concert_and_tour
+  before_action :set_concert_hotel, only: [:add_crew, :add_guest, :remove_user, :remove_guest, :destroy]
+  before_action :set_user, only: [:add_crew, :remove_crew]
+  before_action :set_guest, only: [:add_guest, :remove_guest]
 
   def create
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
     @hotel = Hotel.find(params[:hotel_id])
     @concert_hotel = ConcertHotel.new(concert: @concert, hotel: @hotel)
     authorize @concert_hotel
@@ -14,58 +16,66 @@ class ConcertHotelsController < ApplicationController
   end
 
   def add_crew
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @concert_hotel = @concert.concert_hotels.find(params[:id])
-    @user = User.find(params[:user_id])
     @concert_hotel_user = ConcertHotelUser.new(concert_hotel: @concert_hotel, user: @user)
-    @concert_hotel_user.save
-    authorize @concert_hotel
-    redirect_to tour_concert_path(@concert, @tour)
+    if @concert_hotel_user.save
+      redirect_to tour_concert_path(@concert, @tour), notice: "User added"
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: "Something went wrong"
+    end
   end
 
   def add_guest
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @concert_hotel = @concert.concert_hotels.find(params[:id])
-    @guest = Guest.find(params[:guest_id])
     @concert_hotel_guest = ConcertHotelGuest.new(concert_hotel: @concert_hotel, guest: @guest)
-    @concert_hotel_guest.save
-    authorize @concert_hotel
-    redirect_to tour_concert_path(@concert, @tour)
+    if @concert_hotel_guest.save
+      redirect_to tour_concert_path(@concert, @tour), notice: "Guest added"
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: "Something went wrong"
+    end
   end
 
   def remove_user
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @concert_hotel = @concert.concert_hotels.find(params[:id])
-    @user = User.find(params[:user_id])
-    @concert_hotel_user = @concert_hotel.concert_hotel_users.find_by(user: @user)
-    authorize @concert_hotel
-    @concert_hotel_user.destroy
-    redirect_to tour_concert_path(@concert, @tour)
+    @concert_hotel_user = ConcertHotelUser.find_by(user_id: params[:user_id], concert_hotel_id: params[:id])
+    if @concert_hotel_user.destroy
+      redirect_to tour_concert_path(@concert, @tour), notice: "User removed"
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: "Something went wrong"
+    end
   end
 
   def remove_guest
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @concert_hotel = @concert.concert_hotels.find(params[:id])
-    @guest = Guest.find(params[:guest_id])
-    @concert_hotel_guest = @concert_hotel.concert_hotel_guests.find_by(guest: @guest)
-    authorize @concert_hotel
-    @concert_hotel_guest.destroy
-    redirect_to tour_concert_path(@concert, @tour)
+    @concert_hotel_guest = ConcertHotelGuest.find_by(guest_id: params[:guest_id], concert_hotel_id: params[:id])
+    if @concert_hotel_guest.destroy
+      redirect_to tour_concert_path(@concert, @tour), notice: "Guest removed"
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: "Something went wrong"
+    end
   end
 
   def destroy
+    if @concert_hotel.destroy
+      redirect_to tour_concert_path(@tour, @concert), notice: 'Hotel was successfully removed.'
+    else
+      redirect_to tour_concert_path(@tour, @concert), notice: 'Something went wrong'
+    end
+  end
+
+  private
+
+  def set_concert_and_tour
+    @tour = Tour.find(params[:tour_id])
+    @concert = Concert.find(params[:concert_id])
+  end
+
+  def set_concert_hotel
     @concert_hotel = ConcertHotel.find(params[:id])
     authorize @concert_hotel
-    @concert_hotel.destroy
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    respond_to do |format|
-      format.html { redirect_to tour_concert_path(@tour, @concert), notice: 'Concert hotel was successfully removed.' }
-      format.json { head :no_content }
-    end
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_guest
+    @guest = Guest.find(params[:guest_id])
   end
 end

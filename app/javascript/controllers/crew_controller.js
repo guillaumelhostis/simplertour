@@ -8,7 +8,6 @@ export default class extends Controller {
   static targets = ["searchInput", "results", "selectUsers", "role*", "form*", "submit*", "crewuserrole*", "removerole*", "divplusorminus*"];
 
   search(event) {
-    console.log('Search method called');
     const searchTerm = event.target.value.trim().toLowerCase();
     const selectUsers = this.selectUsersTarget;
 
@@ -53,21 +52,15 @@ export default class extends Controller {
     const roleTarget = this.targets.find(`role${index}`);
     console.log("Role Target:", roleTarget);
     const divplusorminus = this.targets.find(`divplusorminus${index}`)
-
     divplusorminus.classList.add('d-none');
     divplusorminus.classList.remove('d-inline-block');
-
-
-      roleTarget.classList.add('d-inline-block');
-      roleTarget.classList.remove('d-none');
-
+    roleTarget.classList.add('d-inline-block');
+    roleTarget.classList.remove('d-none');
     event.preventDefault();
   }
 
   closeModal(event) {
     event.preventDefault();
-
-
     const index = event.currentTarget.getAttribute("data-index");
     const roleTarget = this.targets.find(`role${index}`);
     const crewuserrole = this.targets.find(`crewuserrole${index}`)
@@ -76,11 +69,8 @@ export default class extends Controller {
     const divplusorminus = this.targets.find(`divplusorminus${index}`)
     divplusorminus.classList.remove('d-none');
     divplusorminus.classList.add('d-inline-block');
-
     const putTarget = this.targets.find(`form${index}`);
     const formData = new FormData(putTarget);
-
-    console.log(putTarget);
     for (var [key, value] of formData.entries()) {
       console.log(key, value);
     }
@@ -115,17 +105,10 @@ export default class extends Controller {
 
   updateRole(event) {
     event.preventDefault()
-    console.log("engagin role blank")
-
     const index = event.currentTarget.getAttribute("data-index");
     const crewuserrole = this.targets.find(`crewuserrole${index}`)
     const divplusorminus = this.targets.find(`divplusorminus${index}`)
-    console.log("target plus:")
-    console.log(divplusorminus)
-
     const url = event.currentTarget.getAttribute("data-url") // Get the URL from the data attribute
-
-
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     // Prompt the user for confirmation
 

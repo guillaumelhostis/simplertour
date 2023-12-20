@@ -1,8 +1,8 @@
 class HotelsController < ApplicationController
+  before_action :set_tours_and_concerts_templates, only: [:index, :edit, :update, :destroy]
+  before_action :set_hotel, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
     @hotels = policy_scope(Hotel)
   end
 
@@ -12,61 +12,57 @@ class HotelsController < ApplicationController
   end
 
   def show
-    @hotel = Hotel.find(params[:id])
-    authorize @hotel
   end
 
   def edit
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
-    @hotel = Hotel.find(params[:id])
-    authorize @hotel
   end
 
   def update
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
-    @hotel = Hotel.find(params[:id])
     if @hotel.update(hotel_params)
-      authorize @hotel
-      redirect_to hotels_path
+      redirect_to hotels_path, notice: 'Hotel infos updated'
     else
       redirect_to edit_hotel_path(@hotel), notice: 'Something went wrong'
     end
   end
 
   def create
-    @hotel = Hotel.new(hotel_params)
-    authorize @hotel
-    @hotel.tourman_id = current_tourman.id
-    if @hotel.save
-      if params[:concert].present? && params[:tour].present?
-        @concert = Concert.find(params[:concert])
-        @tour = Tour.find(params[:tour])
-        @concert_hotel = ConcertHotel.new(concert: @concert, hotel: @hotel)
-        @concert_hotel.save
-        redirect_to tour_concert_path(@concert, @tour), notice: 'Hotel was successfully created.'
-      else
-        redirect_to hotel_path(@hotel), notice: 'Concert was successfully created.'
-      end
+    @concert = Concert.find(params[:concert])
+    @tour = Tour.find(params[:tour])
+    service = HotelCreationService.new(hotel_params, current_tourman, @concert)
+    service.call
+    authorize service.hotel
+    if service.success
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Hotel was successfully created.'
     else
-      redirect_to new_hotel_path, notice: 'Could not add a new show something went wrong'
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
     end
   end
 
   def destroy
-    @tours = Tour.where(tourman_id: current_tourman.id)
-    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
-    @hotel = Hotel.find(params[:id])
-    authorize @hotel
-    @hotel.destroy
-    authorize @hotel
-    redirect_to tours_path, notice: 'Hotel was successfully destroyed.'
+    if @hotel.destroy
+      redirect_to tours_path, notice: 'Hotel was successfully destroyed.'
+    else
+      redirect_to hotels_path, notice: 'Something went wrong'
+    end
   end
 
   private
 
   def hotel_params
     params.require(:hotel).permit(:name, :standing, :postcode, :address, :city, :country, :tourman_id)
+  end
+
+  def set_tours_and_concerts_templates
+    @tours = Tour.where(tourman_id: current_tourman.id)
+    @concert_templates = ConcertTemplate.where(tourman_id: current_tourman.id)
+  end
+
+  def set_hotel
+    @hotel = Hotel.find_by(id: params[:id])
+    if @hotel.present?
+      authorize @hotel
+    else
+      redirect_to hotels_path, notice: "This hotel doesn't exist"
+    end
   end
 end

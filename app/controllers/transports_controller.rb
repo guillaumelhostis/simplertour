@@ -1,32 +1,19 @@
 class TransportsController < ApplicationController
+  before_action :set_concert_and_tour, only: [:create, :update, :destroy]
+  before_action :set_transport, only: [:update, :destroy]
 
   def create
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @transport = Transport.new(transport_params)
-    concert_date = @concert.date
-    arrival_hour = @transport.time_of_arrival.hour
-    arrival_minute = @transport.time_of_arrival.min
-    depart_hour = @transport.time_of_depart.hour
-    depart_minute = @transport.time_of_depart.min
-    new_time_of_arrival = Time.new(concert_date.year, concert_date.month, concert_date.day, arrival_hour, arrival_minute)
-    new_time_of_depart = Time.new(concert_date.year, concert_date.month, concert_date.day, depart_hour, depart_minute)
-    @transport.time_of_arrival = new_time_of_arrival
-    @transport.time_of_depart = new_time_of_depart
-    @transport.concert_id = @concert.id
-    authorize @transport
-    if @transport.save
-      redirect_to tour_concert_path(@concert, @tour)
+    service = TransportCreationService.new(transport_params, @concert)
+    service.call
+    authorize service.transport
+    if service.success
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Transport created'
     else
-      redirect_to tour_concert_path(@concert, @tour), notice: 'New contact added'
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
     end
   end
 
   def update
-    @transport = Transport.find(params[:id])
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    authorize @transport
     if @transport.update(transport_params)
       redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
     else
@@ -35,17 +22,30 @@ class TransportsController < ApplicationController
   end
 
   def destroy
-    @tour = Tour.find(params[:tour_id])
-    @concert = @tour.concerts.find(params[:concert_id])
-    @transport = Transport.find(params[:id])
-    @transport.destroy
-    authorize @transport
-    redirect_to tour_concert_path(@concert, @tour), notice: 'Notes Updated'
+    if @transport.destroy
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Transport deleted'
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 
   private
 
   def transport_params
     params.require(:transport).permit(:time_of_depart, :time_of_arrival, :notes, :way_of_transport, :concert_id, :place_of_arrival, :place_of_depart)
+  end
+
+  def set_concert_and_tour
+    @concert = Concert.find(params[:concert_id])
+    @tour = Tour.find(@concert.tour_id)
+  end
+
+  def set_transport
+    @transport = Transport.find_by(id: params[:id])
+    if @transport.present?
+      authorize @transport
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 end

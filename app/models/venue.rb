@@ -1,6 +1,7 @@
 class Venue < ApplicationRecord
   include PgSearch::Model
   has_many :concerts, dependent: :nullify
+  validates :name, :capacity, :postcode, :address, :city, :country, :tourman_id, presence: true
   before_destroy :nullify_concert_venues
   belongs_to :tourman
   has_many_attached :files
@@ -9,7 +10,7 @@ class Venue < ApplicationRecord
   pg_search_scope :search_by_name_and_city,
     against: [ :name, :city ],
     using: {
-      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+      tsearch: { prefix: true }
     }
 
   def files=(attachables)
@@ -21,7 +22,6 @@ class Venue < ApplicationRecord
   end
 
   def full_street_address
-
     [address, postcode, city, country].compact.join(', ')
   end
 
