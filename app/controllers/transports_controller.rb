@@ -41,7 +41,11 @@ class TransportsController < ApplicationController
   end
 
   def set_transport
-    @transport = Transport.find(params[:id])
-    authorize @transport
+    @transport = Transport.find_by(id: params[:id])
+    if @transport.present?
+      authorize @transport
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 end

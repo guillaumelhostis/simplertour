@@ -58,8 +58,12 @@ class VenuesController < ApplicationController
   end
 
   def set_venue
-    @venue = Venue.find(params[:id])
-    authorize @venue
+    @venue = Venue.find_by(id: params[:id])
+    if @venue.present?
+      authorize @venue
+    else
+      redirect_to venues_path, notice: "This venue doesn't exist"
+    end
   end
 
   def set_concert_and_tour

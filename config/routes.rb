@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   }
 
   get '/pages/search', to: 'pages#search'
-
   root to: 'pages#home'
   get  'pages/user_dashboard'
   get 'pages/user_concert_dashboard'

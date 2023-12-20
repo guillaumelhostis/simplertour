@@ -51,7 +51,11 @@ class TransportUsersController < ApplicationController
   end
 
   def set_transport_user
-    @transport_user = TransportUser.find(params[:id])
-    authorize @transport_user
+    @transport_user = TransportUser.find_by(id: params[:id])
+    if @transport_user.present?
+      authorize @transport_user
+    else
+      redirect_to tour_concert_path(@concert, @tour), notice: 'Something went wrong'
+    end
   end
 end
