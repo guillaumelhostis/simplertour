@@ -12,9 +12,9 @@ export default class extends Controller {
     // const index = event.currentTarget.getAttribute("data-index");
     const checklistId = event.currentTarget.getAttribute("data-id");
     const tourId = event.currentTarget.getAttribute("data-tour");
-    console.log(tourId)
+    // console.log(tourId)
     const concertId =  event.currentTarget.getAttribute("data-concert");
-    console.log(concertId)
+    // console.log(concertId)
     const newValue = this.checkboxTarget.checked;
 
     fetch(`/tours/${tourId}/concerts/${concertId}/checklists/${checklistId}`, {
