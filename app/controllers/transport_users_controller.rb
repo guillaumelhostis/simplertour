@@ -1,5 +1,5 @@
 class TransportUsersController < ApplicationController
-  before_action :set_concert_and_tour, only: [:create, :udpate, :destroy, :destroy_attachment]
+  before_action :set_concert_and_tour, only: [:create, :update, :destroy, :destroy_attachment]
   before_action :set_transport_user, only: [:update, :destroy, :destroy_attachment]
 
   def create

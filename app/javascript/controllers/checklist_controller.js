@@ -9,6 +9,7 @@ export default class extends Controller {
 
   updateStatus(event) {
     event.preventDefault()
+    console.log("merci wadi")
     // const index = event.currentTarget.getAttribute("data-index");
     const checklistId = event.currentTarget.getAttribute("data-id");
     const tourId = event.currentTarget.getAttribute("data-tour");
