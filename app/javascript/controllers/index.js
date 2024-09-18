@@ -1,9 +1,25 @@
+import { Application } from 'stimulus';
+import { definitionsFromContext } from 'stimulus/webpack-helpers';
+
+const application = Application.start();
+
+const context = require.context('controllers', true, /\.js$/);
+
+application.load(definitionsFromContext(context));
+
+
+console.log("toto");
+
+
+
+
+
 // Import and register all your controllers from the importmap under controllers/*
 
-import { application } from "controllers/application"
+// import { application } from "controllers/application"   <+ put back
 
-// import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+// import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading" <+ put back
+// eagerLoadControllersFrom("controllers", application) <+ put back
 
 // import HelloController from "./hello_controller"
 // application.register("hello", HelloController)
