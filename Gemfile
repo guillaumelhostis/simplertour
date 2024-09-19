@@ -16,7 +16,7 @@ gem "pg_search"
 # Use Cloudinary for load image
 gem 'cloudinary'
 # Protect my api key rails
-# gem "dotenv-rails", groups: [:development, :test]
+gem "dotenv-rails", groups: [:development, :test]
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
