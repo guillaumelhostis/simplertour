@@ -12,6 +12,12 @@ class ChecklistsController < ApplicationController
     end
   end
 
+  def update
+    authorize @checklist
+    @checklist.update(checklist_params)
+    head :no_content
+  end
+
   def destroy
     authorize @checklist
     if @checklist.destroy
