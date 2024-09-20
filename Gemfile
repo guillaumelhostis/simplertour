@@ -7,8 +7,8 @@ ruby "3.1.2"
 gem "rails", "~> 7.0.5"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
-
+# gem "sprockets-rails"
+gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
@@ -16,7 +16,7 @@ gem "pg_search"
 # Use Cloudinary for load image
 gem 'cloudinary'
 # Protect my api key rails
-gem "dotenv-rails", groups: [:development, :test]
+# gem "dotenv-rails", groups: [:development, :test]
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -54,10 +54,10 @@ gem "bootsnap", require: false
 gem 'flatpickr'
 
 # Use Sass to process CSS
-gem 'sass-rails', '~> 6.0.0'
+# gem 'sass-rails', '~> 6.0.0'
 
-gem "sassc-rails"
-
+# gem "sassc-rails"
+gem 'cssbundling-rails'
 #installing Devise
 gem "devise"
 gem "pundit"
@@ -73,7 +73,7 @@ gem "geocoder"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "bootstrap", "~> 5.2"
+gem "bootstrap", "~> 5.3.3"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
