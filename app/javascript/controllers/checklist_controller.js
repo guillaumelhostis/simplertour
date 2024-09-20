@@ -9,15 +9,15 @@ export default class extends Controller {
 
   updateStatus(event) {
     event.preventDefault()
-    console.log("merci wadi")
+    const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+    console.log("CSRF Token:", csrfToken); // Check if this is logging the expected token
+
     // const index = event.currentTarget.getAttribute("data-index");
     const checklistId = event.currentTarget.getAttribute("data-id");
     const tourId = event.currentTarget.getAttribute("data-tour");
-    console.log(tourId)
     const concertId =  event.currentTarget.getAttribute("data-concert");
-    console.log(concertId)
     const newValue = this.checkboxTarget.checked;
-
+    console.log("before patch")
     fetch(`/tours/${tourId}/concerts/${concertId}/checklists/${checklistId}`, {
       method: "PATCH",
       headers: {
