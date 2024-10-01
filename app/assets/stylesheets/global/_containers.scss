@@ -15,10 +15,20 @@
 
 }
 
+
 .homepage-container {
-  width: 80%;
-  margin: 150px auto;
+  // height: 100vh;
+
+   // position: absolute;
+  // top: 50%;
+
+  // -ms-transform: translateY(-50%);
+  // transform: translateY(-50%);
+
+  // background-color: rgba(0, 0, 0, 0.8); /* Optional: Background color for styling */
+  // border-radius: 10px; /* Optional: Rounded corners */
   color: white;
-  position: relative;
-  z-index: 1; /* Ensrgb(210, 49, 49)tent is below the navbar */
+
+  // z-index: 1;
+  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: Box shadow */
 }

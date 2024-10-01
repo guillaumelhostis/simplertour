@@ -1,123 +1,125 @@
-<div class="homepage-container">
-  <div class="mb-3">
-    <h1>NEW CREW MEMBER</h1>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= f.error_notification %>
-          <div class="form-inputs">
-            <div class="d-flex">
-              <div class="col-6">
-                <%= f.input :first_name,
-                            required: true,
-                            autofocus: true,
-                            label: false,
-                            placeholder: "First Name",
-                            input_html: { class: 'form-input' } %>
-              </div>
-              <div class="col-6">
-                <%= f.input :last_name,
-                          required: true,
-                          autofocus: true,
-                          label: false,
-                          placeholder: "Last Name",
-                          input_html: { class: 'form-input' }%>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="col-3">
-                <%= f.input :birth_day,
-                            as: :string,
-                            label: false,
-                            placeholder: "Age",
-                            input_html: { class: 'form-input', type: :date } %>
-              </div>
-              <div class="col-1">
-                <%= f.input :country_code, collection: @phoneprefixsorted,  label: false, prompt: "+", input_html: { class: 'form-input' } %>
-              </div>
-              <div class="col-8">
-                <%= f.input :phone_number,
-                          required: true,
-                          autofocus: true,
-                          label: false,
-                          placeholder: "Phone Number",
-                          input_html: { class: 'form-input' }  %>
-              </div>
-            </div>
-            <%= f.input :email,
-                        required: true,
-                        autofocus: true,
-                        input_html: { autocomplete: "email" },
-                        label: false,
-                        placeholder: "Email",
-                        input_html: { class: 'form-input' } %>
-            <%= f.input :address,
-                        as: :text,
-                        required: true,
-                        autofocus: true, label: false,
-                        placeholder: "Address",
-                        input_html: { class: 'form-input-address' } %>
-            <div class="d-flex">
-              <div class="col-4">
-                <%= f.input :post_code,
-                            required: true,
-                            autofocus: true,
-                            label: false,
-                            placeholder: "Post-Code",
-                            input_html: { class: 'form-input' }  %>
-              </div>
-              <div class="col-4">
-                <%= f.input :city,
-                            required: true,
-                            autofocus: true,
-                            label: false,
-                            placeholder: "City",
-                            input_html: { class: 'form-input' }  %>
-              </div>
-              <div class="col-4 ">
-
-                <%= f.input :country,
-                  required: true,
-                  autofocus: true,
-                  label: false,
-                  prompt: "Select a country",
-                  input_html: { class: 'form-input' }  %>
-              </div>
-            </div>
-
-            <div class="d-flex">
-              <div class="col-6">
-                <%= f.input :password,
-                            required: true,
-                            hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                            label: false,
-                            placeholder: "Password",
-                            input_html: { autocomplete: "new-password", class: 'form-input'  } %>
-                </div>
-              <div class="col-6">
-                <%= f.input :password_confirmation,
-                            required: true,
-                            label: false,
-                            placeholder: "Password Confirmation",
-                            input_html: { autocomplete: "new-password", class: 'form-input' } %>
-              </div>
-            </div>
-          </div>
-          <%= f.input :image, as: :file,
-                        label: false,
-
-                        prompt: "Profile Picture",
-                        input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
-
-          <div class="form-actions">
-            <%= f.button :submit, "SIGN UP", class: "button-green" %>
-          </div>
-      <% end %>
-      <%= render "devise/shared/links" %>
+<div class="homepage-container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="homepage-elements">
+    <div class="mb-3">
+      <h1>NEW CREW MEMBER</h1>
     </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+            <div class="form-inputs">
+              <div class="d-flex">
+                <div class="col-6">
+                  <%= f.input :first_name,
+                              required: true,
+                              autofocus: true,
+                              label: false,
+                              placeholder: "First Name",
+                              input_html: { class: 'form-input' } %>
+                </div>
+                <div class="col-6">
+                  <%= f.input :last_name,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "Last Name",
+                            input_html: { class: 'form-input' }%>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="col-3">
+                  <%= f.input :birth_day,
+                              as: :string,
+                              label: false,
+                              placeholder: "Age",
+                              input_html: { class: 'form-input', type: :date } %>
+                </div>
+                <div class="col-1">
+                  <%= f.input :country_code, collection: @phoneprefixsorted,  label: false, prompt: "+", input_html: { class: 'form-input' } %>
+                </div>
+                <div class="col-8">
+                  <%= f.input :phone_number,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "Phone Number",
+                            input_html: { class: 'form-input' }  %>
+                </div>
+              </div>
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" },
+                          label: false,
+                          placeholder: "Email",
+                          input_html: { class: 'form-input' } %>
+              <%= f.input :address,
+                          as: :text,
+                          required: true,
+                          autofocus: true, label: false,
+                          placeholder: "Address",
+                          input_html: { class: 'form-input-address' } %>
+              <div class="d-flex">
+                <div class="col-4">
+                  <%= f.input :post_code,
+                              required: true,
+                              autofocus: true,
+                              label: false,
+                              placeholder: "Post-Code",
+                              input_html: { class: 'form-input' }  %>
+                </div>
+                <div class="col-4">
+                  <%= f.input :city,
+                              required: true,
+                              autofocus: true,
+                              label: false,
+                              placeholder: "City",
+                              input_html: { class: 'form-input' }  %>
+                </div>
+                <div class="col-4 ">
+
+                  <%= f.input :country,
+                    required: true,
+                    autofocus: true,
+                    label: false,
+                    prompt: "Select a country",
+                    input_html: { class: 'form-input' }  %>
+                </div>
+              </div>
+
+              <div class="d-flex">
+                <div class="col-6">
+                  <%= f.input :password,
+                              required: true,
+                              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                              label: false,
+                              placeholder: "Password",
+                              input_html: { autocomplete: "new-password", class: 'form-input'  } %>
+                  </div>
+                <div class="col-6">
+                  <%= f.input :password_confirmation,
+                              required: true,
+                              label: false,
+                              placeholder: "Password Confirmation",
+                              input_html: { autocomplete: "new-password", class: 'form-input' } %>
+                </div>
+              </div>
+            </div>
+            <%= f.input :image, as: :file,
+                          label: false,
+
+                          prompt: "Profile Picture",
+                          input_html: { class: 'form-input', onchange: 'updateFileName(this)' } %>
+
+            <div class="form-actions">
+              <%= f.button :submit, "SIGN UP", class: "button-green" %>
+            </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
+
+
   </div>
-
-
-
 </div>

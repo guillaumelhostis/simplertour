@@ -3,11 +3,9 @@
       <% if user_signed_in?  %>
       <% else %>
       <div class="simpler-tour-home">
-          <div class="simpler-tour-home-link">
-            <strong>
-                <%= link_to 'SIMPLER TOUR', root_path %>
-            </strong>
-          </div>
+        <%= link_to root_path do %>
+          <%= image_tag "logo.png", class: "fit-image" %>
+        <% end %>
       </div>
       <% end %>
     <% end %>

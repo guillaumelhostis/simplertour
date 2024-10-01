@@ -36,10 +36,34 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+    # Set delivery method to :smtp
+    config.action_mailer.delivery_method = :smtp
+
+    # SMTP settings for free.fr or your email provider
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.free.fr',
+      port:                 587, # or 25
+      domain:               'free.fr',
+      user_name:            'guillaume.lhostis@free.fr',
+      password:             'umte7xk4',
+      authentication:       'plain',
+      enable_starttls_auto: true,
+    }
+
+    # Ensures emails are sent during development
+    config.action_mailer.perform_deliveries = true
+
+    # Raise an error if the mail can't be sent
+    config.action_mailer.raise_delivery_errors = true
+
+    # Set default URL options for Devise (if applicable)
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

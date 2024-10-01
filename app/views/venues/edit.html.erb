@@ -48,10 +48,10 @@
         input_html: { class: 'form-input' }  %>
 
     <%= f.input :files, as: :file,
-        label: false,
+        label: "Upload technical sheet:",
 
         prompt: "Attachements",
-        input_html: { class: 'form-input form-file-upload', onchange: 'updateFileName(this)', multiple: true } %>
+        input_html: { class: 'form-input form-file-upload', onchange: 'updateFileName(this)',  multiple: true } %>
 
     <%= f.submit "UPDATE VENUE", class:"button-green" %>
   <% end %>

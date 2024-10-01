@@ -1,8 +1,10 @@
-<div class="homepage-container">
+<div class="homepage-container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="homepage-elements">
+
   <div class="mb-3">
     <h1>FORGOT YOUR PASSWORD?</h1>
   </div>
-  <div class="col-6">
+  <div class="col-12">
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= f.error_notification %>
 
@@ -20,4 +22,5 @@
 
     <%= render "tourmen/shared/links" %>
   </div>
+</div>
 </div>

@@ -14,12 +14,16 @@
   margin-top: 8px;
   height: 60px;
   display: flex; /* Use flexbox */
-  align-items: center; /* Center vertically */
+  // align-items: center; /* Center vertically */
   color: white;
   padding: 15px;
-  background-color: #0e111496;
-  border: 1px solid #9191917f;
+  // background-color: #0e111496;
+  // border: 1px solid #9191917f;
 }
+
+
+
+
 
 .side-bar-container .side-bar-menu {
   border-radius: 8px;
@@ -133,6 +137,8 @@
   .side-bar-home span {
     font-size: 12px;
   }
+
+
 
   .side-bar-menu span {
     font-size: 12px;

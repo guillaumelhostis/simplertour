@@ -331,11 +331,18 @@ class PdfGeneratorController < ApplicationController
 
         end
 
+
         # Save the PDF to a file or send it as a download
         pdf_file = Tempfile.new(["instances", ".pdf"])
         pdf_file.binmode
         pdf_file.write(pdf.render)
+        # session[:generated_pdf] = Base64.encode64(pdf.render)
         pdf_file.close
+
+
+        # @crew_users.each do |user|
+        #   RoadbookMailer.roadbook_email(User.find(user.user_id), pdf_file).deliver_now
+        # end
 
         send_file pdf_file.path, filename: "#{@tour.artist}_#{@concert.location}_#{@concert.date}.pdf", type: "application/pdf", disposition: "inline"
       end
