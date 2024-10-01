@@ -40,15 +40,6 @@ Rails.application.configure do
     config.action_mailer.delivery_method = :smtp
 
     # SMTP settings for free.fr or your email provider
-    config.action_mailer.smtp_settings = {
-      address:              'smtp.free.fr',
-      port:                 587, # or 25
-      domain:               'free.fr',
-      user_name:            'guillaume.lhostis@free.fr',
-      password:             'umte7xk4',
-      authentication:       'plain',
-      enable_starttls_auto: true,
-    }
 
     # Ensures emails are sent during development
     config.action_mailer.perform_deliveries = true
